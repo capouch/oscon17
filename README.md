@@ -1,6 +1,4 @@
-# neal-React Sample Page
-
-This is a sample page for [neal-react](http://www.github.com/dennybritz/neal-react), reactjs components for building landing pages.
+# SPA for OSCON 2016
 
 
 ## Develop locally
@@ -8,8 +6,8 @@ This is a sample page for [neal-react](http://www.github.com/dennybritz/neal-rea
 Transpile the Javascript using Babel and watch for changes:
 
 ```bash
-git clone https://github.com/dennybritz/neal-sample.git
-cd neal-sample
+git clone https://github.com/capouch/oscon16.git
+cd oscon16
 npm install
 npm run watch
 ```
@@ -27,3 +25,9 @@ docker run -p 3000:80 -v "$PWD"/public:/usr/local/apache2/htdocs/ httpd:2.4
 ```
 
 Visit `http://<YOUR_DOCKER_MACHINE_IP>:3000`
+
+Run app in server mode:
+
+```
+npm start
+```

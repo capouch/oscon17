@@ -43,24 +43,23 @@ const businessAddress = (
 );
 
 
-const sampleCode = `  componentDidMount: function() {
-    this.loadRecordsFromServer();
-    // This polls the server; not quite sure why . . .
-    // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-  },
-  render: function() {
-    return (
-      <div>
-        <center><h2>Current image data</h2></center>
-        <SearchBar />
-        <Griddle results={this.state.records}
-          columns={['title','filename', "description"]}
-          columnMetadata={customColumnMetadata}
-          showSettings={true}
-          />
-      </div>
-    )}
-  });
+const sampleCode =
+`    class Upload extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+    render() {
+      return (
+        <div>
+        <DropZoneComponent  config={componentConfig}
+                            eventHandlers={eventHandlers}
+                            djsConfig={djsConfig} />,
+        </div>
+      );
+    }
+  }
+
+  export default Upload;
 `;
 
 
@@ -133,15 +132,6 @@ export default (props) => {
             <p>Because you are relying on react.js and third-party integration you don't need a server to host your landing page. Simply upload it to an Amazon S3 bucket, enable website hosting, and it's ready to go!</p>
           </div>
         </HorizontalSplit>
-      </Section>
-
-      <Section heading="Inline and Modal Signup components" className="gray">
-        <p>Use these components to capture user data, display a payment dialog and/or send them to your own backend for handling. Of course, you could also just use a Typeform to collect user emails. </p>
-        <SignupInline onSubmit={onSignup}/>
-        <SignupModal modalId="signup-modal" onSubmit={onSignup}/>
-        <p>
-          <a className="btn btn-primary btn-ghost" data-toggle="modal" data-target="#signup-modal">Show Signup modal</a>
-        </p>
       </Section>
 
       <Section>

@@ -121,15 +121,3 @@ class Browse extends React.Component {
 }
 
 export default Browse;
-/*
-// public methods
-export default function browseInitModule ( ) {
-  console.log("browse init mod");
-  render(
-    <InfoTable
-      url="/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>,
-    document.getElementById('browse-view')
-  );
-  console.log("browse initModule over");
-};
-*/

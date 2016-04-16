@@ -35,6 +35,11 @@ configRoutes = function ( router, server ) {
     res.sendFile('index.html', options);
   });
 
+  router.get('/home', function(req, res) {
+    console.log('Server home chosen');
+    res.sendFile('index.html', options);
+  });
+
   router.get('/upload', function(req, res) {
     console.log('Server upload chosen');
     res.sendFile('index.html', options);

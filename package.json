@@ -1,8 +1,8 @@
 {
-  "name": "neal-sample",
+  "name": "oscon16-spa",
   "version": "0.1.0",
-  "description": "A sample page built with neal-react",
-  "repository": "https://github.com/dennybritz/neal-react",
+  "description": "An example SPA",
+  "repository": "https://github.com/capouch/oscon16.git",
   "main": "js/app.js",
   "scripts": {
     "start": "node index.js",
@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext js,jsx ."
   },
-  "author": "Denny Britz",
+  "author": "SJC OSCON 2016 Team",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",

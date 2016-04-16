@@ -69,7 +69,7 @@ export default (props) => {
     <Page>
 
       <Navbar brand={brand}>
-        <NavItem><Link to="Home" className="nav-link">Home</Link></NavItem>
+        <NavItem><Link to="home" className="nav-link">Home</Link></NavItem>
         <NavItem><Link to="browse" className="nav-link">Browse</Link></NavItem>
         <NavItem><Link to="upload" className="nav-link">Upload</Link></NavItem>
         <NavItem><Link to="zoomer" className="nav-link">Zoomer</Link></NavItem>
@@ -94,7 +94,7 @@ export default (props) => {
         <h1 className="display-4">Scene: History </h1>
         <p className="lead">Archiving and Presenting Historical Images</p>
         <p>
-          <a href="https://github.com/capouch/neal-sample.git" target="_blank" className="btn btn-white">
+          <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
             Get it on Github
           </a>
         </p>
@@ -111,11 +111,6 @@ export default (props) => {
 
       <Section className="nopad-bottom">
         <Code lang="jsx" block>{sampleCode}</Code>
-      </Section>
-
-      <Section>
-        <Upload
-          className="display-4"/>
       </Section>
 
       <Section>

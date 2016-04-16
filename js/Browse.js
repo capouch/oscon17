@@ -16,7 +16,13 @@ import Griddle from 'griddle-react'
 
 let LinkComponent = React.createClass({
     render: function(){
-      let url = "/zoomer?show=brush";
+      // Grrrr.  How do I get at this.props.data???
+      let url = '';
+      if (Math.random() >0.5) {
+        url = "/zoomer?show=brush";
+      } else {
+        url = "/zoomer?show=bremer";
+      }
       return <a href={url}>{this.props.data}</a>
     }
   });

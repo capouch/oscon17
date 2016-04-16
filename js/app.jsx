@@ -1,5 +1,5 @@
 import React from "react";
-import SamplePage from "./sample-page.jsx";
+import SamplePage from "./Shell.jsx";
 import ReactDOM from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router";
 import { App } from "neal-react";

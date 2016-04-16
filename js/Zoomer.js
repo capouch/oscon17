@@ -28,7 +28,7 @@ export default (props) => {
     <Page>
 
     <Navbar brand={brand}>
-      <NavItem><Link to="Home" className="nav-link">Home</Link></NavItem>
+      <NavItem><Link to="home" className="nav-link">Home</Link></NavItem>
       <NavItem><Link to="browse" className="nav-link">Browse</Link></NavItem>
       <NavItem><Link to="upload" className="nav-link">Upload</Link></NavItem>
       <NavItem><Link to="zoomer" className="nav-link">Zoomer</Link></NavItem>

@@ -17,7 +17,10 @@ import Griddle from 'griddle-react'
 let LinkComponent = React.createClass({
     render: function(){
       // Grrrr.  How do I get at this.props.data???
+      //   This won't work: console.log({this.props.data})
       let url = '';
+
+      // Randomly assign the URL to one image or the other
       if (Math.random() >0.5) {
         url = "/zoomer?show=brush";
       } else {

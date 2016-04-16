@@ -2,40 +2,39 @@ import OpenSeaDragon from 'openseadragon'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+// Function to configure and raise the OpenSeaDragon widget
 let renderImage = function(selection) {
-      // Clear out any previous contents
-      ///document.getElementById("zoomer-view").innerHTML = "";
-      // Set filename
-      let baseName = selection + '.dzi';
-      // Render viewer note nasty "node_modules" parameter!
-      console.log('In the renderImage method');
-      let viewer = OpenSeadragon({
-        id: "zoomer-view",
-        prefixUrl: "/images/",
-        tileSources: baseName
-      });
-      console.log('I think the zoomer should be open!!');
-    }
+
+  let baseName = selection + '.dzi';
+  // NOTE NOTE NOTE: We are current getting images via symlink
+  //  This isn't viable in the long run so this needs fixed
+  console.log('In the renderImage method');
+  let viewer = OpenSeadragon({
+    id: "zoomer-view",
+    prefixUrl: "/images/",
+    tileSources: baseName
+  });
+}
 // end private members/methods
 
 // Just one public method
 let ZoomBox =  React.createClass ({
   componentDidMount: function() {
+    // Set default image to show
     let id = 'bremer';
-    console.log("zoomer init mod");
+    console.log("zoomer render mod live");
+
+    // This logic will change once we have the image name in a parameter
     let url=document.URL;
-    console.log('Got URL ' + url);
+    // console.log('Got URL ' + url);
     let regex = /[^/]+\?show=(\w+)/
     if (url.match(regex)) {
        id = url.match(regex)[1];
        console.log('Setting new id of ' + id);
     }
-    //  let id = url.match(regex)[1];
-    if (id == null ) { id = 'brush'};
-    console.log('Trying to render: ' + id);
-    //id = 'brush';
+    if (id == null ) { id = 'bremer'};
+    // console.log('Trying to render: ' + id);
     renderImage(id);
-    console.log('Got past call to render');
 },
   render() {
     let style = {
@@ -61,7 +60,5 @@ class Zoomer extends React.Component {
     );
   }
 }
-
-
 
 export default Zoomer;

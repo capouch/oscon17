@@ -17,7 +17,7 @@ let renderImage = function(selection) {
 }
 // end private members/methods
 
-// Just one public method
+// Create a container class for the "Zoomer" component
 let ZoomBox =  React.createClass ({
   componentDidMount: function() {
     // Set default image to show
@@ -48,6 +48,7 @@ let ZoomBox =  React.createClass ({
   }
 });
 
+// Render in a component
 class Zoomer extends React.Component {
   constructor(props) {
     super(props);

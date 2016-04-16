@@ -70,7 +70,9 @@ export default (props) => {
 
       <Navbar brand={brand}>
         <NavItem><Link to="Home" className="nav-link">Home</Link></NavItem>
-        <NavItem><Link to="Home" className="nav-link">Splash</Link></NavItem>
+        <NavItem><Link to="browse" className="nav-link">Browse</Link></NavItem>
+        <NavItem><Link to="upload" className="nav-link">Upload</Link></NavItem>
+        <NavItem><Link to="zoomer" className="nav-link">Zoomer</Link></NavItem>
         <NavItem dropdown={true}>
           <DropdownToggle>Older versions</DropdownToggle>
           <DropdownMenu>
@@ -114,15 +116,6 @@ export default (props) => {
       <Section>
         <Upload
           className="display-4"/>
-      </Section>
-
-      <Section>
-        <Browse
-          className = "display-4"/>
-      </Section>
-
-      <Section>
-        <Zoomer />
       </Section>
 
       <Section>

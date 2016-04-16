@@ -1,65 +1,64 @@
-import OpenSeaDragon from 'openseadragon'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import { Link } from "react-router";
+import {
+  DropdownMenu, DropdownToggle,
+  Footer, FooterAddress,
+  Navbar, NavItem,
+  Page,
+  Section,
+} from "neal-react";
 
-// Function to configure and raise the OpenSeaDragon widget
-let renderImage = function(selection) {
+import Zoom from './Zoom'
 
-  let baseName = selection + '.dzi';
-  // NOTE NOTE NOTE: We are current getting images via symlink
-  //  This isn't viable in the long run so this needs fixed
-  console.log('In the renderImage method');
-  let viewer = OpenSeadragon({
-    id: "zoomer-view",
-    prefixUrl: "/images/",
-    tileSources: baseName
-  });
-}
-// end private members/methods
+const businessAddress = (
+  <address>
+    <strong>{brandName}</strong><br/>
+    Saint Josephs College<br/>
+    Rensselaer IN 47978<br/>
+    +1 (219) 866-6000
+  </address>
+);
 
-// Create a container class for the "Zoomer" component
-let ZoomBox =  React.createClass ({
-  componentDidMount: function() {
-    // Set default image to show
-    let id = 'bremer';
-    console.log("zoomer render mod live");
+const brandName = "Scene:History";
+const brand = <span>{brandName}</span>;
 
-    // This logic will change once we have the image name in a parameter
-    let url=document.URL;
-    // console.log('Got URL ' + url);
-    let regex = /[^/]+\?show=(\w+)/
-    if (url.match(regex)) {
-       id = url.match(regex)[1];
-       console.log('Setting new id of ' + id);
-    }
-    if (id == null ) { id = 'bremer'};
-    // console.log('Trying to render: ' + id);
-    renderImage(id);
-},
-  render() {
-    let style = {
-      width: 800,
-      height: 600
-    };
-    return (
-      <div style={style} id="zoomer-view">
-      </div>
-    );
-  }
-});
+export default (props) => {
+  return (
 
-// Render in a component
-class Zoomer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <ZoomBox />
-      </div>
-    );
-  }
-}
+    <Page>
 
-export default Zoomer;
+    <Navbar brand={brand}>
+      <NavItem><Link to="Home" className="nav-link">Home</Link></NavItem>
+      <NavItem><Link to="browse" className="nav-link">Browse</Link></NavItem>
+      <NavItem><Link to="upload" className="nav-link">Upload</Link></NavItem>
+      <NavItem><Link to="zoomer" className="nav-link">Zoomer</Link></NavItem>
+      <NavItem dropdown={true}>
+        <DropdownToggle>Older versions</DropdownToggle>
+        <DropdownMenu>
+          <a href="http://oscon.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
+            2015 Page
+          </a>
+          <a href="http://oscon-sb.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
+            2016 Page
+          </a>
+          <a href="/oscon-test" className="dropdown-item" target="_blank">
+            GraphiQL
+          </a>
+        </DropdownMenu>
+      </NavItem>
+    </Navbar>
+
+
+      <Section>
+        <Zoom
+          className = "display-4"/>
+      </Section>
+
+      <Footer brandName={brandName}
+        facebookUrl="http://www.facebook.com/brian.capouch"
+        githubUrl="https://github.com/capouch"
+        address={businessAddress}>
+      </Footer>
+    </Page>
+  );
+};

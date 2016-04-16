@@ -3,6 +3,7 @@
  * Danilo Zekovic
  */
 
+// Note that these are SERVER-SIDE routes
 // --- Local variables
 'use strict';
 var

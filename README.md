@@ -12,6 +12,10 @@ npm install
 npm run watch
 ```
 
+Note the bundled file is *not* kept in the repo and needs to be generated after
+checkout with `npm run build`
+
+
 Run with webpack:
 
 ```bash

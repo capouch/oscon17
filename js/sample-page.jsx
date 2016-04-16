@@ -20,6 +20,7 @@ import {
 import DropZoneComponent from 'react-dropzone-component'
 import Upload from './Upload'
 import Browse from './Browse'
+import Zoomer from './Zoomer'
 
 const brandName = "Scene:History";
 const brand = <span>{brandName}</span>;
@@ -118,6 +119,10 @@ export default (props) => {
       <Section>
         <Browse
           className = "display-4"/>
+      </Section>
+
+      <Section>
+        <Zoomer />
       </Section>
 
       <Section>

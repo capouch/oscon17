@@ -5,6 +5,20 @@ module.exports = {
     publicPath: "/js",
     filename: "bundle.js"
   },
+  devServer: {
+  port: 8080,
+  inline: true,
+  proxy: {
+  '/uploadHandler*': {
+    target: 'http://localhost:8111',
+    secure: false,
+    },
+    '/oscon-test*': {
+    target: 'http://localhost:8111',
+    secure: false,
+    },
+  },
+},
   module: {
     loaders: [
       {

@@ -11,3 +11,21 @@
     </TeamMember>
   </Team>
 </Section>
+
+From Zoomer:
+// public methods
+export default function zoomerInitModule ( path ) {
+  let id = 'bremer';
+  console.log("zoomer init mod");
+  let url=document.URL;
+  console.log('Got URL ' + url);
+  let regex = /[^/]+\?show=(\w+)/
+  if (url.match(regex)) {
+     id = url.match(regex)[1];
+     console.log('Setting new id of ' + id);
+  }
+  //  let id = url.match(regex)[1];
+  if (id == null ) { id = 'brush'};
+  //id = 'brush';
+  renderImage(id);
+}

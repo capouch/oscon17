@@ -14,7 +14,7 @@ let
   componentConfig = {
     iconFiletypes: ['.jpg', '.png', '.gif', 'tif'],
     showFiletypeIcon: true,
-    postUrl: '/uploadHandler/'
+    postUrl: 'http://localhost:8111/uploadHandler/'
   },
   eventHandlers = {
     // This one receives the dropzone object as the first parameter

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "An example SPA",
   "repository": "https://github.com/capouch/oscon16.git",
-  "main": "js/app.js",
+  "main": "main.js",
   "scripts": {
     "start": "node index.js",
     "watch": "webpack --watch",
@@ -21,6 +21,7 @@
     "express-graphql": "^0.4.13",
     "graphql": "^0.4.16",
     "griddle-react": "^0.4.1",
+    "jquery-latest": "^1.9.0",
     "mongoose": "^4.4.12",
     "multer": "^1.1.0",
     "neal-react": "^0.2.3",

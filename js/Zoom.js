@@ -11,7 +11,7 @@ let renderImage = function(selection) {
   console.log('In the renderImage method');
   let viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "/images/",
+    prefixUrl: "images/",
     tileSources: baseName
   });
 }

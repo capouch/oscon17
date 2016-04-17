@@ -12,18 +12,20 @@ import Griddle from 'griddle-react'
 
 // Options for Griddle table generator
 // Save this: return <a href={url}>{this.props.data}</a>
-// Note that for now we just hardcode the link target in the url variable
+// We use a NavLink but can't seem to customize the "query" property!!!
 
 let LinkComponent = React.createClass({
     render: function(){
       // Set .tif files to one URL, all others to another . .
       let target = this.props.data,
-        url = "/zoomer?show=bremer",
+        urlParms = {show: "brush"},
         tifRegex = /tif/;
 
       if (tifRegex.test(target)) {
-        url = url = "/zoomer?show=brush"
+        urlParms.show = "bremer";
       }
+
+      let tryThisDInDesperation = JSON.stringify(urlParms);
 
       return <NavLink to={{ pathname: 'zoomer', query: { show: "brush" } }} className="nav-link">{this.props.data}</NavLink>
     }

@@ -86,20 +86,3 @@ let
 
 }
 */
-
-// public method
-/*
-export default function uploadInitModule ( $container ) {
-
-  console.log("upload module reached");
-  // This constitutes the whole view to the user, so far
-  ReactDOM.render(
-    <DropZoneComponent  config={componentConfig}
-                        eventHandlers={eventHandlers}
-                        djsConfig={djsConfig} />,
-    document.getElementById('upload-view')
-    );
-
-  // console.log("upload initModule over");
-  };
-  */

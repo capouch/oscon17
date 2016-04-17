@@ -7,7 +7,6 @@ import React from 'react'
 import { render } from 'react-dom'
 import Griddle from 'griddle-react'
 
-
 // private methods
 
 // Options for Griddle table generator
@@ -16,7 +15,15 @@ import Griddle from 'griddle-react'
 
 let LinkComponent = React.createClass({
     render: function(){
-      let url = "/zoomer?show=brush";
+      // Set .tif files to one URL, all others to another . .
+      let target = this.props.data,
+        url = "/zoomer?show=bremer",
+        tifRegex = /tif/;
+
+      if (tifRegex.test(target)) {
+        url = url = "/zoomer?show=brush"
+      }
+
       return <a href={url}>{this.props.data}</a>
     }
   });
@@ -112,15 +119,3 @@ class Browse extends React.Component {
 }
 
 export default Browse;
-/*
-// public methods
-export default function browseInitModule ( ) {
-  console.log("browse init mod");
-  render(
-    <InfoTable
-      url="/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>,
-    document.getElementById('browse-view')
-  );
-  console.log("browse initModule over");
-};
-*/

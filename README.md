@@ -1,6 +1,5 @@
 # SPA for OSCON 2016
 
-
 ## Develop locally
 
 Transpile the Javascript using Babel and watch for changes:

@@ -21,9 +21,6 @@ import {
 import Header from './Header'
 import PageFooter from './Footer'
 
-const brandName = "Scene:History";
-const brand = <span>{brandName}</span>;
-
 const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
   name: "Stripe Integration Included",
   description: "Like this? Donate $5 <3",
@@ -31,16 +28,6 @@ const onSignup = ({ name: name, email: email, password: password }) => Stripe.St
   email: email,
   amount: 500,
 });
-
-const businessAddress = (
-  <address>
-    <strong>{brandName}</strong><br/>
-    Saint Joseph's College<br/>
-    Rensselaer IN 47978<br/>
-    +1 (219) 866-6000
-  </address>
-);
-
 
 const sampleCode =
 `  class Upload extends React.Component {

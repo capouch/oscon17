@@ -115,7 +115,7 @@ class Browse extends React.Component {
     return (
       <div>
         <InfoTable
-          url="http://localhost:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
       </div>
     );
   }

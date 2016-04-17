@@ -29,3 +29,21 @@ export default function zoomerInitModule ( path ) {
   //id = 'brush';
   renderImage(id);
 }
+
+// Boy if this piece of code could talk!!
+let LinkComponent = React.createClass({
+  render: function(){
+    // Set .tif files to one URL, all others to another . .
+    let target = this.props.data,
+      image = { show: "bremer" };
+      tifRegex = /tif/;
+
+    if (tifRegex.test(target)) {
+      image = { show: "brush" };
+    }
+
+      return (<NavLink to="/zoomer" className="nav-link">{this.props.data}</NavLink>
+  )}
+  });
+
+  return <a href={url}>{this.props.data}</a>

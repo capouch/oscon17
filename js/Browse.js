@@ -5,6 +5,7 @@
 
 import React from 'react'
 import { render } from 'react-dom'
+import NavLink from './NavLink'
 import Griddle from 'griddle-react'
 
 // private methods
@@ -21,10 +22,10 @@ let LinkComponent = React.createClass({
         tifRegex = /tif/;
 
       if (tifRegex.test(target)) {
-        url = "/zoomer?show=brush"
+        url = url = "/zoomer?show=brush"
       }
 
-      return <a href={url}>{this.props.data}</a>
+      return <NavLink to={{ pathname: 'zoomer', query: { show: "brush" } }} className="nav-link">{this.props.data}</NavLink>
     }
   });
 

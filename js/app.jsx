@@ -1,5 +1,5 @@
 import React from "react";
-import SamplePage from "./Shell.jsx";
+import Shell from "./Shell.jsx";
 import ReactDOM from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router";
 import { App } from "neal-react";
@@ -24,11 +24,11 @@ class SampleApp extends React.Component {
 ReactDOM.render((
   <Router history={ browserHistory }>
     <Route path="/" component={ SampleApp } history={ browserHistory }>
-      <IndexRoute name="home" component={ SamplePage }/>
+      <IndexRoute name="home" component={ Shell }/>
       <Route path="browse" component= { Browser }/>
       <Route path="zoomer" component={ Zoomer }/>
       <Route path="upload" component={ Uploader }/>
-      <Route path="*" component={ SamplePage }/>
+      <Route path="*" component={ Shell }/>
     </Route>
   </Router>
 ), document.getElementById("main"));

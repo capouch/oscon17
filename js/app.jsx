@@ -25,9 +25,9 @@ ReactDOM.render((
   <Router history={ browserHistory }>
     <Route path="/" component={ SampleApp } history={ browserHistory }>
       <IndexRoute name="home" component={ SamplePage }/>
-      <Route path="/browse" component= { Browser }/>
-      <Route path="/zoomer" component={ Zoomer }/>
-      <Route path="/upload" component={ Uploader }/>
+      <Route path="browse" component= { Browser }/>
+      <Route path="zoomer" component={ Zoomer }/>
+      <Route path="upload" component={ Uploader }/>
       <Route path="*" component={ SamplePage }/>
     </Route>
   </Router>

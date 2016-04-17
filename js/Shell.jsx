@@ -17,10 +17,9 @@ import {
   Team,
   TeamMember,
 } from "neal-react";
-import DropZoneComponent from 'react-dropzone-component'
-import Upload from './Upload'
-import Browse from './Browse'
-import Zoomer from './Zoomer'
+
+import Header from './Header'
+import PageFooter from './Footer'
 
 const brandName = "Scene:History";
 const brand = <span>{brandName}</span>;
@@ -44,7 +43,7 @@ const businessAddress = (
 
 
 const sampleCode =
-`    class Upload extends React.Component {
+`  class Upload extends React.Component {
     constructor(props) {
       super(props);
     }
@@ -67,26 +66,7 @@ export default (props) => {
   return (
     <Page>
 
-      <Navbar brand={brand}>
-        <NavItem><Link to="home" className="nav-link">Home</Link></NavItem>
-        <NavItem><Link to="browse" className="nav-link">Browse</Link></NavItem>
-        <NavItem><Link to="upload" className="nav-link">Upload</Link></NavItem>
-        <NavItem><Link to="zoomer" className="nav-link">Zoomer</Link></NavItem>
-        <NavItem dropdown={true}>
-          <DropdownToggle>Older versions</DropdownToggle>
-          <DropdownMenu>
-            <a href="http://oscon.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
-              2015 Page
-            </a>
-            <a href="http://oscon-sb.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
-              2016 Page
-            </a>
-            <a href="/oscon-test" className="dropdown-item" target="_blank">
-              GraphiQL
-            </a>
-          </DropdownMenu>
-        </NavItem>
-      </Navbar>
+      <Header />
 
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
@@ -102,9 +82,6 @@ export default (props) => {
       <Section className="subhero">
         <ImageList centered>
           <ImageListItem src="img/press/sjcLogo.png" url="http://www.saintjoe.edu"/>
-          <ImageListItem src="img/press/forbes-logo.png" url="http://forbes.com/"/>
-          <ImageListItem src="img/press/theverge-logo.png" url="http://www.theverge.com/"/>
-          <ImageListItem src="img/press/techcrunch-logo.jpg" url="http://techcrunch.com/"/>
         </ImageList>
       </Section>
 
@@ -148,11 +125,8 @@ export default (props) => {
         </CustomerQuotes>
       </Section>
 
-      <Footer brandName={brandName}
-        facebookUrl="http://www.facebook.com/brian.capouch"
-        githubUrl="https://github.com/capouch"
-        address={businessAddress}>
-      </Footer>
+      <PageFooter/>
+
     </Page>
   );
 };

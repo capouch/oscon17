@@ -67,12 +67,12 @@ let InfoTable = React.createClass({
       });
     },
   getInitialState: function() {
-    // Should this be a call to loadRecordsFromServer?
-    return {records: []};
+  // Should this be a call to loadRecordsFromServer?
+  return {records: []};
   },
   componentDidMount: function() {
     this.loadRecordsFromServer();
-    // This polls the server; not quite sure why . . .
+    // This polls the server to check for fresh data . .
     // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {

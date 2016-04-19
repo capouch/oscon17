@@ -18,9 +18,6 @@ import {
   TeamMember,
 } from "neal-react";
 
-import Header from './Header'
-import PageFooter from './Footer'
-
 const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
   name: "Stripe Integration Included",
   description: "Like this? Donate $5 <3",
@@ -52,8 +49,6 @@ const sampleCode =
 export default (props) => {
   return (
     <Page>
-
-      <Header />
 
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
@@ -111,8 +106,6 @@ export default (props) => {
           </CustomerQuote>
         </CustomerQuotes>
       </Section>
-
-      <PageFooter/>
 
     </Page>
   );

@@ -19,7 +19,7 @@ let NavHeader = React.createClass({
         <NavItem><NavLink to="upload" className="nav-link">Upload</NavLink></NavItem>
         <NavItem><NavLink to="zoomer" className="nav-link">Zoomer</NavLink></NavItem>
         <NavItem dropdown={true}>
-          <DropdownToggle>Older versions</DropdownToggle>
+          <DropdownToggle>Other versions</DropdownToggle>
             <DropdownMenu>
               <a href="http://oscon.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
                 2015 Page

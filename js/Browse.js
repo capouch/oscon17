@@ -58,7 +58,7 @@ let InfoTable = React.createClass({
         dataType: 'json',
         cache: false,
         success: function(data) {
-          // console.log('Please print!! ' + JSON.stringify(data.data.imageRecs));
+          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
           this.setState({records: data.data.imageRecs});
         }.bind(this),
           error: function(xhr, status, err) {

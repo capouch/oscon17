@@ -10,11 +10,9 @@ import Browse from './Browse'
 
 export default (props) => {
   return (
-    <div>
 
       <Browse
           className = "display-4"/>
 
-    </div>
   );
 };

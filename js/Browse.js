@@ -21,7 +21,7 @@ let LinkComponent = React.createClass({
         tifRegex = /tif/;
 
       if (tifRegex.test(target)) {
-        url = url = "/zoomer?show=brush"
+        url = "/zoomer?show=brush"
       }
 
       return <a href={url}>{this.props.data}</a>
@@ -55,7 +55,7 @@ let InfoTable = React.createClass({
         dataType: 'json',
         cache: false,
         success: function(data) {
-          // console.log('Please print!! ' + JSON.stringify(data.data.imageRecs));
+          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
           this.setState({records: data.data.imageRecs});
         }.bind(this),
           error: function(xhr, status, err) {

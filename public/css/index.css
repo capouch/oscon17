@@ -1,3 +1,4 @@
 .active {
-  color: green;
+  color: green !important;
+  font-weight: bold !important;
 }

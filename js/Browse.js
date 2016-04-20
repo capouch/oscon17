@@ -6,6 +6,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import Griddle from 'griddle-react'
+import NavLink from './NavLink'
 
 // private methods
 
@@ -13,6 +14,7 @@ import Griddle from 'griddle-react'
 // Save this: return <a href={url}>{this.props.data}</a>
 // Note that for now we just hardcode the link target in the url variable
 
+/* Former
 let LinkComponent = React.createClass({
     render: function(){
       // Set .tif files to one URL, all others to another . .
@@ -27,6 +29,25 @@ let LinkComponent = React.createClass({
       return <a href={url}>{this.props.data}</a>
     }
   });
+  */
+
+  // Putative
+  let LinkComponent = React.createClass({
+      render: function(){
+        // Set .tif files to one URL, all others to another . .
+        let target = this.props.data,
+          urlParms = {show: "brush"},
+          tifRegex = /tif/;
+
+        if (tifRegex.test(target)) {
+          urlParms.show = "bremer";
+        }
+
+        let stingifiedQuery = JSON.stringify(urlParms);
+
+        return <NavLink to={{ pathname: 'zoomer', query: { show: "brush" } }} className="nav-link">{this.props.data}</NavLink>
+      }
+    });
 
 
 let  customColumnMetadata = [

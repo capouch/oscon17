@@ -20,7 +20,7 @@ let ZoomBox =  React.createClass ({
   componentDidMount: function() {
     let zoomTarget = this.props.image;
     renderImage(zoomTarget);
-},
+  },
   render() {
     let style = {
       width: 800,

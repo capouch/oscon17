@@ -46,7 +46,7 @@ let LinkComponent = React.createClass({
         if (tifRegex.test(target)) {
           renderPath = renderBase + "bremer";
         }
-
+        console.log('Setting link to ' + renderPath);
         return <Link to={renderPath}>{this.props.data}</Link>
       }
     });

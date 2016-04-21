@@ -41,11 +41,12 @@ let LinkComponent = React.createClass({
 
         if (tifRegex.test(target)) {
           urlParms.show = "bremer";
+        let stringParms = urlParms + '';
         }
 
-        let stingifiedQuery = JSON.stringify(urlParms);
+        //let stingifiedQuery = stringify(urlParms);
 
-        return <NavLink to={{ pathname: 'zoomer', query: { show: "brush" } }} className="nav-link">{this.props.data}</NavLink>
+        return <NavLink to={{ pathname: 'zoomer', query: { urlParms } }} className="nav-link">{this.props.data}</NavLink>
       }
     });
 

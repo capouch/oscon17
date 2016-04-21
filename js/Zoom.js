@@ -5,11 +5,12 @@ import ReactDOM from 'react-dom'
 // Function to configure and raise the OpenSeaDragon widget
 let renderImage = function(selection) {
 
-  let baseName = selection + '.dzi';
+  // Task for another (near-term) time: why do I have to hardwire paths?
+  let baseName = '/home/brianc/PROJECTS/oscon16/' + selection + '.dzi';
   // console.log('In the renderImage method about to render ' + baseName);
   let viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "images/",
+    prefixUrl: "/home/brianc/PROJECTS/oscon16/images/",
     tileSources: baseName
   });
 }
@@ -42,8 +43,9 @@ class Zoomer extends React.Component {
     let sendParms = "bremer";
     if ( this.props.params.imageId ) {
       // The most time-costly two dots of my life!!
-      sendParms = '../' + this.props.params.imageId
+      sendParms = this.props.params.imageId
       }
+    console.log('Sending parms of ' + sendParms);
     return (
       <div>
         <ZoomBox image={sendParms}/>

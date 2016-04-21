@@ -14,10 +14,10 @@ let NavHeader = React.createClass({
   render() {
     return (
       <Navbar brand={brand}>
-        <NavItem><NavLink to="home" className="nav-link">Home</NavLink></NavItem>
-        <NavItem><NavLink to="browse" className="nav-link">Browse</NavLink></NavItem>
-        <NavItem><NavLink to="upload" className="nav-link">Upload</NavLink></NavItem>
-        <NavItem><NavLink to="zoomer" className="nav-link">Zoomer</NavLink></NavItem>
+        <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
+        <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
+        <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+        <NavItem><NavLink to="/zoomer" className="nav-link">Zoomer</NavLink></NavItem>
         <NavItem dropdown={true}>
           <DropdownToggle>Other versions</DropdownToggle>
             <DropdownMenu>

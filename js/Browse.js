@@ -43,10 +43,11 @@ let LinkComponent = React.createClass({
           urlParms.show = "bremer";
         let stringParms = urlParms + '';
         }
+        // Stringify it
+        let stringifiedQuery = JSON.stringify(urlParms);
+        console.log(stringifiedQuery);
 
-        //let stingifiedQuery = stringify(urlParms);
-
-        return <NavLink to={{ pathname: 'zoomer', query: { urlParms } }} className="nav-link">{this.props.data}</NavLink>
+        return <NavLink to={{ pathname: 'zoomer', query: { stringifiedQuery } }} className="nav-link">{this.props.data}</NavLink>
       }
     });
 

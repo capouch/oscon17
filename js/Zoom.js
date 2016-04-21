@@ -42,6 +42,7 @@ class Zoomer extends React.Component {
     let sendParms = "bremer";
     if ( this.props.params.imageId ) {
       // The most time-costly two dots of my life!!
+      // THERE ARE TWO ENTRY POINTS FOR THIS MODULE!!!
       sendParms = '../' + this.props.params.imageId
       }
     return (

@@ -42,6 +42,7 @@ let LinkComponent = React.createClass({
           tifRegex = /tif/,
           renderPath = renderBase + 'brush';
 
+        // Switch image target for tiff files for variety's sake
         if (tifRegex.test(target)) {
           renderPath = renderBase + "bremer";
         }

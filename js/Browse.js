@@ -6,7 +6,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import Griddle from 'griddle-react'
-import NavLink from './NavLink'
+import { Link } from 'react-router'
 
 // private methods
 
@@ -36,18 +36,15 @@ let LinkComponent = React.createClass({
       render: function(){
         // Set .tif files to one URL, all others to another . .
         let target = this.props.data,
-          urlParms = {show: "brush"},
-          tifRegex = /tif/;
+          renderBase = "zoomer/",
+          tifRegex = /tif/,
+          renderPath = renderBase + 'brush';
 
         if (tifRegex.test(target)) {
-          urlParms.show = "bremer";
-        let stringParms = urlParms + '';
+          renderPath = renderBase + "bremer";
         }
-        // Stringify it
-        let stringifiedQuery = JSON.stringify(urlParms);
-        console.log(stringifiedQuery);
 
-        return <NavLink to={{ pathname: 'zoomer', query: { stringifiedQuery } }} className="nav-link">{this.props.data}</NavLink>
+        return <Link to={renderPath}>{this.props.data}</Link>
       }
     });
 

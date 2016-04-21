@@ -5,9 +5,7 @@ import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react
 import { App } from "neal-react";
 import Browser from './Browser'
 import Zoom from './Zoom'
-import Zoomer from './Zoomer'
 import Uploader from './Uploader'
-import Test from './Test'
 
 import Header from './Header'
 import PageFooter from './Footer'

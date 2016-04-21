@@ -1,4 +1,6 @@
 var app = require('app');  // Module to control application life.
+var path = require('path');
+var url = require('url');
 
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
@@ -35,8 +37,16 @@ app.on('ready', function() {
    });
   // mainWindow = new BrowserWindow({width: 1024, height: 600});
 
+  var indexPath = path.resolve(__dirname, 'public', 'index.html')
+  var indexUrl = url.format({
+    protocol: 'file',
+    pathname: indexPath,
+    slashes: true,
+    // hash: encodeURIComponent(JSON.stringify(someArgs))
+  })
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  // mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL(indexUrl);
 
   // mainWindow.openDevTools();
   // Emitted when the window is closed.

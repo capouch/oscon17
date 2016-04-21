@@ -6,11 +6,11 @@ import ReactDOM from 'react-dom'
 let renderImage = function(selection) {
 
   // Task for another (near-term) time: why do I have to hardwire paths?
-  let baseName = '/home/brianc/PROJECTS/oscon16/' + selection + '.dzi';
+  let baseName =  '/home/brianc/PROJECTS/oscon16/public/' + selection + '.dzi';
   // console.log('In the renderImage method about to render ' + baseName);
   let viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "/home/brianc/PROJECTS/oscon16/images/",
+    prefixUrl: "/home/brianc/PROJECTS/oscon16/public/images/",
     tileSources: baseName
   });
 }
@@ -43,7 +43,7 @@ class Zoomer extends React.Component {
     let sendParms = "bremer";
     if ( this.props.params.imageId ) {
       // The most time-costly two dots of my life!!
-      sendParms = this.props.params.imageId
+      sendParms =  this.props.params.imageId
       }
     console.log('Sending parms of ' + sendParms);
     return (

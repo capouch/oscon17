@@ -72,11 +72,11 @@ let
       render: function() {
         return (
           React.createElement('li', {className: 'RecordItem'},
-          React.createElement('h2', {className: 'RecordItem-title'}, this.props.title),
-          React.createElement('h2', {className: 'RecordItem-description'}, this.props.description),
-          React.createElement('h2', {className: 'RecordItem-filename'}, this.props.filename),
-          React.createElement('h2', {className: 'RecordItem-source'}, this.props.source),
-          React.createElement('div', {className: 'RecordItem-tags'}, this.props.tags)
+          React.createElement('h5', {className: 'RecordItem-title'}, this.props.title),
+          React.createElement('h5', {className: 'RecordItem-description'}, this.props.description),
+          React.createElement('h5', {className: 'RecordItem-filename'}, this.props.filename),
+          React.createElement('h5', {className: 'RecordItem-source'}, this.props.source),
+          React.createElement('h5', {className: 'RecordItem-tags'}, this.props.tags)
           )
         );
       },
@@ -112,7 +112,9 @@ let
         var onChange = this.props.onChange;
 
         return (
-          React.createElement('form', {className: 'RecordForm'},
+          React.createElement('form', {
+              className: 'RecordForm', onSubmit:this.onSubmit,
+              noValidate: true},
             React.createElement('input', {
               type: 'text',
               placeholder: 'Title (required)',
@@ -198,7 +200,7 @@ let
 
   function submitNewRecord() {
   var contact = Object.assign({}, state.newRecord, {key: state.records.length + 1, errors: {}});
-
+  console.log('Submitting new record');
   if (record.title && record.filename) {
     setState(
       Object.keys(record.errors).length === 0
@@ -223,7 +225,6 @@ let
 */
 
  function setState(changes) {
-  console.log('Setting some state');
   Object.assign(state, changes);
 }
 
@@ -233,7 +234,7 @@ let records = [
   {key: 3, title: "Image 3", filename: "789.png"},
 ];
 
-let newRecord = { title: "", description: "", filename: "", source: "", tags: "" };
+let newRecord = { title: "Foo", description: "Bar", filename: "1.jpg", source: "Me", tags: "You" };
 
   class Upload extends React.Component {
     constructor(props) {

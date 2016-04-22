@@ -20,6 +20,9 @@ export default new GraphQLObjectType({
     filename: {
       type: GraphQLString
     },
+    source: {
+      type: GraphQLString
+    },
     taglist: {
       type: GraphQLString
     },

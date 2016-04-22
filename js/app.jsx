@@ -3,7 +3,7 @@ import Shell from "./Shell.jsx";
 import ReactDOM from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router";
 import { App } from "neal-react";
-import Browser from './Browser'
+import Browse from './Browse'
 import Zoom from './Zoom'
 import Uploader from './Uploader'
 
@@ -32,7 +32,7 @@ ReactDOM.render((
   <Router history={ browserHistory }>
     <Route path="/" component={ SampleApp } history={ browserHistory }>
       <IndexRoute name="home" component={ Shell }/>
-      <Route path="browse" component= { Browser }/>
+      <Route path="browse" component= { Browse }/>
       <Route path="zoomer" component= { Zoom }/>
       <Route path="zoomer/:imageId" component={ Zoom }/>
       <Route path="upload" component={ Uploader }/>

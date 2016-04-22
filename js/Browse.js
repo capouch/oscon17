@@ -31,15 +31,18 @@ let LinkComponent = React.createClass({
   });
   */
 
-  // Putative
+  // 'brush' and 'bremer' below will need to come from the database soon
   let LinkComponent = React.createClass({
       render: function(){
         // Set .tif files to one URL, all others to another . .
+        // The data sent in is the value of the field in the Griddle table
+        //  in our pilot app it is the "filename" property
         let target = this.props.data,
           renderBase = "zoomer/",
           tifRegex = /tif/,
           renderPath = renderBase + 'brush';
 
+        // Switch image target for tiff files for variety's sake
         if (tifRegex.test(target)) {
           renderPath = renderBase + "bremer";
         }

@@ -12,6 +12,7 @@ export default new GraphQLInputObjectType({
     title: {type: GraphQLString},
     description: {type: GraphQLString},
     filename: {type: new GraphQLNonNull(GraphQLString)},
+    source: {type: GraphQLString},
     taglist: {type: GraphQLString}
   }
 });

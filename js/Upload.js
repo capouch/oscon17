@@ -173,9 +173,9 @@ let
   });
 
 
-    /*
-     * Model
-     */
+  /*
+    * Model
+  */
   function updateNewRecord(record) {
     console.log('Officially changing our record' + record);
     setState({ newRecord: record });
@@ -265,6 +265,7 @@ let FormBox =  React.createClass ({
   }
 
 export default Upload
+
 /*
 let setState = function(changes) {
   Object.assign(state, changes);
@@ -287,15 +288,4 @@ setState({
 }
 );
 
-//  export default setState;
-
-// end local variables
-
-/* export class Page extends React.Component {
-
-  render() {
-    return <div className="neal-page">{this.props.children}</div>;
-  }
-
-}
 */

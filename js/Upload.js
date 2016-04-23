@@ -61,7 +61,7 @@ let
 
     // Thanks to James R. Nelson whose tutorial was the inspiration for this section
     //  http://jamesknelson.com/learn-raw-react-ridiculously-simple-forms/
-    var RecordItem = React.createClass({
+    let RecordItem = React.createClass({
       propTypes: {
         title: React.PropTypes.string.isRequired,
         description: React.PropTypes.string,
@@ -82,7 +82,7 @@ let
       },
     });
 
-    var RecordForm = React.createClass({
+    let RecordForm = React.createClass({
       propTypes: {
         value: React.PropTypes.object.isRequired,
         onChange: React.PropTypes.func.isRequired,
@@ -108,9 +108,6 @@ let
         this.props.onSubmit();
       },
       render: function() {
-        var oldRecord = this.props.value;
-        var onChange = this.props.onChange;
-
         return (
           React.createElement('form', {
               className: 'RecordForm', onSubmit:this.onSubmit,
@@ -150,7 +147,7 @@ let
       },
     });
 
-    var RecordView = React.createClass({
+    let RecordView = React.createClass({
       propTypes: {
         records: React.PropTypes.array.isRequired,
         newRecord: React.PropTypes.object.isRequired,
@@ -172,7 +169,7 @@ let
             })
           )
         );
-      }
+      },
   });
 
 
@@ -184,11 +181,11 @@ let
     setState({ newRecord: record });
   }
 
-  var state = {};
+  let state = {};
 
   let  RECORD_TEMPLATE = { title: "", description: "", filename: "", source: "", tags: "", errors: null};
 
-  /*
+/*
   let  records = [
     {key: 1, title: "Image 1", description: "An image", filename: "123.jpg", source: "Brian", tags: "Medaryville"},
     {key: 2, title: "Image 2", filename: "456.tif"},
@@ -196,22 +193,22 @@ let
   ];
 
   let newRecord = { title: "", description: "", filename: "", source: "", tags: "" };
-  */
+*/
 
   function submitNewRecord() {
-  var contact = Object.assign({}, state.newRecord, {key: state.records.length + 1, errors: {}});
-  console.log('Submitting new record');
-  if (record.title && record.filename) {
-    setState(
-      Object.keys(record.errors).length === 0
-      ? {
-          newRecord: Object.assign({}, RECORD_TEMPLATE),
-          records: state.records.slice(0).concat(record),
-        }
-      : { newRecord: record }
-    );
-  }
-}
+    var record = Object.assign({}, state.newRecord, {key: state.records.length + 1, errors:{}});
+    console.log('Submitting new record');
+    if (record.title && record.filename) {
+      setState(
+        Object.keys(record.errors).length === 0
+        ? {
+            newRecord: Object.assign({}, RECORD_TEMPLATE),
+            records: state.records.slice(0).concat(record),
+          }
+          : { newRecord: record }
+        );
+      }
+    }
 /*
   React.createElement(RecordView, {
       records: records,
@@ -224,10 +221,11 @@ let
   }))
 */
 
- function setState(changes) {
+function setState(changes) {
   Object.assign(state, changes);
 }
 
+// Temporary workaround since we can't do this (yet) with setState
 let records = [
   {key: 1, title: "Image 1", description: "An image", filename: "123.jpg", source: "Brian", tags: "Medaryville"},
   {key: 2, title: "Image 2", filename: "456.tif"},
@@ -236,6 +234,15 @@ let records = [
 
 let newRecord = { title: "Foo", description: "Bar", filename: "1.jpg", source: "Me", tags: "You" };
 
+let FormBox =  React.createClass ({
+  render() {
+    return (
+      <div id="record-container">
+      </div>
+    );
+  }
+});
+
   class Upload extends React.Component {
     constructor(props) {
       super(props);
@@ -243,13 +250,13 @@ let newRecord = { title: "Foo", description: "Bar", filename: "1.jpg", source: "
     render() {
       return (
         <div>
-        <RecordView
-          records={records}
-          newRecord={newRecord}
-          onNewRecordChange={updateNewRecord}
-          onNewRecordSubmit={submitNewRecord}
-          />
-        <DropZoneComponent  config={componentConfig}
+          <RecordView
+            records={records}
+            newRecord={newRecord}
+            onNewRecordChange={updateNewRecord}
+            onNewRecordSubmit={submitNewRecord}
+            />
+          <DropZoneComponent  config={componentConfig}
                             eventHandlers={eventHandlers}
                             djsConfig={djsConfig} />,
         </div>
@@ -279,7 +286,8 @@ setState({
   newRecord: {title: "", description: "", filename: "", source: "", tags: ""}
 }
 );
-  export default setState;
+
+//  export default setState;
 
 // end local variables
 

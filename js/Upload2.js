@@ -81,6 +81,8 @@ let fieldValues = {
 // Var to hold POST URL
 let queryURL;
 
+// Code inspired by this tutorial:
+//  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
 let Upload = React.createClass ( {
  getInitialState: function() {
    // This needs fixed; we do both Dropzone and Forms in this view

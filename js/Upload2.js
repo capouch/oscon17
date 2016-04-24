@@ -40,6 +40,7 @@ let
     uploadprogress: null,
     sending: null,
     success: function(file, response) {
+      // Server now sends back ultimate filename
       console.log('Got ' + response);
       serverFilename = response;
       // Cut the quotes
@@ -82,6 +83,7 @@ let queryURL;
 
 let Upload = React.createClass ( {
  getInitialState: function() {
+   // This needs fixed; we do both Dropzone and Forms in this view
    return {
     step : 2,
   }
@@ -93,7 +95,7 @@ let Upload = React.createClass ( {
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
     fieldValues = Object.assign({}, fieldValues, fields);
     fieldValues.filename = serverFilename;
-    // Put together query URL
+    // Put together (awful-looking) query URL
     queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}";
@@ -104,7 +106,7 @@ let Upload = React.createClass ( {
       dataType: 'json',
       cache: false,
       success: function(data) {
-        console.log('Returned from mutation calls')
+        console.log('Returned from mutation call')
         //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
         // this.setState({records: data.data.imageRecs});
       }.bind(this),

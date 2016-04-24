@@ -80,25 +80,8 @@ let fieldValues = {
   taglist : null
 }
 
-// Is this scoped right?
+// Var to hold POST URL
 let queryURL;
-let saveRecordsToServer = function() {
-    console.log('In SRTS with URL of ' + queryURL);
-    $.ajax({
-      type: "POST",
-      url: queryURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        console.log('Returned from mutation calls')
-        //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-        // this.setState({records: data.data.imageRecs});
-      }.bind(this),
-        error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  };
 
 let Upload = React.createClass ( {
  getInitialState: function() {
@@ -111,7 +94,6 @@ let Upload = React.createClass ( {
     // Remember, `fieldValues` is set at the top of this file, we are simply appending
     // to and overriding keys in `fieldValues` with the `fields` with Object.assign
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-console.log('In callback saveValues');
     fieldValues = Object.assign({}, fieldValues, fields);
     fieldValues.filename = serverFilename;
     // Put together query URL

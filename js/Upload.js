@@ -61,7 +61,7 @@ let
 
     // Thanks to James R. Nelson whose tutorial was the inspiration for this section
     //  http://jamesknelson.com/learn-raw-react-ridiculously-simple-forms/
-    var RecordItem = React.createClass({
+    let RecordItem = React.createClass({
       propTypes: {
         title: React.PropTypes.string.isRequired,
         description: React.PropTypes.string,
@@ -82,14 +82,16 @@ let
       },
     });
 
-    var RecordForm = React.createClass({
+    let RecordForm = React.createClass({
       propTypes: {
         value: React.PropTypes.object.isRequired,
         onChange: React.PropTypes.func.isRequired,
         onSubmit: React.PropTypes.func.isRequired,
       },
       onTitleChange: function(e) {
+        console.log('Made it to callback with: ' + e.target.value);
         this.props.onChange(Object.assign({}, this.props.value, {title: e.target.value}));
+        console.log('Change complete: ' + JSON.stringify(this.props.value));
       },
       onDescriptionChange: function(e) {
         this.props.onChange(Object.assign({}, this.props.value, {description: e.target.value}));
@@ -108,9 +110,6 @@ let
         this.props.onSubmit();
       },
       render: function() {
-        var oldRecord = this.props.value;
-        var onChange = this.props.onChange;
-
         return (
           React.createElement('form', {
               className: 'RecordForm', onSubmit:this.onSubmit,
@@ -150,7 +149,7 @@ let
       },
     });
 
-    var RecordView = React.createClass({
+    let RecordView = React.createClass({
       propTypes: {
         records: React.PropTypes.array.isRequired,
         newRecord: React.PropTypes.object.isRequired,
@@ -172,23 +171,25 @@ let
             })
           )
         );
-      }
+      },
   });
 
 
-    /*
-     * Model
-     */
+  /*
+    * Model
+  */
   function updateNewRecord(record) {
-    console.log('Officially changing our record' + record);
-    setState({ newRecord: record });
+    console.log('Officially changing our record' + JSON.stringify(record));
+    Object.assign( newRecord, record)
+    //setState({ newRecord: record });
+    console.log('So heres the proof' + JSON.stringify(newRecord));
   }
 
-  var state = {};
+  let state = {};
 
   let  RECORD_TEMPLATE = { title: "", description: "", filename: "", source: "", tags: "", errors: null};
 
-  /*
+/*
   let  records = [
     {key: 1, title: "Image 1", description: "An image", filename: "123.jpg", source: "Brian", tags: "Medaryville"},
     {key: 2, title: "Image 2", filename: "456.tif"},
@@ -196,22 +197,22 @@ let
   ];
 
   let newRecord = { title: "", description: "", filename: "", source: "", tags: "" };
-  */
+*/
 
   function submitNewRecord() {
-  var contact = Object.assign({}, state.newRecord, {key: state.records.length + 1, errors: {}});
-  console.log('Submitting new record');
-  if (record.title && record.filename) {
-    setState(
-      Object.keys(record.errors).length === 0
-      ? {
-          newRecord: Object.assign({}, RECORD_TEMPLATE),
-          records: state.records.slice(0).concat(record),
-        }
-      : { newRecord: record }
-    );
-  }
-}
+    var record = Object.assign({}, state.newRecord, {key: state.records.length + 1, errors:{}});
+    console.log('Submitting new record');
+    if (record.title && record.filename) {
+      setState(
+        Object.keys(record.errors).length === 0
+        ? {
+            newRecord: Object.assign({}, RECORD_TEMPLATE),
+            records: state.records.slice(0).concat(record),
+          }
+          : { newRecord: record }
+        );
+      }
+    }
 /*
   React.createElement(RecordView, {
       records: records,
@@ -224,10 +225,13 @@ let
   }))
 */
 
- function setState(changes) {
+function setState(changes) {
+  console.log('In setState about to assign ' + JSON.stringify(changes));
   Object.assign(state, changes);
+  console.log('In setState about to assign ' + JSON.stringify(state));
 }
 
+// Temporary workaround since we can't do this (yet) with setState
 let records = [
   {key: 1, title: "Image 1", description: "An image", filename: "123.jpg", source: "Brian", tags: "Medaryville"},
   {key: 2, title: "Image 2", filename: "456.tif"},
@@ -236,6 +240,15 @@ let records = [
 
 let newRecord = { title: "Foo", description: "Bar", filename: "1.jpg", source: "Me", tags: "You" };
 
+let FormBox =  React.createClass ({
+  render() {
+    return (
+      <div id="record-container">
+      </div>
+    );
+  }
+});
+
   class Upload extends React.Component {
     constructor(props) {
       super(props);
@@ -243,13 +256,13 @@ let newRecord = { title: "Foo", description: "Bar", filename: "1.jpg", source: "
     render() {
       return (
         <div>
-        <RecordView
-          records={records}
-          newRecord={newRecord}
-          onNewRecordChange={updateNewRecord}
-          onNewRecordSubmit={submitNewRecord}
-          />
-        <DropZoneComponent  config={componentConfig}
+          <RecordView
+            records={records}
+            newRecord={newRecord}
+            onNewRecordChange={updateNewRecord}
+            onNewRecordSubmit={submitNewRecord}
+            />
+          <DropZoneComponent  config={componentConfig}
                             eventHandlers={eventHandlers}
                             djsConfig={djsConfig} />,
         </div>
@@ -258,6 +271,7 @@ let newRecord = { title: "Foo", description: "Bar", filename: "1.jpg", source: "
   }
 
 export default Upload
+
 /*
 let setState = function(changes) {
   Object.assign(state, changes);
@@ -279,15 +293,5 @@ setState({
   newRecord: {title: "", description: "", filename: "", source: "", tags: ""}
 }
 );
-  export default setState;
 
-// end local variables
-
-/* export class Page extends React.Component {
-
-  render() {
-    return <div className="neal-page">{this.props.children}</div>;
-  }
-
-}
 */

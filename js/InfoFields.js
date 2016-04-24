@@ -12,9 +12,6 @@ var InfoFields = React.createClass({
  <label>Description</label>
  <input type="text" ref="description" defaultValue={this.props.fieldValues.description} />
 
- <label>Filename</label>
- <input type="text" ref="filename" defaultValue={this.props.fieldValues.filename} />
-
  <label>Source</label>
  <input type="text" ref="source" defaultValue={this.props.fieldValues.source} />
 
@@ -34,7 +31,6 @@ var InfoFields = React.createClass({
    var data = {
      title : this.refs.title.value,
      description : this.refs.description.value,
-     filename : this.refs.filename.value,
      source : this.refs.source.value,
      taglist : this.refs.taglist.value,
    }

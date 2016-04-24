@@ -89,7 +89,9 @@ let
         onSubmit: React.PropTypes.func.isRequired,
       },
       onTitleChange: function(e) {
+        console.log('Made it to callback with: ' + e.target.value);
         this.props.onChange(Object.assign({}, this.props.value, {title: e.target.value}));
+        console.log('Change complete: ' + JSON.stringify(this.props.value));
       },
       onDescriptionChange: function(e) {
         this.props.onChange(Object.assign({}, this.props.value, {description: e.target.value}));
@@ -177,8 +179,10 @@ let
     * Model
   */
   function updateNewRecord(record) {
-    console.log('Officially changing our record' + record);
-    setState({ newRecord: record });
+    console.log('Officially changing our record' + JSON.stringify(record));
+    Object.assign( newRecord, record)
+    //setState({ newRecord: record });
+    console.log('So heres the proof' + JSON.stringify(newRecord));
   }
 
   let state = {};
@@ -222,7 +226,9 @@ let
 */
 
 function setState(changes) {
+  console.log('In setState about to assign ' + JSON.stringify(changes));
   Object.assign(state, changes);
+  console.log('In setState about to assign ' + JSON.stringify(state));
 }
 
 // Temporary workaround since we can't do this (yet) with setState

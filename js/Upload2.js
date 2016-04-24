@@ -66,9 +66,6 @@ let
     djsConfig = {
       addRemoveLinks: true,
       acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff",
-      params: {
-        fieldValues: fieldValues
-      }
     };
 
 // Data structure

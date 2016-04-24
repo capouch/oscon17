@@ -12,6 +12,7 @@ import InfoFields from './InfoFields'
 
 // begin local variables
 let
+  serverFilename,
   // Configuration and setup for DropZoneComponent
   componentConfig = {
     iconFiletypes: ['.jpg', '.png', '.gif', 'tif'],
@@ -40,7 +41,10 @@ let
     sending: null,
     success: function(file, response) {
       console.log('Got ' + response);
-      fieldValues.filename = response;
+      serverFilename = response;
+      // Cut the quotes
+      serverFilename = serverFilename.replace(/"/g,"");
+      console.log('Cut quotes: ' + serverFilename);
     },
     complete: null,
     canceled: null,
@@ -61,7 +65,10 @@ let
     },
     djsConfig = {
       addRemoveLinks: true,
-      acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff"
+      acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff",
+      params: {
+        fieldValues: fieldValues
+      }
     };
 
 // Data structure
@@ -69,15 +76,34 @@ let
 let fieldValues = {
   title : null,
   description : null,
-  filename : null,
   source : null,
   taglist : null
 }
 
+// Is this scoped right?
+let queryURL;
+let saveRecordsToServer = function() {
+    console.log('In SRTS with URL of ' + queryURL);
+    $.ajax({
+      type: "POST",
+      url: queryURL,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        console.log('Returned from mutation calls')
+        //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+        // this.setState({records: data.data.imageRecs});
+      }.bind(this),
+        error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  };
+
 let Upload = React.createClass ( {
  getInitialState: function() {
    return {
-    step : 2
+    step : 2,
   }
  },
  saveValues: function(fields) {
@@ -85,10 +111,30 @@ let Upload = React.createClass ( {
     // Remember, `fieldValues` is set at the top of this file, we are simply appending
     // to and overriding keys in `fieldValues` with the `fields` with Object.assign
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-    fieldValues = Object.assign({}, fieldValues, fields)
-    console.log('Retrieved: ' + JSON.stringify(fields));
+console.log('In callback saveValues');
+    fieldValues = Object.assign({}, fieldValues, fields);
+    fieldValues.filename = serverFilename;
+    // Put together query URL
+    queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
+      ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
+      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}";
+    console.log(queryURL);
+    $.ajax({
+      type: "POST",
+      url: queryURL,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        console.log('Returned from mutation calls')
+        //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+        // this.setState({records: data.data.imageRecs});
+      }.bind(this),
+        error: function(xhr, status, err) {
+        console.error(status, err.toString());
+      }.bind(this)
+    });
   }()
- },
+  },
  nextStep: function() {
   this.setState({
     step : this.state.step + 1
@@ -103,7 +149,9 @@ let Upload = React.createClass ( {
  render: function() {
    switch(this.state.step) {
      case 1:
-      return <DropZone />
+      return  <DropZoneComponent config={componentConfig}
+                eventHandlers={eventHandlers}
+                djsConfig={djsConfig} />
      case 2:
       return (
         <div>

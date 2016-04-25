@@ -85,9 +85,9 @@ let queryURL;
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
 let Upload = React.createClass ( {
  getInitialState: function() {
-   // This needs fixed; we do both Dropzone and Forms in this view
+   // Stepping stages are overkill for this project, but intrinsically interesting
    return {
-    step : 2,
+    step : 1,
   }
  },
  saveValues: function(fields) {
@@ -132,10 +132,6 @@ let Upload = React.createClass ( {
  render: function() {
    switch(this.state.step) {
      case 1:
-      return  <DropZoneComponent config={componentConfig}
-                eventHandlers={eventHandlers}
-                djsConfig={djsConfig} />
-     case 2:
       return (
         <div>
         <DropZoneComponent config={componentConfig}
@@ -147,7 +143,7 @@ let Upload = React.createClass ( {
           saveValues={this.saveValues} />
         </div>
       )
-  case 3:
+  case 2:
     return <Confirmation />
   }
  }

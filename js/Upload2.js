@@ -95,7 +95,7 @@ let saveRecordsToServer = function() {
         // this.setState({records: data.data.imageRecs});
       }.bind(this),
         error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(queryUrl, status, err.toString());
       }.bind(this)
     });
   };

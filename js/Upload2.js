@@ -8,7 +8,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import DropZoneComponent from 'react-dropzone-component'
 import InfoFields from './InfoFields'
-//import Confirmation from './Confirmation'
+import Confirmation from './Confirmation'
 
 // begin local variables
 let

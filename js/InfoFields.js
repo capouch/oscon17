@@ -6,19 +6,19 @@ var InfoFields = React.createClass({
  render: function() {
  return (
  <div>
- <label>Title</label>
- <input type="text" ref="title" defaultValue={this.props.fieldValues.title} />
+  <label>Title</label>
+  <input type="text" ref="title" defaultValue={this.props.fieldValues.title} />
 
- <label>Description</label>
- <input type="text" ref="description" defaultValue={this.props.fieldValues.description} />
+  <label>Description</label>
+  <input type="text" ref="description" defaultValue={this.props.fieldValues.description} />
 
- <label>Source</label>
- <input type="text" ref="source" defaultValue={this.props.fieldValues.source} />
+  <label>Source</label>
+  <input type="text" ref="source" defaultValue={this.props.fieldValues.source} />
 
- <label>Taglist</label>
- <input type="text" ref="taglist" defaultValue={this.props.fieldValues.taglist} />
+  <label>Taglist</label>
+  <input type="text" ref="taglist" defaultValue={this.props.fieldValues.taglist} />
 
- <button onClick={this.saveAndContinue}>Save and Continue</button>
+  <button onClick={this.saveAndContinue}>Save and Continue</button>
  </div>
  )
  },

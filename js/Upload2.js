@@ -40,6 +40,7 @@ let
     uploadprogress: null,
     sending: null,
     success: function(file, response) {
+      // Server now sends back ultimate filename
       console.log('Got ' + response);
       serverFilename = response;
       // Cut the quotes
@@ -66,9 +67,6 @@ let
     djsConfig = {
       addRemoveLinks: true,
       acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff",
-      params: {
-        fieldValues: fieldValues
-      }
     };
 
 // Data structure
@@ -80,30 +78,16 @@ let fieldValues = {
   taglist : null
 }
 
-// Is this scoped right?
+// Var to hold POST URL
 let queryURL;
-let saveRecordsToServer = function() {
-    console.log('In SRTS with URL of ' + queryURL);
-    $.ajax({
-      type: "POST",
-      url: queryURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        console.log('Returned from mutation calls')
-        //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-        // this.setState({records: data.data.imageRecs});
-      }.bind(this),
-        error: function(xhr, status, err) {
-        console.error(queryUrl, status, err.toString());
-      }.bind(this)
-    });
-  };
 
+// Code inspired by this tutorial:
+//  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
 let Upload = React.createClass ( {
  getInitialState: function() {
+   // Stepping stages are overkill for this project, but intrinsically interesting
    return {
-    step : 2,
+    step : 1,
   }
  },
  saveValues: function(fields) {
@@ -111,10 +95,9 @@ let Upload = React.createClass ( {
     // Remember, `fieldValues` is set at the top of this file, we are simply appending
     // to and overriding keys in `fieldValues` with the `fields` with Object.assign
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-console.log('In callback saveValues');
     fieldValues = Object.assign({}, fieldValues, fields);
     fieldValues.filename = serverFilename;
-    // Put together query URL
+    // Put together (awful-looking) query URL
     queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}";
@@ -125,7 +108,7 @@ console.log('In callback saveValues');
       dataType: 'json',
       cache: false,
       success: function(data) {
-        console.log('Returned from mutation calls')
+        console.log('Returned from mutation call')
         //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
         // this.setState({records: data.data.imageRecs});
       }.bind(this),
@@ -149,10 +132,6 @@ console.log('In callback saveValues');
  render: function() {
    switch(this.state.step) {
      case 1:
-      return  <DropZoneComponent config={componentConfig}
-                eventHandlers={eventHandlers}
-                djsConfig={djsConfig} />
-     case 2:
       return (
         <div>
         <DropZoneComponent config={componentConfig}
@@ -164,7 +143,7 @@ console.log('In callback saveValues');
           saveValues={this.saveValues} />
         </div>
       )
-  case 3:
+  case 2:
     return <Confirmation />
   }
  }

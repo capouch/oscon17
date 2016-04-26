@@ -22,19 +22,19 @@ var images = [
 ];
 
 let ImageShow = React.createClass ( {
-handleSlide: function(index) {
-  console.log('Slid to ' + index);
-},
+  handleSlide: function(index) {
+    console.log('Slid to ' + index);
+  },
 
-render: function() {
-  return (
-    <ImageGallery
-      items={images}
-      autoPlay={true}
-      slideInterval={4000}
-      onSlide={this.handleSlide}/>
-  );
- }
-});
+  render: function() {
+    return (
+      <ImageGallery
+        items={images}
+        autoPlay={true}
+        slideInterval={4000}
+        onSlide={this.handleSlide}/>
+      );
+    }
+  });
 
 export default ImageShow

@@ -10,6 +10,24 @@ import DropZoneComponent from 'react-dropzone-component'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
 
+import {
+  Code,
+  CustomerQuote, CustomerQuotes,
+  DropdownMenu, DropdownToggle,
+  Footer, FooterAddress,
+  Hero,
+  HorizontalSplit,
+  ImageList, ImageListItem,
+  Navbar, NavItem,
+  Page,
+  PricingPlan, PricingTable,
+  Section,
+  SignupInline, SignupModal,
+  Stripe,
+  Team,
+  TeamMember,
+} from "neal-react";
+
 // begin local variables
 let
   serverFilename,
@@ -133,15 +151,16 @@ let Upload = React.createClass ( {
    switch(this.state.step) {
      case 1:
       return (
-        <div>
-        <DropZoneComponent config={componentConfig}
-          eventHandlers={eventHandlers}
-          djsConfig={djsConfig} />
-        <InfoFields
-          fieldValues={fieldValues}
-          nextStep={this.nextStep}
-          saveValues={this.saveValues} />
-        </div>
+        <Section>
+          <DropZoneComponent config={componentConfig}
+            eventHandlers={eventHandlers}
+            djsConfig={djsConfig} />
+          <InfoFields
+            fieldValues={fieldValues}
+            nextStep={this.nextStep}
+            saveValues={this.saveValues} />
+        </Section>
+
       )
   case 2:
     return <Confirmation />

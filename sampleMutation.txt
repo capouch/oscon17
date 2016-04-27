@@ -1,0 +1,9 @@
+mutation {
+  addImage(data:{
+    title: "Baughman Family with Car",
+    description: "Personal postcard",
+    source:"Don Behny",
+    filename:"baughmanCar.png",
+    taglist: "Baughman, Medaryville, Posey"
+  })
+}

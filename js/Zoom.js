@@ -40,10 +40,15 @@ class Zoomer extends React.Component {
     super(props);
   }
   render() {
+
+    // This is the default case, i.e. Zoomer with no parameters
     let sendParms = "bremer";
+
+    // This fires when properties are sent explictly
     if ( this.props.params.imageId ) {
       // The most time-costly two dots of my life!!
       sendParms =  this.props.params.imageId
+      // THERE ARE TWO ENTRY POINTS FOR THIS MODULE!!!
       }
     console.log('Sending parms of ' + sendParms);
     return (

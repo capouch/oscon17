@@ -133,10 +133,7 @@ let SearchBar = React.createClass({
 
 // end private members/methods
 
-class Browse extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+let Browse = React.createClass ( {
   render() {
     return (
       <div>
@@ -145,6 +142,6 @@ class Browse extends React.Component {
       </div>
     );
   }
-}
+});
 
 export default Browse;

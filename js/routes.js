@@ -50,6 +50,11 @@ configRoutes = function ( router, server ) {
     res.sendFile('index.html', options);
   });
 
+  router.get('/images', function(req, res) {
+    console.log('Server browse chosen');
+    res.sendFile('index.html', options);
+  });
+
   router.get('/zoomer/*', function(req, res) {
     console.log('Server zoomer chosen');
     res.sendFile('index.html', options);

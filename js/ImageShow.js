@@ -1,5 +1,6 @@
 import React from 'react'
 import ImageGallery from 'react-image-gallery'
+import { Section } from 'neal-react'
 
 var images = [
   {
@@ -28,11 +29,13 @@ let ImageShow = React.createClass ( {
 
   render: function() {
     return (
-      <ImageGallery
-        items={images}
-        autoPlay={true}
-        slideInterval={4000}
-        onSlide={this.handleSlide}/>
+      <Section>
+        <ImageGallery
+          items={images}
+          autoPlay={true}
+          slideInterval={4000}
+          onSlide={this.handleSlide}/>
+      </Section>
       );
     }
   });

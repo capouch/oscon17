@@ -16,22 +16,6 @@ import { Section } from 'neal-react'
 // Save this: return <a href={url}>{this.props.data}</a>
 // Note that for now we just hardcode the link target in the url variable
 
-/* Former
-let LinkComponent = React.createClass({
-    render: function(){
-      // Set .tif files to one URL, all others to another . .
-      let target = this.props.data,
-        url = "/zoomer?show=bremer",
-        tifRegex = /tif/;
-
-      if (tifRegex.test(target)) {
-        url = "/zoomer?show=brush"
-      }
-
-      return <a href={url}>{this.props.data}</a>
-    }
-  });
-  */
 
   // 'brush' and 'bremer' below will need to come from the database soon
   let LinkComponent = React.createClass({
@@ -46,7 +30,7 @@ let LinkComponent = React.createClass({
 
         // Switch image target for tiff files for variety's sake
         if (tifRegex.test(target)) {
-          renderPath = renderBase + "bremer";
+          renderPath = renderBase + target;
         }
 
         return <NavLink to={renderPath}>{this.props.data}</NavLink>

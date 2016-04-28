@@ -43,3 +43,40 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
     res.send(JSON.stringify(responseString));
     //res.sendStatus(200);
   });
+
+  /* Former
+  let LinkComponent = React.createClass({
+      render: function(){
+        // Set .tif files to one URL, all others to another . .
+        let target = this.props.data,
+          url = "/zoomer?show=bremer",
+          tifRegex = /tif/;
+
+        if (tifRegex.test(target)) {
+          url = "/zoomer?show=brush"
+        }
+
+        return <a href={url}>{this.props.data}</a>
+      }
+    });
+    */
+
+    // 'brush' and 'bremer' below will need to come from the database soon
+    let LinkComponent = React.createClass({
+
+        render: function(){
+          // Make a NavLink out of a column value
+          // console.log('Processing in LinkComponent');
+          let target = this.props.data,
+            renderBase = "zoomer/",
+            tifRegex = /tif/,
+            renderPath = renderBase + 'brush';
+
+          // Switch image target for tiff files for variety's sake
+          if (tifRegex.test(target)) {
+            renderPath = renderBase + "bremer";
+          }
+
+          return <NavLink to={renderPath}>{this.props.data}</NavLink>
+        }
+      });

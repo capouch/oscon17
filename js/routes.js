@@ -80,20 +80,22 @@ configRoutes = function ( router, server ) {
       }
       console.log('Uploading file: ' + req.file.filename);
 
-      // Process input file; generate thumbnail and zoomer tiles
-      //   Note: zoomer creation on all images??  Heuristics?
+      // Crude proof of concept: generate thumbnail and zoom tiles
       let storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
         dziBase = './public/tiles/' + storedFilename + '.dzi';
+      // Make a thumbnail 200 px wide, scaled
       sharp(filePath)
         .resize(200)
         .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
           console.log(err);
         });
+      // Generate zoomer tiles too
       sharp(filePath).tile(256)
         .toFile(dziBase, function(err, info) {
           console.log(err);
         });
+    // Pass back name -- maybe more soon??
     res.send(JSON.stringify(storedFilename));
     //res.sendStatus(200);
   });

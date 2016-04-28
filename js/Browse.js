@@ -25,13 +25,14 @@ import { Section } from 'neal-react'
         // console.log('Processing in LinkComponent');
         let target = this.props.data,
           renderBase = "zoomer/",
-          tifRegex = /tif/,
-          renderPath = renderBase + 'brush';
+          // tifRegex = /tif|png/,
+          renderPath = renderBase + target;
 
-        // Switch image target for tiff files for variety's sake
+        /* Switch image target for tiff files for variety's sake
         if (tifRegex.test(target)) {
           renderPath = renderBase + target;
         }
+        */
 
         return <NavLink to={renderPath}>{this.props.data}</NavLink>
       }

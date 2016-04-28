@@ -9,24 +9,7 @@ import ReactDOM from 'react-dom'
 import DropZoneComponent from 'react-dropzone-component'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
-
-import {
-  Code,
-  CustomerQuote, CustomerQuotes,
-  DropdownMenu, DropdownToggle,
-  Footer, FooterAddress,
-  Hero,
-  HorizontalSplit,
-  ImageList, ImageListItem,
-  Navbar, NavItem,
-  Page,
-  PricingPlan, PricingTable,
-  Section,
-  SignupInline, SignupModal,
-  Stripe,
-  Team,
-  TeamMember,
-} from "neal-react";
+import { Section } from "neal-react";
 
 // begin local variables
 let
@@ -152,6 +135,7 @@ let Upload = React.createClass ( {
      case 1:
       return (
         <Section>
+          <center><h2>Upload Historic Images</h2></center>
           <DropZoneComponent config={componentConfig}
             eventHandlers={eventHandlers}
             djsConfig={djsConfig} />

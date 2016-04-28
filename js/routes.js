@@ -69,6 +69,7 @@ configRoutes = function ( router, server ) {
   });
 
   // Fetch uploaded file handled by "storage" object in multer
+  // Process resulting files for later viewing
   router.post('/uploadHandler', function(req, res) {
     if (req.body) {
         console.log('Req body: ' + JSON.stringify(req.body));
@@ -77,21 +78,21 @@ configRoutes = function ( router, server ) {
       if (err) {
         return res.end('Error uploading file');
       }
-    console.log('Uploading file: ' + req.file.filename);
+      console.log('Uploading file: ' + req.file.filename);
 
-    // Process input file; generate thumbnail and zoomer tiles
-    //   Note: zoomer creation on all images??  Heuristics?
-    let storedFilename = req.file.filename,
-      filePath = './uploads/' + storedFilename,
-      dziBase = './tiles/' + storedFilename + '.dzi';
-    sharp(filePath)
-      .resize(200)
-      .toFile('./images/' + storedFilename + '-thumb', function(err) {
-        console.log(err);
-      });
+      // Process input file; generate thumbnail and zoomer tiles
+      //   Note: zoomer creation on all images??  Heuristics?
+      let storedFilename = req.file.filename,
+        filePath = './uploads/' + storedFilename,
+        dziBase = './tiles/' + storedFilename + '.dzi';
+      sharp(filePath)
+        .resize(200)
+        .toFile('./images/' + storedFilename + '-thumb', function(err) {
+          console.log(err);
+        });
       sharp(filePath).tile(256)
         .toFile(dziBase, function(err, info) {
-        console.log(err);
+          console.log(err);
         });
     res.send(JSON.stringify(storedFilename));
     //res.sendStatus(200);

@@ -1,6 +1,7 @@
 import OpenSeaDragon from 'openseadragon'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Section } from 'neal-react'
 
 // Function to configure and raise the OpenSeaDragon widget
 let renderImage = function(selection) {
@@ -51,9 +52,9 @@ class Zoomer extends React.Component {
       console.log('Going after: ' + sendParms);
       }
     return (
-      <div>
-        <ZoomBox image={sendParms}/>
-      </div>
+      <Section>
+        <center><ZoomBox image={sendParms}/></center>
+      </Section>
     );
   }
 }

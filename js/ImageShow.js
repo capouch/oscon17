@@ -1,5 +1,6 @@
 import React from 'react'
 import ImageGallery from 'react-image-gallery'
+import { Section } from 'neal-react'
 
 class ImageShow extends React.Component {
 

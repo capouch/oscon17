@@ -36,3 +36,10 @@ div#content {
 
 .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
     border-radius: 5px;
+}
+
+/* Danilo */
+.btn-submit {
+  margin-top: 2em;
+  width : 80%;
+}

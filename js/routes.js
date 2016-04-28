@@ -12,12 +12,14 @@ var
   configRoutes,
 
   // Multer handles MIME multi-part uploads
+  //   Configure it for this usage instance
   multer = require('multer'),
   cb = require('cb'),
   storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/')
     },
+  // Add random suffix to avoid filename clashes
   filename: function (req, file, cb) {
     cb(null, file.originalname + '-' + Date.now())
     }
@@ -74,6 +76,12 @@ configRoutes = function ( router, server ) {
     if (req.body) {
         console.log('Req body: ' + JSON.stringify(req.body));
     }
+
+    /* POST-PROCESSING ENTRY POINT */
+
+    // 1. Attempt to upload file
+    // 2. Process images
+    // 3. Pass pointers back to requesting client
     upload(req, res, function(err) {
       if (err) {
         return res.end('Error uploading file');
@@ -102,4 +110,5 @@ configRoutes = function ( router, server ) {
 });
 }
 
+// The old-fashioned way!!
 module.exports = { configRoutes : configRoutes };

@@ -2,6 +2,7 @@ import React from 'react'
 import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
+// We are just wraping the react-image-gallery component for now
 class ImageShow extends React.Component {
 
   constructor() {
@@ -123,7 +124,7 @@ class ImageShow extends React.Component {
     ]
 
     return (
-
+      <Section>
       <section className='app'>
         <ImageGallery
           ref={i => this._imageGallery = i}
@@ -228,6 +229,7 @@ class ImageShow extends React.Component {
 
         </div>
       </section>
+    </Section>
     )
   }
 }

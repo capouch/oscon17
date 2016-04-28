@@ -7,6 +7,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import Griddle from 'griddle-react'
 import { Link } from 'react-router'
+import { Section } from 'neal-react'
 
 // private methods
 
@@ -99,7 +100,7 @@ let InfoTable = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <Section>
         <center><h2>Current image data</h2></center>
         <SearchBar />
         <Griddle results={this.state.records}
@@ -108,7 +109,7 @@ let InfoTable = React.createClass({
           showSettings={true}
           resultsPerPage={10}
           />
-      </div>
+      </Section>
     )}
   });
 

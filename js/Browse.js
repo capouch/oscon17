@@ -37,10 +37,8 @@ let LinkComponent = React.createClass({
   let LinkComponent = React.createClass({
 
       render: function(){
-        // Set .tif files to one URL, all others to another . .
-        // The data sent in is the value of the field in the Griddle table
-        //  in our pilot app it is the "filename" property
-        console.log('Processing in LinkComponent');
+        // Make a NavLink out of a column value
+        // console.log('Processing in LinkComponent');
         let target = this.props.data,
           renderBase = "zoomer/",
           tifRegex = /tif/,

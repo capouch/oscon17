@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom'
 import DropZoneComponent from 'react-dropzone-component'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
+import { Section } from 'neal-react'
 
 // begin local variables
 let
@@ -133,7 +134,7 @@ let Upload = React.createClass ( {
    switch(this.state.step) {
      case 1:
       return (
-        <div>
+        <Section>
         <DropZoneComponent config={componentConfig}
           eventHandlers={eventHandlers}
           djsConfig={djsConfig} />
@@ -141,7 +142,7 @@ let Upload = React.createClass ( {
           fieldValues={fieldValues}
           nextStep={this.nextStep}
           saveValues={this.saveValues} />
-        </div>
+      </Section>
       )
   case 2:
     return <Confirmation />

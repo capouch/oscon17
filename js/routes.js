@@ -58,7 +58,7 @@ configRoutes = function ( router, server ) {
     res.sendFile('index.html', options);
   });
 
-  router.get('/zoomer*', function(req, res) {
+  router.get('/zoomer/*', function(req, res) {
     console.log('Server zoomer chosen');
     res.sendFile('index.html', options);
   });
@@ -84,10 +84,10 @@ configRoutes = function ( router, server ) {
       //   Note: zoomer creation on all images??  Heuristics?
       let storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
-        dziBase = './tiles/' + storedFilename + '.dzi';
+        dziBase = './public/tiles/' + storedFilename + '.dzi';
       sharp(filePath)
         .resize(200)
-        .toFile('./images/' + storedFilename + '-thumb', function(err) {
+        .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
           console.log(err);
         });
       sharp(filePath).tile(256)

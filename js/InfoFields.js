@@ -5,20 +5,20 @@ var React = require('react')
 var InfoFields = React.createClass({
  render: function() {
  return (
- <div>
+ <div className="col-lg-4 col-md-2 form-group">
   <label>Title</label>
-  <input type="text" ref="title" defaultValue={this.props.fieldValues.title} />
+  <input type="text" className="form-control" ref="title" defaultValue={this.props.fieldValues.title} />
 
   <label>Description</label>
-  <input type="text" ref="description" defaultValue={this.props.fieldValues.description} />
+  <input type="text" className="form-control" ref="description" defaultValue={this.props.fieldValues.description} />
 
   <label>Source</label>
-  <input type="text" ref="source" defaultValue={this.props.fieldValues.source} />
+  <input type="text" className="form-control" ref="source" defaultValue={this.props.fieldValues.source} />
 
   <label>Taglist</label>
-  <input type="text" ref="taglist" defaultValue={this.props.fieldValues.taglist} />
+  <input type="text" className="form-control" ref="taglist" defaultValue={this.props.fieldValues.taglist} />
 
-  <button onClick={this.saveAndContinue}>Save and Continue</button>
+  <center><button className="btn btn-success btn-submit" onClick={this.saveAndContinue}>Save and Continue</button></center>
  </div>
  )
  },

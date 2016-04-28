@@ -33,3 +33,13 @@ export default function zoomerInitModule ( path ) {
 queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
   ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
   +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}";
+
+  router.post('/uploadHandler', storage.single('file'), function(req, res) {
+    console.log('Uploading file: ' + req.file.filename);
+    let responseString = req.file.filename;
+    if (req.body) {
+        console.log(req.body);
+    }
+    res.send(JSON.stringify(responseString));
+    //res.sendStatus(200);
+  });

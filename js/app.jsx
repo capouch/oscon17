@@ -1,11 +1,13 @@
 import React from "react";
-import Shell from "./Shell.jsx";
 import ReactDOM from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router";
 import { App } from "neal-react";
+
+// Controller and view modules
+import Shell from "./Shell.jsx";
 import Browse from './Browse'
 import Zoom from './Zoom'
-import Upload from './Upload2'
+import Upload from './Upload'
 import ImageShow from './ImageShow.js'
 
 import Header from './Header'

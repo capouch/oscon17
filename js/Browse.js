@@ -7,6 +7,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import Griddle from 'griddle-react'
 import { Link } from 'react-router'
+import NavLink from './NavLink'
 
 // private methods
 
@@ -49,7 +50,7 @@ let LinkComponent = React.createClass({
           renderPath = renderBase + "bremer";
         }
 
-        return <Link to={renderPath}>{this.props.data}</Link>
+        return <NavLink to={renderPath}>{this.props.data}</NavLink>
       }
     });
 

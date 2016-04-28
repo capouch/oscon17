@@ -6,10 +6,10 @@ import ReactDOM from 'react-dom'
 let renderImage = function(selection) {
 
   let baseName = selection + '.dzi';
-  // console.log('In the renderImage method about to render ' + baseName);
+  console.log('In the renderImage method about to render ' + baseName);
   let viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "/images/",
+    prefixUrl: "/img-icons/",
     tileSources: baseName
   });
 }
@@ -41,13 +41,14 @@ class Zoomer extends React.Component {
   render() {
 
     // This is the default case, i.e. Zoomer with no parameters
-    let sendParms = "bremer";
+    let sendParms = "../tiles/bremer";
 
     // This fires when properties are sent explictly
     if ( this.props.params.imageId ) {
       // The most time-costly two dots of my life!!
       // THERE ARE TWO ENTRY POINTS FOR THIS MODULE!!!
-      sendParms = '../' + this.props.params.imageId
+      sendParms = '../tiles/' + this.props.params.imageId
+      console.log('Going after: ' + sendParms);
       }
     return (
       <div>

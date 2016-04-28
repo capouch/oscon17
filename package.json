@@ -31,6 +31,7 @@
     "react-dropzone-component": "^1.0.0",
     "react-image-gallery": "^0.6.0",
     "react-router": "^2.0.0-rc5",
+    "sharp": "^0.14.1",
     "tether": "^1.2.2"
   },
   "devDependencies": {

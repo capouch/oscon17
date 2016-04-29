@@ -92,10 +92,22 @@ configRoutes = function ( router, server ) {
       let storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
         dziBase = './public/tiles/' + storedFilename + '.dzi';
+
+      // We should test for image size, etc., right here to be smarter below!
+
       // Make a thumbnail 200 px wide, scaled
       sharp(filePath)
         .resize(200)
+        .jpeg()
         .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
+          console.log(err);
+        });
+      // This scales down larger images to cut down file size
+      //   (except current it scales up, too . . . . )
+      sharp(filePath)
+        .resize(1000)
+        .png()
+        .toFile('./public/images/' + storedFilename + '-1k', function(err) {
           console.log(err);
         });
       // Generate zoomer tiles too

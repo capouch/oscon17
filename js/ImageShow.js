@@ -18,6 +18,21 @@ class ImageShow extends React.Component {
       slideInterval: 2000
     }
   }
+  loadRecordsFromServer() {
+      $.ajax({
+        type: "POST",
+        url: this.props.url,
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+          this.setState({records: data.data.imageRecs});
+        }.bind(this),
+          error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
@@ -68,58 +83,30 @@ class ImageShow extends React.Component {
   }
 
   render() {
+
+    // FAKE DATA - Todo: Get images and captions via GraphQL
     const images = [
       {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/1.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/1t.jpg',
+        original: 'http://cmp334.org/IMAGES/hotel.tif-1461888765754-1k',
+        thumbnail: 'http://cmp334.org/THUMBS/hotel.tif-1461888765754-1k',
         originalClass: 'featured-slide',
         thumbnailClass: 'featured-thumb',
-        description: 'Custom class for slides & thumbnails'
+        description: 'Gangwer Hotel Medaryville IN ca 1909'
       },
       {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/2.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/2t.jpg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing...'
+        original: 'http://cmp334.org/IMAGES/ironBridgeRenssy.png-1461904276119-1k',
+        thumbnail: 'http://cmp334.org/THUMBS/ironBridgeRenssy.png-1461904276119-1k',
+        description: 'Washington Street Bridge Rensselaer IN'
       },
       {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/3.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/3t.jpg'
+        original: 'http://cmp334.org/IMAGES/stmarks.tif-1461881719816-1k',
+        thumbnail: 'http://cmp334.org/THUMBS/stmarks.tif-1461881719816-1k',
+        description: 'St. Marks Church Medaryville In ca 1910'
       },
       {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/4.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/4t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/5.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/5t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/6.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/6t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/7.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/7t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/8.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/8t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/9.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/9t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/10.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/10t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/11.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/11t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/12.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/12t.jpg'
+        original: 'http://cmp334.org/IMAGES/medMain.tif-1461839237863-1k',
+        thumbnail: 'http://cmp334.org/THUMBS/medMain.tif-1461839237863-1k',
+        description: 'Horseless Carriages Main Street Medaryville Indiana ca. 1910'
       }
     ]
 

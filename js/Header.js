@@ -16,7 +16,7 @@ let NavHeader = React.createClass({
       <Navbar brand={brand}>
         <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
         <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-        <NavItem><NavLink to="/images" className="nav-link">Images</NavLink></NavItem>
+        <NavItem><NavLink to="/images" className="nav-link">Slideshow</NavLink></NavItem>
         <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
         <NavItem><NavLink to="/zoomer" className="nav-link">Zoomer</NavLink></NavItem>
         <NavItem dropdown={true}>

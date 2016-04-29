@@ -8,14 +8,14 @@ class ImageShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      isPlaying: false,
+      isPlaying: true,
       showIndex: false,
       slideOnThumbnailHover: false,
       showBullets: true,
       infinite: true,
       showThumbnails: true,
       showNav: true,
-      slideInterval: 2000
+      slideInterval: 5000
     }
   }
   loadRecordsFromServer() {
@@ -107,6 +107,11 @@ class ImageShow extends React.Component {
         original: 'http://cmp334.org/IMAGES/medMain.tif-1461839237863-1k',
         thumbnail: 'http://cmp334.org/THUMBS/medMain.tif-1461839237863-1k',
         description: 'Horseless Carriages Main Street Medaryville Indiana ca. 1910'
+      },
+      {
+        original: 'http://cmp334.org/IMAGES/pugilists.tif-1461911534400-1k',
+        thumbnail: 'http://cmp334.org/THUMBS/pugilists.tif-1461911534400-thumb',
+        description: 'Pugilists in the Woods, Medaryville, Indiana'
       }
     ]
 

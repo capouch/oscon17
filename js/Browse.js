@@ -46,7 +46,7 @@ let  customColumnMetadata = [
   },
   {
     "columnName": "filename",
-    "displayName": "Filename",
+    "displayName": "Zoomer Link",
     "customComponent": LinkComponent
   },
   {

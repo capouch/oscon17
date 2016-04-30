@@ -8,6 +8,8 @@ import { render } from 'react-dom'
 import NavLink from './NavLink'
 import Griddle from 'griddle-react'
 import { Link } from 'react-router'
+import NavLink from './NavLink'
+import { Section } from 'neal-react'
 
 // private methods
 
@@ -38,10 +40,8 @@ let LinkComponent = React.createClass({
   let LinkComponent = React.createClass({
 
       render: function(){
-        // Set .tif files to one URL, all others to another . .
-        // The data sent in is the value of the field in the Griddle table
-        //  in our pilot app it is the "filename" property
-        console.log('Processing in LinkComponent');
+        // Make a NavLink out of a column value
+        // console.log('Processing in LinkComponent');
         let target = this.props.data,
           renderBase = "zoomer/",
           tifRegex = /tif/,
@@ -51,8 +51,7 @@ let LinkComponent = React.createClass({
         if (tifRegex.test(target)) {
           renderPath = renderBase + "bremer";
         }
-        console.log('Setting link to ' + renderPath);
-        return <Link to={renderPath}>{this.props.data}</Link>
+        return <NavLink to={renderPath}>{this.props.data}</NavLink>
       }
     });
 
@@ -102,7 +101,7 @@ let InfoTable = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <Section>
         <center><h2>Current image data</h2></center>
         <SearchBar />
         <Griddle results={this.state.records}
@@ -111,7 +110,7 @@ let InfoTable = React.createClass({
           showSettings={true}
           resultsPerPage={10}
           />
-      </div>
+      </Section>
     )}
   });
 

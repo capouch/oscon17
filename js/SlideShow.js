@@ -3,7 +3,7 @@ import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
 // We are just wraping the react-image-gallery component for now
-class SlideShow extends React.Component {
+export default class SlideShow extends React.Component {
 
   constructor() {
     super()
@@ -32,9 +32,9 @@ class SlideShow extends React.Component {
           // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
           // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
 
-          // Fetch data and (functionally) munge it into the proper format
+          // Fetch data and map it into the proper format
 
-          // Three ways to do this: web, local server, or filesystem
+          // Three ways to do this: cloud, local server, or filesystem
           let urlBase = "/",
             imageRecs = data.data.imageRecs
             .map(function (oneImage) {
@@ -218,4 +218,4 @@ class SlideShow extends React.Component {
   }
 }
 
-export default SlideShow
+// export default SlideShow

@@ -18,7 +18,7 @@ class SlideShow extends React.Component {
       slideInterval: 5000,
       images: []
     }
-    // Call our loader here???
+    // Load up image data from server
     this.loadRecordsFromServer();
   }
   loadRecordsFromServer() {
@@ -33,6 +33,8 @@ class SlideShow extends React.Component {
           // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
 
           // Fetch data and (functionally) munge it into the proper format
+
+          // Three ways to do this: web, local server, or filesystem
           let urlBase = "/",
             imageRecs = data.data.imageRecs
             .map(function (oneImage) {
@@ -42,8 +44,8 @@ class SlideShow extends React.Component {
                 description: oneImage.title
               }
             })
-            // console.log('Images: ' + JSON.stringify(rawImages));
-            // Load up state variable with fetched data
+            // console.log('Images: ' + JSON.stringify(imageRecs));
+            // Display the data!!
             this.setState({images: imageRecs});
         }.bind(this),
           error: function(xhr, status, err) {

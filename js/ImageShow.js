@@ -8,25 +8,40 @@ class ImageShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      isPlaying: true,
+      isPlaying: false,
       showIndex: false,
       slideOnThumbnailHover: false,
       showBullets: true,
       infinite: true,
       showThumbnails: true,
       showNav: true,
-      slideInterval: 5000
+      slideInterval: 5000,
+      images: []
     }
+    // Call our loader here???
+    this.loadRecordsFromServer();
   }
   loadRecordsFromServer() {
+    console.log('Getting records');
       $.ajax({
         type: "POST",
-        url: this.props.url,
+        url: "/oscon-test?query=query+{imageRecs{ title, filename}}",
         dataType: 'json',
         cache: false,
         success: function(data) {
           // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-          this.setState({records: data.data.imageRecs});
+          let urlBase = "http://cmp334.org/",
+            rawImages = data.data.imageRecs
+            .map(function (oneImage) {
+              return {
+                original: urlBase + 'IMAGES/' + oneImage.filename + '-1k',
+                thumbnail: urlBase + 'THUMBS/' + oneImage.filename + '-thumb',
+                description: oneImage.title
+              }
+            })
+            // console.log('Images: ' + JSON.stringify(rawImages));
+            // console.log('State? ' + JSON.stringify(this.state));
+            this.setState({images: rawImages});
         }.bind(this),
           error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
@@ -83,44 +98,16 @@ class ImageShow extends React.Component {
   }
 
   render() {
-
+    //this.loadRecordsFromServer();
     // FAKE DATA - Todo: Get images and captions via GraphQL
-    const images = [
-      {
-        original: 'http://cmp334.org/IMAGES/hotel.tif-1461888765754-1k',
-        thumbnail: 'http://cmp334.org/THUMBS/hotel.tif-1461888765754-1k',
-        originalClass: 'featured-slide',
-        thumbnailClass: 'featured-thumb',
-        description: 'Gangwer Hotel Medaryville IN ca 1909'
-      },
-      {
-        original: 'http://cmp334.org/IMAGES/ironBridgeRenssy.png-1461904276119-1k',
-        thumbnail: 'http://cmp334.org/THUMBS/ironBridgeRenssy.png-1461904276119-1k',
-        description: 'Washington Street Bridge Rensselaer IN'
-      },
-      {
-        original: 'http://cmp334.org/IMAGES/stmarks.tif-1461881719816-1k',
-        thumbnail: 'http://cmp334.org/THUMBS/stmarks.tif-1461881719816-1k',
-        description: 'St. Marks Church Medaryville In ca 1910'
-      },
-      {
-        original: 'http://cmp334.org/IMAGES/medMain.tif-1461839237863-1k',
-        thumbnail: 'http://cmp334.org/THUMBS/medMain.tif-1461839237863-1k',
-        description: 'Horseless Carriages Main Street Medaryville Indiana ca. 1910'
-      },
-      {
-        original: 'http://cmp334.org/IMAGES/pugilists.tif-1461911534400-1k',
-        thumbnail: 'http://cmp334.org/THUMBS/pugilists.tif-1461911534400-thumb',
-        description: 'Pugilists in the Woods, Medaryville, Indiana'
-      }
-    ]
+
 
     return (
       <Section>
       <section className='app'>
         <ImageGallery
           ref={i => this._imageGallery = i}
-          items={images}
+          items={this.state.images}
           lazyLoad={false}
           onClick={this._onImageClick}
           onImageLoad={this._onImageLoad}

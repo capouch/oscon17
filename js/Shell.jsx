@@ -8,7 +8,7 @@ import Home from "./Launch.jsx";
 import Browse from './Browse'
 import Zoom from './Zoom'
 import Upload from './Upload'
-import ImageShow from './ImageShow.js'
+import SlideShow from './SlideShow.js'
 
 import Header from './Header'
 import PageFooter from './Footer'
@@ -39,7 +39,7 @@ ReactDOM.render((
       <Route path="zoomer" component= { Zoom }/>
       <Route path="zoomer/:imageId" component={ Zoom }/>
       <Route path="upload" component={ Upload }/>
-      <Route path="images" component={ ImageShow } />
+      <Route path="slides" component={ SlideShow } />
       <Route path="*" component={ Home }/>
     </Route>
   </Router>

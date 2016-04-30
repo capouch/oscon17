@@ -79,11 +79,11 @@ let fieldValues = {
   taglist : null
 }
 
-let resetFieldValues = function() {
-  fieldValues.title = null;
-  fieldValues.description = null;
-  fieldValues.source = null;
-  fieldValues.taglist = null;
+let blankFieldValues = {
+  title: null,
+  description: null,
+  source: null,
+  taglist: null
 }
 
 // Var to hold POST URL
@@ -110,8 +110,8 @@ let Upload = React.createClass ( {
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}";
     console.log(queryURL);
-    // Reset the field values here
-    resetFieldValues;
+    // Reset the field values here!!
+    fieldValues = Object.assign({}, fieldValues, blankFieldValues);
     $.ajax({
       type: "POST",
       url: queryURL,

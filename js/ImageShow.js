@@ -8,7 +8,7 @@ class ImageShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      isPlaying: false,
+      isPlaying: true,
       showIndex: false,
       slideOnThumbnailHover: false,
       showBullets: true,
@@ -30,17 +30,17 @@ class ImageShow extends React.Component {
         cache: false,
         success: function(data) {
           // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-          let urlBase = "http://cmp334.org/",
+          // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
+          let urlBase = "/",
             rawImages = data.data.imageRecs
             .map(function (oneImage) {
               return {
-                original: urlBase + 'IMAGES/' + oneImage.filename + '-1k',
-                thumbnail: urlBase + 'THUMBS/' + oneImage.filename + '-thumb',
+                original: urlBase + 'images/' + oneImage.filename + '-1k',
+                thumbnail: urlBase + 'thumbs/' + oneImage.filename + '-thumb',
                 description: oneImage.title
               }
             })
             // console.log('Images: ' + JSON.stringify(rawImages));
-            // console.log('State? ' + JSON.stringify(this.state));
             this.setState({images: rawImages});
         }.bind(this),
           error: function(xhr, status, err) {

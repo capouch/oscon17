@@ -11,7 +11,7 @@ import Upload from './Upload'
 import SlideShow from './SlideShow.js'
 
 import Header from './Header'
-import PageFooter from './Footer'
+import Footer from './Footer'
 
 class osconSPA extends React.Component {
   render() {
@@ -25,7 +25,7 @@ class osconSPA extends React.Component {
           history={ browserHistory }>
           { this.props.children }
         </App>
-        <PageFooter/>
+        <Footer/>
       </div>
     );
   }

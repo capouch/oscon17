@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  padding: 3px 0;
+  display: inline-block;
+}
+
+label {
+  margin-left: 5px;
+}
+
+.app {
+  font-family: "Arial Narrow", Arial, sans-serif;
+}
+
+.app-header {
+  letter-spacing: 3px;
+}
+
+.app .image-gallery {
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 1320px) {
+  .app .image-gallery {
+    width: 70%;
+  }
+}
+
+.app-sandbox {
+  margin-top: 20px;
+  padding: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.app-buttons li {
+  display: table-cell;
+}
+
+.app-buttons li + li {
+  padding-left: 10px;
+}
+
+.app-button {
+  font-size: 14px;
+  color: #222;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: #fff;
+  line-height: 1;
+}
+
+.app-button.active {
+  background: #5cb85c;
+  border: 1px solid #4cae4c;
+  color: #fff;
+}
+
+.app-interval-input-group {
+  display: table;
+}
+
+.app-interval-label {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.app-interval-input {
+  -webkit-appearance: none;
+  display: table-cell;
+  margin: 0;
+  padding: 9px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  width: 65px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.app-checkboxes {
+  margin-top: 10px;
+}
+
+.app-checkboxes li {
+  display: block;
+}
+

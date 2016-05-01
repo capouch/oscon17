@@ -3,21 +3,54 @@ import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
 // We are just wraping the react-image-gallery component for now
-class ImageShow extends React.Component {
+class SlideShow extends React.Component {
 
   constructor() {
     super()
     this.state = {
-      isPlaying: false,
+      isPlaying: true,
       showIndex: false,
       slideOnThumbnailHover: false,
       showBullets: true,
       infinite: true,
       showThumbnails: true,
       showNav: true,
-      slideInterval: 2000
+      slideInterval: 5000,
+      images: []
     }
+    // Call our loader here???
+    this.loadRecordsFromServer();
   }
+  loadRecordsFromServer() {
+    console.log('Getting records');
+      $.ajax({
+        type: "POST",
+        url: "/oscon-test?query=query+{imageRecs{ title, filename}}",
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+          // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
+
+          // Fetch data and (functionally) munge it into the proper format
+          let urlBase = "/",
+            imageRecs = data.data.imageRecs
+            .map(function (oneImage) {
+              return {
+                original: urlBase + 'images/' + oneImage.filename + '-1k',
+                thumbnail: urlBase + 'thumbs/' + oneImage.filename + '-thumb',
+                description: oneImage.title
+              }
+            })
+            // console.log('Images: ' + JSON.stringify(rawImages));
+            // Load up state variable with fetched data
+            this.setState({images: imageRecs});
+        }.bind(this),
+          error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
@@ -68,67 +101,16 @@ class ImageShow extends React.Component {
   }
 
   render() {
-    const images = [
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/1.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/1t.jpg',
-        originalClass: 'featured-slide',
-        thumbnailClass: 'featured-thumb',
-        description: 'Custom class for slides & thumbnails'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/2.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/2t.jpg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing...'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/3.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/3t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/4.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/4t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/5.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/5t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/6.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/6t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/7.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/7t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/8.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/8t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/9.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/9t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/10.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/10t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/11.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/11t.jpg'
-      },
-      {
-        original: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/12.jpg',
-        thumbnail: 'https://raw.githubusercontent.com/xiaolin/linxtion.github.io/master/static/img/image-gallery/12t.jpg'
-      }
-    ]
+    //this.loadRecordsFromServer();
+    // FAKE DATA - Todo: Get images and captions via GraphQL
+
 
     return (
       <Section>
       <section className='app'>
         <ImageGallery
           ref={i => this._imageGallery = i}
-          items={images}
+          items={this.state.images}
           lazyLoad={false}
           onClick={this._onImageClick}
           onImageLoad={this._onImageLoad}
@@ -234,4 +216,4 @@ class ImageShow extends React.Component {
   }
 }
 
-export default ImageShow
+export default SlideShow

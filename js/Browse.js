@@ -17,26 +17,22 @@ import { Section } from 'neal-react'
 // Note that for now we just hardcode the link target in the url variable
 
 
-  // 'brush' and 'bremer' below will need to come from the database soon
-  let LinkComponent = React.createClass({
+// Compose NavLink to the zoomer view for each image
+let LinkComponent = React.createClass({
 
-      render: function(){
-        // Make a NavLink out of a column value
-        // console.log('Processing in LinkComponent');
-        let target = this.props.data,
-          renderBase = "zoomer/",
-          // tifRegex = /tif|png/,
-          renderPath = renderBase + target;
+  render: function(){
+    // Make a NavLink out of a column value
+    // console.log('Processing in LinkComponent');
+    let target = this.props.data,
+    renderBase = "zoomer/",
+    // tifRegex = /tif|png/,
+    renderPath = renderBase + target;
 
-        /* Switch image target for tiff files for variety's sake
-        if (tifRegex.test(target)) {
-          renderPath = renderBase + target;
-        }
-        */
-
-        return <NavLink to={renderPath}>{this.props.data}</NavLink>
-      }
-    });
+    return <NavLink to={renderPath}>
+      {this.props.data}
+    </NavLink>
+  }
+});
 
 
 let  customColumnMetadata = [

@@ -95,14 +95,14 @@ export default (props) => {
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" title="Saint Joe" imageUrl="img/people/daniloOSCON.jpg">
-            <p>What I tell founders is not to sweat the business model too much at first. The most important task at first is to build something people want. If you don't do that, it won't matter how clever your business model is.</p>
+          <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
+            <p>What I tell founders is not to sweat the business model too much at first. The most important task at first is to build something people want. If you don't do that, it won't matter how clever your business model is. -- Borrowed Quote</p>
           </CustomerQuote>
-          <CustomerQuote name="Brian Capouch" title="Saint Joe" imageUrl="img/people/bcOSCON.jpg">
-            <p>I came to the conclusion that we should aspire to increase the scope and scale of human consciousness in order to better understand what questions to ask. Really, the only thing that makes sense is to strive for greater collective enlightenment.</p>
+          <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
+            <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
           </CustomerQuote>
-          <CustomerQuote name="Ben Davisson" title="Saint Joe" imageUrl="img/people/benOSCON.jpg">
-            <p>If you are not embarrassed by the first version of your product, you've launched too late.</p>
+          <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
+            <p>If you are not embarrassed by the first version of your product, you've launched too late.   -- Borrowed Quote</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

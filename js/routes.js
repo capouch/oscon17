@@ -111,7 +111,7 @@ configRoutes = function ( router, server ) {
         .toFile('./public/images/' + storedFilename + '-1k', function(err) {
           console.log(err);
         });
-        
+
       // Generate zoomer tiles too
       sharp(filePath).tile(256)
         .toFile(dziBase, function(err, info) {

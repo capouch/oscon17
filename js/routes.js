@@ -55,7 +55,7 @@ configRoutes = function ( router, server ) {
     res.sendFile('index.html', options);
   });
 
-  router.get('/images', function(req, res) {
+  router.get('/slides', function(req, res) {
     console.log('Server browse chosen');
     res.sendFile('index.html', options);
   });
@@ -111,7 +111,7 @@ configRoutes = function ( router, server ) {
         .toFile('./public/images/' + storedFilename + '-1k', function(err) {
           console.log(err);
         });
-        
+
       // Generate zoomer tiles too
       sharp(filePath).tile(256)
         .toFile(dziBase, function(err, info) {

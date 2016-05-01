@@ -1,9 +1,9 @@
 import imageRec from './single'
 import imageRecs from './multiple'
-import keywords from './keywords'
+import lookup  from './keywords'
 
 export default {
   imageRec,
   imageRecs,
-  keywords
+  lookup
 };

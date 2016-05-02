@@ -25,6 +25,7 @@ var
     }
   });
   // This function uses multer to handle the upload process
+  // Note: we still need to set the Dropzone knob for "only one file at a time"
   let upload  =  multer( {storage: storage }).single('file');
 
 // --- End variable declarations

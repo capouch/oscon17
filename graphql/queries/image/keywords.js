@@ -28,7 +28,7 @@ export default {
     // Hopefully we can create a regex here!!
     // let r = new RegExp(keywords, "i");
     return ImageRecModel
-      .find({ taglist: new RegExp(params.keywords, "i") })
+      .find({ $or: [ { taglist: new RegExp(params.keywords, "i") } , { title: new RegExp(params.keywords, "i") } ] } )
       .select(projection)
       .exec();
 

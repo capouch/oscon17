@@ -24,8 +24,9 @@ export default {
     }
   },
   resolve (root, params, options) {
+    // Project only those properties the query has specified
     const projection = getProjection(options.fieldASTs[0]);
-    // We will need to munge the search terms into regexes
+    // We will need to munge the search terms into a regex
     //  That isn't what we're doing here yet, although this illustrates
     //  using the input terms to search multiple properties of the document
     let searchRegex = new RegExp(params.keywords, "i");

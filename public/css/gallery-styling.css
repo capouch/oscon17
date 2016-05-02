@@ -26,6 +26,7 @@ label {
   letter-spacing: 3px;
 }
 
+/* Tone down screen usage in standard view */
 .app .image-gallery {
   margin: 0 auto;
   width: 80%;

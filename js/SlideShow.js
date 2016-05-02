@@ -3,7 +3,8 @@ import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
 // We are just wraping the react-image-gallery component for now
-export default class SlideShow extends React.Component {
+// This used to be called SlideShow
+export default class extends React.Component {
 
   constructor() {
     super()

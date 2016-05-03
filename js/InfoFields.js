@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const InfoFields = React.createClass({
+export default React.createClass({
  render: function() {
  return (
  <div className="col-lg-4 col-md-2 form-group">
@@ -28,7 +28,7 @@ const InfoFields = React.createClass({
 
    // Get values via this.refs
    // console.log('For title: ' + this.refs.title.value);
-   var data = {
+   const data = {
      title : this.refs.title.value,
      description : this.refs.description.value,
      source : this.refs.source.value,
@@ -38,5 +38,3 @@ const InfoFields = React.createClass({
    this.props.nextStep()
   }
   })
-
-export default InfoFields

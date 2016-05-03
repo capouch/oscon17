@@ -10,7 +10,7 @@ import NavLink from './NavLink';
 const brandName = "Scene:History";
 const brand = <span>{brandName}</span>;
 
-let NavHeader = React.createClass({
+const NavHeader = React.createClass({
   render() {
     return (
       <Navbar brand={brand}>

@@ -9,11 +9,11 @@ import bodyParser from 'body-parser';
 
 // Our custom schema
 import schema from './graphql';
+import configRoutes from './js/routes'
 
 const app = express(),
-router = express.Router(),
-routes = require('./js/routes.js'),
-server = http.createServer( app );
+  router = express.Router(),
+  server = http.createServer( app );
 
 app.use( bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,7 +27,7 @@ app.use('/oscon-test', graphqlHTTP(req => ({
 })));
 
 // Generic routers
-routes.configRoutes( router, server);
+configRoutes( router, server);
 app.use('/', router);
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('/public'));

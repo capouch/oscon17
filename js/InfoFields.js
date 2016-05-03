@@ -1,8 +1,8 @@
 // file: AccountFields.jsx
 
-var React = require('react')
+import React from 'react'
 
-var InfoFields = React.createClass({
+const InfoFields = React.createClass({
  render: function() {
  return (
  <div className="col-lg-4 col-md-2 form-group">

@@ -26,9 +26,10 @@ label {
   letter-spacing: 3px;
 }
 
+/* Tone down screen usage in standard view */
 .app .image-gallery {
   margin: 0 auto;
-  width: 100%;
+  width: 80%;
 }
 
 @media (min-width: 1320px) {
@@ -114,4 +115,3 @@ label {
 .app-checkboxes li {
   display: block;
 }
-

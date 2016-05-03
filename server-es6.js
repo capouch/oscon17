@@ -10,7 +10,7 @@ import bodyParser from 'body-parser';
 // Our custom schema
 import schema from './graphql';
 
-var app = express(),
+const app = express(),
 router = express.Router(),
 routes = require('./js/routes.js'),
 server = http.createServer( app );

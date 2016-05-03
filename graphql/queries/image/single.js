@@ -26,7 +26,7 @@ export default {
       .select(projection)
       .exec();
 
-      // Hoping to extract some fields for a further query
+      // "Subquery" for e.g. related geopoint document isn't implemented yet
       return imageResult;
   }
 };

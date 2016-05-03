@@ -18,7 +18,7 @@ import { Section } from 'neal-react'
 
 
 // Compose NavLink to the zoomer view for each image
-let LinkComponent = React.createClass({
+const LinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
@@ -35,7 +35,7 @@ let LinkComponent = React.createClass({
 });
 
 
-let  customColumnMetadata = [
+const  customColumnMetadata = [
   {
     "columnName": "title",
     "displayName": "Image Title"
@@ -52,7 +52,7 @@ let  customColumnMetadata = [
  ];
 
 // We have hijacked this component and patched in Griddle
-let InfoTable = React.createClass({
+const InfoTable = React.createClass({
   // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
       $.ajax({
@@ -94,7 +94,7 @@ let InfoTable = React.createClass({
   });
 
 // Currently doesn't do anything
-let SearchBar = React.createClass({
+const SearchBar = React.createClass({
   render: function() {
     return (
       <form>
@@ -111,7 +111,7 @@ let SearchBar = React.createClass({
 
 // end private members/methods
 
-let Browse = React.createClass ( {
+const Browse = React.createClass ( {
   render() {
     return (
       <div>

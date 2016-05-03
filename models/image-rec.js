@@ -9,7 +9,8 @@ var imageRecSchema = new mongoose.Schema({
     type: String
   },
   filename: {
-    type: String
+    type: String,
+    required: true
   },
   source: {
     type: String

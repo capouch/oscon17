@@ -29,7 +29,7 @@ export default {
     // We will need to munge the search terms into a regex
     //  That isn't what we're doing here yet, although this illustrates
     //  using the input terms to search multiple properties of the document
-    let searchRegex = new RegExp(params.keywords, "i");
+    const searchRegex = new RegExp(params.keywords, "i");
     return ImageRecModel
       .find({ $or: [ { taglist: searchRegex } , { title: searchRegex },
         { description: searchRegex }, { source: searchRegex }] } )

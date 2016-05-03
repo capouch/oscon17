@@ -13,9 +13,9 @@ import { Section } from 'neal-react'
 
 // begin local variables
 let
-  serverFilename,
+  serverFilename;
   // Configuration and setup for DropZoneComponent
-  componentConfig = {
+  const componentConfig = {
     iconFiletypes: ['.jpg', '.png', '.gif', 'tif'],
     showFiletypeIcon: true,
     postUrl: '/uploadHandler/'
@@ -79,7 +79,7 @@ let fieldValues = {
   taglist : null
 }
 
-let blankFieldValues = {
+const blankFieldValues = {
   title: null,
   description: null,
   source: null,
@@ -91,7 +91,7 @@ let queryURL;
 
 // Code inspired by this tutorial:
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
-let Upload = React.createClass ( {
+const Upload = React.createClass ( {
  getInitialState: function() {
    // Stepping stages are overkill for this project, but intrinsically interesting
    return {

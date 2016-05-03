@@ -3,7 +3,6 @@ import {
   GraphQLString,
   GraphQLNonNull
 } from 'graphql';
-import {Types} from 'mongoose';
 
 import imageRecType from '../../types/image';
 import getProjection from '../../get-projection';

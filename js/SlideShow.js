@@ -16,7 +16,7 @@ export default class extends React.Component {
       infinite: true,
       showThumbnails: true,
       showNav: true,
-      slideInterval: 5000,
+      slideInterval: 10000,
       images: []
     }
     // Load up image data from server

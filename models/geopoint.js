@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 var geoPointRecSchema = new mongoose.Schema({
   imageId: {

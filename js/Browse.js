@@ -35,7 +35,7 @@ const LinkComponent = React.createClass({
 });
 
 
-const  customColumnMetadata = [
+const customColumnMetadata = [
   {
     "columnName": "title",
     "displayName": "Image Title"
@@ -111,7 +111,7 @@ const SearchBar = React.createClass({
 
 // end private members/methods
 
-const Browse = React.createClass ( {
+export default React.createClass ( {
   render() {
     return (
       <div>
@@ -121,5 +121,3 @@ const Browse = React.createClass ( {
     );
   }
 });
-
-export default Browse;

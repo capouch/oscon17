@@ -218,5 +218,3 @@ export default class extends React.Component {
     )
   }
 }
-
-// export default SlideShow

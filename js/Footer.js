@@ -15,7 +15,7 @@ const businessAddress = (
   </address>
 );
 
-let NavFooter = React.createClass({
+const NavFooter = React.createClass({
   render() {
     return (
       <Footer brandName={brandName}

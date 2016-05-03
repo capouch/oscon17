@@ -7,15 +7,13 @@
 // --- Local variables
 'use strict';
 import sharp from 'sharp'
-
-var
-  configRoutes,
+import multer from 'multer'
+import cb from 'cb'
 
   // Multer handles MIME multi-part uploads
   //   Configure it for this usage instance
-  multer = require('multer'),
-  cb = require('cb'),
-  storage = multer.diskStorage({
+  // const multer = require('multer'),
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/')
     },
@@ -26,13 +24,13 @@ var
   });
   // This function uses multer to handle the upload process
   // Note: we still need to set the Dropzone knob for "only one file at a time"
-  let upload  =  multer( {storage: storage }).single('file');
+const upload  =  multer( {storage: storage }).single('file');
 
 // --- End variable declarations
 
 // --- Public API
 
-configRoutes = function ( router, server ) {
+export default function ( router, server ) {
   var options = {
     root: __dirname + '/../public'
    };
@@ -124,6 +122,3 @@ configRoutes = function ( router, server ) {
   });
 });
 }
-
-// The old-fashioned way!!
-module.exports = { configRoutes : configRoutes };

@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom'
 import { Section } from 'neal-react'
 
 // Function to configure and raise the OpenSeaDragon widget
-let renderImage = function(selection) {
+const renderImage = function(selection) {
 
-  let baseName = selection + '.dzi';
+  const baseName = selection + '.dzi';
   console.log('In the renderImage method about to render ' + baseName);
   let viewer = OpenSeadragon({
     id: "zoomer-view",
@@ -17,7 +17,7 @@ let renderImage = function(selection) {
 // end private members/methods
 
 // Create a container class for the "Zoomer" component
-let ZoomBox =  React.createClass ({
+const ZoomBox = React.createClass ({
   componentDidMount: function() {
     let zoomTarget = this.props.image;
     renderImage(zoomTarget);
@@ -35,7 +35,7 @@ let ZoomBox =  React.createClass ({
 });
 
 // Render in a component
-class Zoomer extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -58,5 +58,3 @@ class Zoomer extends React.Component {
     );
   }
 }
-
-export default Zoomer;

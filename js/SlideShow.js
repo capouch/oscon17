@@ -2,7 +2,7 @@ import React from 'react'
 import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
-// We are just wraping the react-image-gallery component for now
+// We are just wrapping the react-image-gallery component for now
 // This used to be called SlideShow
 export default class extends React.Component {
 

@@ -4,8 +4,7 @@
  */
 
 // Note that these are SERVER-SIDE routes
-// --- Local variables
-'use strict';
+
 import sharp from 'sharp'
 import multer from 'multer'
 import cb from 'cb'
@@ -31,7 +30,7 @@ const upload  =  multer( {storage: storage }).single('file');
 // --- Public API
 
 export default function ( router, server ) {
-  var options = {
+  const options = {
     root: __dirname + '/../public'
    };
 
@@ -88,7 +87,7 @@ export default function ( router, server ) {
       console.log('Uploading file: ' + req.file.filename);
 
       // Crude proof of concept: generate thumbnail and zoom tiles
-      let storedFilename = req.file.filename,
+      const storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
         dziBase = './public/tiles/' + storedFilename + '.dzi';
 

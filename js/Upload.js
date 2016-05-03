@@ -86,7 +86,7 @@ const blankFieldValues = {
 }
 
 // Var to hold POST URL
-let queryURL;
+let queryURL = "";
 
 // Code inspired by this tutorial:
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react

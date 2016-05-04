@@ -15,7 +15,7 @@ import ImageRecModel from '../../../models/image-rec';
 
 export default {
   type: new GraphQLList(imageRecType),
-  description: "Retrieves records whose taglist matches a set of keywords",
+  description: "Search images for keywords",
   args: {
     keywords: {
       name: 'keywords',

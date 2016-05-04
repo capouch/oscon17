@@ -37,7 +37,7 @@ const NavHeader = React.createClass({
       )}
     })
 
-class Header extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -47,5 +47,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

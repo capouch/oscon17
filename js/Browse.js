@@ -6,7 +6,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import Griddle from 'griddle-react'
-import { Link } from 'react-router'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 

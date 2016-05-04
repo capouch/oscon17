@@ -2,7 +2,7 @@ import React from 'react'
 import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
-// We are just wraping the react-image-gallery component for now
+// We are just wrapping the react-image-gallery component for now
 // This used to be called SlideShow
 export default class extends React.Component {
 
@@ -16,7 +16,7 @@ export default class extends React.Component {
       infinite: true,
       showThumbnails: true,
       showNav: true,
-      slideInterval: 5000,
+      slideInterval: 10000,
       images: []
     }
     // Load up image data from server

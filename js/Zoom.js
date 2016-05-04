@@ -8,7 +8,7 @@ const renderImage = function(selection) {
 
   const baseName = selection + '.dzi';
   console.log('In the renderImage method about to render ' + baseName);
-  let viewer = OpenSeadragon({
+  const viewer = OpenSeadragon({
     id: "zoomer-view",
     prefixUrl: "/img-icons/",
     tileSources: baseName
@@ -23,7 +23,7 @@ const ZoomBox = React.createClass ({
     renderImage(zoomTarget);
   },
   render() {
-    let style = {
+    const style = {
       width: 800,
       height: 600
     };

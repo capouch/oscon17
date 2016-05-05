@@ -36,7 +36,6 @@ export default class extends React.Component {
           const urlBase = "/home/brianc/PROJECTS/oscon16/public/",
 
           // Three ways to do this: cloud, local server, or filesystem
-          const urlBase = "/",
             imageRecs = data.data.imageRecs
             .map(function (oneImage) {
               return {

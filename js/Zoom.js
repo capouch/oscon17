@@ -6,13 +6,12 @@ import { Section } from 'neal-react'
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
 
-<<<<<<< HEAD
   // Task for another (near-term) time: why do I have to hardwire paths?
   const baseName =  '/home/brianc/PROJECTS/oscon16/public/' + selection + '.dzi';
   // console.log('In the renderImage method about to render ' + baseName);
   const viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "public/img-icons/",
+    prefixUrl: "/home/brianc/PROJECTS/oscon16/public/img-icons/",
     tileSources: baseName
   });
 }

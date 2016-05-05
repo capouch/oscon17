@@ -2,6 +2,8 @@ var app = require('app');  // Module to control application life.
 var path = require('path');
 var url = require('url');
 
+// console.log(app.getAppPath());
+
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 // Report crashes to our server.

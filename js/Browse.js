@@ -56,7 +56,7 @@ const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
 
     // Good ole jQuery!
-    // Note the irony of using AJAX to get GraphQL . . . 
+    // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
       url: this.props.url,
@@ -118,9 +118,8 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url="/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url="http://127.0.0.1:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
       </div>
     );
   }
 });
-

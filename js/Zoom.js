@@ -2,6 +2,8 @@ import OpenSeaDragon from 'openseadragon'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Section } from 'neal-react'
+//require('electron-window').parseArgs();
+// import { parseArgs } from 'electron-window'
 // import { remote } from '../electron'
 
 
@@ -17,9 +19,14 @@ import { Section } from 'neal-react'
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
   // console.log(remote.getGlobal('sharedObj').filePath);
-  // Task for another (near-term) time: why do I have to hardwire paths?
-  const filePrefix = remote.getGlobal('sharedObj').filePath + '/public/';
+  // For now use global object to determine base file path
+
+  // const filePrefix = remote.getGlobal('sharedObj').filePath + '/public/';
   // const filePrefix = '/home/brianc/PROJECTS/oscon16/public/';
+
+  // We pass in the base dir path via electron-window
+  const filePrefix = window.__args__.data + '/public/';
+  console.log('File prefix: ' + filePrefix);
   const baseName =  filePrefix + selection + '.dzi';
   // console.log('In the renderImage method about to render ' + baseName);
   const viewer = OpenSeadragon({

@@ -5,9 +5,7 @@
 
 import React from 'react'
 import { render } from 'react-dom'
-import NavLink from './NavLink'
 import Griddle from 'griddle-react'
-import { Link } from 'react-router'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
@@ -15,55 +13,35 @@ import { Section } from 'neal-react'
 
 // Options for Griddle table generator
 // Save this: return <a href={url}>{this.props.data}</a>
-// We use a NavLink but can't seem to customize the "query" property!!!
-
-/* Former
-let LinkComponent = React.createClass({
-    render: function(){
-      // Set .tif files to one URL, all others to another . .
-      let target = this.props.data,
-        urlParms = {show: "brush"},
-        tifRegex = /tif/;
-
-      if (tifRegex.test(target)) {
-        urlParms.show = "bremer";
-      }
-
-      let tryThisDInDesperation = JSON.stringify(urlParms);
-
-      return <NavLink to={{ pathname: 'zoomer', query: { show: "brush" } }} className="nav-link">{this.props.data}</NavLink>
-    }
-  });
-  */
-
-  // 'brush' and 'bremer' below will need to come from the database soon
-  let LinkComponent = React.createClass({
-
-      render: function(){
-        // Make a NavLink out of a column value
-        // console.log('Processing in LinkComponent');
-        let target = this.props.data,
-          renderBase = "zoomer/",
-          tifRegex = /tif/,
-          renderPath = renderBase + 'brush';
-
-        // Switch image target for tiff files for variety's sake
-        if (tifRegex.test(target)) {
-          renderPath = renderBase + "bremer";
-        }
-        return <NavLink to={renderPath}>{this.props.data}</NavLink>
-      }
-    });
+// Note that for now we just hardcode the link target in the url variable
 
 
-let  customColumnMetadata = [
+// Compose NavLink to the zoomer view for each image
+const LinkComponent = React.createClass({
+
+  render: function(){
+    // Make a NavLink out of a column value
+    // console.log('Processing in LinkComponent');
+    const target = this.props.data,
+    renderBase = "zoomer/",
+    // tifRegex = /tif|png/,
+    renderPath = renderBase + target;
+
+    return <NavLink to={renderPath}>
+      {this.props.data}
+    </NavLink>
+  }
+});
+
+
+const customColumnMetadata = [
   {
     "columnName": "title",
     "displayName": "Image Title"
   },
   {
     "columnName": "filename",
-    "displayName": "Filename",
+    "displayName": "Zoomer Link",
     "customComponent": LinkComponent
   },
   {
@@ -73,30 +51,33 @@ let  customColumnMetadata = [
  ];
 
 // We have hijacked this component and patched in Griddle
-let InfoTable = React.createClass({
+const InfoTable = React.createClass({
   // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
-      $.ajax({
-        type: "POST",
-        url: this.props.url,
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
-          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-          this.setState({records: data.data.imageRecs});
-        }.bind(this),
-          error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-        }.bind(this)
-      });
-    },
+
+    // Good ole jQuery!
+    // Note the irony of using AJAX to get GraphQL . . . 
+    $.ajax({
+      type: "POST",
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+        this.setState({records: data.data.imageRecs});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
-  // Should this be a call to loadRecordsFromServer?
-  return {records: []};
+    // Should this be a call to loadRecordsFromServer?
+    return {records: []};
   },
   componentDidMount: function() {
     this.loadRecordsFromServer();
-    // This polls the server to check for fresh data . .
+    // This polls the server; not quite sure why . . .
     // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
@@ -115,7 +96,7 @@ let InfoTable = React.createClass({
   });
 
 // Currently doesn't do anything
-let SearchBar = React.createClass({
+const SearchBar = React.createClass({
   render: function() {
     return (
       <form>
@@ -132,15 +113,14 @@ let SearchBar = React.createClass({
 
 // end private members/methods
 
-let Browse = React.createClass ( {
+export default React.createClass ( {
   render() {
     return (
       <div>
         <InfoTable
-          url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url="/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
       </div>
     );
   }
 });
 
-export default Browse;

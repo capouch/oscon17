@@ -2,8 +2,8 @@ import React from 'react'
 import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
 
-// We are just wraping the react-image-gallery component for now
-class SlideShow extends React.Component {
+// We are just wrapping the react-image-gallery component
+export default class extends React.Component {
 
   constructor() {
     super()
@@ -15,10 +15,10 @@ class SlideShow extends React.Component {
       infinite: true,
       showThumbnails: true,
       showNav: true,
-      slideInterval: 5000,
+      slideInterval: 10000,
       images: []
     }
-    // Call our loader here???
+    // Load up image data from server
     this.loadRecordsFromServer();
   }
   loadRecordsFromServer() {
@@ -33,7 +33,10 @@ class SlideShow extends React.Component {
           // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
 
           // Fetch data and (functionally) munge it into the proper format
-          let urlBase = "/home/brianc/PROJECTS/oscon16/public/",
+          const urlBase = "/home/brianc/PROJECTS/oscon16/public/",
+
+          // Three ways to do this: cloud, local server, or filesystem
+          const urlBase = "/",
             imageRecs = data.data.imageRecs
             .map(function (oneImage) {
               return {
@@ -42,8 +45,8 @@ class SlideShow extends React.Component {
                 description: oneImage.title
               }
             })
-            // console.log('Images: ' + JSON.stringify(rawImages));
-            // Load up state variable with fetched data
+            // console.log('Images: ' + JSON.stringify(imageRecs));
+            // Display the data!!
             this.setState({images: imageRecs});
         }.bind(this),
           error: function(xhr, status, err) {
@@ -101,9 +104,7 @@ class SlideShow extends React.Component {
   }
 
   render() {
-    //this.loadRecordsFromServer();
-    // FAKE DATA - Todo: Get images and captions via GraphQL
-
+    // Configure and post
 
     return (
       <Section>
@@ -127,93 +128,105 @@ class SlideShow extends React.Component {
           slideOnThumbnailHover={this.state.slideOnThumbnailHover}
         />
 
-        <div className='app-sandbox'>
+      <div className='app-sandbox'>
 
-          <h2 className='app-header'>Prop settings</h2>
+        <h2 className='app-header'>
+          Prop settings
+        </h2>
 
-          <ul className='app-buttons'>
-            <li>
-              <a
-                className={'app-button ' + (this.state.isPlaying ? 'active' : '')}
-                onClick={this._playSlider.bind(this)}>
-                Play
-              </a>
-            </li>
-            <li>
+        <ul className='app-buttons'>
+          <li>
+            <a
+              className={'app-button ' + (this.state.isPlaying ? 'active' : '')}
+              onClick={this._playSlider.bind(this)}>
+              Play
+            </a>
+          </li>
+          <li>
             <a
               className={'app-button ' + (!this.state.isPlaying ? 'active' : '')}
               onClick={this._pauseSlider.bind(this)}>
               Pause
             </a>
-            </li>
-            <li>
-              <div className='app-interval-input-group'>
-                <span className='app-interval-label'>interval</span>
-                <input
-                  className='app-interval-input'
-                  type='text'
-                  onChange={this._handleInputChange.bind(this, 'slideInterval')}
-                  value={this.state.slideInterval}/>
-              </div>
-            </li>
-          </ul>
+          </li>
+          <li>
+            <div className='app-interval-input-group'>
+              <span className='app-interval-label'>interval</span>
+              <input
+                className='app-interval-input'
+                type='text'
+                onChange={this._handleInputChange.bind(this, 'slideInterval')}
+                value={this.state.slideInterval}/>
+            </div>
+          </li>
+        </ul>
 
-          <ul className='app-checkboxes'>
-            <li>
-              <input
-                id='infinite'
-                type='checkbox'
-                onChange={this._handleCheckboxChange.bind(this, 'infinite')}
-                checked={this.state.infinite}/>
-                <label htmlFor='infinite'>infinite sliding</label>
-            </li>
-            <li>
-              <input
-                id='show_bullets'
-                type='checkbox'
-                onChange={this._handleCheckboxChange.bind(this, 'showBullets')}
-                checked={this.state.showBullets}/>
-                <label htmlFor='show_bullets'>show bullets</label>
-            </li>
-            <li>
-              <input
-                id='show_thumbnails'
-                type='checkbox'
-                onChange={this._handleCheckboxChange.bind(this, 'showThumbnails')}
-                checked={this.state.showThumbnails}/>
-                <label htmlFor='show_thumbnails'>show thumbnails</label>
-            </li>
-            <li>
-              <input
-                id='show_navigation'
-                type='checkbox'
-                onChange={this._handleCheckboxChange.bind(this, 'showNav')}
-                checked={this.state.showNav}/>
-                <label htmlFor='show_navigation'>show navigation</label>
-            </li>
-            <li>
-              <input
-                id='show_index'
-                type='checkbox'
-                onChange={this._handleCheckboxChange.bind(this, 'showIndex')}
-                checked={this.state.showIndex}/>
-                <label htmlFor='show_index'>show index</label>
-            </li>
-            <li>
-              <input
-                id='slide_on_thumbnail_hover'
-                type='checkbox'
-                onChange={this._handleCheckboxChange.bind(this, 'slideOnThumbnailHover')}
-                checked={this.state.slideOnThumbnailHover}/>
-                <label htmlFor='slide_on_thumbnail_hover'>slide on thumbnail hover (desktop)</label>
-            </li>
-          </ul>
+        <ul className='app-checkboxes'>
+          <li>
+            <input
+              id='infinite'
+              type='checkbox'
+              onChange={this._handleCheckboxChange.bind(this, 'infinite')}
+              checked={this.state.infinite}/>
+            <label htmlFor='infinite'>
+              infinite sliding
+            </label>
+          </li>
+          <li>
+            <input
+              id='show_bullets'
+              type='checkbox'
+              onChange={this._handleCheckboxChange.bind(this, 'showBullets')}
+              checked={this.state.showBullets}/>
+            <label htmlFor='show_bullets'>
+              show bullets
+            </label>
+          </li>
+          <li>
+            <input
+              id='show_thumbnails'
+              type='checkbox'
+              onChange={this._handleCheckboxChange.bind(this, 'showThumbnails')}
+              checked={this.state.showThumbnails}/>
+            <label htmlFor='show_thumbnails'>
+              show thumbnails
+            </label>
+          </li>
+          <li>
+            <input
+              id='show_navigation'
+              type='checkbox'
+              onChange={this._handleCheckboxChange.bind(this, 'showNav')}
+              checked={this.state.showNav}/>
+            <label htmlFor='show_navigation'>
+              show navigation
+            </label>
+          </li>
+          <li>
+            <input
+              id='show_index'
+              type='checkbox'
+              onChange={this._handleCheckboxChange.bind(this, 'showIndex')}
+              checked={this.state.showIndex}/>
+            <label htmlFor='show_index'>
+              show index
+            </label>
+          </li>
+          <li>
+            <input
+              id='slide_on_thumbnail_hover'
+              type='checkbox'
+              onChange={this._handleCheckboxChange.bind(this, 'slideOnThumbnailHover')}
+              checked={this.state.slideOnThumbnailHover}/>
+            <label htmlFor='slide_on_thumbnail_hover'>
+              slide on thumbnail hover (desktop)
+            </label>
+          </li>
+        </ul>
 
-        </div>
+      </div>
       </section>
     </Section>
     )
   }
 }
-
-export default SlideShow

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Confirmation extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -15,5 +15,3 @@ class Confirmation extends React.Component {
     );
   }
 }
-
-export default Confirmation;

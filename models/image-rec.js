@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 var imageRecSchema = new mongoose.Schema({
   title: {
@@ -9,7 +9,8 @@ var imageRecSchema = new mongoose.Schema({
     type: String
   },
   filename: {
-    type: String
+    type: String,
+    required: true
   },
   source: {
     type: String

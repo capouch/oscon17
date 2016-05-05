@@ -55,7 +55,6 @@ const InfoTable = React.createClass({
   // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
 
-    // Good ole jQuery!
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",

@@ -20,7 +20,7 @@ export default {
     const newImageRec = await imageRecModel.save();
 
     if (!newImageRec) {
-      throw new Error('Error adding new image addition');
+      throw new Error('Error adding new image');
     }
     return true;
   }

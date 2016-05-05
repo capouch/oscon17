@@ -15,7 +15,7 @@ const businessAddress = (
   </address>
 );
 
-let NavFooter = React.createClass({
+const NavFooter = React.createClass({
   render() {
     return (
       <Footer brandName={brandName}
@@ -28,7 +28,7 @@ let NavFooter = React.createClass({
   });
 
 // Won't call this footer b/c the neal-react kit already uses the name
-class PageFooter extends React.Component {
+export default class extends React.Component {
     constructor(props) {
       super(props);
     }
@@ -38,5 +38,3 @@ class PageFooter extends React.Component {
       );
     }
   }
-
-  export default PageFooter;

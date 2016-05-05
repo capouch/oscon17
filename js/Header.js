@@ -10,7 +10,7 @@ import NavLink from './NavLink';
 const brandName = "Scene:History";
 const brand = <span>{brandName}</span>;
 
-let NavHeader = React.createClass({
+const NavHeader = React.createClass({
   render() {
     return (
       <Navbar brand={brand}>
@@ -37,7 +37,7 @@ let NavHeader = React.createClass({
       )}
     })
 
-class Header extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -47,5 +47,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

@@ -4,12 +4,13 @@ import ReactDOM from 'react-dom'
 import { Section } from 'neal-react'
 
 // Function to configure and raise the OpenSeaDragon widget
-let renderImage = function(selection) {
+const renderImage = function(selection) {
 
+<<<<<<< HEAD
   // Task for another (near-term) time: why do I have to hardwire paths?
-  let baseName =  '/home/brianc/PROJECTS/oscon16/public/' + selection + '.dzi';
+  const baseName =  '/home/brianc/PROJECTS/oscon16/public/' + selection + '.dzi';
   // console.log('In the renderImage method about to render ' + baseName);
-  let viewer = OpenSeadragon({
+  const viewer = OpenSeadragon({
     id: "zoomer-view",
     prefixUrl: "public/img-icons/",
     tileSources: baseName
@@ -18,13 +19,13 @@ let renderImage = function(selection) {
 // end private members/methods
 
 // Create a container class for the "Zoomer" component
-let ZoomBox =  React.createClass ({
+const ZoomBox = React.createClass ({
   componentDidMount: function() {
     let zoomTarget = this.props.image;
     renderImage(zoomTarget);
   },
   render() {
-    let style = {
+    const style = {
       width: 800,
       height: 600
     };
@@ -36,7 +37,7 @@ let ZoomBox =  React.createClass ({
 });
 
 // Render in a component
-class Zoomer extends React.Component {
+export default class extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -59,5 +60,3 @@ class Zoomer extends React.Component {
     );
   }
 }
-
-export default Zoomer;

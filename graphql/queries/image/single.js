@@ -3,7 +3,6 @@ import {
   GraphQLID,
   GraphQLNonNull
 } from 'graphql';
-import {Types} from 'mongoose';
 
 import imageRecType from '../../types/image';
 import getProjection from '../../get-projection';
@@ -26,7 +25,7 @@ export default {
       .select(projection)
       .exec();
 
-      // Hoping to extract some fields for a further query
+      // "Subquery" for e.g. related geopoint document isn't implemented yet
       return imageResult;
   }
 };

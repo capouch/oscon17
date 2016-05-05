@@ -4,6 +4,8 @@ var url = require('url');
 
 // console.log(app.getAppPath());
 
+global.sharedObj = {filePath: app.getAppPath()};
+
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 // Report crashes to our server.

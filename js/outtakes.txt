@@ -98,3 +98,8 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
         }
       });
 >>>>>>> master
+
+<script>
+  // This is AWFUL and needs to be fixed!!  Set GLOBAL variable!!
+  remote = require('electron').remote;
+</script>

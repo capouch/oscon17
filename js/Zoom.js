@@ -11,7 +11,7 @@ let renderImage = function(selection) {
   // console.log('In the renderImage method about to render ' + baseName);
   let viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "/home/brianc/PROJECTS/oscon16/public/img-icons/",
+    prefixUrl: "public/img-icons/",
     tileSources: baseName
   });
 }

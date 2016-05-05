@@ -33,7 +33,7 @@ class SlideShow extends React.Component {
           // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
 
           // Fetch data and (functionally) munge it into the proper format
-          let urlBase = "../",
+          let urlBase = "/home/brianc/PROJECTS/oscon16/public/",
             imageRecs = data.data.imageRecs
             .map(function (oneImage) {
               return {

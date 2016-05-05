@@ -22,7 +22,7 @@ const LinkComponent = React.createClass({
   render: function(){
     // Make a NavLink out of a column value
     // console.log('Processing in LinkComponent');
-    let target = this.props.data,
+    const target = this.props.data,
     renderBase = "zoomer/",
     // tifRegex = /tif|png/,
     renderPath = renderBase + target;
@@ -54,20 +54,23 @@ const customColumnMetadata = [
 const InfoTable = React.createClass({
   // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
-      $.ajax({
-        type: "POST",
-        url: this.props.url,
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
-          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-          this.setState({records: data.data.imageRecs});
-        }.bind(this),
-          error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-        }.bind(this)
-      });
-    },
+
+    // Good ole jQuery!
+    // Note the irony of using AJAX to get GraphQL . . . 
+    $.ajax({
+      type: "POST",
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+        this.setState({records: data.data.imageRecs});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     // Should this be a call to loadRecordsFromServer?
     return {records: []};

@@ -4,15 +4,17 @@ import {
   GraphQLNonNull
 } from 'graphql';
 
+// GraphQL type definition
 import imageRecType from '../../types/image';
+// Projection determines which fields to return
 import getProjection from '../../get-projection';
+// Mongoose model (matches the GraphQL type)
 import ImageRecModel from '../../../models/image-rec';
 
 /* Primitive keyword search
   It lets you input a regex, which is very useful
   I didn't design it that way!!
 */
-
 export default {
   type: new GraphQLList(imageRecType),
   description: "Search images for keywords",

@@ -9,7 +9,7 @@ var url = require('url');
 var window = require('electron-window');  // Module to create native browser window.
 
 var args = {
-  data: app.getAppPath()
+  baseDir: app.getAppPath()
 }
 
 // Report crashes to our server.

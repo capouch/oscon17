@@ -25,7 +25,7 @@ const renderImage = function(selection) {
   // const filePrefix = '/home/brianc/PROJECTS/oscon16/public/';
 
   // We pass in the base dir path via electron-window
-  const filePrefix = window.__args__.data + '/public/';
+  const filePrefix = window.__args__.baseDir + '/public/';
   console.log('File prefix: ' + filePrefix);
   const baseName =  filePrefix + selection + '.dzi';
   // console.log('In the renderImage method about to render ' + baseName);

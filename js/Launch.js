@@ -19,7 +19,7 @@ import {
 } from "neal-react";
 
 // We are passing in the path via electron-window
-const urlBase = window.__args__.data + '/public/';
+const urlBase = window.__args__.baseDir + '/public/';
 
 const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
   name: "Stripe Integration Included",

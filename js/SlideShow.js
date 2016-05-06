@@ -37,7 +37,7 @@ export default class extends React.Component {
           // const urlBase = remote.getGlobal('sharedObj').filePath + '/public/',
 
           // We are passing in the path via electron-window
-          const urlBase = window.__args__.data + '/public/',
+          const urlBase = window.__args__.baseDir + '/public/',
 
           // Three ways to do this: cloud, local server, or filesystem
             imageRecs = data.data.imageRecs

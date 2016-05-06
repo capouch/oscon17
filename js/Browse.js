@@ -23,9 +23,8 @@ const LinkComponent = React.createClass({
     // Make a NavLink out of a column value
     // console.log('Processing in LinkComponent');
     const target = this.props.data,
-    renderBase = "zoomer/",
-    // tifRegex = /tif|png/,
-    renderPath = renderBase + target;
+      renderBase = "zoomer/",
+      renderPath = renderBase + target;
 
     return <NavLink to={renderPath}>
       {this.props.data}
@@ -56,7 +55,7 @@ const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
 
     // Good ole jQuery!
-    // Note the irony of using AJAX to get GraphQL . . . 
+    // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
       url: this.props.url,
@@ -96,13 +95,14 @@ const InfoTable = React.createClass({
   });
 
 // Currently doesn't do anything
+// See https://github.com/vakhtang/react-search-bar for an idea
 const SearchBar = React.createClass({
   render: function() {
     return (
       <form>
-        <input type="text" placeholder="Search...disabled" />
+        <input type="text" ref="searchString" placeholder="Search...disabled" />
         <p>
-          <input type="checkbox" />
+          <input ref = "searchBoolean" type="checkbox" />
           {' '}
           Example checkbox to implement a binary filter
         </p>

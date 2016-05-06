@@ -18,6 +18,9 @@ import {
   TeamMember,
 } from "neal-react";
 
+// We are passing in the path via electron-window
+const urlBase = window.__args__.data + '/public/';
+
 const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
   name: "Stripe Integration Included",
   description: "Like this? Donate $5 <3",
@@ -50,7 +53,7 @@ export default (props) => {
   return (
     <Page>
 
-      <Hero backgroundImage="img/background.png"
+      <Hero backgroundImage={ urlBase  + "img/background.png" }
         className="text-xs-center">
         <h1 className="display-4">Scene: History </h1>
         <p className="lead">Archiving and Presenting Historical Images</p>
@@ -63,7 +66,7 @@ export default (props) => {
 
       <Section className="subhero">
         <ImageList centered>
-          <ImageListItem src="img/press/sjcLogo.png" url="http://www.saintjoe.edu"/>
+          <ImageListItem src={ urlBase  + "img/press/sjcLogo.png" } url="http://www.saintjoe.edu"/>
         </ImageList>
       </Section>
 
@@ -95,13 +98,13 @@ export default (props) => {
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
+          <CustomerQuote name="Danilo Zekovic" imageUrl={ urlBase  + "img/people/daniloOSCON.jpg" }>
             <p>What I tell founders is not to sweat the business model too much at first. The most important task at first is to build something people want. If you don't do that, it won't matter how clever your business model is. -- Borrowed Quote</p>
           </CustomerQuote>
-          <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
+          <CustomerQuote name="Brian Capouch" imageUrl={ urlBase  + "img/people/bcOSCON.jpg" }>
             <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
           </CustomerQuote>
-          <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
+          <CustomerQuote name="Ben Davisson" imageUrl={ urlBase  + "img/people/benOSCON.jpg" }>
             <p>If you are not embarrassed by the first version of your product, you've launched too late.   -- Borrowed Quote</p>
           </CustomerQuote>
         </CustomerQuotes>

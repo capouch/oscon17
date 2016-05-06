@@ -47,14 +47,13 @@ app.on('ready', function() {
 
    windowOptions = {
      width: 1280,
-     height: 720,
+     height: 600,
      'minWidth': 800,
      'minHeight': 540,
      frame: true
    }
 
   mainWindow = window.createWindow(windowOptions);
-
 
   indexPath = path.resolve(__dirname, 'public', 'index.html')
   var indexUrl = url.format({

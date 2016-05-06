@@ -4,7 +4,7 @@ import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react
 import { App } from "neal-react";
 
 // Controller and view modules
-import Home from "./Launch.jsx";
+import Home from "./Launch";
 import Browse from './Browse'
 import Zoom from './Zoom'
 import Upload from './Upload'

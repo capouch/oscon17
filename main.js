@@ -50,7 +50,7 @@ app.on('ready', function() {
      height: 600,
      'minWidth': 800,
      'minHeight': 540,
-     frame: true
+     'autoHideMenuBar': true,
    }
 
   mainWindow = window.createWindow(windowOptions);

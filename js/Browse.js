@@ -112,6 +112,7 @@ const SearchBar = React.createClass({
 
 // end private members/methods
 
+// Cloud server URL or 127.0.0.1 is all we need to set things up
 export default React.createClass ( {
   render() {
     return (

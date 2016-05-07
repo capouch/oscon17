@@ -25,6 +25,7 @@ const renderImage = function(selection) {
   // const filePrefix = '/home/brianc/PROJECTS/oscon16/public/';
 
   // We pass in the base dir path via electron-window
+  // This block used when images/DB comes from local server
   // const filePrefix = window.__args__.baseDir + '/public/';
   // console.log('File prefix: ' + filePrefix);
 
@@ -67,7 +68,6 @@ export default class extends React.Component {
   render() {
 
     // This is the default case, i.e. Zoomer with no parameters
-    let urlBase = "http://oscon-sb.saintjoe-cs.org:8111"
     let sendParms = "/tiles/bremer";
 
     // This fires when properties are sent explictly

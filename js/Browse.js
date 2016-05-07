@@ -117,7 +117,7 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url="http://127.0.0.1:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
       </div>
     );
   }

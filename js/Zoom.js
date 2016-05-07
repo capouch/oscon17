@@ -25,9 +25,13 @@ const renderImage = function(selection) {
   // const filePrefix = '/home/brianc/PROJECTS/oscon16/public/';
 
   // We pass in the base dir path via electron-window
-  const filePrefix = window.__args__.baseDir + '/public/';
-  console.log('File prefix: ' + filePrefix);
+  // const filePrefix = window.__args__.baseDir + '/public/';
+  // console.log('File prefix: ' + filePrefix);
+
+  const filePrefix ="http://oscon-sb.saintjoe-cs.org:8111/"
   const baseName =  filePrefix + selection + '.dzi';
+
+
   // console.log('In the renderImage method about to render ' + baseName);
   const viewer = OpenSeadragon({
     id: "zoomer-view",
@@ -63,6 +67,7 @@ export default class extends React.Component {
   render() {
 
     // This is the default case, i.e. Zoomer with no parameters
+    let urlBase = "http://oscon-sb.saintjoe-cs.org:8111"
     let sendParms = "/tiles/bremer";
 
     // This fires when properties are sent explictly

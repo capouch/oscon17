@@ -25,7 +25,7 @@ export default class extends React.Component {
     console.log('Getting records');
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
+        url: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
         dataType: 'json',
         cache: false,
         success: function(data) {
@@ -37,7 +37,10 @@ export default class extends React.Component {
           // const urlBase = remote.getGlobal('sharedObj').filePath + '/public/',
 
           // We are passing in the path via electron-window
-          const urlBase = window.__args__.baseDir + '/public/',
+          // const urlBase = window.__args__.baseDir + '/public/',
+
+          // This vesion gets files from a remote server
+          const urlBase = "http://oscon-sb.saintjoe-cs.org:8111/",
 
           // Three ways to do this: cloud, local server, or filesystem
             imageRecs = data.data.imageRecs

@@ -19,6 +19,7 @@ import SearchBar from 'react-search-bar'
 // Save this: return <a href={url}>{this.props.data}</a>
 // Note that for now we just hardcode the link target in the url variable
 
+// Borrowed from the react-searh-bar demo
 const matches = {
   'macbook a': [
     'macbook air 13 case',

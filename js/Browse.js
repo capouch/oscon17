@@ -9,12 +9,28 @@ import Griddle from 'griddle-react'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
+// We are using a modified version of this repo yet to be merged
+// See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
+import SearchBar from 'react-search-bar'
+
 // private methods
 
 // Options for Griddle table generator
 // Save this: return <a href={url}>{this.props.data}</a>
 // Note that for now we just hardcode the link target in the url variable
 
+const matches = {
+  'macbook a': [
+    'macbook air 13 case',
+    'macbook air 11 case',
+    'macbook air charger'
+  ],
+  'macbook p': [
+    'macbook pro 13 case',
+    'macbook pro 15 case',
+    'macbook pro charger'
+  ]
+}
 
 // Compose NavLink to the zoomer view for each image
 const LinkComponent = React.createClass({
@@ -23,9 +39,8 @@ const LinkComponent = React.createClass({
     // Make a NavLink out of a column value
     // console.log('Processing in LinkComponent');
     const target = this.props.data,
-    renderBase = "zoomer/",
-    // tifRegex = /tif|png/,
-    renderPath = renderBase + target;
+      renderBase = "zoomer/",
+      renderPath = renderBase + target;
 
     return <NavLink to={renderPath}>
       {this.props.data}
@@ -56,7 +71,7 @@ const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
 
     // Good ole jQuery!
-    // Note the irony of using AJAX to get GraphQL . . . 
+    // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
       url: this.props.url,
@@ -80,11 +95,30 @@ const InfoTable = React.createClass({
     // This polls the server; not quite sure why . . .
     // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
+  onChange(input, resolve) {
+    // Simulate AJAX request
+    setTimeout(() => {
+      const suggestions = matches[Object.keys(matches).find((partial) => {
+        return input.match(new RegExp(partial), 'i');
+      })] || ['macbook', 'macbook air', 'macbook pro'];
+
+    resolve(suggestions.filter((suggestion) =>
+      suggestion.match(new RegExp('^' + input.replace(/\W\s/g, ''), 'i'))
+      ));
+      }, 25);
+    },
+  onSearch(input) {
+    if (!input) return;
+      console.info(`Searching "${input}"`);
+    },
   render: function() {
     return (
       <Section>
         <center><h2>Current image data</h2></center>
-        <SearchBar />
+        <SearchBar
+          placeholder="search images"
+          onChange={this.onChange}
+          onSearch={this.onSearch} />
         <Griddle results={this.state.records}
           columns={['title','filename', "description"]}
           columnMetadata={customColumnMetadata}
@@ -95,14 +129,16 @@ const InfoTable = React.createClass({
     )}
   });
 
+/*
 // Currently doesn't do anything
+// See https://github.com/vakhtang/react-search-bar for an idea
 const SearchBar = React.createClass({
   render: function() {
     return (
       <form>
-        <input type="text" placeholder="Search...disabled" />
+        <input type="text" ref="searchString" placeholder="Search...disabled" />
         <p>
-          <input type="checkbox" />
+          <input ref = "searchBoolean" type="checkbox" />
           {' '}
           Example checkbox to implement a binary filter
         </p>
@@ -110,6 +146,7 @@ const SearchBar = React.createClass({
       );
     }
   });
+*/
 
 // end private members/methods
 

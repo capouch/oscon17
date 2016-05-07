@@ -103,3 +103,30 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
   // This is AWFUL and needs to be fixed!!  Set GLOBAL variable!!
   remote = require('electron').remote;
 </script>
+
+// Test code for react-search-bar
+const matches = {
+  'macbook a': [
+    'macbook air 13 case',
+    'macbook air 11 case',
+    'macbook air charger'
+  ],
+  'macbook p': [
+    'has nothing to do with macbook p',
+    'macbook pro 13 case',
+    'macbook pro 15 case',
+    'macbook pro charger'
+  ]
+};
+
+
+const input = "macbook p";
+var i = 1;
+
+      const suggestions = matches[Object.keys(matches).find((partial) => {
+        console.log('Partial raw: ' + partial + ' on pass ' + i++)
+        console.log(input.match(new RegExp(partial), 'i'))
+        return input.match(new RegExp(partial), 'i');
+      })] || ['macbook', 'macbook air', 'macbook pro'];
+
+console.log('Suggestions: ' + suggestions);

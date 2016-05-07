@@ -10,7 +10,7 @@ import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
 // We are using a modified version of this repo yet to be merged
-// See https://github.com/moimael/react-search-bar.git
+// See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
 // private methods

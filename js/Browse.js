@@ -123,7 +123,10 @@ const InfoTable = React.createClass({
       console.log('Button clicked!!')
       // Someone on stackoverflow called this a "violent solution"
       // The right way is to push it to the history object
-      window.location.assign('/slides/' + queryTarget);
+      console.log('History yet?' + JSON.stringify(history))
+      //this.context.transitionTo('/slides/' + queryTarget);
+      history.replaceState(null, null, '/slides/' + queryTarget)
+      //window.location.assign('/slides/' + queryTarget);
 
     },
   render: function() {

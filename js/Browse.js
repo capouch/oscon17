@@ -70,47 +70,53 @@ const customColumnMetadata = [
 const InfoTable = React.createClass({
   // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
-
+    // console.log('Called once with ' + this.state.fetchURL)
     // Good ole jQuery!
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
-      url: this.props.url,
+      url: this.state.fetchURL,
       dataType: 'json',
       cache: false,
       success: function(data) {
-        // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-        this.setState({records: data.data.imageRecs});
+        // console.log(JSON.stringify(data.data))
+        if (data.data.imageRecs)
+          this.setState({records: data.data.imageRecs})
+        else
+          this.setState({records: data.data.lookup})
+        data.data = undefined
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(this.state.url, status, err.toString());
       }.bind(this)
     });
   },
   getInitialState: function() {
     // Should this be a call to loadRecordsFromServer?
-    return {records: []};
+    return {
+      records: [],
+      fetchURL: ""
+    };
   },
   componentDidMount: function() {
+    console.log('Mounting event')
+    this.state.fetchURL = this.props.url;
     this.loadRecordsFromServer();
     // This polls the server; not quite sure why . . .
     // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   onChange(input, resolve) {
-    // Simulate AJAX request
-    setTimeout(() => {
-      const suggestions = matches[Object.keys(matches).find((partial) => {
-        return input.match(new RegExp(partial), 'i');
-      })] || ['macbook', 'macbook air', 'macbook pro'];
-
-    resolve(suggestions.filter((suggestion) =>
-      suggestion.match(new RegExp('^' + input.replace(/\W\s/g, ''), 'i'))
-      ));
-      }, 25);
+    // Currently we do not do suggestions
     },
   onSearch(input) {
     if (!input) return;
       console.info(`Searching "${input}"`);
+      let searchURL = '/oscon-test?query=query+{lookup(keywords: "' +  input + '" ){title, filename, description}}';
+      this.setState({fetchURL: searchURL}, function(){
+        this.loadRecordsFromServer()
+        }.bind(this));
+      // console.log('State is: ' + this.state.fetchURL)
+      // this.loadRecordsFromServer();
     },
   render: function() {
     return (

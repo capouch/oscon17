@@ -3,7 +3,6 @@
  *   Handle uplads of new images
  */
 
-'use strict';
 import React from 'react'
 import ReactDOM from 'react-dom'
 import DropZoneComponent from 'react-dropzone-component'
@@ -41,11 +40,11 @@ let  serverFilename = "";
     sending: null,
     success: function(file, response) {
       // Server now sends back ultimate filename
-      console.log('Got ' + response);
-      serverFilename = response;
+      console.log('Got ' + response)
+      serverFilename = response
       // Cut the quotes
-      serverFilename = serverFilename.replace(/"/g,"");
-      console.log('Cut quotes: ' + serverFilename);
+      serverFilename = serverFilename.replace(/"/g,"")
+      console.log('Cut quotes: ' + serverFilename)
     },
     complete: null,
     canceled: null,
@@ -65,9 +64,10 @@ let  serverFilename = "";
     queuecomplete: null
     },
     djsConfig = {
+      // Note: configure here for SINGLE file upload
       addRemoveLinks: true,
       acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff",
-    };
+    }
 
 // Data structure
 
@@ -86,7 +86,7 @@ const blankFieldValues = {
 }
 
 // Var to hold POST URL
-let queryURL = "";
+let queryURL = ""
 
 // Code inspired by this tutorial:
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
@@ -102,15 +102,15 @@ export default React.createClass ( {
     // Remember, `fieldValues` is set at the top of this file, we are simply appending
     // to and overriding keys in `fieldValues` with the `fields` with Object.assign
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-    fieldValues = Object.assign({}, fieldValues, fields);
-    fieldValues.filename = serverFilename;
+    fieldValues = Object.assign({}, fieldValues, fields)
+    fieldValues.filename = serverFilename
     // Put together (awful-looking) query URL
     queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
-      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}";
-    console.log(queryURL);
+      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}"
+    console.log(queryURL)
     // Reset the field values here!!
-    fieldValues = Object.assign({}, fieldValues, blankFieldValues);
+    fieldValues = Object.assign({}, fieldValues, blankFieldValues)
     $.ajax({
       type: "POST",
       url: queryURL,
@@ -124,7 +124,7 @@ export default React.createClass ( {
         error: function(xhr, status, err) {
         console.error(status, err.toString());
       }.bind(this)
-    });
+    })
   }()
   },
  nextStep: function() {
@@ -156,4 +156,4 @@ export default React.createClass ( {
     return <Confirmation />
   }
  }
-});
+})

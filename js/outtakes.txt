@@ -94,3 +94,18 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
           ));
           }, 25);
         },
+
+        // Borrowed from the react-searh-bar demo
+        // Allows "suggestions" in the bar
+        const matches = {
+          'macbook a': [
+            'macbook air 13 case',
+            'macbook air 11 case',
+            'macbook air charger'
+          ],
+          'macbook p': [
+            'macbook pro 13 case',
+            'macbook pro 15 case',
+            'macbook pro charger'
+          ]
+        }

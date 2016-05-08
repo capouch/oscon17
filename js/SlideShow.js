@@ -24,18 +24,19 @@ export default class extends React.Component {
   }
   componentDidMount() {
     // If a parameterized custom list, render it
+    // Note: this test has a callback!!
     if (this.props.params.viewSet) {
       console.log('Param is: ' + this.props.params.viewSet)
-        this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
-          this.loadRecordsFromServer()
-          }.bind(this));
+      this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
+        this.loadRecordsFromServer()
+        }.bind(this));
     } else {
       // Default is to show all images
-      this.loadRecordsFromServer();
+      this.loadRecordsFromServer()
     }
   }
   loadRecordsFromServer() {
-    console.log('Getting records');
+    console.log('Getting records')
       $.ajax({
         type: "POST",
         url: this.state.loadUrl,
@@ -49,12 +50,15 @@ export default class extends React.Component {
           // Fetch data and map it into the proper format
 
           // Three ways to do this: cloud, local server, or filesystem
-          const urlBase = '/';
+          const urlBase = '/'
           let source = []
+
+          // default load, or filtered through lookup?
           if (data.data.imageRecs)
             source = data.data.imageRecs
           else
             source = data.data.lookup
+
           console.log('imageRecs before render: ' + JSON.stringify(imageRecs))
           //  imageRecs = data.data.imageRecs
           const imageRecs = source.map(function (oneImage) {
@@ -66,12 +70,12 @@ export default class extends React.Component {
             })
             // console.log('Images: ' + JSON.stringify(imageRecs));
             // Display the data!!
-            this.setState({images: imageRecs});
+            this.setState({images: imageRecs})
         }.bind(this),
           error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
+          console.error(this.props.url, status, err.toString())
         }.bind(this)
-      });
+      })
     }
 
   componentDidUpdate(prevProps, prevState) {

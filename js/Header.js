@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router";
+import React from "react"
+import { Link } from "react-router"
 import {
   Navbar, NavItem,
   DropdownMenu, DropdownToggle,
-} from "neal-react";
+} from "neal-react"
 
-import NavLink from './NavLink';
+import NavLink from './NavLink'
 
-const brandName = "Scene:History";
-const brand = <span>{brandName}</span>;
+const brandName = "Scene:History"
+const brand = <span>{brandName}</span>
 
 const NavHeader = React.createClass({
   render() {
@@ -44,6 +44,6 @@ export default class extends React.Component {
   render() {
     return (
         <NavHeader/>
-    );
+    )
   }
 }

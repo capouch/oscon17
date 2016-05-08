@@ -111,7 +111,7 @@ const InfoTable = React.createClass({
   onSearch(input) {
     if (!input) return;
       console.info(`Searching "${input}"`);
-      let searchURL = '/oscon-test?query=query+{lookup(keywords: "' +  input + '" ){title, filename, description}}';
+      let searchURL = '/oscon-test?query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}';
       this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
         }.bind(this));

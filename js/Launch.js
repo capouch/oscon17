@@ -16,7 +16,7 @@ import {
   Stripe,
   Team,
   TeamMember,
-} from "neal-react";
+} from "neal-react"
 
 // We are passing in the path via electron-window
 const urlBase = window.__args__.baseDir + '/public/';
@@ -27,12 +27,12 @@ const onSignup = ({ name: name, email: email, password: password }) => Stripe.St
   panelLabel: "Donate {{amount}}",
   email: email,
   amount: 500,
-});
+})
 
 const sampleCode =
 `  class Upload extends React.Component {
     constructor(props) {
-      super(props);
+      super(props)
     }
     render() {
       return (
@@ -41,12 +41,12 @@ const sampleCode =
                             eventHandlers={eventHandlers}
                             djsConfig={djsConfig} />,
         </div>
-      );
+      )
     }
   }
 
-  export default Upload;
-`;
+  export default Upload
+`
 
 
 export default (props) => {
@@ -107,5 +107,5 @@ export default (props) => {
       </Section>
 
     </Page>
-  );
-};
+  )
+}

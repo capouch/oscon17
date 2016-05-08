@@ -19,18 +19,23 @@ import SearchBar from 'react-search-bar'
 // Save this: return <a href={url}>{this.props.data}</a>
 // Note that for now we just hardcode the link target in the url variable
 
-const matches = {
-  'macbook a': [
-    'macbook air 13 case',
-    'macbook air 11 case',
-    'macbook air charger'
-  ],
-  'macbook p': [
-    'macbook pro 13 case',
-    'macbook pro 15 case',
-    'macbook pro charger'
-  ]
+const buttonStyle = {
+  margin: '10px 10px 10px 0'
 }
+
+const Button = React.createClass({
+  render: function () {
+    return (
+      <button
+        className="btn btn-default"
+        style={buttonStyle}
+        onClick={this.props.handleClick}>{this.props.label}</button>
+    )
+  }
+})
+
+// A module-scoped variable!!
+let queryTarget = ""
 
 // Compose NavLink to the zoomer view for each image
 const LinkComponent = React.createClass({
@@ -46,9 +51,9 @@ const LinkComponent = React.createClass({
       {this.props.data}
     </NavLink>
   }
-});
+})
 
-
+// Configuration object for Griddle
 const customColumnMetadata = [
   {
     "columnName": "title",
@@ -63,51 +68,61 @@ const customColumnMetadata = [
     "columnName": "description",
     "displayName": "Description"
   }
- ];
+ ]
 
-// We have hijacked this component and patched in Griddle
+// InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
-      url: this.props.url,
+      url: this.state.fetchURL,
       dataType: 'json',
       cache: false,
       success: function(data) {
-        // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-        this.setState({records: data.data.imageRecs});
+        // console.log(JSON.stringify(data.data))
+        if (data.data.imageRecs)
+          this.setState({records: data.data.imageRecs})
+        else
+          this.setState({records: data.data.lookup})
+        data.data = undefined
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(this.state.url, status, err.toString());
       }.bind(this)
-    });
+    })
   },
   getInitialState: function() {
     // Should this be a call to loadRecordsFromServer?
-    return {records: []};
+    return {
+      records: [],
+      fetchURL: "",
+    }
   },
   componentDidMount: function() {
-    this.loadRecordsFromServer();
-    // This polls the server; not quite sure why . . .
-    // setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    console.log('Mounting event')
+    this.state.fetchURL = this.props.url
+    this.loadRecordsFromServer()
   },
   onChange(input, resolve) {
-    // Simulate AJAX request
-    setTimeout(() => {
-      const suggestions = matches[Object.keys(matches).find((partial) => {
-        return input.match(new RegExp(partial), 'i');
-      })] || ['macbook', 'macbook air', 'macbook pro'];
-
-    resolve(suggestions.filter((suggestion) =>
-      suggestion.match(new RegExp('^' + input.replace(/\W\s/g, ''), 'i'))
-      ));
-      }, 25);
+    // Here is where to put code which implements suggestions in the SearchBar
     },
   onSearch(input) {
-    if (!input) return;
-      console.info(`Searching "${input}"`);
+    if (!input) return
+    console.info(`Searching "${input}"`)
+    queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
+    let searchURL = '/oscon-test?' + queryTarget
+    this.setState({fetchURL: searchURL}, function(){
+        this.loadRecordsFromServer()
+        }.bind(this))
+    },
+    handleClick() {
+      console.log('Button clicked!!')
+      // Someone on stackoverflow called this a "violent solution"
+      // The right way is to push it to the history object
+      window.location.assign('/slides/' + queryTarget);
+
     },
   render: function() {
     return (
@@ -117,6 +132,10 @@ const InfoTable = React.createClass({
           placeholder="search images"
           onChange={this.onChange}
           onSearch={this.onSearch} />
+        <Button
+          label="Slideshow of this imageset"
+          handleClick={this.handleClick}
+        />
         <Griddle results={this.state.records}
           columns={['title','filename', "description"]}
           columnMetadata={customColumnMetadata}
@@ -125,28 +144,7 @@ const InfoTable = React.createClass({
           />
       </Section>
     )}
-  });
-
-/*
-// Currently doesn't do anything
-// See https://github.com/vakhtang/react-search-bar for an idea
-const SearchBar = React.createClass({
-  render: function() {
-    return (
-      <form>
-        <input type="text" ref="searchString" placeholder="Search...disabled" />
-        <p>
-          <input ref = "searchBoolean" type="checkbox" />
-          {' '}
-          Example checkbox to implement a binary filter
-        </p>
-      </form>
-      );
-    }
-  });
-*/
-
-// end private members/methods
+  })
 
 // Cloud server URL or 127.0.0.1 is all we need to set things up
 export default React.createClass ( {
@@ -156,6 +154,6 @@ export default React.createClass ( {
         <InfoTable
           url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
       </div>
-    );
+    )
   }
-});
+})

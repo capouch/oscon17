@@ -16,20 +16,35 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
+      loadUrl: "/oscon-test?query=query+{imageRecs{ title, filename}}",
       images: []
     }
-    // Load up image data from server
-    this.loadRecordsFromServer();
+    // Stale behavior see below
+    // this.loadRecordsFromServer()
+  }
+  componentDidMount() {
+    // If a parameterized custom list, render it
+    // Note: this test has a callback!!
+    if (this.props.params.viewSet) {
+      console.log('Param is: ' + this.props.params.viewSet)
+      this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
+        this.loadRecordsFromServer()
+        }.bind(this));
+    } else {
+      // Default is to show all images
+      this.loadRecordsFromServer()
+    }
   }
   loadRecordsFromServer() {
-    console.log('Getting records');
+    console.log('Getting records')
       $.ajax({
         type: "POST",
-        url: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
+        url: this.state.loadUrl,
         dataType: 'json',
         cache: false,
         success: function(data) {
-          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+          console.log('Just fetched: ' + this.state.loadUrl)
+          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data));
           // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
 
           // Fetch data and (functionally) munge it into the proper format
@@ -44,8 +59,18 @@ export default class extends React.Component {
           const urlBase = "http://oscon-sb.saintjoe-cs.org:8111/",
 
           // Three ways to do this: cloud, local server, or filesystem
-            imageRecs = data.data.imageRecs
-            .map(function (oneImage) {
+          const urlBase = '/'
+          let source = []
+
+          // default load, or filtered through lookup?
+          if (data.data.imageRecs)
+            source = data.data.imageRecs
+          else
+            source = data.data.lookup
+
+          console.log('imageRecs before render: ' + JSON.stringify(imageRecs))
+          //  imageRecs = data.data.imageRecs
+          const imageRecs = source.map(function (oneImage) {
               return {
                 original: urlBase + 'images/' + oneImage.filename + '-1k',
                 thumbnail: urlBase + 'thumbs/' + oneImage.filename + '-thumb',
@@ -54,12 +79,12 @@ export default class extends React.Component {
             })
             // console.log('Images: ' + JSON.stringify(imageRecs));
             // Display the data!!
-            this.setState({images: imageRecs});
+            this.setState({images: imageRecs})
         }.bind(this),
           error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
+          console.error(this.props.url, status, err.toString())
         }.bind(this)
-      });
+      })
     }
 
   componentDidUpdate(prevProps, prevState) {

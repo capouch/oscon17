@@ -97,7 +97,6 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
           return <NavLink to={renderPath}>{this.props.data}</NavLink>
         }
       });
->>>>>>> master
 
 <script>
   // This is AWFUL and needs to be fixed!!  Set GLOBAL variable!!
@@ -130,3 +129,34 @@ var i = 1;
       })] || ['macbook', 'macbook air', 'macbook pro'];
 
 console.log('Suggestions: ' + suggestions);
+=======
+
+      // Search bar matching code
+      onChange(input, resolve) {
+        // Simulate AJAX request
+        setTimeout(() => {
+          const suggestions = matches[Object.keys(matches).find((partial) => {
+            return input.match(new RegExp(partial), 'i');
+          })] || ['macbook', 'macbook air', 'macbook pro'];
+
+        resolve(suggestions.filter((suggestion) =>
+          suggestion.match(new RegExp('^' + input.replace(/\W\s/g, ''), 'i'))
+          ));
+          }, 25);
+        },
+
+        // Borrowed from the react-searh-bar demo
+        // Allows "suggestions" in the bar
+        const matches = {
+          'macbook a': [
+            'macbook air 13 case',
+            'macbook air 11 case',
+            'macbook air charger'
+          ],
+          'macbook p': [
+            'macbook pro 13 case',
+            'macbook pro 15 case',
+            'macbook pro charger'
+          ]
+        }
+>>>>>>> master

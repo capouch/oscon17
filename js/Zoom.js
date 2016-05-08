@@ -33,20 +33,21 @@ const renderImage = function(selection) {
   const baseName =  filePrefix + selection + '.dzi';
 
 
-  // console.log('In the renderImage method about to render ' + baseName);
+  const baseName = selection + '.dzi'
+  console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",
     prefixUrl: filePrefix + "img-icons/",
     tileSources: baseName
-  });
+  })
 }
 // end private members/methods
 
 // Create a container class for the "Zoomer" component
 const ZoomBox = React.createClass ({
   componentDidMount: function() {
-    let zoomTarget = this.props.image;
-    renderImage(zoomTarget);
+    let zoomTarget = this.props.image
+    renderImage(zoomTarget)
   },
   render() {
     const style = {
@@ -56,19 +57,19 @@ const ZoomBox = React.createClass ({
     return (
       <div style={style} id="zoomer-view">
       </div>
-    );
+    )
   }
 });
 
 // Render in a component
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   render() {
 
     // This is the default case, i.e. Zoomer with no parameters
-    let sendParms = "/tiles/bremer";
+    let sendParms = "../tiles/bremer"
 
     // This fires when properties are sent explictly
     if ( this.props.params.imageId ) {

@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 import ReactDOM from "react-dom";
-import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router";
-import { App } from "neal-react";
+import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router"
+import { App } from "neal-react"
 
 // Controller and view modules
-import Home from "./Launch";
+import Home from "./Launch.jsx"
 import Browse from './Browse'
 import Zoom from './Zoom'
 import Upload from './Upload'
@@ -27,7 +27,7 @@ class osconSPA extends React.Component {
         </App>
         <Footer/>
       </div>
-    );
+    )
   }
 }
 
@@ -40,7 +40,8 @@ ReactDOM.render((
       <Route path="zoomer/:imageId" component={ Zoom }/>
       <Route path="upload" component={ Upload }/>
       <Route path="slides" component={ SlideShow } />
+      <Route path="slides/:viewSet" component={ SlideShow } />
       <Route path="*" component={ Home }/>
     </Route>
   </Router>
-), document.getElementById("main"));
+), document.getElementById("main"))

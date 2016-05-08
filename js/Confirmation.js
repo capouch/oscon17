@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   render() {
     return (
@@ -12,6 +12,6 @@ export default class extends React.Component {
         <a href="/upload">Click here to upload more images</a>
         </center>
       </div>
-    );
+    )
   }
 }

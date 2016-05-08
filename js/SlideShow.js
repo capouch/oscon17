@@ -16,6 +16,7 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
+      loadUrl: "/oscon-test?query=query+{imageRecs{ title, filename}}",
       images: []
     }
     // Load up image data from server
@@ -25,7 +26,7 @@ export default class extends React.Component {
     console.log('Getting records');
       $.ajax({
         type: "POST",
-        url: "/oscon-test?query=query+{imageRecs{ title, filename}}",
+        url: this.state.loadUrl,
         dataType: 'json',
         cache: false,
         success: function(data) {

@@ -40,6 +40,7 @@ ReactDOM.render((
       <Route path="zoomer/:imageId" component={ Zoom }/>
       <Route path="upload" component={ Upload }/>
       <Route path="slides" component={ SlideShow } />
+      <Route path="slides/:viewSet" component={ SlideShow } />
       <Route path="*" component={ Home }/>
     </Route>
   </Router>

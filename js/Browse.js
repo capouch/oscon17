@@ -33,6 +33,21 @@ const matches = {
   ]
 }
 
+var buttonStyle = {
+  margin: '10px 10px 10px 0'
+};
+
+var Button = React.createClass({
+  render: function () {
+    return (
+      <button
+        className="btn btn-default"
+        style={buttonStyle}
+        onClick={this.props.handleClick}>{this.props.label}</button>
+    );
+  }
+});
+
 // Compose NavLink to the zoomer view for each image
 const LinkComponent = React.createClass({
 
@@ -118,6 +133,10 @@ const InfoTable = React.createClass({
       // console.log('State is: ' + this.state.fetchURL)
       // this.loadRecordsFromServer();
     },
+    handleClick() {
+      console.log('Button clicked!!')
+      
+    },
   render: function() {
     return (
       <Section>
@@ -126,6 +145,10 @@ const InfoTable = React.createClass({
           placeholder="search images"
           onChange={this.onChange}
           onSearch={this.onSearch} />
+        <Button
+          label="Make Slideshow"
+          handleClick={this.handleClick}
+        />
         <Griddle results={this.state.records}
           columns={['title','filename', "description"]}
           columnMetadata={customColumnMetadata}

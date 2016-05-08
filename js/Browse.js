@@ -112,16 +112,18 @@ const InfoTable = React.createClass({
     if (!input) return
     console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
-    let searchURL = '/oscon-test?' + queryTarget
+    let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
         }.bind(this))
     },
     handleClick() {
-      console.log('Button clicked!!')
+      let cloudBase = 'http://oscon-sb.saintjoe-cs.org:8111/slides/'
+      console.log('Sending to: ' + cloudBase + queryTarget)
+      console.log('History? ' + history)
       // Someone on stackoverflow called this a "violent solution"
       // The right way is to push it to the history object
-      window.location.assign('/slides/' + queryTarget);
+      // window.location.assign(cloudBase + queryTarget);
 
     },
   render: function() {

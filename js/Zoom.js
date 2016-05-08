@@ -33,7 +33,7 @@ const renderImage = function(selection) {
   const baseName =  filePrefix + selection + '.dzi';
 
 
-  const baseName = selection + '.dzi'
+  // const baseName = selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",

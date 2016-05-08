@@ -16,7 +16,7 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
-      loadUrl: "/oscon-test?query=query+{imageRecs{ title, filename}}",
+      loadUrl: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
       images: []
     }
     // Stale behavior see below
@@ -56,10 +56,10 @@ export default class extends React.Component {
           // const urlBase = window.__args__.baseDir + '/public/',
 
           // This vesion gets files from a remote server
-          const urlBase = "http://oscon-sb.saintjoe-cs.org:8111/",
+          const urlBase = "http://oscon-sb.saintjoe-cs.org:8111/"
 
           // Three ways to do this: cloud, local server, or filesystem
-          const urlBase = '/'
+          // const urlBase = '/'
           let source = []
 
           // default load, or filtered through lookup?

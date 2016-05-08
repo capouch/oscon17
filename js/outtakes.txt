@@ -80,3 +80,17 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
           return <NavLink to={renderPath}>{this.props.data}</NavLink>
         }
       });
+
+      // Search bar matching code
+      onChange(input, resolve) {
+        // Simulate AJAX request
+        setTimeout(() => {
+          const suggestions = matches[Object.keys(matches).find((partial) => {
+            return input.match(new RegExp(partial), 'i');
+          })] || ['macbook', 'macbook air', 'macbook pro'];
+
+        resolve(suggestions.filter((suggestion) =>
+          suggestion.match(new RegExp('^' + input.replace(/\W\s/g, ''), 'i'))
+          ));
+          }, 25);
+        },

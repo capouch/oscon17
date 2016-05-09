@@ -97,11 +97,9 @@ const InfoTable = React.createClass({
       records: [],
       fetchURL: ""
     }
-    // Should this be a call to loadRecordsFromServer?
     // console.log('Storage: ' + localStorage.getItem('browse'))
     console.log('Getting state again')
     if (localStorage.getItem('browse')) {
-      console.log('Will you blow up here?')
       initValues = JSON.parse(localStorage.getItem('browse'))
       }
     console.log('Init values ' + JSON.stringify(initValues))
@@ -112,12 +110,12 @@ const InfoTable = React.createClass({
     console.log('Mounting event')
     this.state.fetchURL = this.props.url
     // console.log('State at mounting: ' + JSON.stringify(this.state))
-    if (this.state.records.length == 0)
+    if (!this.state.records || this.state.records.length == 0)
       this.loadRecordsFromServer()
   },
   componentWillUnmount: function () {
-    // Sometimes this line throws the baby out with the bathwater
-    localStorage.setItem('browse', '{}')
+    // Keeping this around until we can test some more
+    // localStorage.setItem('browse', '{}')
   },
   onChange(input, resolve) {
     // Hook for "suggestions"
@@ -146,6 +144,12 @@ const InfoTable = React.createClass({
       //window.location.assign('/slides/' + queryTarget);
 
     },
+    clearStore() {
+      // Nothing yet!
+      console.log('Handling reset click')
+      localStorage.removeItem('browse')
+      this.loadRecordsFromServer()
+    },
   render: function() {
     return (
       <Section>
@@ -154,10 +158,16 @@ const InfoTable = React.createClass({
           placeholder="search images"
           onChange={this.onChange}
           onSearch={this.onSearch} />
-        <Button
-          label="Slideshow of this imageset"
-          handleClick={this.handleClick}
-        />
+        <div>
+          <Button
+            label="Slideshow of this imageset"
+            handleClick={this.handleClick}
+          />
+          <Button
+            label="Reset search"
+            handleClick={this.clearStore}
+          />
+        </div>
         <Griddle results={this.state.records}
           columns={['title','filename', "description"]}
           columnMetadata={customColumnMetadata}

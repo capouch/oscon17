@@ -124,6 +124,8 @@ const InfoTable = React.createClass({
       // Someone on stackoverflow called this a "violent solution"
       // The right way is to push it to the history object
       // window.location.assign(cloudBase + queryTarget);
+      history.pushState(null, null, cloudBase + queryTarget)
+      location.reload()
 
     },
   render: function() {

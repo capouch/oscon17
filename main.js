@@ -51,6 +51,7 @@ app.on('ready', function() {
      'minWidth': 800,
      'minHeight': 540,
      'autoHideMenuBar': true,
+     'nodeIntegration': false
    }
 
   mainWindow = window.createWindow(windowOptions);

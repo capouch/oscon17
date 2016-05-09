@@ -137,10 +137,6 @@ const InfoTable = React.createClass({
     },
     handleSearchClick() {
       console.log('Button clicked!!')
-      // Someone on stackoverflow called this a "violent solution"
-      // The right way is to push it to the history object
-      console.log('History yet?' + JSON.stringify(history))
-      //this.context.transitionTo('/slides/' + queryTarget);
 
       // This is some heavy shit going down--call new view!
       // This is the slideshow for only the images currently selected

@@ -1,6 +1,10 @@
 import React from 'react'
-import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
+
+// This component has been manually patched as per below PR
+//  which the developer has yet to merge
+// https://github.com/xiaolin/react-image-gallery/pull/51/files
+import ImageGallery from 'react-image-gallery'
 
 // We are just wrapping the react-image-gallery component
 export default class extends React.Component {

@@ -68,10 +68,8 @@ const customColumnMetadata = [
 
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
-  // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
     // console.log('Called once with ' + this.state.fetchURL)
-    // Good ole jQuery!
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
@@ -105,10 +103,17 @@ const InfoTable = React.createClass({
     console.log('Init values ' + JSON.stringify(initValues))
     return initValues;
   },
-
   componentDidMount: function() {
     console.log('Mounting event')
+    queryTarget = this.state.fetchURL
     this.state.fetchURL = this.props.url
+    // console.log('Query target before:' + queryTarget)
+    // Strip off URL prefix
+    // Note should we do something if it can't find the '?'
+    if (queryTarget.indexOf('?')) {
+      queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
+    }
+    // console.log('We just set queryTarget to: ' + queryTarget)
     // console.log('State at mounting: ' + JSON.stringify(this.state))
     if (!this.state.records || this.state.records.length == 0)
       this.loadRecordsFromServer()
@@ -130,12 +135,8 @@ const InfoTable = React.createClass({
         localStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-    handleClick() {
+    handleSearchClick() {
       console.log('Button clicked!!')
-      // Someone on stackoverflow called this a "violent solution"
-      // The right way is to push it to the history object
-      console.log('History yet?' + JSON.stringify(history))
-      //this.context.transitionTo('/slides/' + queryTarget);
 
       // This is some heavy shit going down--call new view!
       // This is the slideshow for only the images currently selected
@@ -161,7 +162,7 @@ const InfoTable = React.createClass({
         <div>
           <Button
             label="Slideshow of this imageset"
-            handleClick={this.handleClick}
+            handleClick={this.handleSearchClick}
           />
           <Button
             label="Reset search"

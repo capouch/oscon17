@@ -9,16 +9,12 @@ import Griddle from 'griddle-react'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
+// CUSTOMIZATION REQUIRED HERE!!!!
 // We are using a modified version of this repo yet to be merged
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
-// private methods
-
-// Options for Griddle table generator
-// Save this: return <a href={url}>{this.props.data}</a>
-// Note that for now we just hardcode the link target in the url variable
-
+// Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
@@ -42,7 +38,7 @@ const LinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
-    // console.log('Processing in LinkComponent');
+    // The rendered object is a zoomer for this image
     const target = this.props.data,
       renderBase = "zoomer/",
       renderPath = renderBase + target;
@@ -89,6 +85,7 @@ const InfoTable = React.createClass({
         else
           this.setState({records: data.data.lookup})
         data.data = undefined
+        localStorage.setItem('browse', JSON.stringify(this.state))
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -96,19 +93,32 @@ const InfoTable = React.createClass({
     })
   },
   getInitialState: function() {
-    // Should this be a call to loadRecordsFromServer?
-    return {
+    let initValues = {
       records: [],
-      fetchURL: "",
+      fetchURL: ""
     }
+    // console.log('Storage: ' + localStorage.getItem('browse'))
+    console.log('Getting state again')
+    if (localStorage.getItem('browse')) {
+      initValues = JSON.parse(localStorage.getItem('browse'))
+      }
+    console.log('Init values ' + JSON.stringify(initValues))
+    return initValues;
   },
+
   componentDidMount: function() {
     console.log('Mounting event')
     this.state.fetchURL = this.props.url
-    this.loadRecordsFromServer()
+    // console.log('State at mounting: ' + JSON.stringify(this.state))
+    if (!this.state.records || this.state.records.length == 0)
+      this.loadRecordsFromServer()
+  },
+  componentWillUnmount: function () {
+    // Keeping this around until we can test some more
+    // localStorage.setItem('browse', '{}')
   },
   onChange(input, resolve) {
-    // Here is where to put code which implements suggestions in the SearchBar
+    // Hook for "suggestions"
     },
   onSearch(input) {
     if (!input) return
@@ -117,14 +127,28 @@ const InfoTable = React.createClass({
     let searchURL = '/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
+        localStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
     handleClick() {
       console.log('Button clicked!!')
       // Someone on stackoverflow called this a "violent solution"
       // The right way is to push it to the history object
-      window.location.assign('/slides/' + queryTarget);
+      console.log('History yet?' + JSON.stringify(history))
+      //this.context.transitionTo('/slides/' + queryTarget);
 
+      // This is some heavy shit going down--call new view!
+      // This is the slideshow for only the images currently selected
+      history.pushState(null, null, '/slides/' + queryTarget)
+      location.reload()
+      //window.location.assign('/slides/' + queryTarget);
+
+    },
+    clearStore() {
+      // Nothing yet!
+      console.log('Handling reset click')
+      localStorage.removeItem('browse')
+      this.loadRecordsFromServer()
     },
   render: function() {
     return (
@@ -134,10 +158,16 @@ const InfoTable = React.createClass({
           placeholder="search images"
           onChange={this.onChange}
           onSearch={this.onSearch} />
-        <Button
-          label="Slideshow of this imageset"
-          handleClick={this.handleClick}
-        />
+        <div>
+          <Button
+            label="Slideshow of this imageset"
+            handleClick={this.handleClick}
+          />
+          <Button
+            label="Reset search"
+            handleClick={this.clearStore}
+          />
+        </div>
         <Griddle results={this.state.records}
           columns={['title','filename', "description"]}
           columnMetadata={customColumnMetadata}

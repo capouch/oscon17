@@ -100,18 +100,16 @@ const InfoTable = React.createClass({
     // Should this be a call to loadRecordsFromServer?
     // console.log('Storage: ' + localStorage.getItem('browse'))
     console.log('Getting state again')
-    return ( typeof localStorage.getItem('browse') == 'undefined') ?
-      JSON.parse(localStorage.getItem('browse')) :
-      {
-        records: [],
-        url: ""
-      }
+    if (localStorage.getItem('browse')) {
+      return JSON.parse(localStorage.getItem('browse'))
+    }
+
   },
   componentDidMount: function() {
     console.log('Mounting event')
     this.state.fetchURL = this.props.url
     console.log('State at mounting: ' + JSON.stringify(this.state))
-    if (this.state.records.length == 0)
+    if (! this.state.records)
       this.loadRecordsFromServer()
   },
   componentWillUnmount: function () {

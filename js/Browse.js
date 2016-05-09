@@ -14,8 +14,7 @@ import { Section } from 'neal-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
-// private methods
-
+// Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
@@ -94,19 +93,26 @@ const InfoTable = React.createClass({
     })
   },
   getInitialState: function() {
+    let initValues = {
+      records: [],
+      fetchURL: ""
+    }
     // Should this be a call to loadRecordsFromServer?
     // console.log('Storage: ' + localStorage.getItem('browse'))
     console.log('Getting state again')
     if (localStorage.getItem('browse')) {
-      return JSON.parse(localStorage.getItem('browse'))
-    }
-
+      console.log('Will you blow up here?')
+      initValues = JSON.parse(localStorage.getItem('browse'))
+      }
+    console.log('Init values ' + JSON.stringify(initValues))
+    return initValues;
   },
+
   componentDidMount: function() {
     console.log('Mounting event')
     this.state.fetchURL = this.props.url
-    console.log('State at mounting: ' + JSON.stringify(this.state))
-    if (! this.state.records)
+    // console.log('State at mounting: ' + JSON.stringify(this.state))
+    if (this.state.records.length == 0)
       this.loadRecordsFromServer()
   },
   componentWillUnmount: function () {
@@ -114,7 +120,7 @@ const InfoTable = React.createClass({
     localStorage.setItem('browse', '{}')
   },
   onChange(input, resolve) {
-    // Hook for "suggestions" module
+    // Hook for "suggestions"
     },
   onSearch(input) {
     if (!input) return

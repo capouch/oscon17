@@ -89,6 +89,7 @@ const InfoTable = React.createClass({
         else
           this.setState({records: data.data.lookup})
         data.data = undefined
+        localStorage.setItem('browse', JSON.stringify(this.state))
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -97,15 +98,24 @@ const InfoTable = React.createClass({
   },
   getInitialState: function() {
     // Should this be a call to loadRecordsFromServer?
-    return {
-      records: [],
-      fetchURL: "",
-    }
+    // console.log('Storage: ' + localStorage.getItem('browse'))
+    console.log('Getting state again')
+    return ( typeof localStorage.getItem('browse') == 'undefined') ?
+      JSON.parse(localStorage.getItem('browse')) :
+      {
+        records: [],
+        url: ""
+      }
   },
   componentDidMount: function() {
     console.log('Mounting event')
     this.state.fetchURL = this.props.url
-    this.loadRecordsFromServer()
+    console.log('State at mounting: ' + JSON.stringify(this.state))
+    if (this.state.records.length == 0)
+      this.loadRecordsFromServer()
+  },
+  componentWillUnmount: function () {
+    localStorage.setItem('browse', '{}')
   },
   onChange(input, resolve) {
     // Here is where to put code which implements suggestions in the SearchBar
@@ -117,6 +127,7 @@ const InfoTable = React.createClass({
     let searchURL = '/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
+        localStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
     handleClick() {

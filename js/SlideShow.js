@@ -23,8 +23,6 @@ export default class extends React.Component {
       loadUrl: "/oscon-test?query=query+{imageRecs{ title, filename}}",
       images: []
     }
-    // Stale behavior see below
-    // this.loadRecordsFromServer()
   }
   componentDidMount() {
     // If a parameterized custom list, render it
@@ -81,7 +79,6 @@ export default class extends React.Component {
         }.bind(this)
       })
     }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
       // refresh setInterval

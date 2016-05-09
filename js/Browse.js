@@ -18,7 +18,6 @@ import SearchBar from 'react-search-bar'
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
-
 const Button = React.createClass({
   render: function () {
     return (
@@ -84,18 +83,17 @@ const InfoTable = React.createClass({
           this.setState({records: data.data.lookup})
         data.data = undefined
         localStorage.setItem('browse', JSON.stringify(this.state))
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.state.url, status, err.toString());
-      }.bind(this)
-    })
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.state.url, status, err.toString());
+        }.bind(this)
+      })
   },
   getInitialState: function() {
     let initValues = {
       records: [],
       fetchURL: ""
     }
-    // console.log('Storage: ' + localStorage.getItem('browse'))
     console.log('Getting state again')
     if (localStorage.getItem('browse')) {
       initValues = JSON.parse(localStorage.getItem('browse'))
@@ -113,8 +111,11 @@ const InfoTable = React.createClass({
     if (queryTarget.indexOf('?')) {
       queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
     }
+
     // console.log('We just set queryTarget to: ' + queryTarget)
     // console.log('State at mounting: ' + JSON.stringify(this.state))
+
+    // If just launched get initial imageset
     if (!this.state.records || this.state.records.length == 0)
       this.loadRecordsFromServer()
   },
@@ -122,7 +123,7 @@ const InfoTable = React.createClass({
     // Keeping this around until we can test some more
     // localStorage.setItem('browse', '{}')
   },
-  onChange(input, resolve) {
+  onSearchChange(input, resolve) {
     // Hook for "suggestions"
     },
   onSearch(input) {
@@ -136,19 +137,17 @@ const InfoTable = React.createClass({
         }.bind(this))
     },
     handleSearchClick() {
-      console.log('Button clicked!!')
+      // console.log('Search button clicked!!')
 
       // This is some heavy shit going down--call new view!
       // This is the slideshow for only the images currently selected
       history.pushState(null, null, '/slides/' + queryTarget)
       location.reload()
-      //window.location.assign('/slides/' + queryTarget);
-
     },
     clearStore() {
-      // Nothing yet!
-      console.log('Handling reset click')
+      // console.log('Handling reset click')
       localStorage.removeItem('browse')
+      this.state.fetchURL = this.props.url
       this.loadRecordsFromServer()
     },
   render: function() {
@@ -157,7 +156,7 @@ const InfoTable = React.createClass({
         <center><h2>Current image data</h2></center>
         <SearchBar
           placeholder="search images"
-          onChange={this.onChange}
+          onChange={this.onSearchChange}
           onSearch={this.onSearch} />
         <div>
           <Button
@@ -179,6 +178,7 @@ const InfoTable = React.createClass({
     )}
   })
 
+// Render composite component 
 export default React.createClass ( {
   render() {
     return (

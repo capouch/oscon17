@@ -27,22 +27,28 @@ const onSignup = ({ name: name, email: email, password: password }) => Stripe.St
 })
 
 const sampleCode =
-`  class Upload extends React.Component {
-    constructor(props) {
-      super(props)
-    }
-    render() {
-      return (
-        <div>
-        <DropZoneComponent  config={componentConfig}
-                            eventHandlers={eventHandlers}
-                            djsConfig={djsConfig} />,
-        </div>
-      )
-    }
+`getInitialState: function() {
+  let initValues = {
+    records: [],
+    fetchURL: ""
   }
-
-  export default Upload
+  console.log('Getting state again')
+  if (localStorage.getItem('browse')) {
+    initValues = JSON.parse(localStorage.getItem('browse'))
+    }
+  console.log('Init values ' + JSON.stringify(initValues))
+  return initValues;
+},
+componentDidMount: function() {
+  console.log('Mounting event')
+  queryTarget = this.state.fetchURL
+  this.state.fetchURL = this.props.url
+  // console.log('Query target before:' + queryTarget)
+  // Strip off URL prefix
+  // Note should we do something if it can't find the '?'
+  if (queryTarget.indexOf('?')) {
+    queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
+  }
 `
 
 

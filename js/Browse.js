@@ -125,7 +125,8 @@ const InfoTable = React.createClass({
       // The right way is to push it to the history object
       console.log('History yet?' + JSON.stringify(history))
       //this.context.transitionTo('/slides/' + queryTarget);
-      history.replaceState(null, null, '/slides/' + queryTarget)
+      history.pushState(null, null, '/slides/' + queryTarget)
+      location.reload()
       //window.location.assign('/slides/' + queryTarget);
 
     },

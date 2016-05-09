@@ -9,15 +9,12 @@ import Griddle from 'griddle-react'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
+// CUSTOMIZATION REQUIRED HERE!!!!
 // We are using a modified version of this repo yet to be merged
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
 // private methods
-
-// Options for Griddle table generator
-// Save this: return <a href={url}>{this.props.data}</a>
-// Note that for now we just hardcode the link target in the url variable
 
 const buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -42,7 +39,7 @@ const LinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
-    // console.log('Processing in LinkComponent');
+    // The rendered object is a zoomer for this image
     const target = this.props.data,
       renderBase = "zoomer/",
       renderPath = renderBase + target;
@@ -113,10 +110,11 @@ const InfoTable = React.createClass({
       this.loadRecordsFromServer()
   },
   componentWillUnmount: function () {
+    // Sometimes this line throws the baby out with the bathwater
     localStorage.setItem('browse', '{}')
   },
   onChange(input, resolve) {
-    // Here is where to put code which implements suggestions in the SearchBar
+    // Hook for "suggestions" module
     },
   onSearch(input) {
     if (!input) return
@@ -134,6 +132,9 @@ const InfoTable = React.createClass({
       // The right way is to push it to the history object
       console.log('History yet?' + JSON.stringify(history))
       //this.context.transitionTo('/slides/' + queryTarget);
+
+      // This is some heavy shit going down--call new view!
+      // This is the slideshow for only the images currently selected
       history.pushState(null, null, '/slides/' + queryTarget)
       location.reload()
       //window.location.assign('/slides/' + queryTarget);

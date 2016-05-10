@@ -108,8 +108,8 @@ const InfoTable = React.createClass({
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
     // console.log('We just set queryTarget to: ' + queryTarget)
 
-    // N.B. This is a blastfrom the past that warrants more study
-    // this.state.fetchURL = this.props.url
+    // Initialize fetchURL from props
+    this.state.fetchURL = this.props.url
     console.log('fetchURL: ' + this.state.fetchURL + ' props.url: ' + this.props.url)
 
     console.log('State at mounting: ' + JSON.stringify(this.state))

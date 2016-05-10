@@ -145,7 +145,9 @@ const InfoTable = React.createClass({
         }.bind(this))
     },
     handleSearchClick() {
-      let cloudBase = 'http://oscon-sb.saintjoe-cs.org:8111/slides/'
+      //let cloudBase = 'http://oscon-sb.saintjoe-cs.org:8111/slides/'
+      let cloudBase = '/slides/'
+      console.log('Bout to move: ' + cloudBase + queryTarget)
       this.context.router.push(cloudBase + queryTarget)
     },
     clearStore() {

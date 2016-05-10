@@ -28,8 +28,9 @@ export default class extends React.Component {
     // If a parameterized custom list, render it
     // Note: this test has a callback!!
     if (this.props.params.viewSet) {
+      let accessPrefix = "http://oscon-sb.saintjoe-cs.org:8111"
       console.log('Param is: ' + this.props.params.viewSet)
-      this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
+      this.setState({loadUrl: accessPrefix + '/oscon-test/?' + this.props.params.viewSet}, function(){
         this.loadRecordsFromServer()
         }.bind(this));
     } else {

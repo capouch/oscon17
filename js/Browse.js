@@ -104,7 +104,7 @@ const InfoTable = React.createClass({
       fetchURL: ""
     }
     console.log('Getting state again')
-    if (sessionStorage.getItem('browse')) {
+    if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     console.log('Init values ' + JSON.stringify(initValues))
@@ -125,7 +125,7 @@ const InfoTable = React.createClass({
     // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
-    if (!this.state.records || this.state.records.length == 0)
+    if ((this.state.records == null) || this.state.records.length == 0)
       this.loadRecordsFromServer()
   },
   componentWillUnmount: function () {
@@ -157,6 +157,7 @@ const InfoTable = React.createClass({
       // console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       this.state.fetchURL = this.props.url
+      queryTarget = 'query=query+{imageRecs{_id, title, filename, description}}'
       this.loadRecordsFromServer()
     },
   render: function() {
@@ -186,7 +187,6 @@ const InfoTable = React.createClass({
       </Section>
     )}
   })
-
 
 // Render composite component
 export default React.createClass ( {

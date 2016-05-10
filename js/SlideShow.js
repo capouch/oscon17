@@ -1,6 +1,10 @@
 import React from 'react'
-import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
+
+// This component has been manually patched as per below PR
+//  which the developer has yet to merge
+// https://github.com/xiaolin/react-image-gallery/pull/51/files
+import ImageGallery from 'react-image-gallery'
 
 // We are just wrapping the react-image-gallery component
 export default class extends React.Component {
@@ -19,8 +23,6 @@ export default class extends React.Component {
       loadUrl: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
       images: []
     }
-    // Stale behavior see below
-    // this.loadRecordsFromServer()
   }
   componentDidMount() {
     // If a parameterized custom list, render it
@@ -86,7 +88,6 @@ export default class extends React.Component {
         }.bind(this)
       })
     }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
       // refresh setInterval

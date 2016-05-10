@@ -41,7 +41,6 @@ const renderImage = function(selection) {
     tileSources: baseName
   })
 }
-// end private members/methods
 
 // Create a container class for the "Zoomer" component
 const ZoomBox = React.createClass ({
@@ -53,14 +52,13 @@ const ZoomBox = React.createClass ({
     const style = {
       width: 800,
       height: 600
-    };
+    }
     return (
       <div style={style} id="zoomer-view">
       </div>
     )
   }
-});
-
+})
 // Render in a component
 export default class extends React.Component {
   constructor(props) {
@@ -82,6 +80,6 @@ export default class extends React.Component {
       <Section>
         <center><ZoomBox image={sendParms}/></center>
       </Section>
-    );
+    )
   }
 }

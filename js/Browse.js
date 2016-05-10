@@ -9,20 +9,15 @@ import Griddle from 'griddle-react'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
+// CUSTOMIZATION REQUIRED HERE!!!!
 // We are using a modified version of this repo yet to be merged
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
-// private methods
-
-// Options for Griddle table generator
-// Save this: return <a href={url}>{this.props.data}</a>
-// Note that for now we just hardcode the link target in the url variable
-
+// Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
-
 const Button = React.createClass({
   render: function () {
     return (
@@ -42,7 +37,7 @@ const LinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
-    // console.log('Processing in LinkComponent');
+    // The rendered object is a zoomer for this image
     const target = this.props.data,
       renderBase = "zoomer/",
       renderPath = renderBase + target;
@@ -72,7 +67,6 @@ const customColumnMetadata = [
 
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
-  // IRONY: Using an AJAX call to get the GrqphQL data from server!
   loadRecordsFromServer: function() {
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
@@ -87,26 +81,49 @@ const InfoTable = React.createClass({
         else
           this.setState({records: data.data.lookup})
         data.data = undefined
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.state.url, status, err.toString());
-      }.bind(this)
-    })
+        localStorage.setItem('browse', JSON.stringify(this.state))
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.state.url, status, err.toString());
+        }.bind(this)
+      })
   },
   getInitialState: function() {
-    // Should this be a call to loadRecordsFromServer?
-    return {
+    let initValues = {
       records: [],
-      fetchURL: "",
+      fetchURL: ""
     }
+    console.log('Getting state again')
+    if (localStorage.getItem('browse')) {
+      initValues = JSON.parse(localStorage.getItem('browse'))
+      }
+    console.log('Init values ' + JSON.stringify(initValues))
+    return initValues;
   },
   componentDidMount: function() {
     console.log('Mounting event')
+    queryTarget = this.state.fetchURL
     this.state.fetchURL = this.props.url
-    this.loadRecordsFromServer()
+    // console.log('Query target before:' + queryTarget)
+    // Strip off URL prefix
+    // Note should we do something if it can't find the '?'
+    if (queryTarget.indexOf('?')) {
+      queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
+    }
+
+    // console.log('We just set queryTarget to: ' + queryTarget)
+    // console.log('State at mounting: ' + JSON.stringify(this.state))
+
+    // If just launched get initial imageset
+    if (!this.state.records || this.state.records.length == 0)
+      this.loadRecordsFromServer()
   },
-  onChange(input, resolve) {
-    // Here is where to put code which implements suggestions in the SearchBar
+  componentWillUnmount: function () {
+    // Keeping this around until we can test some more
+    // localStorage.setItem('browse', '{}')
+  },
+  onSearchChange(input, resolve) {
+    // Hook for "suggestions"
     },
   onSearch(input) {
     if (!input) return
@@ -115,18 +132,22 @@ const InfoTable = React.createClass({
     let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
+        localStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-    handleClick() {
+
+    handleSearchClick() {
       let cloudBase = 'http://oscon-sb.saintjoe-cs.org:8111/slides/'
-      console.log('Sending to: ' + cloudBase + queryTarget)
-      console.log('History? ' + history)
-      // Someone on stackoverflow called this a "violent solution"
-      // The right way is to push it to the history object
-      // window.location.assign(cloudBase + queryTarget);
+      // console.log('Sending to: ' + cloudBase + queryTarget)
+      // console.log('History? ' + history)
       history.pushState(null, null, cloudBase + queryTarget)
       location.reload()
-
+    },
+    clearStore() {
+      // console.log('Handling reset click')
+      localStorage.removeItem('browse')
+      this.state.fetchURL = this.props.url
+      this.loadRecordsFromServer()
     },
   render: function() {
     return (
@@ -134,12 +155,18 @@ const InfoTable = React.createClass({
         <center><h2>Current image data</h2></center>
         <SearchBar
           placeholder="search images"
-          onChange={this.onChange}
+          onChange={this.onSearchChange}
           onSearch={this.onSearch} />
-        <Button
-          label="Slideshow of this imageset"
-          handleClick={this.handleClick}
-        />
+        <div>
+          <Button
+            label="Slideshow of this imageset"
+            handleClick={this.handleSearchClick}
+          />
+          <Button
+            label="Reset search"
+            handleClick={this.clearStore}
+          />
+        </div>
         <Griddle results={this.state.records}
           columns={['title','filename', "description"]}
           columnMetadata={customColumnMetadata}
@@ -150,7 +177,8 @@ const InfoTable = React.createClass({
     )}
   })
 
-// Cloud server URL or 127.0.0.1 is all we need to set things up
+
+// Render composite component
 export default React.createClass ( {
   render() {
     return (

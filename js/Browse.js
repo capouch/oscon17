@@ -82,7 +82,7 @@ const InfoTable = React.createClass({
         else
           this.setState({records: data.data.lookup})
         data.data = undefined
-        localStorage.setItem('browse', JSON.stringify(this.state))
+        sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.state.url, status, err.toString());
@@ -95,8 +95,8 @@ const InfoTable = React.createClass({
       fetchURL: ""
     }
     console.log('Getting state again')
-    if (localStorage.getItem('browse')) {
-      initValues = JSON.parse(localStorage.getItem('browse'))
+    if (sessionStorage.getItem('browse') != null) {
+      initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     console.log('Init values ' + JSON.stringify(initValues))
     return initValues;
@@ -116,12 +116,12 @@ const InfoTable = React.createClass({
     // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
-    if (!this.state.records || this.state.records.length == 0)
+    if ((this.state.records == null) || this.state.records.length == 0)
       this.loadRecordsFromServer()
   },
   componentWillUnmount: function () {
     // Keeping this around until we can test some more
-    // localStorage.setItem('browse', '{}')
+    // sessionStorage.setItem('browse', '{}')
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -133,7 +133,7 @@ const InfoTable = React.createClass({
     let searchURL = '/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
-        localStorage.setItem('browse', JSON.stringify(this.state))
+        sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
     handleSearchClick() {
@@ -146,7 +146,7 @@ const InfoTable = React.createClass({
     },
     clearStore() {
       // console.log('Handling reset click')
-      localStorage.removeItem('browse')
+      sessionStorage.removeItem('browse')
       this.state.fetchURL = this.props.url
       this.loadRecordsFromServer()
     },
@@ -178,7 +178,7 @@ const InfoTable = React.createClass({
     )}
   })
 
-// Render composite component 
+// Render composite component
 export default React.createClass ( {
   render() {
     return (

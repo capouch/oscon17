@@ -148,6 +148,7 @@ const InfoTable = React.createClass({
       // console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       this.state.fetchURL = this.props.url
+      queryTarget = 'query=query+{imageRecs{_id, title, filename, description}}'
       this.loadRecordsFromServer()
     },
   render: function() {

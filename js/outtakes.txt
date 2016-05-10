@@ -109,3 +109,12 @@ queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify
             'macbook pro charger'
           ]
         }
+
+        // This stuff leftover from big "how to push a new route" effort
+        // console.log('Search button clicked!!')
+
+        // This is some heavy shit going down--call new view!
+        // This is the slideshow for only the images currently selected
+        // history.pushState(null, null, '/slides/' + queryTarget)
+        // location.reload()
+        // console.log('History?: ' + JSON.stringify(this.context.router))

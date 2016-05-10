@@ -53,7 +53,7 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
-  router.get('/slides*', function(req, res) {
+  router.get('/slides/*', function(req, res) {
     console.log('Server slides chosen')
     res.sendFile('index.html', options)
   });

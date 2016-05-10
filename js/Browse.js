@@ -112,17 +112,16 @@ const InfoTable = React.createClass({
   },
   componentDidMount: function() {
     console.log('Mounting event')
-    queryTarget = this.state.fetchURL
-    this.state.fetchURL = this.props.url
-    // console.log('Query target before:' + queryTarget)
-    // Strip off URL prefix
-    // Note should we do something if it can't find the '?'
-    if (queryTarget.indexOf('?')) {
-      queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
-    }
 
+    // Extract query part only of URL (i.e. the part after the '?')
+    queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
     // console.log('We just set queryTarget to: ' + queryTarget)
-    // console.log('State at mounting: ' + JSON.stringify(this.state))
+
+    // Initialize fetchURL from props
+    this.state.fetchURL = this.props.url
+    console.log('fetchURL: ' + this.state.fetchURL + ' props.url: ' + this.props.url)
+
+    console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
     if ((this.state.records == null) || this.state.records.length == 0)
@@ -145,13 +144,9 @@ const InfoTable = React.createClass({
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-
     handleSearchClick() {
       let cloudBase = 'http://oscon-sb.saintjoe-cs.org:8111/slides/'
-      // console.log('Sending to: ' + cloudBase + queryTarget)
-      // console.log('History? ' + history)
-      history.pushState(null, null, cloudBase + queryTarget)
-      location.reload()
+      this.context.router.push(cloudBase + queryTarget)
     },
     clearStore() {
       // console.log('Handling reset click')
@@ -187,6 +182,12 @@ const InfoTable = React.createClass({
       </Section>
     )}
   })
+
+
+// Here is the key to allowing a click to cause a view change
+InfoTable.contextTypes = {
+  router: React.PropTypes.object.isRequired
+  }
 
 // Render composite component
 export default React.createClass ( {

@@ -14,6 +14,15 @@ import { Section } from 'neal-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
+/*
+// Electron is odd about the way it uses sessionStorage, so try this:
+window.addEventListener("beforeunload", function (e) {
+  sessionStorage.removeItem('browse')
+  (e || window.event).returnValue = null;
+  return null;
+});
+*/
+
 // Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -81,7 +90,8 @@ const InfoTable = React.createClass({
         else
           this.setState({records: data.data.lookup})
         data.data = undefined
-        localStorage.setItem('browse', JSON.stringify(this.state))
+        // console.log('In AJAX handler about to set session storage')
+        sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.state.url, status, err.toString());
@@ -94,8 +104,8 @@ const InfoTable = React.createClass({
       fetchURL: ""
     }
     console.log('Getting state again')
-    if (localStorage.getItem('browse')) {
-      initValues = JSON.parse(localStorage.getItem('browse'))
+    if (sessionStorage.getItem('browse')) {
+      initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     console.log('Init values ' + JSON.stringify(initValues))
     return initValues;
@@ -120,7 +130,7 @@ const InfoTable = React.createClass({
   },
   componentWillUnmount: function () {
     // Keeping this around until we can test some more
-    // localStorage.setItem('browse', '{}')
+    // sessionStorage.setItem('browse', '{}')
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -132,7 +142,7 @@ const InfoTable = React.createClass({
     let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
-        localStorage.setItem('browse', JSON.stringify(this.state))
+        sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
 
@@ -145,7 +155,7 @@ const InfoTable = React.createClass({
     },
     clearStore() {
       // console.log('Handling reset click')
-      localStorage.removeItem('browse')
+      sessionStorage.removeItem('browse')
       this.state.fetchURL = this.props.url
       this.loadRecordsFromServer()
     },

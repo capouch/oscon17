@@ -53,12 +53,12 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
-  router.get('/slides/*', function(req, res) {
+  router.get('/slides*', function(req, res) {
     console.log('Server slides chosen')
     res.sendFile('index.html', options)
   });
 
-  router.get('/zoomer/*', function(req, res) {
+  router.get('/zoomer*', function(req, res) {
     console.log('Server zoomer chosen')
     res.sendFile('index.html', options)
   });

@@ -1,6 +1,5 @@
 /*
- * spa.upload.js
- *   Handle uplads of new images
+  ** Browse: Search image database allow for various viewing options
  */
 
 import React from 'react'
@@ -9,7 +8,7 @@ import Griddle from 'griddle-react'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
-// CUSTOMIZATION REQUIRED HERE!!!!
+// CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
@@ -39,6 +38,7 @@ const Button = React.createClass({
 })
 
 // A module-scoped variable!!
+// It shares the user's input with other views
 let queryTarget = ""
 
 // Compose NavLink to the zoomer view for each image
@@ -84,7 +84,7 @@ const InfoTable = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
-        // console.log(JSON.stringify(data.data))
+        // Is the data from a "fetch all" query, or a lookup search?
         if (data.data.imageRecs)
           this.setState({records: data.data.imageRecs})
         else
@@ -115,18 +115,16 @@ const InfoTable = React.createClass({
 
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
-    // console.log('We just set queryTarget to: ' + queryTarget)
 
     // Initialize fetchURL from props
     this.state.fetchURL = this.props.url
-    console.log('fetchURL: ' + this.state.fetchURL + ' props.url: ' + this.props.url)
 
     console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
     if ((this.state.records == null) || this.state.records.length == 0)
       this.loadRecordsFromServer()
-  },
+    },
   componentWillUnmount: function () {
     // Keeping this around until we can test some more
     // sessionStorage.setItem('browse', '{}')

@@ -72,7 +72,7 @@ export default (props) => {
 
       <Section className="subhero">
         <ImageList centered>
-          <ImageListItem src={ urlBase  + "img/press/sjcLogo.png" } url="http://www.saintjoe.edu"/>
+          <ImageListItem src="img/press/sjcLogo.gif" url="http://www.saintjoe.edu"/>
         </ImageList>
       </Section>
 

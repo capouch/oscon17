@@ -30,6 +30,7 @@ const Button = React.createClass({
 })
 
 // A module-scoped variable!!
+// It shares the user's input with other views
 let queryTarget = ""
 
 // Compose NavLink to the zoomer view for each image

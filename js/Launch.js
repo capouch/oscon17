@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router";
+import React from "react"
+import { Link } from "react-router"
 import {
   Code,
   CustomerQuote, CustomerQuotes,
@@ -18,8 +18,21 @@ import {
   TeamMember,
 } from "neal-react"
 
+var urlBase = ''
+
+// Use IPC to get the filesystem path of the app
+
+// Send request
+const ipc = window.require('electron').ipcRenderer
+ipc.send('get-app-path')
+// Process update message
+ipc.on('got-app-path', function(app,path) {
+  urlBase = path + '/'
+})
+
 // We are passing in the path via electron-window
-const urlBase = window.__args__.baseDir + '/public/';
+//const urlBase = window.__args__.baseDir + '/public/';
+// const urlBase = '/home/brianc/PROJECTS/oscon16/public/'
 
 const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
   name: "Stripe Integration Included",
@@ -72,7 +85,7 @@ export default (props) => {
 
       <Section className="subhero">
         <ImageList centered>
-          <ImageListItem src="img/press/sjcLogo.gif" url="http://www.saintjoe.edu"/>
+          <ImageListItem src={ urlBase + "img/press/sjcLogo.gif" } url="http://www.saintjoe.edu"/>
         </ImageList>
       </Section>
 

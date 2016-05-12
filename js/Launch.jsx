@@ -69,7 +69,9 @@ export default (props) => {
 
       <Section className="subhero">
         <ImageList centered>
-          <ImageListItem src="img/press/sjcLogo.gif" url="http://www.saintjoe.edu"/>
+          <a href="http://www.saintjoe.edu">
+            <img className="sjc-logo" src="img/press/sjcLogo.gif"/>
+          </a>
         </ImageList>
       </Section>
 

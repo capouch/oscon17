@@ -1,5 +1,6 @@
 /*
-  ** Browse: Search image database allow for various viewing options
+  ** Browse: Search image database; allow for various viewing options
+    This is the primary UI module for accessing stored images
  */
 
 import React from 'react'
@@ -28,7 +29,7 @@ const Button = React.createClass({
   }
 })
 
-// A module-scoped variable!!
+// A module-scoped variable!! You don't see man of these. . .
 // It shares the user's input with other views
 let queryTarget = ""
 
@@ -118,6 +119,7 @@ const InfoTable = React.createClass({
     },
   componentWillUnmount: function () {
     // Keeping this around until we can test some more
+    // Need to mention the line below in the presentation
     // sessionStorage.setItem('browse', '{}')
   },
   onSearchChange(input, resolve) {
@@ -128,6 +130,8 @@ const InfoTable = React.createClass({
     console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
     let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
+
+    // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
         sessionStorage.setItem('browse', JSON.stringify(this.state))

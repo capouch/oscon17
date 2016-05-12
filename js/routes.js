@@ -3,15 +3,15 @@
  * Danilo Zekovic
  */
 
-// Note that these are SERVER-SIDE routes
+// Note that these are SERVER-SIDE routes!!
 
 import sharp from 'sharp'
 import multer from 'multer'
 import cb from 'cb'
 
-  // Multer handles MIME multi-part uploads
-  //   Configure it for this usage instance
-  // const multer = require('multer'),
+// Multer handles MIME multi-part uploads
+//   Configure it for this usage instance
+// const multer = require('multer'),
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/')
@@ -21,13 +21,9 @@ const storage = multer.diskStorage({
     cb(null, file.originalname + '-' + Date.now())
     }
   })
-  // This function uses multer to handle the upload process
-  // Note: we still need to set the Dropzone knob for "only one file at a time"
+// This function uses multer to handle the upload process
+// Note: we still need to set the Dropzone knob for "only one file at a time"
 const upload  =  multer( {storage: storage }).single('file')
-
-// --- End variable declarations
-
-// --- Public API
 
 export default function ( router, server ) {
   const options = {

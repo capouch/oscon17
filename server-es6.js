@@ -17,13 +17,14 @@ const app = express(),
   server = http.createServer( app )
 
 // CORS allows us to fetch images remotely on local-hosted server
-//  Without it, "no cross-domain" policy blocks browser access
+//  Without it, "no cross-domain" policy blocks browser access!!
 app.use(cors())
 
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // GraphqQL server route
+// This "route" treated differently therebecause
 app.use('/oscon-test', graphqlHTTP(req => ({
   schema,
   pretty: true,

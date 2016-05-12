@@ -5,6 +5,7 @@ const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
 
+// Respond to any requests for the filesystem path via IPC
 ipc.on('get-app-path', function (event) {
   event.sender.send('got-app-path', app.getAppPath())
 })

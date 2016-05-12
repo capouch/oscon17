@@ -16,9 +16,10 @@ const app = express(),
   router = express.Router(),
   server = http.createServer( app )
 
-// CORS allows us to fetch images remotely on local server
+// CORS allows us to fetch images remotely on local-hosted server
 //  Without it, "no cross-domain" policy blocks browser access
 app.use(cors())
+
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

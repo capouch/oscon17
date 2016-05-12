@@ -6,8 +6,17 @@ import { Section } from 'neal-react'
 // https://github.com/xiaolin/react-image-gallery/pull/51/files
 import ImageGallery from 'react-image-gallery'
 
+// Local assets
+const assetBase = '/oscon-test?query=query+{imageRecs{ title, filename}}'
+// Cloud assets
+// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}'
+
 // We are just wrapping the react-image-gallery component
 export default class extends React.Component {
+  // Local assets
+  // const assetBase = '/oscon-test?query=query+{imageRecs{ title, filename}}'
+  // Cloud assets
+  // const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}'
 
   constructor() {
     super()
@@ -20,7 +29,7 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
-      loadUrl: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
+      loadUrl: assetBase,
       images: []
     }
   }
@@ -28,9 +37,13 @@ export default class extends React.Component {
     // If a parameterized custom list, render it
     // Note: this test has a callback!!
     if (this.props.params.viewSet) {
-      let accessPrefix = "http://oscon-sb.saintjoe-cs.org:8111"
+      // Local assets
+      const assetBase = '/oscon-test/?'
+      // Cloud assets
+      // let assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test/?'
+      // let assetBase = "http://oscon-sb.saintjoe-cs.org:8111"
       console.log('Param is: ' + this.props.params.viewSet)
-      this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
+      this.setState({loadUrl: assetBase + this.props.params.viewSet}, function(){
         this.loadRecordsFromServer()
         }.bind(this));
     } else {
@@ -53,7 +66,10 @@ export default class extends React.Component {
           // Fetch data and map it into the proper format
 
           // Three ways to do this: cloud, local server, or filesystem
-          const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
+          // local assets
+          const urlBase = '/'
+          // cloud assets
+          // const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
           let source = []
 
           // default load, or filtered through lookup?

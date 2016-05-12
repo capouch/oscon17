@@ -129,7 +129,11 @@ const InfoTable = React.createClass({
     if (!input) return
     console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
-    let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
+
+    // Local assets
+    let searchURL = '/oscon-test?' + queryTarget
+    // Cloud assets
+    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
@@ -181,13 +185,20 @@ InfoTable.contextTypes = {
   router: React.PropTypes.object.isRequired
   }
 
+
 // Render composite component
 export default React.createClass ( {
   render() {
+
+    // Local assets
+    const assetBase = '/oscon-test?query=query+{imageRecs{_id, title, filename, description}}'
+    // Cloud assets
+    // const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}'
+
     return (
       <div>
         <InfoTable
-          url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url={ assetBase }/>
       </div>
     )
   }

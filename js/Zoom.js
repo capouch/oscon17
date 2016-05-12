@@ -6,7 +6,8 @@ import { Section } from 'neal-react'
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
 
-  const baseName = selection + '.dzi'
+  const filePrefix ="http://oscon-sb.saintjoe-cs.org:8111/"
+  const baseName = filePrefix + selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",

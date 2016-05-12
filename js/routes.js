@@ -34,6 +34,7 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
+  // These repetitive routes need abstracting
   router.get('/home', function(req, res) {
     console.log('Server home chosen')
     res.sendFile('index.html', options)
@@ -82,7 +83,7 @@ export default function ( router, server ) {
       }
       console.log('Uploading file: ' + req.file.filename)
 
-      // Crude proof of concept: generate thumbnail and zoom tiles
+      // Here we leverage sharp.js to rapidly process the uploaded image
       const storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
         dziBase = './public/tiles/' + storedFilename + '.dzi'
@@ -106,7 +107,7 @@ export default function ( router, server ) {
           console.log(err)
         })
 
-      // Generate zoomer tiles too
+      // Generate zoomer tiles
       sharp(filePath).tile(256)
         .toFile(dziBase, function(err, info) {
           console.log(err)

@@ -3,6 +3,7 @@ import path from 'path'
 import graphql from 'graphql'
 import graphqlHTTP from 'express-graphql'
 import mongoose from 'mongoose'
+import cors from 'cors'
 
 import http from 'http'
 import bodyParser from 'body-parser'
@@ -15,6 +16,7 @@ const app = express(),
   router = express.Router(),
   server = http.createServer( app )
 
+app.use(cors())
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

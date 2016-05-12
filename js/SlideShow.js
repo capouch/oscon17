@@ -20,7 +20,7 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
-      loadUrl: "/oscon-test?query=query+{imageRecs{ title, filename}}",
+      loadUrl: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
       images: []
     }
   }
@@ -28,6 +28,7 @@ export default class extends React.Component {
     // If a parameterized custom list, render it
     // Note: this test has a callback!!
     if (this.props.params.viewSet) {
+      let accessPrefix = "http://oscon-sb.saintjoe-cs.org:8111"
       console.log('Param is: ' + this.props.params.viewSet)
       this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
         this.loadRecordsFromServer()
@@ -52,7 +53,7 @@ export default class extends React.Component {
           // Fetch data and map it into the proper format
 
           // Three ways to do this: cloud, local server, or filesystem
-          const urlBase = '/'
+          const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
           let source = []
 
           // default load, or filtered through lookup?

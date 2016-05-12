@@ -68,7 +68,7 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Called once with ' + this.state.fetchURL)
+    console.log('Called once with ' + this.state.fetchURL)
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
@@ -127,7 +127,7 @@ const InfoTable = React.createClass({
     if (!input) return
     console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
-    let searchURL = '/oscon-test?' + queryTarget
+    let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
         sessionStorage.setItem('browse', JSON.stringify(this.state))
@@ -183,7 +183,7 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url="/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
       </div>
     )
   }

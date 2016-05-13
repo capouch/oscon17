@@ -6,6 +6,7 @@ const {app} = electron;
 const {BrowserWindow} = electron;
 
 // Respond to any requests for the filesystem path via IPC
+// Renderer processes act as observers to find where they're running
 ipc.on('get-app-path', function (event) {
   event.sender.send('got-app-path', app.getAppPath())
 })

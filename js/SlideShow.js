@@ -6,9 +6,17 @@ import { Section } from 'neal-react'
 // https://github.com/xiaolin/react-image-gallery/pull/51/files
 import ImageGallery from 'react-image-gallery'
 
+// Cloud assets
+// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}'
+//
+// Local assets
+const assetBase = '/oscon-test?'
+
+// If no parameters fetch all the images
+const defaultQuery= 'query=query+{imageRecs{ title, filename}}'
+
 // We are just wrapping the react-image-gallery component
 export default class extends React.Component {
-
   constructor() {
     super()
     this.state = {
@@ -20,17 +28,16 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
-      loadUrl: "http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
+      loadUrl: assetBase + defaultQuery,
       images: []
     }
   }
   componentDidMount() {
+    console.log('loadUrl is ' + this.state.loadUrl)
     // If a parameterized custom list, render it
     // Note: this test has a callback!!
     if (this.props.params.viewSet) {
-      let accessPrefix = "http://oscon-sb.saintjoe-cs.org:8111"
-      console.log('Param is: ' + this.props.params.viewSet)
-      this.setState({loadUrl: '/oscon-test/?' + this.props.params.viewSet}, function(){
+      this.setState({loadUrl: assetBase + this.props.params.viewSet}, function(){
         this.loadRecordsFromServer()
         }.bind(this));
     } else {
@@ -48,12 +55,14 @@ export default class extends React.Component {
         success: function(data) {
           console.log('Just fetched: ' + this.state.loadUrl)
           // console.log('Making a server trip!!!! ' + JSON.stringify(data.data));
-          // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
 
-          // Fetch data and map it into the proper format
-
+          // Map data into the proper format
           // Three ways to do this: cloud, local server, or filesystem
-          const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
+          //
+          // cloud assets:
+          // const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
+          // local assets:
+          const urlBase = '/'
           let source = []
 
           // default load, or filtered through lookup?
@@ -62,8 +71,7 @@ export default class extends React.Component {
           else
             source = data.data.lookup
 
-          console.log('imageRecs before render: ' + JSON.stringify(imageRecs))
-          //  imageRecs = data.data.imageRecs
+          // Generate parameters for viewer component
           const imageRecs = source.map(function (oneImage) {
               return {
                 original: urlBase + 'images/' + oneImage.filename + '-1k',
@@ -71,7 +79,7 @@ export default class extends React.Component {
                 description: oneImage.title
               }
             })
-            // console.log('Images: ' + JSON.stringify(imageRecs));
+
             // Display the data!!
             this.setState({images: imageRecs})
         }.bind(this),

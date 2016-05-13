@@ -19,7 +19,7 @@ ipc.send('get-app-path')
 
 
 // Cloud assets
-// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 //
 // Local assets
 const assetBase = runPath + '/oscon-test?'
@@ -73,7 +73,7 @@ export default class extends React.Component {
           // Three ways to do this: cloud, local server, or filesystem
           //
           // cloud assets:
-          const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
+          const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
           // local assets:
           // const urlBase = '/'
 

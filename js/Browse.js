@@ -30,7 +30,7 @@ ipc.send('get-app-path')
 // Local assets
 const assetBase = runPath + '/oscon-test?'
 // Cloud assets
-// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+// const assetBase = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 
@@ -150,7 +150,7 @@ const InfoTable = React.createClass({
     // Local assets
     let searchURL = assetBase + queryTarget
     // Cloud assets
-    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
+    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?' + queryTarget
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
@@ -159,7 +159,7 @@ const InfoTable = React.createClass({
         }.bind(this))
     },
     handleSearchClick() {
-      //let cloudBase = 'http://oscon-sb.saintjoe-cs.org:8111/slides/'
+      //let cloudBase = 'http://oscon-sb.saintjoe-cs.org:2016/slides/'
       let cloudBase = '/slides/'
       console.log('Bout to move: ' + cloudBase + queryTarget)
       this.context.router.push(cloudBase + queryTarget)

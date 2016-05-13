@@ -11,7 +11,8 @@ ipc.send('get-app-path')
 // Process update message
 // This is an observer pattern
  ipc.on('got-app-path', function(app,path) {
-   runPath =  path
+   runPath =  path + '/public/'
+   console.log('Got runpath of ' + runPath)
  })
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
@@ -24,6 +25,7 @@ const renderImage = function(selection) {
 
 
   const baseName = assetBase + selection + '.dzi'
+  console.log('Runpath: ' + runPath)
   console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",

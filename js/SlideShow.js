@@ -1,10 +1,34 @@
 import React from 'react'
-import ImageGallery from 'react-image-gallery'
 import { Section } from 'neal-react'
+
+// This component has been manually patched as per below PR
+//  which the developer has yet to merge
+// https://github.com/xiaolin/react-image-gallery/pull/51/files
+import ImageGallery from 'react-image-gallery'
+
+// Find out where we're running
+const ipc = window.require('electron').ipcRenderer
+let runPath = ''
+
+ipc.send('get-app-path')
+// Process update message
+// This is an observer pattern
+ ipc.on('got-app-path', function(app,path) {
+   runPath =  path
+ })
+
+
+// Cloud assets
+// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+//
+// Local assets
+const assetBase = runPath + '/oscon-test?'
+
+// If no parameters fetch all the images
+const defaultQuery= 'query=query+{imageRecs{ title, filename}}'
 
 // We are just wrapping the react-image-gallery component
 export default class extends React.Component {
-
   constructor() {
     super()
     this.state = {
@@ -16,48 +40,68 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
+      loadUrl: assetBase + defaultQuery,
       images: []
     }
-    // Load up image data from server
-    this.loadRecordsFromServer();
+  }
+  componentDidMount() {
+    console.log('loadUrl is ' + this.state.loadUrl)
+    // If a parameterized custom list, render it
+    // Note: this test has a callback!!
+    if (this.props.params.viewSet) {
+      this.setState({loadUrl: assetBase + this.props.params.viewSet}, function(){
+        this.loadRecordsFromServer()
+        }.bind(this));
+    } else {
+      // Default is to show all images
+      this.loadRecordsFromServer()
+    }
   }
   loadRecordsFromServer() {
-    console.log('Getting records');
+    console.log('Getting records')
       $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8111/oscon-test?query=query+{imageRecs{ title, filename}}",
+        url: this.state.loadUrl,
         dataType: 'json',
         cache: false,
         success: function(data) {
-          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-          // --> To use cloud server for lightbox, use urlBase = "http://www.cmp334.org/"
+          console.log('Just fetched: ' + this.state.loadUrl)
+          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data));
 
-          // Fetch data and (functionally) munge it into the proper format
-          // const urlBase = "/home/brianc/PROJECTS/oscon16/public/",
-          // const urlBase = remote.getGlobal('sharedObj').filePath + '/public/',
 
-          // We are passing in the path via electron-window
-          const urlBase = window.__args__.baseDir + '/public/',
-
+          // Map data into the proper format
           // Three ways to do this: cloud, local server, or filesystem
-            imageRecs = data.data.imageRecs
-            .map(function (oneImage) {
+          //
+          // cloud assets:
+          const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
+          // local assets:
+          // const urlBase = '/'
+
+          let source = []
+
+          // default load, or filtered through lookup?
+          if (data.data.imageRecs)
+            source = data.data.imageRecs
+          else
+            source = data.data.lookup
+
+          // Generate parameters for viewer component
+          const imageRecs = source.map(function (oneImage) {
               return {
                 original: urlBase + 'images/' + oneImage.filename + '-1k',
                 thumbnail: urlBase + 'thumbs/' + oneImage.filename + '-thumb',
                 description: oneImage.title
               }
             })
-            // console.log('Images: ' + JSON.stringify(imageRecs));
+
             // Display the data!!
-            this.setState({images: imageRecs});
+            this.setState({images: imageRecs})
         }.bind(this),
           error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
+          console.error(this.props.url, status, err.toString())
         }.bind(this)
-      });
+      })
     }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
       // refresh setInterval

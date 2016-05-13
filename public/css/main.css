@@ -1,0 +1,18 @@
+/*
+* main.css
+* custome style for small details on the page
+* mostly overwriting nealjs styles
+*/
+
+.active {
+  color: green !important;
+  font-weight: bold !important;
+}
+ .neal-footer {
+   padding: 0 !important;
+   padding-top: 1rem !important;
+ }
+
+.sjc-logo {
+  max-height: 100px;
+}

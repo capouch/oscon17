@@ -2,68 +2,62 @@ import OpenSeaDragon from 'openseadragon'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Section } from 'neal-react'
-//require('electron-window').parseArgs();
-// import { parseArgs } from 'electron-window'
-// import { remote } from '../electron'
 
+// Find out where we're running
+const ipc = window.require('electron').ipcRenderer
+let runPath = ''
 
-/*
-  var remote = require('electron').remote;
-  console.log('<p>filePath: ' + remote.getGlobal('sharedObj').filePath + '</p>');
-*/
-
-// Do we have access to global "remote"
-// console.log(remote.getGlobal('sharedObj').filePath);
-
-
+ipc.send('get-app-path')
+// Process update message
+// This is an observer pattern
+ ipc.on('got-app-path', function(app,path) {
+   runPath =  path
+ })
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
-  // console.log(remote.getGlobal('sharedObj').filePath);
-  // For now use global object to determine base file path
 
-  // const filePrefix = remote.getGlobal('sharedObj').filePath + '/public/';
-  // const filePrefix = '/home/brianc/PROJECTS/oscon16/public/';
+  // Use cloud-based image assets
+  // const assetBase ="http://oscon-sb.saintjoe-cs.org:8111/"
+  //
+  // Use local assets
+  const assetBase = runPath
 
-  // We pass in the base dir path via electron-window
-  const filePrefix = window.__args__.baseDir + '/public/';
-  console.log('File prefix: ' + filePrefix);
-  const baseName =  filePrefix + selection + '.dzi';
-  // console.log('In the renderImage method about to render ' + baseName);
+
+  const baseName = assetBase + selection + '.dzi'
+  console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: filePrefix + "img-icons/",
+    prefixUrl: assetBase + "img-icons/",
     tileSources: baseName
-  });
+  })
 }
-// end private members/methods
 
 // Create a container class for the "Zoomer" component
 const ZoomBox = React.createClass ({
   componentDidMount: function() {
-    let zoomTarget = this.props.image;
-    renderImage(zoomTarget);
+    let zoomTarget = this.props.image
+    renderImage(zoomTarget)
   },
   render() {
     const style = {
       width: 800,
       height: 600
-    };
+    }
     return (
       <div style={style} id="zoomer-view">
       </div>
-    );
+    )
   }
-});
-
+})
 // Render in a component
 export default class extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
   render() {
 
     // This is the default case, i.e. Zoomer with no parameters
-    let sendParms = "/tiles/bremer";
+    let sendParms = "../tiles/bremer"
 
     // This fires when properties are sent explictly
     if ( this.props.params.imageId ) {
@@ -76,6 +70,6 @@ export default class extends React.Component {
       <Section>
         <center><ZoomBox image={sendParms}/></center>
       </Section>
-    );
+    )
   }
 }

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router";
+import React from "react"
+import { Link } from "react-router"
 import {
   Code,
   CustomerQuote, CustomerQuotes,
@@ -16,10 +16,24 @@ import {
   Stripe,
   Team,
   TeamMember,
-} from "neal-react";
+} from "neal-react"
+
+var urlBase = ''
+
+// Use IPC to get the filesystem path of the app
+
+// Send request
+const ipc = window.require('electron').ipcRenderer
+ipc.send('get-app-path')
+// Process update message
+// This is an observer pattern
+ipc.on('got-app-path', function(app,path) {
+  urlBase = path + '/'
+})
 
 // We are passing in the path via electron-window
-const urlBase = window.__args__.baseDir + '/public/';
+//const urlBase = window.__args__.baseDir + '/public/';
+// const urlBase = '/home/brianc/PROJECTS/oscon16/public/'
 
 const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
   name: "Stripe Integration Included",
@@ -27,26 +41,32 @@ const onSignup = ({ name: name, email: email, password: password }) => Stripe.St
   panelLabel: "Donate {{amount}}",
   email: email,
   amount: 500,
-});
+})
 
 const sampleCode =
-`  class Upload extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-    render() {
-      return (
-        <div>
-        <DropZoneComponent  config={componentConfig}
-                            eventHandlers={eventHandlers}
-                            djsConfig={djsConfig} />,
-        </div>
-      );
-    }
+`getInitialState: function() {
+  let initValues = {
+    records: [],
+    fetchURL: ""
   }
-
-  export default Upload;
-`;
+  console.log('Getting state again')
+  if (localStorage.getItem('browse')) {
+    initValues = JSON.parse(localStorage.getItem('browse'))
+    }
+  console.log('Init values ' + JSON.stringify(initValues))
+  return initValues;
+},
+componentDidMount: function() {
+  console.log('Mounting event')
+  queryTarget = this.state.fetchURL
+  this.state.fetchURL = this.props.url
+  // console.log('Query target before:' + queryTarget)
+  // Strip off URL prefix
+  // Note should we do something if it can't find the '?'
+  if (queryTarget.indexOf('?')) {
+    queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
+  }
+`
 
 
 export default (props) => {
@@ -66,7 +86,9 @@ export default (props) => {
 
       <Section className="subhero">
         <ImageList centered>
-          <ImageListItem src={ urlBase  + "img/press/sjcLogo.png" } url="http://www.saintjoe.edu"/>
+          <a href="http://www.saintjoe.edu">
+            <img className="sjc-logo" src="img/press/sjcLogo.gif"/>
+          </a>
         </ImageList>
       </Section>
 
@@ -107,5 +129,5 @@ export default (props) => {
       </Section>
 
     </Page>
-  );
-};
+  )
+}

@@ -7,7 +7,7 @@ import { Section } from 'neal-react'
 const renderImage = function(selection) {
 
   // Use cloud-based image assets
-  const assetBase ="http://oscon-sb.saintjoe-cs.org:2016/"
+  const assetBase ="http://oscon.saintjoe-cs.org:2016/"
   //
   // Use local assets
   // const assetBase = ''

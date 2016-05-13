@@ -52,14 +52,14 @@ const ZoomBox = React.createClass ({
   }
 })
 // Render in a component
-export default class extends React.Component {
+export default class UniqueNewYork extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
 
     // This is the default case, i.e. Zoomer with no parameters
-    let sendParms = "../tiles/bremer"
+    let sendParms = "/tiles/bremer"
 
     // This fires when properties are sent explictly
     if ( this.props.params.imageId ) {

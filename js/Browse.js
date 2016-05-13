@@ -28,7 +28,7 @@ ipc.send('get-app-path')
 // A module-scoped variable!! You don't see man of these. . .
 // It shares the user's input with other views
 // Local assets
-const assetBase = runPath + '/oscon-test?'
+const assetBase = 'http://127.0.0.1:8111' + '/oscon-test?'
 // Cloud assets
 // const assetBase = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?'
 

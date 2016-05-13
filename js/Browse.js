@@ -1,5 +1,6 @@
 /*
-  ** Browse: Search image database allow for various viewing options
+  ** Browse: Search image database; allow for various viewing options
+    This is the primary UI module for accessing stored images
  */
 
 import React from 'react'
@@ -13,14 +14,22 @@ import { Section } from 'neal-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
-/*
-// Electron is odd about the way it uses sessionStorage, so try this:
-window.addEventListener("beforeunload", function (e) {
-  sessionStorage.removeItem('browse')
-  (e || window.event).returnValue = null;
-  return null;
-});
-*/
+const ipc = window.require('electron').ipcRenderer
+ipc.send('get-app-path')
+// Process update message
+// This is an observer pattern
+ ipc.on('got-app-path', function(app,path) {
+   console.log('Run path: ' + path)
+ })
+
+// A module-scoped variable!! You don't see man of these. . .
+// It shares the user's input with other views
+// Local assets
+// const assetBase = '/oscon-test?'
+// Cloud assets
+const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+
+let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -36,10 +45,6 @@ const Button = React.createClass({
     )
   }
 })
-
-// A module-scoped variable!!
-// It shares the user's input with other views
-let queryTarget = ""
 
 // Compose NavLink to the zoomer view for each image
 const LinkComponent = React.createClass({
@@ -103,7 +108,8 @@ const InfoTable = React.createClass({
       records: [],
       fetchURL: ""
     }
-    console.log('Getting state again')
+
+    // If we're remembering last query, pre-load it from sessionStorage
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
@@ -127,6 +133,7 @@ const InfoTable = React.createClass({
     },
   componentWillUnmount: function () {
     // Keeping this around until we can test some more
+    // Need to mention the line below in the presentation
     // sessionStorage.setItem('browse', '{}')
   },
   onSearchChange(input, resolve) {
@@ -136,7 +143,13 @@ const InfoTable = React.createClass({
     if (!input) return
     console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
-    let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
+
+    // Local assets
+    let searchURL = assetBase + queryTarget
+    // Cloud assets
+    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
+
+    // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
         sessionStorage.setItem('browse', JSON.stringify(this.state))
@@ -149,10 +162,11 @@ const InfoTable = React.createClass({
       this.context.router.push(cloudBase + queryTarget)
     },
     clearStore() {
-      // console.log('Handling reset click')
+      console.log('Handling reset click with props: ' + this.props.url)
       sessionStorage.removeItem('browse')
-      this.state.fetchURL = this.props.url
+      // 5-13 reversed these two lines
       queryTarget = 'query=query+{imageRecs{_id, title, filename, description}}'
+      this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
   render: function() {
@@ -189,13 +203,14 @@ InfoTable.contextTypes = {
   router: React.PropTypes.object.isRequired
   }
 
+
 // Render composite component
 export default React.createClass ( {
   render() {
     return (
       <div>
         <InfoTable
-          url="http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}"/>
+          url={ assetBase + queryTarget}/>
       </div>
     )
   }

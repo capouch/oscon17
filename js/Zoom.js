@@ -29,15 +29,19 @@ const renderImage = function(selection) {
   // const filePrefix = window.__args__.baseDir + '/public/';
   // console.log('File prefix: ' + filePrefix);
 
-  const filePrefix ="http://oscon-sb.saintjoe-cs.org:8111/"
-  const baseName =  filePrefix + selection + '.dzi';
+
+  // Use cloud-based image assets
+  const assetBase ="http://oscon-sb.saintjoe-cs.org:8111/"
+  //
+  // Use local assets
+  // const assetBase = ''
 
 
-  // const baseName = selection + '.dzi'
+  const baseName = assetBase + selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: filePrefix + "img-icons/",
+    prefixUrl: assetBase + "img-icons/",
     tileSources: baseName
   })
 }

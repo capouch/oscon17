@@ -3,15 +3,15 @@
  * Danilo Zekovic
  */
 
-// Note that these are SERVER-SIDE routes
+// Note that these are SERVER-SIDE routes!!
 
 import sharp from 'sharp'
 import multer from 'multer'
 import cb from 'cb'
 
-  // Multer handles MIME multi-part uploads
-  //   Configure it for this usage instance
-  // const multer = require('multer'),
+// Multer handles MIME multi-part uploads
+//   Configure it for this usage instance
+// const multer = require('multer'),
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/')
@@ -21,13 +21,9 @@ const storage = multer.diskStorage({
     cb(null, file.originalname + '-' + Date.now())
     }
   })
-  // This function uses multer to handle the upload process
-  // Note: we still need to set the Dropzone knob for "only one file at a time"
+// This function uses multer to handle the upload process
+// Note: we still need to set the Dropzone knob for "only one file at a time"
 const upload  =  multer( {storage: storage }).single('file')
-
-// --- End variable declarations
-
-// --- Public API
 
 export default function ( router, server ) {
   const options = {
@@ -38,6 +34,7 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
+  // These repetitive routes need abstracting
   router.get('/home', function(req, res) {
     console.log('Server home chosen')
     res.sendFile('index.html', options)
@@ -86,7 +83,7 @@ export default function ( router, server ) {
       }
       console.log('Uploading file: ' + req.file.filename)
 
-      // Crude proof of concept: generate thumbnail and zoom tiles
+      // Here we leverage sharp.js to rapidly process the uploaded image
       const storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
         dziBase = './public/tiles/' + storedFilename + '.dzi'
@@ -110,7 +107,7 @@ export default function ( router, server ) {
           console.log(err)
         })
 
-      // Generate zoomer tiles too
+      // Generate zoomer tiles
       sharp(filePath).tile(256)
         .toFile(dziBase, function(err, info) {
           console.log(err)

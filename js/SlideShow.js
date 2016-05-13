@@ -7,7 +7,7 @@ import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'
 
 // Cloud assets
-const assetBase = 'http://oscon-sb.saintjoe-cs.org:8016/oscon-test?'
+const assetBase = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?'
 //
 // Local assets
 // const assetBase = '/oscon-test?'

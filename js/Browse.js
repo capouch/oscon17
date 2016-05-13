@@ -19,7 +19,7 @@ import SearchBar from 'react-search-bar'
 // Local assets
 // const assetBase = '/oscon-test?'
 // Cloud assets
-const assetBase = 'http://oscon-sb.saintjoe-cs.org:8016/oscon-test?'
+const assetBase = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 
@@ -139,7 +139,7 @@ const InfoTable = React.createClass({
     // Local assets
     let searchURL = assetBase + queryTarget
     // Cloud assets
-    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:8016/oscon-test?' + queryTarget
+    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?' + queryTarget
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){

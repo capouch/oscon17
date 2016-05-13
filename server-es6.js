@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, '/public')))
 mongoose.connect('mongodb://localhost/oscon-test')
 
 // start server
-server.listen(8111)
+server.listen(2016)
 console.log(
   'Express server listening on port %d in %s mode',
   server.address().port, app.settings.env

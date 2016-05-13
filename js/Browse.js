@@ -17,9 +17,9 @@ import SearchBar from 'react-search-bar'
 // A module-scoped variable!! You don't see man of these. . .
 // It shares the user's input with other views
 // Local assets
-const assetBase = '/oscon-test?'
+// const assetBase = '/oscon-test?'
 // Cloud assets
-// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 

@@ -7,7 +7,7 @@ import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'
 
 // Cloud assets
-const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+const assetBase = 'http://oscon-sb.saintjoe-cs.org:8016/oscon-test?'
 //
 // Local assets
 // const assetBase = '/oscon-test?'
@@ -60,7 +60,7 @@ export default class extends React.Component {
           // Three ways to do this: cloud, local server, or filesystem
           //
           // cloud assets:
-          const urlBase = 'http://oscon-sb.saintjoe-cs.org:8111/'
+          const urlBase = 'http://oscon-sb.saintjoe-cs.org:2016/'
           // local assets:
           // const urlBase = '/'
           let source = []

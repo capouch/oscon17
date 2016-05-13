@@ -106,7 +106,7 @@ export default (props) => {
             <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
           </CustomerQuote>
           <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
-            <p>If you are not embarrassed by the first version of your product, you've launched too late.   -- Borrowed Quote</p>
+            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

@@ -14,6 +14,15 @@ import { Section } from 'neal-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
+// A module-scoped variable!! You don't see man of these. . .
+// It shares the user's input with other views
+// Local assets
+const assetBase = '/oscon-test?'
+// Cloud assets
+// const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?'
+
+let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
+
 // Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -28,10 +37,6 @@ const Button = React.createClass({
     )
   }
 })
-
-// A module-scoped variable!! You don't see man of these. . .
-// It shares the user's input with other views
-let queryTarget = ""
 
 // Compose NavLink to the zoomer view for each image
 const LinkComponent = React.createClass({
@@ -69,7 +74,7 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    console.log('Called once with ' + this.state.fetchURL)
+    // console.log('Called once with ' + this.state.fetchURL)
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
@@ -95,7 +100,8 @@ const InfoTable = React.createClass({
       records: [],
       fetchURL: ""
     }
-    console.log('Getting state again')
+
+    // If we're remembering last query, pre-load it from sessionStorage
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
@@ -131,7 +137,7 @@ const InfoTable = React.createClass({
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
 
     // Local assets
-    let searchURL = '/oscon-test?' + queryTarget
+    let searchURL = assetBase + queryTarget
     // Cloud assets
     // let searchURL = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?' + queryTarget
 
@@ -189,16 +195,10 @@ InfoTable.contextTypes = {
 // Render composite component
 export default React.createClass ( {
   render() {
-
-    // Local assets
-    const assetBase = '/oscon-test?query=query+{imageRecs{_id, title, filename, description}}'
-    // Cloud assets
-    // const assetBase = 'http://oscon-sb.saintjoe-cs.org:8111/oscon-test?query=query+{imageRecs{_id, title, filename, description}}'
-
     return (
       <div>
         <InfoTable
-          url={ assetBase }/>
+          url={ assetBase + queryTarget}/>
       </div>
     )
   }

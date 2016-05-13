@@ -6,9 +6,13 @@ import { Section } from 'neal-react'
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
 
-  // For using cloud-based image assets
+  // Use cloud-based image assets
   // const assetBase ="http://oscon-sb.saintjoe-cs.org:8111/"
+  //
+  // Use local assets
   const assetBase = ''
+
+
   const baseName = assetBase + selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({

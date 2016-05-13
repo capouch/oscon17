@@ -147,7 +147,7 @@ const InfoTable = React.createClass({
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-    handleSearchClick() {
+    handleCustomSlideshowClick() {
       this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
@@ -168,7 +168,7 @@ const InfoTable = React.createClass({
         <div>
           <Button
             label="Slideshow of this imageset"
-            handleClick={this.handleSearchClick}
+            handleClick={this.handleCustomSlideshowClick}
           />
           <Button
             label="Reset search"

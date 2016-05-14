@@ -1,13 +1,15 @@
 /*
   ** Browse: Search image database; allow for various viewing options
-    This is the primary UI module for accessing stored images
+    This will be the user's primary portal into the content
  */
 
 import React from 'react'
 import { render } from 'react-dom'
-import Griddle from 'griddle-react'
+
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
+
+import Griddle from 'griddle-react'
 
 // CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged
@@ -16,8 +18,11 @@ import SearchBar from 'react-search-bar'
 
 // A module-scoped variable!! You don't see man of these. . .
 // It shares the user's input with other views
+//
+// Select one of the two to configure for local/cloud access
 // Local assets
 // const assetBase = '/oscon-test?'
+//
 // Cloud assets
 const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 
@@ -105,7 +110,6 @@ const InfoTable = React.createClass({
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
-    console.log('Init values ' + JSON.stringify(initValues))
     return initValues;
   },
   componentDidMount: function() {
@@ -124,9 +128,7 @@ const InfoTable = React.createClass({
       this.loadRecordsFromServer()
     },
   componentWillUnmount: function () {
-    // Keeping this around until we can test some more
-    // Need to mention the line below in the presentation
-    // sessionStorage.setItem('browse', '{}')
+    // Unused but reserved 
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"

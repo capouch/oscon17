@@ -22,7 +22,7 @@ ipc.send('get-app-path')
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 //
 // Local assets
-const assetBase = 'http://127.0.0.1:8111' + '/oscon-test?'
+const assetBase = 'http://127.0.0.1:2016' + '/oscon-test?'
 
 // If no parameters fetch all the images
 const defaultQuery= 'query=query+{imageRecs{ title, filename}}'
@@ -40,7 +40,7 @@ export default class extends React.Component {
       showThumbnails: true,
       showNav: true,
       slideInterval: 10000,
-      loadUrl: 'http://127.0.0.1:8111/oscon-test?' + defaultQuery,
+      loadUrl: 'http://127.0.0.1:2016/oscon-test?' + defaultQuery,
       images: []
     }
   }
@@ -73,11 +73,7 @@ export default class extends React.Component {
           // Three ways to do this: cloud, local server, or filesystem
           //
           // cloud assets:
-<<<<<<< HEAD
-          const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
-=======
-          const urlBase = 'http://127.0.0.1:8111/'
->>>>>>> 2c6400c83dafaba62c625b80440430297cf14214
+          const urlBase = 'http://127.0.0.1:2016/'
           // local assets:
           // const urlBase = '/'
 

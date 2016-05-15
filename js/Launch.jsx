@@ -100,7 +100,7 @@ export default (props) => {
       <Section>
         <CustomerQuotes>
           <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
-            <p>What I tell founders is not to sweat the business model too much at first. The most important task at first is to build something people want. If you don't do that, it won't matter how clever your business model is. -- Borrowed Quote</p>
+            <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
           </CustomerQuote>
           <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
             <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>

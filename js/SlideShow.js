@@ -72,10 +72,12 @@ export default class extends React.Component {
           // Map data into the proper format
           // Three ways to do this: cloud, local server, or filesystem
           //
-          // cloud assets:
-          const urlBase = 'http://127.0.0.1:2016/'
           // local assets:
-          // const urlBase = '/'
+          const urlBase = 'http://127.0.0.1:2016/'
+          // cloud assets:
+          // const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
+
+
 
           let source = []
 

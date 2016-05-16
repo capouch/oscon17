@@ -1,13 +1,15 @@
 /*
   ** Browse: Search image database; allow for various viewing options
-    This is the primary UI module for accessing stored images
+    This will be the user's primary portal into the content
  */
 
 import React from 'react'
 import { render } from 'react-dom'
-import Griddle from 'griddle-react'
+
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
+
+import Griddle from 'griddle-react'
 
 // CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged
@@ -27,12 +29,17 @@ ipc.send('get-app-path')
 
 // A module-scoped variable!! You don't see man of these. . .
 // It shares the user's input with other views
+//
+// Select one of the two to configure for local/cloud access
 // Local assets
 const assetBase = 'http://127.0.0.1:2016' + '/oscon-test?'
+//
 // Cloud assets
-// const assetBase = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
+const queryBase = queryTarget
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -116,7 +123,6 @@ const InfoTable = React.createClass({
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
-    console.log('Init values ' + JSON.stringify(initValues))
     return initValues;
   },
   componentDidMount: function() {
@@ -135,9 +141,7 @@ const InfoTable = React.createClass({
       this.loadRecordsFromServer()
     },
   componentWillUnmount: function () {
-    // Keeping this around until we can test some more
-    // Need to mention the line below in the presentation
-    // sessionStorage.setItem('browse', '{}')
+    // Unused but reserved
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -150,7 +154,7 @@ const InfoTable = React.createClass({
     // Local assets
     let searchURL = assetBase + queryTarget
     // Cloud assets
-    // let searchURL = 'http://oscon-sb.saintjoe-cs.org:2016/oscon-test?' + queryTarget
+    // let searchURL = 'http://oscon.saintjoe-cs.org:2016/oscon-test?' + queryTarget
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
@@ -158,17 +162,13 @@ const InfoTable = React.createClass({
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-    handleSearchClick() {
-      //let cloudBase = 'http://oscon-sb.saintjoe-cs.org:2016/slides/'
-      let cloudBase = '/slides/'
-      console.log('Bout to move: ' + cloudBase + queryTarget)
-      this.context.router.push(cloudBase + queryTarget)
+    handleCustomSlideshowClick() {
+      this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
-      console.log('Handling reset click with props: ' + this.props.url)
+      console.log('Handling reset click')
       sessionStorage.removeItem('browse')
-      // 5-13 reversed these two lines
-      queryTarget = 'query=query+{imageRecs{_id, title, filename, description}}'
+      queryTarget = queryBase
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
@@ -183,7 +183,7 @@ const InfoTable = React.createClass({
         <div>
           <Button
             label="Slideshow of this imageset"
-            handleClick={this.handleSearchClick}
+            handleClick={this.handleCustomSlideshowClick}
           />
           <Button
             label="Reset search"

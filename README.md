@@ -21,12 +21,34 @@ checkout with `npm run build`. Also after any change, `npm run build` has to be
 executed to get the newest version of the code
 
 
+###Development Version
+
 Run with webpack, and have hot reload:
 
 ```bash
 npm run serve
 localhost:8080
 ```
+
+###Electron Version
+
+####Local
+```bash
+git checkout electron-local
+npm run build
+electron .
+```
+
+####Online
+Run electron app with access to the online database:
+
+```bash
+git checkout electron-dist
+npm run build
+electron .
+```
+
+
 
 Run inside a docker container:
 

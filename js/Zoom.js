@@ -30,12 +30,12 @@ const renderImage = function(selection) {
   // console.log('File prefix: ' + filePrefix);
 
 
-  // Use cloud-based image assets
-  const assetBase ="http://oscon.saintjoe-cs.org:2016/"
-  //
-  // Use local assets
-  // const assetBase = ''
-
+// 1.
+// Use cloud-based image assets
+const assetBase ="http://oscon.saintjoe-cs.org:2016/"
+//
+// Use local assets
+// const assetBase = ''
 
   const baseName = assetBase + selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)

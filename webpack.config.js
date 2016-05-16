@@ -6,16 +6,16 @@ module.exports = {
     filename: "bundle.js"
   },
   devServer: {
-  port: 8080,
-  inline: true,
-  proxy: {
-  '/uploadHandler*': {
-    target: 'http://localhost:8111',
-    secure: false,
-    },
-    '/oscon-test*': {
-    target: 'http://localhost:8111',
-    secure: false,
+    port: 8080,
+    inline: true,
+    proxy: {
+      '/uploadHandler*': {
+        target: 'http://localhost:2016',
+        secure: false,
+      },
+      '/oscon-test*': {
+      target: 'http://localhost:2016',
+      secure: false,
     },
   },
 },

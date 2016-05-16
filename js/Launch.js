@@ -13,7 +13,6 @@ import {
   PricingPlan, PricingTable,
   Section,
   SignupInline, SignupModal,
-  Stripe,
   Team,
   TeamMember,
 } from "neal-react"
@@ -29,18 +28,6 @@ ipc.send('get-app-path')
 // This is an observer pattern
 ipc.on('got-app-path', function(app,path) {
   urlBase = path + '/'
-})
-
-// We are passing in the path via electron-window
-//const urlBase = window.__args__.baseDir + '/public/';
-// const urlBase = '/home/brianc/PROJECTS/oscon16/public/'
-
-const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
-  name: "Stripe Integration Included",
-  description: "Like this? Donate $5 <3",
-  panelLabel: "Donate {{amount}}",
-  email: email,
-  amount: 500,
 })
 
 const sampleCode =
@@ -60,9 +47,6 @@ componentDidMount: function() {
   console.log('Mounting event')
   queryTarget = this.state.fetchURL
   this.state.fetchURL = this.props.url
-  // console.log('Query target before:' + queryTarget)
-  // Strip off URL prefix
-  // Note should we do something if it can't find the '?'
   if (queryTarget.indexOf('?')) {
     queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
   }
@@ -116,14 +100,16 @@ export default (props) => {
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" imageUrl={ urlBase  + "img/people/daniloOSCON.jpg" }>
-            <p>What I tell founders is not to sweat the business model too much at first. The most important task at first is to build something people want. If you don't do that, it won't matter how clever your business model is. -- Borrowed Quote</p>
+
+          <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
+            <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
           </CustomerQuote>
           <CustomerQuote name="Brian Capouch" imageUrl={ urlBase  + "img/people/bcOSCON.jpg" }>
             <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
           </CustomerQuote>
-          <CustomerQuote name="Ben Davisson" imageUrl={ urlBase  + "img/people/benOSCON.jpg" }>
-            <p>If you are not embarrassed by the first version of your product, you've launched too late.   -- Borrowed Quote</p>
+
+          <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
+            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

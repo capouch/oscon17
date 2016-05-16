@@ -18,14 +18,6 @@ import {
   TeamMember,
 } from "neal-react"
 
-const onSignup = ({ name: name, email: email, password: password }) => Stripe.StripeHandler.open({
-  name: "Stripe Integration Included",
-  description: "Like this? Donate $5 <3",
-  panelLabel: "Donate {{amount}}",
-  email: email,
-  amount: 500,
-})
-
 const sampleCode =
 `getInitialState: function() {
   let initValues = {

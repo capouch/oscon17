@@ -151,7 +151,7 @@ const InfoTable = React.createClass({
       this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
-      // console.log('Handling reset click')
+      console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       this.state.fetchURL = this.props.url
       queryTarget = 'query=query+{imageRecs{_id, title, filename, description}}'

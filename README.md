@@ -2,6 +2,8 @@
 
 ## Develop locally
 
+###Production Version
+
 Transpile the Javascript using Babel and watch for changes:
 
 ```bash

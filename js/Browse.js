@@ -27,6 +27,7 @@ import SearchBar from 'react-search-bar'
 const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
+const queryBase = queryTarget
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -128,7 +129,7 @@ const InfoTable = React.createClass({
       this.loadRecordsFromServer()
     },
   componentWillUnmount: function () {
-    // Unused but reserved 
+    // Unused but reserved
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -153,10 +154,10 @@ const InfoTable = React.createClass({
       this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
-      // console.log('Handling reset click')
+      console.log('Handling reset click')
       sessionStorage.removeItem('browse')
-      this.state.fetchURL = this.props.url
-      queryTarget = 'query=query+{imageRecs{_id, title, filename, description}}'
+      queryTarget = queryBase
+      this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
   render: function() {

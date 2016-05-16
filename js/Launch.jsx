@@ -34,9 +34,6 @@ componentDidMount: function() {
   console.log('Mounting event')
   queryTarget = this.state.fetchURL
   this.state.fetchURL = this.props.url
-  // console.log('Query target before:' + queryTarget)
-  // Strip off URL prefix
-  // Note should we do something if it can't find the '?'
   if (queryTarget.indexOf('?')) {
     queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
   }

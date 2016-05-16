@@ -10,11 +10,11 @@ module.exports = {
   inline: true,
   proxy: {
   '/uploadHandler*': {
-    target: 'http://localhost:8111',
+    target: 'http://localhost:2016',
     secure: false,
     },
     '/oscon-test*': {
-    target: 'http://localhost:8111',
+    target: 'http://localhost:2016',
     secure: false,
     },
   },

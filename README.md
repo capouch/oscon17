@@ -8,17 +8,22 @@ Transpile the Javascript using Babel and watch for changes:
 git clone https://github.com/capouch/oscon16.git
 cd oscon16
 npm install
-npm run watch
+npm run build
+npm start
 ```
-
+```bash
+localhost:2016
+```
 Note the bundled file is *not* kept in the repo and needs to be generated after
-checkout with `npm run build`
+checkout with `npm run build`. Also after any change, `npm run build` has to be
+executed to get the newest version of the code
 
 
-Run with webpack:
+Run with webpack, and have hot reload:
 
 ```bash
 npm run serve
+localhost:8080
 ```
 
 Run inside a docker container:

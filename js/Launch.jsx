@@ -13,7 +13,6 @@ import {
   PricingPlan, PricingTable,
   Section,
   SignupInline, SignupModal,
-  Stripe,
   Team,
   TeamMember,
 } from "neal-react"

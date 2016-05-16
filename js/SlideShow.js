@@ -6,6 +6,7 @@ import { Section } from 'neal-react'
 // https://github.com/xiaolin/react-image-gallery/pull/51/files
 import ImageGallery from 'react-image-gallery'
 
+// 1.
 // Cloud assets
 const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 //
@@ -57,8 +58,9 @@ export default class extends React.Component {
           // console.log('Making a server trip!!!! ' + JSON.stringify(data.data));
 
           // Map data into the proper format
-          // Three ways to do this: cloud, local server, or filesystem
+          // Three ways to do this: cloud, local server, or filesystem (via Electron)
           //
+          // 2.
           // cloud assets:
           const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
           // local assets:

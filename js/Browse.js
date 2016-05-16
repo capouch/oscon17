@@ -16,9 +16,10 @@ import Griddle from 'griddle-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
-// A module-scoped variable!! You don't see man of these. . .
+// A module-scoped variable!! You don't see many of these. . .
 // It shares the user's input with other views
 //
+// 1.
 // Select one of the two to configure for local/cloud access
 // Local assets
 // const assetBase = '/oscon-test?'
@@ -139,6 +140,7 @@ const InfoTable = React.createClass({
     console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
 
+    // 2.
     // Local assets
     let searchURL = assetBase + queryTarget
     // Cloud assets

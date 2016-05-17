@@ -13,12 +13,12 @@ npm install
 ##ATTENTION MAC USERS
 If npm install gives you errors failing to install sharp, run next commands:
 
-1. Only if you are missing node and git
+- Only if you are missing node and git
 ```bash
 brew install nodejs
 brew install git
 ```
-2. Command to fix it
+- Command to fix it
 ```bash
 brew install homebrew/science/vips --with-webp --with-graphicsmagick
 ```

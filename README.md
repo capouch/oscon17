@@ -2,19 +2,26 @@
 
 ## Develop locally
 
-###Production Version
-
-Transpile the Javascript using Babel and watch for changes:
+First:
 
 ```bash
 git clone https://github.com/capouch/oscon16.git
 cd oscon16
 npm install
+```
+
+###Production Version
+
+Transpile the Javascript using Babel:
+
+```bash
 npm run build
 npm start
 ```
 ```bash
 localhost:2016
+or
+127.0.0.1:2016
 ```
 Note the bundled file is *not* kept in the repo and needs to be generated after
 checkout with `npm run build`. Also after any change, `npm run build` has to be
@@ -27,6 +34,8 @@ Run with webpack, and have hot reload:
 
 ```bash
 npm run serve
+```
+```bash
 localhost:8080
 ```
 
@@ -36,6 +45,11 @@ localhost:8080
 ```bash
 git checkout electron-local
 npm run build
+npm start
+```
+And then in the separate terminal/tab:
+
+```bash
 electron .
 ```
 
@@ -45,11 +59,28 @@ Run electron app with access to the online database:
 ```bash
 git checkout electron-dist
 npm run build
+```
+And then in the separate terminal/tab:
+
+```bash
 electron .
 ```
 
+##FIX FOR MAC USERS
+If npm install gives you errors failing to install sharp, run next commands:
+
+1. Only if you are missing node and git
+```bash
+brew install nodejs
+brew install git
+```
+2. Command to fix it
+```bash
+brew install homebrew/science/vips --with-webp --with-graphicsmagick
+```
 
 
+#### Still needs more testing
 Run inside a docker container:
 
 ```
@@ -63,3 +94,17 @@ Run app in server mode:
 ```
 npm start
 ```
+
+
+
+
+
+
+
+
+
+MAC
+
+brew install nodejs
+brew install git
+brew install homebrew/science/vips --with-webp --with-graphicsmagick

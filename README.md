@@ -13,15 +13,16 @@ npm install
 ##ATTENTION MAC USERS
 If npm install gives you errors failing to install sharp, run next commands:
 
-- Only if you are missing node and git
+- Only if you are missing node and git:
 ```bash
 brew install nodejs
 brew install git
 ```
-- Command to fix it
+- Command that should fix the problem with sharp:
 ```bash
 brew install homebrew/science/vips --with-webp --with-graphicsmagick
 ```
+Try installing sharp now it should work.
 
 
 ###Production Version
@@ -44,7 +45,7 @@ executed to get the newest version of the code
 
 ###Development Version
 
-Run with webpack, and have hot reload:
+Run with webpack, hot reload is included so there is no need for refreshing the server:
 
 ```bash
 npm run serve
@@ -55,11 +56,12 @@ localhost:8080
 
 ###Electron Version
 
-####Local
+####Online
+Run electron app with access to the online database:
+
 ```bash
-git checkout electron-local
+git checkout electron-dist
 npm run build
-npm start
 ```
 And then in the separate terminal/tab:
 
@@ -67,12 +69,12 @@ And then in the separate terminal/tab:
 electron .
 ```
 
-####Online
-Run electron app with access to the online database:
 
+####Local
 ```bash
-git checkout electron-dist
+git checkout electron-local
 npm run build
+npm start
 ```
 And then in the separate terminal/tab:
 

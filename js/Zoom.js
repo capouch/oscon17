@@ -48,7 +48,7 @@ const ZoomBox = React.createClass ({
 })
 
 // Render in a component
-export default class extends React.Component {
+export default class UniqueNewYork extends React.Component {
   constructor(props) {
     super(props)
   }

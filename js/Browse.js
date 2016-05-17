@@ -20,10 +20,10 @@ import SearchBar from 'react-search-bar'
 // 1.
 // Select one of the two to configure for local/cloud access
 // Local assets
-const assetBase = '/oscon-test?'
+// const assetBase = '/oscon-test?'
 //
 // Cloud assets
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 const queryBase = queryTarget

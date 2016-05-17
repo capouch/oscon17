@@ -34,18 +34,17 @@ npm run build
 npm start
 ```
 ```bash
-localhost:2016
-or
 127.0.0.1:2016
 ```
-Note the bundled file is *not* kept in the repo and needs to be generated after
-checkout with `npm run build`. Also after any change, `npm run build` has to be
+Note the bundle.js file, which webpack creates and is sent to the client is
+*not* kept in the repo and needs to be generated after checkout with
+`npm run build`. Also after any change, `npm run build` has to be
 executed to get the newest version of the code
 
 
 ###Development Version
 
-Run with webpack, hot reload is included so there is no need for refreshing the server:
+Run with webpack, hot reload is included so there is no need for refreshing the client:
 
 ```bash
 npm run serve
@@ -56,6 +55,10 @@ localhost:8080
 
 ###Electron Version
 
+To install the electron client, run (as root or administrator user):
+```bash
+npm install -g electron-prebuilt
+```
 ####Online
 Run electron app with access to the online database:
 
@@ -83,7 +86,7 @@ electron .
 ```
 
 
-#### Still needs more testing
+### Docker
 Run inside a docker container:
 
 ```
@@ -97,17 +100,3 @@ Run app in server mode:
 ```
 npm start
 ```
-
-
-
-
-
-
-
-
-
-MAC
-
-brew install nodejs
-brew install git
-brew install homebrew/science/vips --with-webp --with-graphicsmagick

@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('/public'));
 
 // Connect mongo database
-//mongoose.connect('mongodb://oscon.saintjoe-cs.org:27017/oscon-test')
+mongoose.connect('mongodb://oscon.saintjoe-cs.org:27017/oscon-test')
 
 // start server
 server.listen(2016)

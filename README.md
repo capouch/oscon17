@@ -10,6 +10,20 @@ cd oscon16
 npm install
 ```
 
+##ATTENTION MAC USERS
+If npm install gives you errors failing to install sharp, run next commands:
+
+1. Only if you are missing node and git
+```bash
+brew install nodejs
+brew install git
+```
+2. Command to fix it
+```bash
+brew install homebrew/science/vips --with-webp --with-graphicsmagick
+```
+
+
 ###Production Version
 
 Transpile the Javascript using Babel:
@@ -64,19 +78,6 @@ And then in the separate terminal/tab:
 
 ```bash
 electron .
-```
-
-##FIX FOR MAC USERS
-If npm install gives you errors failing to install sharp, run next commands:
-
-1. Only if you are missing node and git
-```bash
-brew install nodejs
-brew install git
-```
-2. Command to fix it
-```bash
-brew install homebrew/science/vips --with-webp --with-graphicsmagick
 ```
 
 

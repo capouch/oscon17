@@ -2,6 +2,10 @@
 
 Link to our presentation slides: https://slides.com/capouch/spa-bootcamp/
 
+VM with development environment (7G): http://jsserver.saintjoe-cs.org:8001/OSCONBaseBox.ova
+Electron .asar file (108M): http://jsserver.saintjoe-cs.org:8001/spa.zip
+Mongo dump file: http://jsserver.saintjoe-cs.org:8001/mongoDump.tar.bz2
+
 ## Develop locally
 
 First:

@@ -1,5 +1,7 @@
 # SPA for OSCON 2016
 
+Link to our presentation slides: https://slides.com/capouch/spa-bootcamp/
+
 ## Develop locally
 
 First:

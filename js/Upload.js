@@ -138,6 +138,7 @@ export default React.createClass ( {
      case 1:
      return (
        <Section>
+        <div><center><h2>Live App: Please just look!!</h2></center></div>
          <DropZoneComponent
            config={componentConfig}
            eventHandlers={eventHandlers}

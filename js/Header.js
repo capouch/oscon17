@@ -1,3 +1,7 @@
+/*
+  ** Common "Navbar" header used by all views
+*/
+
 import React from "react"
 import { Link } from "react-router"
 import {
@@ -22,10 +26,10 @@ const NavHeader = React.createClass({
         <NavItem dropdown={true}>
           <DropdownToggle>Other versions</DropdownToggle>
             <DropdownMenu>
-              <a href="http://oscon.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
+              <a href="http://oscon-old.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
                 2015 Page
               </a>
-              <a href="http://oscon-sb.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
+              <a href="http://oscon.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
                 2016 Page
               </a>
               <a href="/oscon-test" className="dropdown-item" target="_blank">

@@ -1,3 +1,9 @@
+/*
+  ** Launch: Modern-era prototypical launch page
+    With thanks to the developers of neal-react
+    see http://www.nealjs.com/
+*/
+
 import React from "react";
 import { Link } from "react-router";
 import {
@@ -10,9 +16,7 @@ import {
   ImageList, ImageListItem,
   Navbar, NavItem,
   Page,
-  PricingPlan, PricingTable,
   Section,
-  SignupInline, SignupModal,
   Team,
   TeamMember,
 } from "neal-react"
@@ -38,7 +42,6 @@ componentDidMount: function() {
     queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
   }
 `
-
 
 export default (props) => {
   return (

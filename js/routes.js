@@ -1,9 +1,6 @@
 /*
- * routes.js - module to provide routing
- * Danilo Zekovic
- */
-
-// Note that these are SERVER-SIDE routes!!
+ * routes.js - module to provide server-side routing
+*/
 
 import sharp from 'sharp'
 import multer from 'multer'

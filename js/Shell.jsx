@@ -1,3 +1,8 @@
+/*
+  ** Shell: Search image database; allow for various viewing options
+    This will be the user's primary portal into the content
+*/
+
 import React from "react"
 import ReactDOM from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router"
@@ -10,9 +15,11 @@ import Zoom from './Zoom'
 import Upload from './Upload'
 import SlideShow from './SlideShow.js'
 
+// Components rendered on every view
 import Header from './Header'
 import Footer from './Footer'
 
+// Create toplevel component
 class osconSPA extends React.Component {
   render() {
     return (
@@ -28,6 +35,7 @@ class osconSPA extends React.Component {
   }
 }
 
+// Render application in main div
 ReactDOM.render((
   <Router history={ browserHistory }>
     <Route path="/" component={ osconSPA } history={ browserHistory }>

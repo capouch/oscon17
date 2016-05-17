@@ -1,3 +1,8 @@
+/*
+  ** Confirmation: Provide confirmation feedback and "do another" link
+    This view is posted as "Step 2" of the Upload functionalty
+*/
+
 import React from 'react'
 
 export default class extends React.Component {

@@ -1,6 +1,6 @@
 /*
- * spa.upload.js
- *   Handle uplads of new images
+ *    Upload: Hand upload of new images
+ *    Input image metadata
  */
 
 import React from 'react'
@@ -10,13 +10,15 @@ import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
 import { Section } from 'neal-react'
 
-// begin local variables
-let  serverFilename = "";
-  // Configuration and setup for DropZoneComponent
-  const componentConfig = {
-    iconFiletypes: ['.jpg', '.png', '.gif', 'tif'],
-    showFiletypeIcon: true,
-    postUrl: '/uploadHandler/'
+// Module-scope variables
+let queryURL = ""
+let  serverFilename = ""
+
+// Configuration and setup for DropZoneComponent
+const componentConfig = {
+  iconFiletypes: ['.jpg', '.png', '.gif', 'tif'],
+  showFiletypeIcon: true,
+  postUrl: '/uploadHandler/'
   },
   eventHandlers = {
     // This one receives the dropzone object as the first parameter
@@ -39,11 +41,11 @@ let  serverFilename = "";
     uploadprogress: null,
     sending: null,
     success: function(file, response) {
-      // Server now sends back ultimate filename
-      console.log('Got ' + response)
+      // This callback receives filename from the server
+      // console.log('Got ' + response)
       serverFilename = response
       // Cut the quotes
-      serverFilename = serverFilename.replace(/"/g,"")
+      serverFilename = serverFilename.replace(/"/g,/"/g,/"/g,/"/g,"")
       console.log('Cut quotes: ' + serverFilename)
     },
     complete: null,
@@ -69,8 +71,8 @@ let  serverFilename = "";
       acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff",
     }
 
-// Data structure
 
+// fieldValues provide form input
 let fieldValues = {
   title : null,
   description : null,
@@ -78,15 +80,13 @@ let fieldValues = {
   taglist : null
 }
 
+// We blank fields after each data entry event
 const blankFieldValues = {
   title: null,
   description: null,
   source: null,
   taglist: null
 }
-
-// Var to hold POST URL
-let queryURL = ""
 
 // Code inspired by this tutorial:
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
@@ -99,8 +99,7 @@ export default React.createClass ( {
  },
  saveValues: function(fields) {
   return function() {
-    // Remember, `fieldValues` is set at the top of this file, we are simply appending
-    // to and overriding keys in `fieldValues` with the `fields` with Object.assign
+    // Callback function for InfoFields sub-module
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
     fieldValues = Object.assign({}, fieldValues, fields)
     fieldValues.filename = serverFilename
@@ -119,7 +118,6 @@ export default React.createClass ( {
       success: function(data) {
         console.log('Returned from mutation call')
         //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-        // this.setState({records: data.data.imageRecs});
       }.bind(this),
         error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -132,7 +130,6 @@ export default React.createClass ( {
     step : this.state.step + 1
     })
  },
- // Same as nextStep, but decrementing
  previousStep: function() {
   this.setState({
     step : this.state.step - 1
@@ -141,19 +138,21 @@ export default React.createClass ( {
  render: function() {
    switch(this.state.step) {
      case 1:
-      return (
-        <Section>
-        <DropZoneComponent config={componentConfig}
-          eventHandlers={eventHandlers}
-          djsConfig={djsConfig} />
-        <InfoFields
-          fieldValues={fieldValues}
-          nextStep={this.nextStep}
-          saveValues={this.saveValues} />
-      </Section>
-      )
-  case 2:
-    return <Confirmation />
-  }
+     return (
+       <Section>
+         <DropZoneComponent
+           config={componentConfig}
+           eventHandlers={eventHandlers}
+           djsConfig={djsConfig} />
+         
+         <InfoFields
+           fieldValues={fieldValues}
+           nextStep={this.nextStep}
+           saveValues={this.saveValues} />
+       </Section>
+     )
+     case 2:
+     return <Confirmation />
+   }
  }
 })

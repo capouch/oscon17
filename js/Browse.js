@@ -16,8 +16,6 @@ import Griddle from 'griddle-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
-// A module-scoped variable!! You don't see many of these. . .
-// It shares the user's input with other views
 //
 // 1.
 // Select one of the two to configure for local/cloud access
@@ -115,7 +113,7 @@ const InfoTable = React.createClass({
     return initValues;
   },
   componentDidMount: function() {
-    console.log('Mounting event')
+    // console.log('Mounting event')
 
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
@@ -123,7 +121,7 @@ const InfoTable = React.createClass({
     // Initialize fetchURL from props
     this.state.fetchURL = this.props.url
 
-    console.log('State at mounting: ' + JSON.stringify(this.state))
+    // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
     if ((this.state.records == null) || this.state.records.length == 0)
@@ -156,7 +154,7 @@ const InfoTable = React.createClass({
       this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
-      console.log('Handling reset click')
+      // console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       queryTarget = queryBase
       this.state.fetchURL = assetBase + queryTarget

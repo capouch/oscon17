@@ -46,7 +46,6 @@ const componentConfig = {
       serverFilename = response
       // Cut the quotes
       serverFilename = serverFilename.replace(/"/g,/"/g,/"/g,/"/g,"")
-      console.log('Cut quotes: ' + serverFilename)
     },
     complete: null,
     canceled: null,
@@ -116,8 +115,7 @@ export default React.createClass ( {
       dataType: 'json',
       cache: false,
       success: function(data) {
-        console.log('Returned from mutation call')
-        //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
+        // console.log('Returned from mutation call')
       }.bind(this),
         error: function(xhr, status, err) {
         console.error(status, err.toString());
@@ -144,7 +142,7 @@ export default React.createClass ( {
            config={componentConfig}
            eventHandlers={eventHandlers}
            djsConfig={djsConfig} />
-         
+
          <InfoFields
            fieldValues={fieldValues}
            nextStep={this.nextStep}

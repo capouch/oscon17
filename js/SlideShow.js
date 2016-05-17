@@ -39,7 +39,7 @@ export default class extends React.Component {
     }
   }
   componentDidMount() {
-    console.log('loadUrl is ' + this.state.loadUrl)
+    // console.log('loadUrl is ' + this.state.loadUrl)
     // If a parameterized custom list, render it
     // Note: this test has a callback!!
     if (this.props.params.viewSet) {
@@ -52,15 +52,14 @@ export default class extends React.Component {
     }
   }
   loadRecordsFromServer() {
-    console.log('Getting records')
+    // console.log('Getting records')
       $.ajax({
         type: "POST",
         url: this.state.loadUrl,
         dataType: 'json',
         cache: false,
         success: function(data) {
-          console.log('Just fetched: ' + this.state.loadUrl)
-          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data));
+          // console.log('Just fetched: ' + this.state.loadUrl)
 
           // Map data into the proper format
           // Three ways to do this: cloud, local server, or filesystem (via Electron)

@@ -52,8 +52,8 @@ export default (props) => {
         <h1 className="display-4">Scene: History </h1>
         <p className="lead">Archiving and Presenting Historical Images</p>
         <p>
-          <a href="https://slides.com/capouch/spa-bootcamp/" target="_blank" className="btn btn-white">
-            OSCON Presentation
+          <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
+            Get it on github
           </a>
         </p>
       </Hero>

@@ -106,7 +106,7 @@ export default React.createClass ( {
     queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}"
-    console.log(queryURL)
+    // console.log(queryURL)
     // Reset the field values here!!
     fieldValues = Object.assign({}, fieldValues, blankFieldValues)
     $.ajax({

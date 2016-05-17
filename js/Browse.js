@@ -79,7 +79,7 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    console.log('Browse once with ' + this.state.fetchURL)
+    // console.log('Browse once with ' + this.state.fetchURL)
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",

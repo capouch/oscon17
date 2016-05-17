@@ -52,7 +52,7 @@ export default class extends React.Component {
     }
   }
   loadRecordsFromServer() {
-    console.log('Slideshow: Getting records')
+    // console.log('Slideshow: Getting records')
       $.ajax({
         type: "POST",
         url: this.state.loadUrl,

@@ -34,7 +34,7 @@ npm run build
 npm start
 ```
 ```bash
-127.0.0.1:2016
+http://127.0.0.1:2016
 ```
 Note the bundle.js file, which webpack creates and is sent to the client is
 *not* kept in the repo and needs to be generated after checkout with
@@ -50,7 +50,7 @@ Run with webpack, hot reload is included so there is no need for refreshing the 
 npm run serve
 ```
 ```bash
-localhost:8080
+http://127.0.0.1:8080
 ```
 
 ###Electron Version

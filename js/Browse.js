@@ -150,6 +150,7 @@ const InfoTable = React.createClass({
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
+    // This is a very heavy moment we switch to a new view
     handleCustomSlideshowClick() {
       this.context.router.push('/slides/' + queryTarget)
     },
@@ -190,6 +191,7 @@ const InfoTable = React.createClass({
 
 
 // Here is the key to allowing a click to cause a view change
+// I do not understand it well
 InfoTable.contextTypes = {
   router: React.PropTypes.object.isRequired
   }

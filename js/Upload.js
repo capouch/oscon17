@@ -45,7 +45,7 @@ const componentConfig = {
       // console.log('Got ' + response)
       serverFilename = response
       // Cut the quotes
-      serverFilename = serverFilename.replace(/"/g,/"/g,/"/g,/"/g,"")
+      serverFilename = serverFilename.replace(/"/g,"")
     },
     complete: null,
     canceled: null,

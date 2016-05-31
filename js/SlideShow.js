@@ -13,10 +13,10 @@ import ImageGallery from 'react-image-gallery'
 
 // 1.
 // Cloud assets
-const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 //
 // Local assets
-// const assetBase = '/oscon-test?'
+const assetBase = '/oscon-test?'
 
 // If no parameters fetch all the images
 const defaultQuery= 'query=query+{imageRecs{ title, filename}}'
@@ -66,9 +66,9 @@ export default class extends React.Component {
           //
           // 2.
           // cloud assets:
-          const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
+          // const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
           // local assets:
-          // const urlBase = '/'
+          const urlBase = '/'
           let source = []
 
           // default load, or filtered through lookup?

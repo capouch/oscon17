@@ -188,7 +188,7 @@ const InfoTable = React.createClass({
       <Section>
         <center><h2>Current image data</h2></center>
         <SearchBar
-          placeholder="search images"
+          placeholder={"Search image database"}
           onChange={this.onSearchChange}
           onSearch={this.onSearch} />
         <div>

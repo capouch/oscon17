@@ -8,6 +8,7 @@
   color: green !important;
   font-weight: bold !important;
 }
+
  .neal-footer {
    padding: 0 !important;
    padding-top: 1rem !important;
@@ -18,5 +19,5 @@
 }
 
 .editColumn{
-    width: 100px;
+    width: 5%;
 }

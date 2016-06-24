@@ -14,6 +14,7 @@ import {
 
 export default new GraphQLInputObjectType({
   name: 'ImageRecUpdate',
+  description: 'Fields for imagerec update',
   fields: {
     _id: {type: GraphQLID},
     title: {type: GraphQLString},

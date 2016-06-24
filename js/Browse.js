@@ -3,8 +3,6 @@
     This will be the user's primary portal into the content
  */
 
-// Gratuitous comment to help sort out how nuclide works
-
 import React from 'react'
 import { render } from 'react-dom'
 
@@ -46,7 +44,7 @@ const Button = React.createClass({
 })
 
 // Compose NavLink to the zoomer view for each image
-const LinkComponent = React.createClass({
+const ZoomLinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
@@ -61,8 +59,30 @@ const LinkComponent = React.createClass({
   }
 })
 
+// Compose NavLink to edit function
+const EditLinkComponent = React.createClass({
+
+  render: function(){
+    // Make a NavLink out of a column value
+    // The rendered object is a zoomer for this image
+    const target = this.props.data,
+      renderBase = "edit/",
+      renderPath = renderBase + target;
+
+    return <NavLink to={renderPath}>
+      Edit
+    </NavLink>
+  }
+})
+
 // Configuration object for Griddle
 const customColumnMetadata = [
+  {
+    columnName: "_id",
+    displayName: "",
+    cssClassName: "editColumn",
+    customComponent: EditLinkComponent
+  },
   {
     "columnName": "title",
     "displayName": "Image Title"
@@ -70,7 +90,7 @@ const customColumnMetadata = [
   {
     "columnName": "filename",
     "displayName": "Zoomer Link",
-    "customComponent": LinkComponent
+    "customComponent": ZoomLinkComponent
   },
   {
     "columnName": "description",
@@ -138,7 +158,7 @@ const InfoTable = React.createClass({
   onSearch(input) {
     if (!input) return
     console.info(`Searching "${input}"`)
-    queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
+    queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){_id, title, filename, description, source, taglist}}'
 
     // 2.
     // Local assets
@@ -182,7 +202,7 @@ const InfoTable = React.createClass({
           />
         </div>
         <Griddle results={this.state.records}
-          columns={['title','filename', "description"]}
+          columns={['_id','title','filename', "description"]}
           columnMetadata={customColumnMetadata}
           showSettings={true}
           resultsPerPage={10}

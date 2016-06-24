@@ -20,7 +20,7 @@ export default {
     },
   async resolve (root, params, options) {
     // Put together update object
-    console.log(params.data._id)
+    // console.log(params.data._id)
     const query = {
       _id: params.data._id
     }
@@ -28,7 +28,7 @@ export default {
       title: params.data.title, description: params.data.description,
           source: params.data.source, taglist: params.data.taglist
         }
-    console.log(updateRec)
+    // console.log(updateRec)
     const updateResult = ImageRecModel
     .findOneAndUpdate(query, updateRec)
 

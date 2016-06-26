@@ -12,17 +12,17 @@ const EditDeleteWidget = React.createClass({
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
       type: "POST",
-      url: this.state.fetchURL,
+      url: 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){title, filename, description, taglist}}',
       dataType: 'json',
       cache: false,
       success: function(data) {
         // Is the data from a "fetch all" query, or a lookup search?
-        if (data.data.imageRecs)
-          this.setState({records: data.data.imageRecs})
+        if (data.data.imageRec)
+          this.setState({record: data.data.imageRec})
         else
-          this.setState({records: data.data.lookup})
-        data.data = undefined
-        sessionStorage.setItem('browse', JSON.stringify(this.state))
+          this.setState({record: data.data.lookup})
+        // data.data = undefined
+        // sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.state.url, status, err.toString());
@@ -31,23 +31,21 @@ const EditDeleteWidget = React.createClass({
   },
   getInitialState: function() {
     let initValues = {
-      records: [],
+      record: [],
       fetchURL: ""
     }
+  return initValues
   },
   componentDidMount: function() {
     // console.log('Mounting event')
 
     // Extract query part only of URL (i.e. the part after the '?')
-    queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
-
-    // Initialize fetchURL from props
-    this.state.fetchURL = this.props.url
+    let queryTarget = "";
 
     // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
-    if ((this.state.records == null) || this.state.records.length == 0)
+    if ((this.state.record == null) || this.state.record.length == 0)
       this.loadRecordsFromServer()
     },
   componentWillUnmount: function () {
@@ -69,45 +67,17 @@ const EditDeleteWidget = React.createClass({
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
-        this.loadRecordsFromServer()
-        sessionStorage.setItem('browse', JSON.stringify(this.state))
+        this.loadrecordFromServer()
+        // sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-    // This is a very heavy moment we switch to a new view
-    handleCustomSlideshowClick() {
-      this.context.router.push('/slides/' + queryTarget)
-    },
-    clearStore() {
-      // console.log('Handling reset click')
-      sessionStorage.removeItem('browse')
-      queryTarget = queryBase
-      this.state.fetchURL = assetBase + queryTarget
-      this.loadRecordsFromServer()
-    },
   render: function() {
+    let tempOutputString = JSON.stringify(this.state.record)
     return (
       <Section>
-        <center><h2>Current image data</h2></center>
-        <SearchBar
-          placeholder="search images"
-          onChange={this.onSearchChange}
-          onSearch={this.onSearch} />
-        <div>
-          <Button
-            label="Slideshow of this imageset"
-            handleClick={this.handleCustomSlideshowClick}
-          />
-          <Button
-            label="Reset search"
-            handleClick={this.clearStore}
-          />
-        </div>
-        <Griddle results={this.state.records}
-          columns={['_id','title','filename', "description"]}
-          columnMetadata={customColumnMetadata}
-          showSettings={true}
-          resultsPerPage={10}
-          />
+        <center><h2>Eventual edit widget placeholder</h2>
+          <h3>{tempOutputString}</h3>
+        </center>
       </Section>
     )}
   })
@@ -117,7 +87,7 @@ export default React.createClass ( {
   render() {
     return (
       <div>
-        Coming soon!!
+        <EditDeleteWidget record={this.props.params.imageId}/>
       </div>
     )
   }

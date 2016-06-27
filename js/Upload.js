@@ -122,7 +122,7 @@ export default React.createClass ( {
       }.bind(this)
     })
   }()
-  },
+}.bind(this),
  nextStep: function() {
   this.setState({
     step : this.state.step + 1

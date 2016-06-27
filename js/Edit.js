@@ -52,8 +52,6 @@ const EditDeleteWidget = React.createClass({
     // console.log('Mounting event')
     // console.log(this.state.record)
 
-    // Clear out cached data in local store
-    sessionStorage.removeItem('browse')
     // Extract query part only of URL (i.e. the part after the '?')
     let queryTarget = "";
 
@@ -66,6 +64,10 @@ const EditDeleteWidget = React.createClass({
       // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
       fieldValues = Object.assign({}, fieldValues, fields)
       fieldValues.filename = serverFilename
+
+      // Clear out cached data in local store
+      sessionStorage.removeItem('browse')
+      
       // Put together (awful-looking) query URL
       let queryURL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)

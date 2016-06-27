@@ -26,7 +26,7 @@ const assetBase = '/oscon-test?'
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
-const queryBase = queryTarget
+const queryBase = "query=query+{imageRecs{_id, title, filename, description}}"
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -129,6 +129,7 @@ const InfoTable = React.createClass({
     }
 
     // If we're remembering last query, pre-load it from sessionStorage
+    // console.log('Checking session storage in initial state')
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
@@ -142,6 +143,7 @@ const InfoTable = React.createClass({
 
     // Initialize fetchURL from props
     this.state.fetchURL = this.props.url
+    // console.log('Fetching: ' + this.state.fetchURL)
 
     // console.log('State at mounting: ' + JSON.stringify(this.state))
 
@@ -225,7 +227,7 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url={ assetBase + queryTarget}/>
+          url={ assetBase + queryBase}/>
       </div>
     )
   }

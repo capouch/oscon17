@@ -14,7 +14,7 @@ export default class extends React.Component {
       <div>
         <center>
         <h1>Thanks for your submission</h1>
-        <a href="/upload">Click here to upload more images</a>
+        <h1>Choose next action from menu above</h1>
         </center>
       </div>
     )

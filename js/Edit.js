@@ -77,7 +77,6 @@ const EditDeleteWidget = React.createClass({
       case 1:
       if (!this.state.record) {
         // Data is not ready yet
-        console.log('I thought promises fixed this!!')
         return (
           // This causes the screen to flash!!
           <div> Waiting </div>

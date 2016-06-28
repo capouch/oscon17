@@ -105,6 +105,7 @@ const EditDeleteWidget = React.createClass({
         fieldValues.description = this.state.record.description
         fieldValues.source = this.state.record.source
         fieldValues.taglist = this.state.record.taglist
+        // These next two are not subject to user editing
         id = this.state.record._id
         serverFilename = this.state.record.filename
         return (

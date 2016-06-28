@@ -103,6 +103,7 @@ const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
     let URL = this.state.fetchURL,
       req = new Request(URL, {method: 'POST', cache: 'reload'})
+
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {
@@ -129,7 +130,6 @@ const InfoTable = React.createClass({
   },
   componentDidMount: function() {
     // console.log('Mounting event')
-
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
 
@@ -176,32 +176,37 @@ const InfoTable = React.createClass({
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
-  render: function() {
-    return (
-      <Section>
-        <center><h2>Current image data</h2></center>
-        <SearchBar
-          placeholder={"Search image database"}
-          onChange={this.onSearchChange}
-          onSearch={this.onSearch} />
-        <div>
-          <Button
-            label="Slideshow of this imageset"
-            handleClick={this.handleCustomSlideshowClick}
-          />
-          <Button
-            label="Reset search"
-            handleClick={this.clearStore}
-          />
-        </div>
-        <Griddle results={this.state.records}
-          columns={['_id','title','filename', "description"]}
-          columnMetadata={customColumnMetadata}
-          showSettings={true}
-          resultsPerPage={10}
-          />
-      </Section>
-    )}
+    render: function() {
+      return (
+        <Section>
+          <center>
+            <h2>
+              Current image data
+            </h2>
+          </center>
+          <SearchBar
+            placeholder={"Search image database"}
+            onChange={this.onSearchChange}
+            onSearch={this.onSearch} />
+          <div>
+            <Button
+              label="Slideshow of this imageset"
+              handleClick={this.handleCustomSlideshowClick}
+              />
+            <Button
+              label="Reset search"
+              handleClick={this.clearStore}
+              />
+          </div>
+          <Griddle
+            results={this.state.records}
+            columns={['_id','title','filename', "description"]}
+            columnMetadata={customColumnMetadata}
+            showSettings={true}
+            resultsPerPage={10}
+            />
+        </Section>
+      )}
   })
 
 

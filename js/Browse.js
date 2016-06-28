@@ -101,26 +101,19 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Browse once with ' + this.state.fetchURL)
-    // Note the irony of using AJAX to get GraphQL . . .
-    $.ajax({
-      type: "POST",
-      url: this.state.fetchURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        // Is the data from a "fetch all" query, or a lookup search?
-        if (data.data.imageRecs)
-          this.setState({records: data.data.imageRecs})
-        else
-          this.setState({records: data.data.lookup})
-        data.data = undefined
-        sessionStorage.setItem('browse', JSON.stringify(this.state))
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(this.state.url, status, err.toString());
-        }.bind(this)
-      })
+    let URL = this.state.fetchURL,
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      if (json.data.imageRecs)
+        this.setState({records: json.data.imageRecs})
+      else
+        this.setState({records: json.data.lookup})
+      json.data = undefined
+      sessionStorage.setItem('browse', JSON.stringify(this.state))
+    }.bind(this))
   },
   getInitialState: function() {
     let initValues = {

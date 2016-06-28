@@ -53,7 +53,6 @@ const EditDeleteWidget = React.createClass({
     this.loadRecordsFromServer()
   },
   saveValues: function(fields) {
-    return function() {
       // Callback function for InfoFields sub-module
       // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
       fieldValues = Object.assign({}, fieldValues, fields)
@@ -63,26 +62,14 @@ const EditDeleteWidget = React.createClass({
       sessionStorage.removeItem('browse')
 
       // Put together (awful-looking) query URL
-      let queryURL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
+      let URL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
-      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}"
+      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
       // console.log('Sending: ' + queryURL)
-      // I don't think this is needed in this view
-      // Reset the field values here!!
-      // fieldValues = Object.assign({}, fieldValues, blankFieldValues)
-      $.ajax({
-        type: "POST",
-        url: queryURL,
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
-          // console.log('Returned from mutation call')
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(status, err.toString());
-        }.bind(this)
-      })
-    }()
+        req = new Request(URL, {method: 'POST', cache: 'reload'})
+      fetch(req).then(function(response) {
+        return response.json()
+      }.bind(this))
   },
   render: function() {
     // console.log('rendering widget')

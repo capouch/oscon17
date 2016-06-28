@@ -32,23 +32,6 @@ const EditDeleteWidget = React.createClass({
       this.setState({record: json.data.imageRec})
     }.bind(this))
   },
-  /*
-    // console.log('Loading record')
-    // Note the irony of using AJAX to get GraphQL . . .
-    $.ajax({
-      type: "POST",
-      url: 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        // console.log('Setting image data')
-        this.setState({record: data.data.imageRec})
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.state.url, status, err.toString());
-      }.bind(this)
-    })
-  }, */
   getInitialState: function() {
     return {
       step: 1

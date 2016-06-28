@@ -97,33 +97,25 @@ export default React.createClass ( {
   }
  },
  saveValues: function(fields) {
-  return function() {
     // Callback function for InfoFields sub-module
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
     fieldValues = Object.assign({}, fieldValues, fields)
     fieldValues.filename = serverFilename
     // Put together (awful-looking) query URL
-    queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
+    let URL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
-      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}"
+      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
     console.log(queryURL)
     // Reset the field values here!!
     fieldValues = Object.assign({}, fieldValues, blankFieldValues)
-    $.ajax({
-      type: "POST",
-      url: queryURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        // console.log('Returned from mutation call')
-      }.bind(this),
-        error: function(xhr, status, err) {
-        console.error(status, err.toString());
-      }.bind(this)
+    // console.log('Sending: ' + URL)
+    fetch(req).then(function(response) {
+      return response.json()
     })
-  }()
-}.bind(this),
- nextStep: function() {
+},
+
+nextStep: function() {
   this.setState({
     step : this.state.step + 1
     })

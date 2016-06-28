@@ -22,6 +22,17 @@ let id = '',
 // This component is something of a love child of the Browse and Upload views
 const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
+    // Fix me: hardcoded URL won't work if we aim at the cloud!!
+    let URL = 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      this.setState({record: json.data.imageRec})
+    }.bind(this))
+  },
+  /*
     // console.log('Loading record')
     // Note the irony of using AJAX to get GraphQL . . .
     $.ajax({
@@ -37,7 +48,7 @@ const EditDeleteWidget = React.createClass({
         console.error(this.state.url, status, err.toString());
       }.bind(this)
     })
-  },
+  }, */
   getInitialState: function() {
     return {
       step: 1
@@ -67,7 +78,7 @@ const EditDeleteWidget = React.createClass({
 
       // Clear out cached data in local store
       sessionStorage.removeItem('browse')
-      
+
       // Put together (awful-looking) query URL
       let queryURL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
@@ -96,6 +107,7 @@ const EditDeleteWidget = React.createClass({
       case 1:
       if (!this.state.record) {
         // Data is not ready yet
+        console.log('I thought promises fixed this!!')
         return (
           <div> Waiting </div>
         )

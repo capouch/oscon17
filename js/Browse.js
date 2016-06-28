@@ -101,26 +101,20 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Browse once with ' + this.state.fetchURL)
-    // Note the irony of using AJAX to get GraphQL . . .
-    $.ajax({
-      type: "POST",
-      url: this.state.fetchURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        // Is the data from a "fetch all" query, or a lookup search?
-        if (data.data.imageRecs)
-          this.setState({records: data.data.imageRecs})
-        else
-          this.setState({records: data.data.lookup})
-        data.data = undefined
-        sessionStorage.setItem('browse', JSON.stringify(this.state))
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(this.state.url, status, err.toString());
-        }.bind(this)
-      })
+    let URL = this.state.fetchURL,
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      if (json.data.imageRecs)
+        this.setState({records: json.data.imageRecs})
+      else
+        this.setState({records: json.data.lookup})
+      json.data = undefined
+      sessionStorage.setItem('browse', JSON.stringify(this.state))
+    }.bind(this))
   },
   getInitialState: function() {
     let initValues = {
@@ -137,7 +131,6 @@ const InfoTable = React.createClass({
   },
   componentDidMount: function() {
     // console.log('Mounting event')
-
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
 
@@ -185,32 +178,37 @@ const InfoTable = React.createClass({
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
-  render: function() {
-    return (
-      <Section>
-        <center><h2>Current image data</h2></center>
-        <SearchBar
-          placeholder={"Search image database"}
-          onChange={this.onSearchChange}
-          onSearch={this.onSearch} />
-        <div>
-          <Button
-            label="Slideshow of this imageset"
-            handleClick={this.handleCustomSlideshowClick}
-          />
-          <Button
-            label="Reset search"
-            handleClick={this.clearStore}
-          />
-        </div>
-        <Griddle results={this.state.records}
-          columns={['_id','title','filename', "description"]}
-          columnMetadata={customColumnMetadata}
-          showSettings={true}
-          resultsPerPage={10}
-          />
-      </Section>
-    )}
+    render: function() {
+      return (
+        <Section>
+          <center>
+            <h2>
+              Current image data
+            </h2>
+          </center>
+          <SearchBar
+            placeholder={"Search image database"}
+            onChange={this.onSearchChange}
+            onSearch={this.onSearch} />
+          <div>
+            <Button
+              label="Slideshow of this imageset"
+              handleClick={this.handleCustomSlideshowClick}
+              />
+            <Button
+              label="Reset search"
+              handleClick={this.clearStore}
+              />
+          </div>
+          <Griddle
+            results={this.state.records}
+            columns={['_id','title','filename', "description"]}
+            columnMetadata={customColumnMetadata}
+            showSettings={true}
+            resultsPerPage={10}
+            />
+        </Section>
+      )}
   })
 
 

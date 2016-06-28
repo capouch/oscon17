@@ -22,21 +22,15 @@ let id = '',
 // This component is something of a love child of the Browse and Upload views
 const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Loading record')
-    // Note the irony of using AJAX to get GraphQL . . .
-    $.ajax({
-      type: "POST",
-      url: 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        // console.log('Setting image data')
-        this.setState({record: data.data.imageRec})
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.state.url, status, err.toString());
-      }.bind(this)
-    })
+    // Fix me: hardcoded URL won't work if we aim at the cloud!!
+    let URL = 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      this.setState({record: json.data.imageRec})
+    }.bind(this))
   },
   getInitialState: function() {
     return {
@@ -59,7 +53,6 @@ const EditDeleteWidget = React.createClass({
     this.loadRecordsFromServer()
   },
   saveValues: function(fields) {
-    return function() {
       // Callback function for InfoFields sub-module
       // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
       fieldValues = Object.assign({}, fieldValues, fields)
@@ -67,28 +60,16 @@ const EditDeleteWidget = React.createClass({
 
       // Clear out cached data in local store
       sessionStorage.removeItem('browse')
-      
+
       // Put together (awful-looking) query URL
-      let queryURL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
+      let URL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
-      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}"
+      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
       // console.log('Sending: ' + queryURL)
-      // I don't think this is needed in this view
-      // Reset the field values here!!
-      // fieldValues = Object.assign({}, fieldValues, blankFieldValues)
-      $.ajax({
-        type: "POST",
-        url: queryURL,
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
-          // console.log('Returned from mutation call')
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(status, err.toString());
-        }.bind(this)
-      })
-    }()
+        req = new Request(URL, {method: 'POST', cache: 'reload'})
+      fetch(req).then(function(response) {
+        return response.json()
+      }.bind(this))
   },
   render: function() {
     // console.log('rendering widget')
@@ -97,6 +78,7 @@ const EditDeleteWidget = React.createClass({
       if (!this.state.record) {
         // Data is not ready yet
         return (
+          // This causes the screen to flash!!
           <div> Waiting </div>
         )
       }
@@ -109,6 +91,7 @@ const EditDeleteWidget = React.createClass({
         fieldValues.description = this.state.record.description
         fieldValues.source = this.state.record.source
         fieldValues.taglist = this.state.record.taglist
+        // These next two are not subject to user editing
         id = this.state.record._id
         serverFilename = this.state.record.filename
         return (

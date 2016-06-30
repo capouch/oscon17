@@ -99,7 +99,7 @@ const EditDeleteWidget = React.createClass({
             <Section>
               <center>
                 <h2>
-                  Edit image record values
+                  Edit/Delete image record values
                 </h2>
               </center>
               <InfoFields

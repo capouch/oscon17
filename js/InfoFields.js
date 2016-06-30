@@ -5,6 +5,8 @@
 
 import React from 'react'
 
+let deleteStyle = { background: "red"}
+
 export default React.createClass({
   render: function() {
     return (
@@ -44,6 +46,14 @@ export default React.createClass({
             Save and Continue
           </button>
         </center>
+
+        <center>
+          <button style={ deleteStyle }
+            className="btn btn-success btn-submit"
+            onClick={this.deleteRecord}>
+            Delete This Record!!
+          </button>
+        </center>
       </div>
     )
   },
@@ -60,5 +70,21 @@ export default React.createClass({
     }
     this.props.saveValues(data)
     this.props.nextStep()
+  },
+
+  deleteRecord: function(e) {
+    e.preventDefault()
+
+    // Get values via this.refs
+    // console.log('For title: ' + this.refs.title.value);
+
+    // Post alert here
+    // Extract _id field here, or back in the caller?
+    let accept = confirm('Are you sure?')
+    if (accept) {
+      // this.props.deleteRecord(data)
+      this.props.nextStep()
+    }
   }
+
 })

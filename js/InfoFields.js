@@ -5,10 +5,37 @@
 
 import React from 'react'
 
-let deleteStyle = { background: "red"}
+let deleteStyle = { background: "red"},
+  deleteRef = undefined,
+  deleteButton = undefined
+
+// Optional delete button on edit screens
+// Wrap an HTML button into a component
+const buttonStyle = {
+  background: 'red',
+  margin: '10px',
+  width: '80%'
+}
+const DeleteButton = React.createClass({
+  render: function () {
+    return (
+      <button
+        className="btn btn-default"
+        style={buttonStyle}
+        onClick={deleteRef}>
+        Delete this Record!!</button>
+    )
+  }
+})
 
 export default React.createClass({
+  componentWillMount: function() {
+      deleteRef = this.deleteRecord
+  },
   render: function() {
+    if (this.props.isCreate == undefined) {
+      deleteButton = <DeleteButton />
+      }
     return (
       <div className="col-lg-4 col-md-2 form-group">
         <label>Title</label>
@@ -48,11 +75,7 @@ export default React.createClass({
         </center>
 
         <center>
-          <button style={ deleteStyle }
-            className="btn btn-success btn-submit"
-            onClick={this.deleteRecord}>
-            Delete This Record!!
-          </button>
+          {deleteButton}
         </center>
       </div>
     )

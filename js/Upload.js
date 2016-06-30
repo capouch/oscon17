@@ -139,6 +139,7 @@ nextStep: function() {
          <InfoFields
            fieldValues={fieldValues}
            nextStep={this.nextStep}
+           isCreate={true}
            saveValues={this.saveValues} />
        </Section>
      )

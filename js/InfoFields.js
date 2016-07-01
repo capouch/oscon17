@@ -7,6 +7,7 @@ import React from 'react'
 
 let deleteStyle = { background: "red"},
   deleteRef = undefined,
+  // Default is no delete button (for upload)
   deleteButton = undefined
 
 // Optional delete button on edit screens
@@ -30,9 +31,12 @@ const DeleteButton = React.createClass({
 
 export default React.createClass({
   componentWillMount: function() {
-      deleteRef = this.deleteRecord
+    // Move function reference to module-scoped variable
+    deleteRef = this.deleteRecord
   },
   render: function() {
+
+    // Display delete button for edit/delete view
     if (this.props.isCreate == undefined) {
       deleteButton = <DeleteButton />
       }

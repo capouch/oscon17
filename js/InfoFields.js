@@ -109,7 +109,7 @@ export default React.createClass({
     // Extract _id field here, or back in the caller?
     let accept = confirm('Are you sure?')
     if (accept) {
-      // this.props.deleteRecord(data)
+      this.props.deleteRecord()
       this.props.nextStep()
     }
   }

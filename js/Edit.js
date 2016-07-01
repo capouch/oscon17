@@ -6,6 +6,7 @@ import React from 'react'
 import { Section } from 'neal-react'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
+import fs from 'fs'
 
 // fieldValues provide form input
 let fieldValues = {
@@ -71,6 +72,22 @@ const EditDeleteWidget = React.createClass({
         return response.json()
       }.bind(this))
   },
+  deleteRecord: function() {
+      // Callback function to delete a record
+
+      // Clear out cached data in local store
+      sessionStorage.removeItem('browse')
+
+      // Put together mutation URL
+      let URL="/oscon-test?query=mutation+{deleteImage(id: " + JSON.stringify(id) + ")}",
+        req = new Request(URL, {method: 'POST', cache: 'reload'})
+      // console.log('Sending: ' + URL)
+      fetch(req).then(function(response) {
+        return response.json()
+      }.bind(this))
+      // Mongod record is now gone; the saved original file + 2 created files
+      //  still will need to be deleted.  Will fs do that?
+  },
   render: function() {
     // console.log('rendering widget')
     switch(this.state.step) {
@@ -105,7 +122,8 @@ const EditDeleteWidget = React.createClass({
               <InfoFields
                 fieldValues={fieldValues}
                 nextStep={this.nextStep}
-                saveValues={this.saveValues} />
+                saveValues={this.saveValues}
+                deleteRecord={this.deleteRecord}/>
             </Section>
           </div>
         )

@@ -120,6 +120,7 @@ const EditDeleteWidget = React.createClass({
               </center>
               <InfoFields
                 fieldValues={fieldValues}
+                isCreate={false}
                 nextStep={this.nextStep}
                 saveValues={this.saveValues}
                 deleteRecord={this.deleteRecord}/>

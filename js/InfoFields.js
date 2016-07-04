@@ -37,9 +37,12 @@ export default React.createClass({
   render: function() {
 
     // Display delete button for edit/delete view
-    if (this.props.isCreate == undefined) {
+    if (!this.props.isCreate) {
       deleteButton = <DeleteButton />
       }
+    else {
+      deleteButton = undefined
+    }
     return (
       <div className="col-lg-4 col-md-2 form-group">
         <label>Title</label>

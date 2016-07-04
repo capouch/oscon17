@@ -6,7 +6,6 @@ import React from 'react'
 import { Section } from 'neal-react'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
-import fs from 'fs'
 
 // fieldValues provide form input
 let fieldValues = {
@@ -20,7 +19,7 @@ let fieldValues = {
 let id = '',
   serverFilename = ''
 
-// This component is something of a love child of the Browse and Upload views
+// This component is something of a love child between Browse and Upload
 const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
     // Fix me: hardcoded URL won't work if we aim at the cloud!!
@@ -73,7 +72,7 @@ const EditDeleteWidget = React.createClass({
       }.bind(this))
   },
   deleteRecord: function() {
-      // Callback function to delete a record
+      // Callback to remove an image record in the DB
 
       // Clear out cached data in local store
       sessionStorage.removeItem('browse')
@@ -86,7 +85,8 @@ const EditDeleteWidget = React.createClass({
         return response.json()
       }.bind(this))
       // Mongod record is now gone; the saved original file + 2 created files
-      //  still will need to be deleted.  Will fs do that?
+      //  still will need to be deleted on the Server
+      //  How to do that??!!!???
   },
   render: function() {
     // console.log('rendering widget')
@@ -103,7 +103,6 @@ const EditDeleteWidget = React.createClass({
         // console.log(JSON.stringify(this.state))
 
         // Note: async strangeness possible here . .
-        //  i.e. could data possibly still not be ready yet?
         fieldValues.title = this.state.record.title
         fieldValues.description = this.state.record.description
         fieldValues.source = this.state.record.source

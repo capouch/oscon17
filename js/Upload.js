@@ -11,8 +11,8 @@ import Confirmation from './Confirmation'
 import { Section } from 'neal-react'
 
 // Module-scope variables
-let queryURL = ""
-let  serverFilename = ""
+let queryURL = "",
+  serverFilename = ""
 
 // Configuration and setup for DropZoneComponent
 const componentConfig = {

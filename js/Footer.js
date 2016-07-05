@@ -8,15 +8,15 @@ import {
 } from "neal-react"
 
 // We appropriate slightly inappropriate names from neal-react sample app
-const brandName = "Scene:History"
+const brandName = "Independence Property Management"
 const brand = <span>{brandName}</span>
 
 const businessAddress = (
   <address>
     <strong>{brandName}</strong><br/>
-    Saint Josephs College<br/>
+    PO Box XYZ<br/>
     Rensselaer IN 47978<br/>
-    +1 (219) 866-6000
+  +1 (219) 866-0000
   </address>
 )
 
@@ -24,15 +24,14 @@ const NavFooter = React.createClass({
   render() {
     return (
       <Footer brandName={brandName}
-        facebookUrl="http://www.facebook.com/brian.capouch"
-        githubUrl="https://github.com/capouch"
+        facebookUrl="https://www.facebook.com/jchsmuseum/"
         address={businessAddress}>
       </Footer>
       )
     }
   })
 
-// We keep default export object anonymous 
+// We keep default export object anonymous
 export default class extends React.Component {
     constructor(props) {
       super(props)

@@ -44,10 +44,10 @@ mongoose.Promise = global.Promise;
 // assert.equal(query.exec().constructor, global.Promise);
 
 // Connect mongo database
-mongoose.connect('mongodb://localhost/oscon-test')
+// mongoose.connect('mongodb://localhost/oscon-test')
 
 // start server
-server.listen(2016)
+server.listen(8181)
 console.log(
   'Express server listening on port %d in %s mode',
   server.address().port, app.settings.env

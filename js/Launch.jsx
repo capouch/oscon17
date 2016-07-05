@@ -49,33 +49,29 @@ export default (props) => {
 
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
-        <h1 className="display-4">Scene: History </h1>
-        <p className="lead">Archiving and Presenting Historical Images</p>
+        <h1 className="display-4">Independence Church and Cemetery</h1>
+        <p className="lead">Jasper County&#39;s Oldest Church</p>
         <p>
-          <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
-            Get it on github
+          <a href="http://www.independence-church.org" target="_blank" className="btn btn-white">
+            How can I help?
           </a>
         </p>
       </Hero>
 
-      <Section className="nopad-bottom">
-        <Code lang="jsx" block>{sampleCode}</Code>
-      </Section>
-
       <Section>
         <HorizontalSplit padding="md">
           <div>
-            <p className="lead">Shell executive</p>
-            <p>The initial page load brings in a shell program, written in JavaScript, which then manages the client/UI.</p>
+            <p className="lead">Founded in the 1840s</p>
+            <p>Independence Church was founded by Jasper County&#39;s earliest families: The Gillams, Culps, and Randles</p>
           </div>
           <div>
-            <p className="lead">Modern Tools</p>
-            <p>Code is written ES6 via Babel, React front end, GraphQL queries and mutations, to a local or remote MongoDB backend.
+            <p className="lead">Church, Cemetery, School</p>
+            <p>Besides the church, which was built in 1872 and remodeled in 1949, there is a large cemetery, and across the road, the remains of Independence School.
               </p>
           </div>
           <div>
-            <p className="lead">Views instead of pages</p>
-            <p>React components play nicely with one another, and wrappers exist for many useful tools.</p>
+            <p className="lead">National Register</p>
+            <p>The church was listed on the National Register of Historic Places in 1976</p>
           </div>
         </HorizontalSplit>
       </Section>

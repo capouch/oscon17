@@ -58,14 +58,6 @@ export default (props) => {
         </p>
       </Hero>
 
-      <Section className="subhero">
-        <ImageList centered>
-          <a href="http://www.saintjoe.edu">
-            <img className="sjc-logo" src="img/press/sjcLogo.gif"/>
-          </a>
-        </ImageList>
-      </Section>
-
       <Section className="nopad-bottom">
         <Code lang="jsx" block>{sampleCode}</Code>
       </Section>

@@ -5,10 +5,44 @@
 
 import React from 'react'
 
-let deleteStyle = { background: "red"}
+let deleteStyle = { background: "red"},
+  deleteRef = undefined,
+  // Default is no delete button (for upload)
+  deleteButton = undefined
+
+// Optional delete button on edit screens
+// Wrap an HTML button into a component
+const buttonStyle = {
+  background: 'red',
+  margin: '10px',
+  width: '80%'
+}
+const DeleteButton = React.createClass({
+  render: function () {
+    return (
+      <button
+        className="btn btn-default"
+        style={buttonStyle}
+        onClick={deleteRef}>
+        Delete this Record!!</button>
+    )
+  }
+})
 
 export default React.createClass({
+  componentWillMount: function() {
+    // Move function reference to module-scoped variable
+    deleteRef = this.deleteRecord
+  },
   render: function() {
+
+    // Display delete button for edit/delete view
+    if (!this.props.isCreate) {
+      deleteButton = <DeleteButton />
+      }
+    else {
+      deleteButton = undefined
+    }
     return (
       <div className="col-lg-4 col-md-2 form-group">
         <label>Title</label>
@@ -48,11 +82,7 @@ export default React.createClass({
         </center>
 
         <center>
-          <button style={ deleteStyle }
-            className="btn btn-success btn-submit"
-            onClick={this.deleteRecord}>
-            Delete This Record!!
-          </button>
+          {deleteButton}
         </center>
       </div>
     )
@@ -82,7 +112,7 @@ export default React.createClass({
     // Extract _id field here, or back in the caller?
     let accept = confirm('Are you sure?')
     if (accept) {
-      // this.props.deleteRecord(data)
+      this.props.deleteRecord()
       this.props.nextStep()
     }
   }

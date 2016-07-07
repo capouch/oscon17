@@ -37,10 +37,10 @@ const renderImage = function(selection) {
 
   // 1.
   // Use cloud-based image assets
-  // const assetBase ="http://oscon.saintjoe-cs.org:2016/"
+  const assetBase ="http://oscon.saintjoe-cs.org:2016/"
   //
   // Use local assets
-  const assetBase = ''
+  // const assetBase = ''
 
   const baseName = assetBase + selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)

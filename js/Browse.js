@@ -30,10 +30,10 @@ ipc.send('get-app-path')
 // 1.
 // Select one of the two to configure for local/cloud access
 // Local assets
-const assetBase = '/oscon-test?'
+// const assetBase = '/oscon-test?'
 //
 // Cloud assets
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 const queryBase = "query=query+{imageRecs{_id, title, filename, description}}"
@@ -167,9 +167,9 @@ const InfoTable = React.createClass({
 
     // 2.
     // Local assets
-    let searchURL = assetBase + queryTarget
+    // let searchURL = assetBase + queryTarget
     // Cloud assets
-    // let searchURL = 'http://oscon.saintjoe-cs.org:2016/oscon-test?' + queryTarget
+    let searchURL = 'http://oscon.saintjoe-cs.org:2016/oscon-test?' + queryTarget
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){

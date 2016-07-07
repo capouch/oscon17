@@ -39,7 +39,7 @@
     "react-image-gallery": "^0.6.4",
     "react-router": "^2.0.0-rc5",
     "react-swipeable": "^3.4.0",
-    "sharp": "^0.14.1",
+    "sharp": "^0.15.x",
     "tether": "^1.2.2",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"

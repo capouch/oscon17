@@ -17,14 +17,16 @@ let fieldValues = {
 
 // Module "globals"
 let id = '',
-  serverFilename = ''
+  serverFilename = '',
+  URLbase = "http://oscon.saintjoe-cs.org:2016/"
 
 // This component is something of a love child between Browse and Upload
 const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
     // Fix me: hardcoded URL won't work if we aim at the cloud!!
-    let URL = 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = URLbase + 'oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
+    // console.log('Fetching from: ' + URL)
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {

@@ -1,5 +1,11 @@
-import React from "react"
-import { Link } from "react-router"
+/*
+  ** Launch: Modern-era prototypical launch page
+    With thanks to the developers of neal-react
+    see http://www.nealjs.com/
+*/
+
+import React from "react";
+import { Link } from "react-router";
 import {
   Code,
   CustomerQuote, CustomerQuotes,
@@ -10,9 +16,7 @@ import {
   ImageList, ImageListItem,
   Navbar, NavItem,
   Page,
-  PricingPlan, PricingTable,
   Section,
-  SignupInline, SignupModal,
   Team,
   TeamMember,
 } from "neal-react"
@@ -52,7 +56,6 @@ componentDidMount: function() {
   }
 `
 
-
 export default (props) => {
   return (
     <Page>
@@ -63,18 +66,10 @@ export default (props) => {
         <p className="lead">Archiving and Presenting Historical Images</p>
         <p>
           <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
-            Get it on Github
+            Get it on github
           </a>
         </p>
       </Hero>
-
-      <Section className="subhero">
-        <ImageList centered>
-          <a href="http://www.saintjoe.edu">
-            <img className="sjc-logo" src="img/press/sjcLogo.gif"/>
-          </a>
-        </ImageList>
-      </Section>
 
       <Section className="nopad-bottom">
         <Code lang="jsx" block>{sampleCode}</Code>

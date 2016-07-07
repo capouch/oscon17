@@ -1,4 +1,8 @@
-// modules/NavLink.js
+/*
+  ** Navlink: Create a Link component with extra foo
+    Borrowed essentially verbatim from the react-router-tutorial, which is great
+*/
+
 import React from 'react'
 import { Link } from 'react-router'
 

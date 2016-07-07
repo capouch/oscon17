@@ -38,6 +38,11 @@ app.use('/', router)
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('/public'));
 
+// Configure mongoose as per http://mongoosejs.com/docs/promises.html
+// Use native promises
+mongoose.Promise = global.Promise;
+// assert.equal(query.exec().constructor, global.Promise);
+
 // Connect mongo database
 mongoose.connect('mongodb://oscon.saintjoe-cs.org:2016/oscon-test')
 

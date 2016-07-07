@@ -30,13 +30,13 @@ ipc.send('get-app-path')
 // 1.
 // Select one of the two to configure for local/cloud access
 // Local assets
-// const assetBase = '/oscon-test?'
+const assetBase = '/oscon-test?'
 //
 // Cloud assets
-const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
-const queryBase = queryTarget
+const queryBase = "query=query+{imageRecs{_id, title, filename, description}}"
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -54,7 +54,7 @@ const Button = React.createClass({
 })
 
 // Compose NavLink to the zoomer view for each image
-const LinkComponent = React.createClass({
+const ZoomLinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
@@ -69,8 +69,30 @@ const LinkComponent = React.createClass({
   }
 })
 
+// Compose NavLink to edit function
+const EditLinkComponent = React.createClass({
+
+  render: function(){
+    // Make a NavLink out of a column value
+    // The rendered object is a zoomer for this image
+    const target = this.props.data,
+      renderBase = "edit/",
+      renderPath = renderBase + target;
+
+    return <NavLink to={renderPath}>
+      Edit
+    </NavLink>
+  }
+})
+
 // Configuration object for Griddle
 const customColumnMetadata = [
+  {
+    columnName: "_id",
+    displayName: "",
+    cssClassName: "editColumn",
+    customComponent: EditLinkComponent
+  },
   {
     "columnName": "title",
     "displayName": "Image Title"
@@ -78,7 +100,7 @@ const customColumnMetadata = [
   {
     "columnName": "filename",
     "displayName": "Zoomer Link",
-    "customComponent": LinkComponent
+    "customComponent": ZoomLinkComponent
   },
   {
     "columnName": "description",
@@ -89,26 +111,20 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // Note the irony of using AJAX to get GraphQL . . .
-    $.ajax({
-      type: "POST",
-      url: this.state.fetchURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        // Is the data from a "fetch all" query, or a lookup search?
-        if (data.data.imageRecs)
-          this.setState({records: data.data.imageRecs})
-        else
-          this.setState({records: data.data.lookup})
-        data.data = undefined
-        // console.log('In AJAX handler about to set session storage')
-        sessionStorage.setItem('browse', JSON.stringify(this.state))
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(this.state.url, status, err.toString());
-        }.bind(this)
-      })
+    let URL = this.state.fetchURL,
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      if (json.data.imageRecs)
+        this.setState({records: json.data.imageRecs})
+      else
+        this.setState({records: json.data.lookup})
+      json.data = undefined
+      sessionStorage.setItem('browse', JSON.stringify(this.state))
+    }.bind(this))
   },
   getInitialState: function() {
     let initValues = {
@@ -117,21 +133,22 @@ const InfoTable = React.createClass({
     }
 
     // If we're remembering last query, pre-load it from sessionStorage
+    // console.log('Checking session storage in initial state')
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     return initValues;
   },
   componentDidMount: function() {
-    console.log('Mounting event')
-
+    // console.log('Mounting event')
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
 
     // Initialize fetchURL from props
     this.state.fetchURL = this.props.url
+    // console.log('Fetching: ' + this.state.fetchURL)
 
-    console.log('State at mounting: ' + JSON.stringify(this.state))
+    // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
     if ((this.state.records == null) || this.state.records.length == 0)
@@ -146,7 +163,7 @@ const InfoTable = React.createClass({
   onSearch(input) {
     if (!input) return
     console.info(`Searching "${input}"`)
-    queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){title, filename, description, source, taglist}}'
+    queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){_id, title, filename, description, source, taglist}}'
 
     // 2.
     // Local assets
@@ -160,6 +177,7 @@ const InfoTable = React.createClass({
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
+    // This is a very heavy moment we switch to a new view
     handleCustomSlideshowClick() {
       let cloudBase = '/slides/'
       this.context.router.push(cloudBase + queryTarget)
@@ -171,36 +189,42 @@ const InfoTable = React.createClass({
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
-  render: function() {
-    return (
-      <Section>
-        <center><h2>Current image data</h2></center>
-        <SearchBar
-          placeholder="search images"
-          onChange={this.onSearchChange}
-          onSearch={this.onSearch} />
-        <div>
-          <Button
-            label="Slideshow of this imageset"
-            handleClick={this.handleCustomSlideshowClick}
-          />
-          <Button
-            label="Reset search"
-            handleClick={this.clearStore}
-          />
-        </div>
-        <Griddle results={this.state.records}
-          columns={['title','filename', "description"]}
-          columnMetadata={customColumnMetadata}
-          showSettings={true}
-          resultsPerPage={10}
-          />
-      </Section>
-    )}
+    render: function() {
+      return (
+        <Section>
+          <center>
+            <h2>
+              Current image data
+            </h2>
+          </center>
+          <SearchBar
+            placeholder={"Search image database"}
+            onChange={this.onSearchChange}
+            onSearch={this.onSearch} />
+          <div>
+            <Button
+              label="Slideshow of this imageset"
+              handleClick={this.handleCustomSlideshowClick}
+              />
+            <Button
+              label="Reset search"
+              handleClick={this.clearStore}
+              />
+          </div>
+          <Griddle
+            results={this.state.records}
+            columns={['_id','title','filename', "description"]}
+            columnMetadata={customColumnMetadata}
+            showSettings={true}
+            resultsPerPage={10}
+            />
+        </Section>
+      )}
   })
 
 
 // Here is the key to allowing a click to cause a view change
+// I do not understand it well
 InfoTable.contextTypes = {
   router: React.PropTypes.object.isRequired
   }
@@ -212,7 +236,7 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url={ assetBase + queryTarget}/>
+          url={ assetBase + queryBase}/>
       </div>
     )
   }

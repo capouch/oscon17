@@ -1,3 +1,8 @@
+/*
+  ** Slideshow: Provide option-heavy slideshow using converted images
+    This is a slightly-patched version of react-image-gallery
+*/
+
 import React from 'react'
 import { Section } from 'neal-react'
 
@@ -8,10 +13,10 @@ import ImageGallery from 'react-image-gallery'
 
 // 1.
 // Cloud assets
-const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
 //
 // Local assets
-// const assetBase = '/oscon-test?'
+const assetBase = '/oscon-test?'
 
 // If no parameters fetch all the images
 const defaultQuery= 'query=query+{imageRecs{ title, filename}}'
@@ -34,7 +39,7 @@ export default class extends React.Component {
     }
   }
   componentDidMount() {
-    console.log('loadUrl is ' + this.state.loadUrl)
+    // console.log('loadUrl is ' + this.state.loadUrl)
     // If a parameterized custom list, render it
     // Note: this test has a callback!!
     if (this.props.params.viewSet) {
@@ -47,15 +52,14 @@ export default class extends React.Component {
     }
   }
   loadRecordsFromServer() {
-    console.log('Getting records')
+    // console.log('Slideshow: Getting records')
       $.ajax({
         type: "POST",
         url: this.state.loadUrl,
         dataType: 'json',
         cache: false,
         success: function(data) {
-          console.log('Just fetched: ' + this.state.loadUrl)
-          // console.log('Making a server trip!!!! ' + JSON.stringify(data.data));
+          // console.log('Just fetched: ' + this.state.loadUrl)
 
 
           // Map data into the proper format
@@ -63,7 +67,7 @@ export default class extends React.Component {
           //
           // 2.
           // cloud assets:
-          const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
+          // const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
           // local assets:
           // const urlBase = '/'
 

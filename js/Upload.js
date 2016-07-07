@@ -1,6 +1,6 @@
 /*
- * spa.upload.js
- *   Handle uplads of new images
+ *    Upload: Hand upload of new images
+ *    Input image metadata
  */
 
 import React from 'react'
@@ -39,12 +39,11 @@ let  serverFilename = "";
     uploadprogress: null,
     sending: null,
     success: function(file, response) {
-      // Server now sends back ultimate filename
-      console.log('Got ' + response)
+      // This callback receives filename from the server
+      // console.log('Got ' + response)
       serverFilename = response
       // Cut the quotes
       serverFilename = serverFilename.replace(/"/g,"")
-      console.log('Cut quotes: ' + serverFilename)
     },
     complete: null,
     canceled: null,
@@ -69,8 +68,8 @@ let  serverFilename = "";
       acceptedFiles: "image/jpeg,image/png,image/gif,image/tiff",
     }
 
-// Data structure
 
+// fieldValues provide form input
 let fieldValues = {
   title : null,
   description : null,
@@ -78,15 +77,13 @@ let fieldValues = {
   taglist : null
 }
 
+// We blank fields after each data entry event
 const blankFieldValues = {
   title: null,
   description: null,
   source: null,
   taglist: null
 }
-
-// Var to hold POST URL
-let queryURL = ""
 
 // Code inspired by this tutorial:
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
@@ -98,41 +95,29 @@ export default React.createClass ( {
   }
  },
  saveValues: function(fields) {
-  return function() {
-    // Remember, `fieldValues` is set at the top of this file, we are simply appending
-    // to and overriding keys in `fieldValues` with the `fields` with Object.assign
+    // Callback function for InfoFields sub-module
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
     fieldValues = Object.assign({}, fieldValues, fields)
     fieldValues.filename = serverFilename
     // Put together (awful-looking) query URL
-    queryURL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
+    let URL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
-      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}"
+      +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
     console.log(queryURL)
     // Reset the field values here!!
     fieldValues = Object.assign({}, fieldValues, blankFieldValues)
-    $.ajax({
-      type: "POST",
-      url: queryURL,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        console.log('Returned from mutation call')
-        //console.log('Making a server trip!!!! ' + JSON.stringify(data.data.imageRecs));
-        // this.setState({records: data.data.imageRecs});
-      }.bind(this),
-        error: function(xhr, status, err) {
-        console.error(status, err.toString());
-      }.bind(this)
+    // console.log('Sending: ' + URL)
+    fetch(req).then(function(response) {
+      return response.json()
     })
-  }()
-  },
- nextStep: function() {
+},
+
+nextStep: function() {
   this.setState({
     step : this.state.step + 1
     })
  },
- // Same as nextStep, but decrementing
  previousStep: function() {
   this.setState({
     step : this.state.step - 1
@@ -141,19 +126,23 @@ export default React.createClass ( {
  render: function() {
    switch(this.state.step) {
      case 1:
-      return (
-        <Section>
-        <DropZoneComponent config={componentConfig}
-          eventHandlers={eventHandlers}
-          djsConfig={djsConfig} />
-        <InfoFields
-          fieldValues={fieldValues}
-          nextStep={this.nextStep}
-          saveValues={this.saveValues} />
-      </Section>
-      )
-  case 2:
-    return <Confirmation />
-  }
+     return (
+       <Section>
+        <div><center><h2>Live App: Please just look!!</h2></center></div>
+         <DropZoneComponent
+           config={componentConfig}
+           eventHandlers={eventHandlers}
+           djsConfig={djsConfig} />
+
+         <InfoFields
+           fieldValues={fieldValues}
+           nextStep={this.nextStep}
+           isCreate={true}
+           saveValues={this.saveValues} />
+       </Section>
+     )
+     case 2:
+     return <Confirmation />
+   }
  }
 })

@@ -7,3 +7,15 @@ mutation {
     taglist: "Baughman, Medaryville, Posey"
   })
 }
+
+// Update
+mutation {
+  updateImage(data: {
+        _id: "57228bc4a0613fe711e4605b",
+        title: "St. Marks Church Medaryville Ind. ca 1910",
+        description: "eBay RPPC, Posey house in background",
+        source: "Brian Capouch",
+        taglist: "Posey, Baughman, Medaryville, St. Marks, German Lutheran"
+      }
+  )
+}

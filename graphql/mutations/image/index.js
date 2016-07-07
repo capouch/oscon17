@@ -1,5 +1,9 @@
-import addImage from './add';
+import addImage from './add'
+import updateImage from './update'
+import deleteImage from './delete'
 
 export default {
-  addImage
+  addImage,
+  updateImage,
+  deleteImage
 };

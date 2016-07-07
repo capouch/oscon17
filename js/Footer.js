@@ -1,8 +1,13 @@
+/*
+  ** Common footer used by all views
+*/
+
 import React from 'react'
 import {
   Footer, FooterAddress,
 } from "neal-react"
 
+// We appropriate slightly inappropriate names from neal-react sample app
 const brandName = "Scene:History"
 const brand = <span>{brandName}</span>
 
@@ -27,7 +32,7 @@ const NavFooter = React.createClass({
     }
   })
 
-// Won't call this footer b/c the neal-react kit already uses the name
+// We keep default export object anonymous 
 export default class extends React.Component {
     constructor(props) {
       super(props)

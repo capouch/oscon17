@@ -1,3 +1,8 @@
+/*
+  ** Zoom: Wrap the OpenSeaDragon client in a React component
+    The functionality provided by this module was the inspiration for the app
+ */
+
 import OpenSeaDragon from 'openseadragon'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -30,12 +35,12 @@ const renderImage = function(selection) {
   // console.log('File prefix: ' + filePrefix);
 
 
-// 1.
-// Use cloud-based image assets
-const assetBase ="http://oscon.saintjoe-cs.org:2016/"
-//
-// Use local assets
-// const assetBase = ''
+  // 1.
+  // Use cloud-based image assets
+  // const assetBase ="http://oscon.saintjoe-cs.org:2016/"
+  //
+  // Use local assets
+  const assetBase = ''
 
   const baseName = assetBase + selection + '.dzi'
   console.log('In the renderImage method about to render ' + baseName)
@@ -63,21 +68,23 @@ const ZoomBox = React.createClass ({
     )
   }
 })
+
 // Render in a component
-export default class extends React.Component {
+export default class UniqueNewYork extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
 
-    // This is the default case, i.e. Zoomer with no parameters
+    // This module has two routes, and thus two entry points
+    // The default case, i.e. Zoomer with no parameters
     let sendParms = "../tiles/bremer"
 
     // This fires when properties are sent explictly
     if ( this.props.params.imageId ) {
       // The most time-costly two dots of my life!!
       sendParms = '/tiles/' + this.props.params.imageId
-      console.log('Going after: ' + sendParms);
+      // console.log('Going after: ' + sendParms);
       }
     console.log('Sending parms of ' + sendParms);
     return (

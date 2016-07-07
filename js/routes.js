@@ -1,9 +1,6 @@
 /*
- * routes.js - module to provide routing
- * Danilo Zekovic
- */
-
-// Note that these are SERVER-SIDE routes!!
+ * routes.js - module to provide server-side routing
+*/
 
 import sharp from 'sharp'
 import multer from 'multer'
@@ -52,6 +49,11 @@ export default function ( router, server ) {
 
   router.get('/slides*', function(req, res) {
     console.log('Server slides chosen')
+    res.sendFile('index.html', options)
+  });
+
+  router.get('/edit*', function(req, res) {
+    console.log('Server edit chosen')
     res.sendFile('index.html', options)
   });
 

@@ -14,7 +14,7 @@ import bodyParser from 'body-parser'
 import schema from './graphql'
 import configRoutes from './js/routes'
 
-let privateKey = fs.readFileSync('/home/brianc/CERT/server.key'),
+const privateKey = fs.readFileSync('/home/brianc/CERT/server.key'),
   certificate = fs.readFileSync('/home/brianc/CERT/server.crt'),
   credentials = {key: privateKey, cert: certificate}
 

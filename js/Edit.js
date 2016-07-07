@@ -23,7 +23,7 @@ let id = '',
 const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
     // Fix me: hardcoded URL won't work if we aim at the cloud!!
-    let URL = 'http://127.0.0.1:2016/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = '/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     fetch(req).then(function(response) {
       return response.json()

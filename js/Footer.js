@@ -14,9 +14,10 @@ const brand = <span>{brandName}</span>
 const businessAddress = (
   <address>
     <strong>{brandName}</strong><br/>
-    Saint Josephs College<br/>
-    Rensselaer IN 47978<br/>
-    +1 (219) 866-6000
+    Palaver Consulting<br/>
+    8979 N. Lowes Road<br />
+    Monon IN 47959<br/>
+    +1 (219) 253-8181
   </address>
 )
 
@@ -32,7 +33,7 @@ const NavFooter = React.createClass({
     }
   })
 
-// We keep default export object anonymous 
+// We keep default export object anonymous
 export default class extends React.Component {
     constructor(props) {
       super(props)

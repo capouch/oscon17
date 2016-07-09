@@ -26,7 +26,8 @@ export default React.createClass ( {
   getInitialState: function() {
     return {
       auth: firebase.auth(),
-      provider: new firebase.auth.GoogleAuthProvider,
+      gprovider: new firebase.auth.GoogleAuthProvider,
+      fprovider = new firebase.auth.FacebookAuthProvider();
       isLoggedIn: false
       }
   },
@@ -46,8 +47,25 @@ export default React.createClass ( {
   },
   signIn: function() {
   // Sign in Firebase using popup auth and Google as the identity provider.
-    this.state.auth.signInWithPopup(this.state.provider);
+    this.state.auth.signInWithPopup(this.state.gprovider);
   },
+  gSignIn: function () {
+    firebase.auth().signInWithPopup(this.state.fprovider).then(function(result) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+  // ...
+  });
+  }
   signOut:  function() {
   // Sign out of Firebase.
     this.state.auth.signOut();
@@ -86,7 +104,11 @@ export default React.createClass ( {
          <Button
            label="Log in with Google"
            handleClick={this.signIn}
-           />
+          />
+           <Button
+             label="Log in with Facebook"
+             handleClick={this.gSignIn}
+          />
         </Section>
       )
     }

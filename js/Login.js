@@ -59,6 +59,7 @@ export default React.createClass ( {
       return true;
     }
 
+    // This structure doesn't do anything at present
     // Display a message to the user using a Toast.
     let data = {
       message: 'You must sign-in first',

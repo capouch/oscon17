@@ -144,9 +144,9 @@ nextStep: function() {
    console.log('Login state: ' + this.checkSignedInWithMessage())
    switch(this.state.step) {
      case 1:
+     if (this.checkSignedInWithMessage()) {
      return (
        <Section>
-        <div><center><h2>Live App: Please just look!!</h2></center></div>
          <DropZoneComponent
            config={componentConfig}
            eventHandlers={eventHandlers}
@@ -159,6 +159,13 @@ nextStep: function() {
            saveValues={this.saveValues} />
        </Section>
      )
+   } else {
+     return (
+       <Section>
+        <div><center><h2>You must be logged in to Upload</h2></center></div>
+       </Section>
+     )
+   }
      case 2:
      return <Confirmation />
    }

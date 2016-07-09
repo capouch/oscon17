@@ -84,7 +84,7 @@ export default React.createClass ( {
         <Section>
          <div><center><h2>You are not authorized!!</h2></center></div>
          <Button
-           label="Log in"
+           label="Log in with Google"
            handleClick={this.signIn}
            />
         </Section>

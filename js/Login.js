@@ -1,17 +1,9 @@
 
 /*
-let auth = firebase.auth(),
-  provider = new firebase.auth.GoogleAuthProvider()
-  auth.onAuthStateChanged(function(user) {
-    if (user)
-      console.log('User is logged in!!')
-    else
-      console.log('User is logged out')
-    }
-  )
-  auth.signInWithPopup(provider)
-  auth.signOut()
-  */
+    Login: Module to handle Firebase authentication
+    Begun 9 July 2016
+*/
+
 import React from "react"
 import { Section } from "neal-react"
 

@@ -93,8 +93,23 @@ export default React.createClass ( {
  getInitialState: function() {
    // Stepping stages are overkill for this project, but intrinsically interesting
    return {
-    step : 1,
+     auth: firebase.auth(),
+     step : 1,
   }
+ },
+ checkSignedInWithMessage: function() {
+   // Return true if the user is signed in Firebase
+   if (this.state.auth.currentUser) {
+     return true;
+   }
+
+   // Display a message to the user using a Toast.
+   let data = {
+     message: 'You must sign-in first',
+     timeout: 2000
+   };
+   // this.signInSnackbar.MaterialSnackbar.showSnackbar(data);
+   return false
  },
  saveValues: function(fields) {
     // Callback function for InfoFields sub-module
@@ -126,6 +141,7 @@ nextStep: function() {
     })
  },
  render: function() {
+   console.log('Login state: ' + this.checkSignedInWithMessage())
    switch(this.state.step) {
      case 1:
      return (

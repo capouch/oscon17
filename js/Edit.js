@@ -34,6 +34,7 @@ const EditDeleteWidget = React.createClass({
   },
   getInitialState: function() {
     return {
+      auth: firebase.auth(),
       step: 1
     }
   },
@@ -71,6 +72,20 @@ const EditDeleteWidget = React.createClass({
         return response.json()
       }.bind(this))
   },
+  checkSignedInWithMessage: function() {
+    // Return true if the user is signed in Firebase
+    if (this.state.auth.currentUser) {
+      return true;
+    }
+
+    // Display a message to the user using a Toast.
+    let data = {
+      message: 'You must sign-in first',
+      timeout: 2000
+    };
+    // this.signInSnackbar.MaterialSnackbar.showSnackbar(data);
+    return false
+  },
   deleteRecord: function() {
       // Callback to remove an image record in the DB
 
@@ -92,40 +107,54 @@ const EditDeleteWidget = React.createClass({
     // console.log('rendering widget')
     switch(this.state.step) {
       case 1:
-      if (!this.state.record) {
-        // Data is not ready yet
-        return (
-          // This causes the screen to flash!!
-          <div> Waiting </div>
-        )
-      }
-      else {
-        // console.log(JSON.stringify(this.state))
+      if (this.checkSignedInWithMessage()) {
+        if (!this.state.record) {
+          // Data is not ready yet
+          return (
+            // This causes the screen to flash!!
+            <div> Waiting </div>
+          )
+        }
+        else {
+          // console.log(JSON.stringify(this.state))
 
-        // Note: async strangeness possible here . .
-        fieldValues.title = this.state.record.title
-        fieldValues.description = this.state.record.description
-        fieldValues.source = this.state.record.source
-        fieldValues.taglist = this.state.record.taglist
-        // These next two are not subject to user editing
-        id = this.state.record._id
-        serverFilename = this.state.record.filename
+          // Note: async strangeness possible here . .
+          fieldValues.title = this.state.record.title
+          fieldValues.description = this.state.record.description
+          fieldValues.source = this.state.record.source
+          fieldValues.taglist = this.state.record.taglist
+          // These next two are not subject to user editing
+          id = this.state.record._id
+          serverFilename = this.state.record.filename
+          return (
+            <div>
+              <Section>
+                <center>
+                  <h2>
+                    Edit/Delete image record values
+                  </h2>
+                </center>
+                <InfoFields
+                  fieldValues={fieldValues}
+                  isCreate={false}
+                  nextStep={this.nextStep}
+                  saveValues={this.saveValues}
+                  deleteRecord={this.deleteRecord}/>
+              </Section>
+            </div>
+          )
+        }
+      } else {
         return (
-          <div>
-            <Section>
+          <Section>
+            <div>
               <center>
                 <h2>
-                  Edit/Delete image record values
+                  You must be logged in to Edit
                 </h2>
               </center>
-              <InfoFields
-                fieldValues={fieldValues}
-                isCreate={false}
-                nextStep={this.nextStep}
-                saveValues={this.saveValues}
-                deleteRecord={this.deleteRecord}/>
-            </Section>
-          </div>
+            </div>
+          </Section>
         )
       }
       case 2:

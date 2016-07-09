@@ -65,7 +65,7 @@ export default React.createClass ( {
       var credential = error.credential;
   // ...
   });
-  }
+  },
   signOut:  function() {
   // Sign out of Firebase.
     this.state.auth.signOut();

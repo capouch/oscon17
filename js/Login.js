@@ -64,9 +64,64 @@ export default React.createClass ( {
       // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
       console.log("Facebook failure: " + errorMessage + 'and ' + email)
-  // ...
-  });
+      // ...
+    });
   },
+  /* Code below will need to be used to resolve Firebase's only one email deal
+  // In other words, this is documentation for a future work session
+  auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch(function(error) {
+  // An error happened.
+  if (error.code === 'auth/account-exists-with-different-credential') {
+    // Step 2.
+    // User's email already exists.
+    // The pending Facebook credential.
+    var pendingCred = error.credential;
+    // The provider account's email address.
+    var email = error.email;
+    // Get registered providers for this email.
+    auth.fetchProvidersForEmail(email).then(function(providers) {
+      // Step 3.
+      // If the user has several providers,
+      // the first provider in the list will be the "recommended" provider to use.
+      if (providers[0] === 'password') {
+        // Asks the user his password.
+        // In real scenario, you should handle this asynchronously.
+        var password = promptUserForPassword(); // TODO: implement promptUserForPassword.
+        auth.signInWithEmailAndPassword(email, password).then(function(user) {
+          // Step 4a.
+          return user.link(pendingCred);
+        }).then(function() {
+          // Facebook account successfully linked to the existing Firebase user.
+          goToApp();
+        });
+        return;
+      }
+      // All the other cases are external providers.
+      // Construct provider object for that provider.
+      // TODO: implement getProviderForProviderId.
+      var provider = getProviderForProviderId(providers[0]);
+      // At this point, you should let the user know that he already has an account
+      // but with a different provider, and let him validate the fact he wants to
+      // sign in with this provider.
+      // Sign in to provider. Note: browsers usually block popup triggered asynchronously,
+      // so in real scenario you should ask the user to click on a "continue" button
+      // that will trigger the signInWithPopup.
+      auth.signInWithPopup(provider).then(function(result) {
+        // Remember that the user may have signed in with an account that has a different email
+        // address than the first one. This can happen as Firebase doesn't control the provider's
+        // sign in flow and the user is free to login using whichever account he owns.
+        // Step 4b.
+        // Link to Facebook credential.
+        // As we have access to the pending credential, we can directly call the link method.
+        result.user.link(pendingCred).then(function() {
+          // Facebook account successfully linked to the existing Firebase user.
+          goToApp();
+        });
+      });
+    });
+  }
+});
+*/
   signOut:  function() {
   // Sign out of Firebase.
     this.state.auth.signOut();

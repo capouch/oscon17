@@ -27,7 +27,7 @@ export default React.createClass ( {
     return {
       auth: firebase.auth(),
       gprovider: new firebase.auth.GoogleAuthProvider,
-      fprovider = new firebase.auth.FacebookAuthProvider();
+      fprovider = new firebase.auth.FacebookAuthProvider(),
       isLoggedIn: false
       }
   },

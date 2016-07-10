@@ -22,9 +22,8 @@ const NavHeader = React.createClass({
         <NavItem><NavLink to="/login-out" className="nav-link">Login/Logout</NavLink></NavItem>
         <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
         <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
-        <NavItem><NavLink to="/zoomer" className="nav-link">Cemetery</NavLink></NavItem>
         <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
-        <NavItem><NavLink to="/zoomer" className="nav-link">Zoomer</NavLink></NavItem>
+        <NavItem><a href="http://www.independence-church.org" target="_blank" className="nav-link">Old Site</a></NavItem>
       </Navbar>
       )}
     })

@@ -14,10 +14,12 @@ const buttonStyle = {
 const Button = React.createClass({
   render: function () {
     return (
-      <button
+      <input
+        type="image"
         className="btn btn-default"
-        style={buttonStyle}
-        onClick={this.props.handleClick}>{this.props.label}</button>
+        // style={buttonStyle}
+        src={this.props.image}
+        onClick={this.props.handleClick}></input>
     )
   }
 })
@@ -148,7 +150,7 @@ export default React.createClass ( {
          <Section>
           <div><center><h2>Logged in and ready!!</h2></center></div>
           <Button
-            label="Log out"
+            image='img/logout.png'
             handleClick={this.signOut}
             />
          </Section>
@@ -157,14 +159,17 @@ export default React.createClass ( {
       return (
         <Section>
          <div><center><h2>You are not authorized!!</h2></center></div>
+         <div>
          <Button
-           label="Log in with Google"
+           image='img/google.png'
            handleClick={this.signIn}
           />
+        <p/>
            <Button
-             label="Log in with Facebook"
+             image='img/facebook.png'
              handleClick={this.gSignIn}
           />
+        </div>
         </Section>
       )
     }

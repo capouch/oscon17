@@ -111,6 +111,7 @@ const EditDeleteWidget = React.createClass({
     switch(this.state.step) {
       case 1:
       if (this.checkSignedInWithMessage()) {
+        // Onlyi allow editing when there is a valid logged-in user
         if (!this.state.record) {
           // Data is not ready yet
           return (
@@ -148,6 +149,7 @@ const EditDeleteWidget = React.createClass({
           )
         }
       } else {
+        // Post message that edits are only for authorized users
         return (
           <Section>
             <div>

@@ -33,7 +33,7 @@ const NavHeader = React.createClass({
               <a href="http://oscon.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
                 2016 Page
               </a>
-              <a href="/oscon-test" className="dropdown-item" target="_blank">
+              <a href="/graphql" className="dropdown-item" target="_blank">
                 GraphiQL
               </a>
             </DropdownMenu>

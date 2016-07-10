@@ -13,7 +13,7 @@ module.exports = {
         target: 'http://localhost:2016',
         secure: false,
       },
-      '/oscon-test*': {
+      '/graphql*': {
       target: 'http://localhost:2016',
       secure: false,
     },

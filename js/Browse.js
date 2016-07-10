@@ -20,10 +20,10 @@ import SearchBar from 'react-search-bar'
 // 1.
 // Select one of the two to configure for local/cloud access
 // Local assets
-const assetBase = '/oscon-test?'
+const assetBase = '/graphql?'
 //
 // Cloud assets
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
 const queryBase = "query=query+{imageRecs{_id, title, filename, description}}"
@@ -159,7 +159,7 @@ const InfoTable = React.createClass({
     // Local assets
     let searchURL = assetBase + queryTarget
     // Cloud assets
-    // let searchURL = 'http://oscon.saintjoe-cs.org:2016/oscon-test?' + queryTarget
+    // let searchURL = 'http://oscon.saintjoe-cs.org:2016/graphql?' + queryTarget
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){

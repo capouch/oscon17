@@ -7,7 +7,7 @@
 import React from "react"
 import { Section } from "neal-react"
 
-// Wrap an HTML button into a component
+// Wrap an HTML input element into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
@@ -27,15 +27,12 @@ const Button = React.createClass({
 export default React.createClass ( {
   getInitialState: function() {
     return {
-      auth: firebase.auth(),
-      gprovider: new firebase.auth.GoogleAuthProvider,
-      fprovider: new firebase.auth.FacebookAuthProvider(),
-      isLoggedIn: false
+      isLoggedIn: false,
       }
   },
   componentWillMount: function() {
-    // Something wrong here--this function gets called twice after second render
-    this.state.auth.onAuthStateChanged(this.onAuthStateChanged)
+    // This callback seems to confuse react after the first time it's called
+    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
    },
   onAuthStateChanged: function(user) {
     if (user) {
@@ -47,12 +44,12 @@ export default React.createClass ( {
       console.log('User is logged out')
     }
   },
-  signIn: function() {
+  googleSignIn: function() {
   // Sign in Firebase using popup auth and Google as the identity provider.
-    this.state.auth.signInWithPopup(this.state.gprovider);
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider);
   },
-  gSignIn: function () {
-    firebase.auth().signInWithPopup(this.state.fprovider).then(function(result) {
+  fbSignIn: function () {
+    firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(function(result) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       var token = result.credential.accessToken;
       // The signed-in user info.
@@ -126,12 +123,12 @@ export default React.createClass ( {
 */
   signOut:  function() {
   // Sign out of Firebase.
-    this.state.auth.signOut();
+    firebase.auth().signOut();
   },
   // Returns true if user is signed-in. Otherwise false and displays a message.
   checkSignedInWithMessage: function() {
     // Return true if the user is signed in Firebase
-    if (this.state.auth.currentUser) {
+    if (firebase.auth().currentUser) {
       return true;
     }
 
@@ -162,12 +159,12 @@ export default React.createClass ( {
          <div>
          <Button
            image='img/google.png'
-           handleClick={this.signIn}
+           handleClick={this.googleSignIn}
           />
         <p/>
            <Button
              image='img/facebook.png'
-             handleClick={this.gSignIn}
+             handleClick={this.fbSignIn}
           />
         </div>
         </Section>

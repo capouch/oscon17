@@ -5,10 +5,6 @@
 
 import React from 'react'
 import { Section } from 'neal-react'
-
-// This component has been manually patched as per below PR
-//  which the developer has yet to merge
-// https://github.com/xiaolin/react-image-gallery/pull/51/files
 import ImageGallery from 'react-image-gallery'
 
 // 1.
@@ -53,47 +49,32 @@ export default class extends React.Component {
   }
   loadRecordsFromServer() {
     // console.log('Slideshow: Getting records')
-      $.ajax({
-        type: "POST",
-        url: this.state.loadUrl,
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
-          // console.log('Just fetched: ' + this.state.loadUrl)
-
-          // Map data into the proper format
-          // Three ways to do this: cloud, local server, or filesystem (via Electron)
-          //
-          // 2.
-          // cloud assets:
-          // const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
-          // local assets:
-          const urlBase = '/'
-          let source = []
-
-          // default load, or filtered through lookup?
-          if (data.data.imageRecs)
-            source = data.data.imageRecs
-          else
-            source = data.data.lookup
-
-          // Generate parameters for viewer component
-          const imageRecs = source.map(function (oneImage) {
-              return {
-                original: urlBase + 'images/' + oneImage.filename + '-1k',
-                thumbnail: urlBase + 'thumbs/' + oneImage.filename + '-thumb',
-                description: oneImage.title
-              }
-            })
-
-            // Display the data!!
-            this.setState({images: imageRecs})
-        }.bind(this),
-          error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString())
-        }.bind(this)
-      })
-    }
+    let URL = this.state.loadUrl,
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      // 2.
+      // cloud assets:
+      // const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
+      // local assets:
+      const urlBase = '/'
+      let source = []
+      if (json.data.imageRecs)
+        source = json.data.imageRecs
+      else
+        source = json.data.lookup
+      const imageRecs = source.map(function (oneImage) {
+        return {
+          original: urlBase + 'images/' + oneImage.filename + '-1k',
+          thumbnail: urlBase + 'thumbs/' + oneImage.filename + '-thumb',
+          description: oneImage.title
+          }
+        })
+      this.setState( { images: imageRecs } )
+    }.bind(this))
+  }
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
       // refresh setInterval

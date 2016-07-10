@@ -4,17 +4,24 @@ import graphql from 'graphql'
 import graphqlHTTP from 'express-graphql'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import fs from 'fs'
 
 import http from 'http'
+import https from 'https'
 import bodyParser from 'body-parser'
 
 // Our custom schema
 import schema from './graphql'
 import configRoutes from './js/routes'
 
+const privateKey = fs.readFileSync('/home/brianc/CERTS/palaver.key'),
+  certificate = fs.readFileSync('/home/brianc/CERTS/fullchain.pem'),
+  credentials = {key: privateKey, cert: certificate}
+
 const app = express(),
   router = express.Router(),
-  server = http.createServer( app )
+  server = http.createServer( app ),
+  sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images remotely on local-hosted server
 //  Without it, "no cross-domain" policy blocks browser access!!
@@ -47,7 +54,8 @@ mongoose.Promise = global.Promise;
 // mongoose.connect('mongodb://localhost/oscon-test')
 
 // start server
-server.listen(8181)
+server.listen(2016)
+sserver.listen(2017)
 console.log(
   'Express server listening on port %d in %s mode',
   server.address().port, app.settings.env

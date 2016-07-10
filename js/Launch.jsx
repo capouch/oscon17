@@ -22,25 +22,15 @@ import {
 } from "neal-react"
 
 const sampleCode =
-`getInitialState: function() {
-  let initValues = {
-    records: [],
-    fetchURL: ""
-  }
-  console.log('Getting state again')
-  if (localStorage.getItem('browse')) {
-    initValues = JSON.parse(localStorage.getItem('browse'))
-    }
-  console.log('Init values ' + JSON.stringify(initValues))
-  return initValues;
-},
-componentDidMount: function() {
-  console.log('Mounting event')
-  queryTarget = this.state.fetchURL
-  this.state.fetchURL = this.props.url
-  if (queryTarget.indexOf('?')) {
-    queryTarget = queryTarget.substring((queryTarget.indexOf('?')+1))
-  }
+`  loadRecordsFromServer: function() {
+    let URL = '/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+      req = new Request(URL, {method: 'POST', cache: 'reload'})
+    fetch(req).then(function(response) {
+      return response.json()
+    }).then (function(json) {
+      // console.log('json object: ' + JSON.stringify(json))
+      this.setState({record: json.data.imageRec})
+    }.bind(this))
 `
 
 export default (props) => {

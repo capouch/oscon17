@@ -19,7 +19,8 @@ const NavHeader = React.createClass({
     return (
       <Navbar brand={brand}>
         <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-        <NavItem><NavLink to="/browse" className="nav-link">About</NavLink></NavItem>
+        <NavItem><NavLink to="/login-out" className="nav-link">Login/Logout</NavLink></NavItem>
+        <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
         <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
         <NavItem><NavLink to="/upload" className="nav-link">Blog</NavLink></NavItem>
         <NavItem><NavLink to="/zoomer" className="nav-link">Cemetery</NavLink></NavItem>

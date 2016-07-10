@@ -69,13 +69,13 @@ export default (props) => {
       <Section>
         <CustomerQuotes>
           <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
-            <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
+            <p>I have many memories of my grandmother telling me about Homecoming at the Church each August.  I cannot wait to see it open again</p>
           </CustomerQuote>
           <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
             <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
           </CustomerQuote>
           <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
-            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
+            <p>I have over twenty relatives buried in the cemetery.  It is such a peaceful place!</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

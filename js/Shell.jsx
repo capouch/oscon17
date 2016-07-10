@@ -15,7 +15,7 @@ import Edit from './Edit'
 import Zoom from './Zoom'
 import Upload from './Upload'
 import SlideShow from './SlideShow.js'
-import LoginOut from './Login.js'
+// import LoginOut from './Login.js'
 
 // Components rendered on every view
 import Header from './Header'
@@ -44,7 +44,6 @@ ReactDOM.render((
       <IndexRoute name ="home" component = { Home } />
       <Route path = "browse" component = { Browse } />
       <Route path = "edit/:imageId" component = { Edit } />
-      <Route path = "login-out" component = { LoginOut } />
       <Route path = "zoomer" component = { Zoom } />
       <Route path = "zoomer/:imageId" component = { Zoom }/>
       <Route path = "upload" component = { Upload } />

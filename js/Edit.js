@@ -21,6 +21,39 @@ let id = '',
 
 // This component is something of a love child between Browse and Upload
 const EditDeleteWidget = React.createClass({
+  getInitialState: function() {
+    return {
+      isLoggedIn: this.checkSignedInWithMessage(),
+      step: 1
+    }
+  },
+  componentDidMount: function() {
+    // console.log('Mounting event')
+    // console.log(this.state.record)
+
+    // Extract query part only of URL (i.e. the part after the '?')
+    let queryTarget = "";
+    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+
+    // console.log('State at mounting: ' + JSON.stringify(this.state))
+    this.loadRecordsFromServer()
+  },
+  onAuthStateChanged: function(user) {
+     if (user) {
+       this.setState( {
+         isLoggedIn: true,
+       })
+     }
+     else {
+       this.setState( {
+         isLoggedIn: false,
+       })
+     }
+   },
+  checkSignedInWithMessage: function() {
+    // Return true if the user is signed in Firebase
+    return firebase.auth().currentUser;
+  },
   loadRecordsFromServer: function() {
     // Fix me: hardcoded URL won't work if we aim at the cloud!!
     let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
@@ -32,26 +65,10 @@ const EditDeleteWidget = React.createClass({
       this.setState({record: json.data.imageRec})
     }.bind(this))
   },
-  getInitialState: function() {
-    return {
-      auth: firebase.auth(),
-      step: 1
-    }
-  },
   nextStep: function() {
     this.setState({
       step : this.state.step + 1
     })
-  },
-  componentDidMount: function() {
-    // console.log('Mounting event')
-    // console.log(this.state.record)
-
-    // Extract query part only of URL (i.e. the part after the '?')
-    let queryTarget = "";
-
-    // console.log('State at mounting: ' + JSON.stringify(this.state))
-    this.loadRecordsFromServer()
   },
   saveValues: function(fields) {
       // Callback function for InfoFields sub-module
@@ -71,20 +88,6 @@ const EditDeleteWidget = React.createClass({
       fetch(req).then(function(response) {
         return response.json()
       }.bind(this))
-  },
-  checkSignedInWithMessage: function() {
-    // Return true if the user is signed in Firebase
-    if (this.state.auth.currentUser) {
-      return true;
-    }
-
-    // Display a message to the user using a Toast.
-    let data = {
-      message: 'You must sign-in first',
-      timeout: 2000
-    };
-    // this.signInSnackbar.MaterialSnackbar.showSnackbar(data);
-    return false
   },
   deleteRecord: function() {
       // Callback to remove an image record in the DB

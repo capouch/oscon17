@@ -93,13 +93,29 @@ export default React.createClass ( {
  getInitialState: function() {
    // Stepping stages are overkill for this project, but intrinsically interesting
    return {
-     auth: firebase.auth(),
+     isLoggedIn: this.checkSignedInWithMessage(),
      step : 1,
   }
  },
+ componentDidMount: function() {
+   // This callback seems to confuse react after the first time it's called
+   firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+  },
+  onAuthStateChanged: function(user) {
+    if (user) {
+      this.setState( {
+        isLoggedIn: true,
+      })
+    }
+    else {
+      this.setState( {
+        isLoggedIn: false,
+      })
+    }
+  },
  checkSignedInWithMessage: function() {
    // Return true if the user is signed in Firebase
-   if (this.state.auth.currentUser) {
+   if (firebase.auth().currentUser) {
      return true;
    }
 

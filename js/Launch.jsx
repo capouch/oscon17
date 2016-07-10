@@ -40,7 +40,7 @@ export default (props) => {
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
         <h1 className="display-4">Independence Church and Cemetery</h1>
-        <p className="lead">Jasper County&#39;s Oldest Church</p>
+        <p className="lead">The Oldest Church in Jasper County, Indiana</p>
         <p>
           <a href="http://www.independence-church.org" target="_blank" className="btn btn-white">
             How can I help?

@@ -148,7 +148,7 @@ export default React.createClass ( {
     if (this.checkSignedInWithMessage())
        return (
          <Section>
-          <div><center><h2>Logged in and ready!!</h2></center></div>
+          <div><center><h2>You are signed in!</h2></center></div>
           <Button
             image='img/logout.png'
             handleClick={this.signOut}
@@ -158,7 +158,7 @@ export default React.createClass ( {
     else
       return (
         <Section>
-         <div><center><h2>You are not authorized!!</h2></center></div>
+         <div><center><h2>Please sign in to upload or edit</h2></center></div>
          <div>
          <Button
            image='img/google.png'

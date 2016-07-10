@@ -1,0 +1,18 @@
+---
+
+extends:
+  - defaults/rules/eslint/node/airbnb
+  - defaults/rules/eslint/es6/airbnb
+  - defaults/rules/eslint/errors/airbnb
+  - defaults/rules/eslint/style/airbnb
+  - defaults/rules/eslint/best-practices/airbnb
+parser: babel-eslint
+env:
+  browser: true
+  es6: true
+  jquery: true
+globals:
+  analytics: true
+  StripeCheckout: true
+rules:
+  quotes: [2, "double", "avoid-escape"]

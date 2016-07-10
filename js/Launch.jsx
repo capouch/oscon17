@@ -23,7 +23,7 @@ import {
 
 const sampleCode =
 `  loadRecordsFromServer: function() {
-    let URL = '/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     fetch(req).then(function(response) {
       return response.json()

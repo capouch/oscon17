@@ -22,9 +22,24 @@ const NavHeader = React.createClass({
         <NavItem><NavLink to="/login-out" className="nav-link">Login/Logout</NavLink></NavItem>
         <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
         <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
-        <NavItem><NavLink to="/upload" className="nav-link">Blog</NavLink></NavItem>
         <NavItem><NavLink to="/zoomer" className="nav-link">Cemetery</NavLink></NavItem>
-      </Navbar>
+        <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+        <NavItem><NavLink to="/zoomer" className="nav-link">Zoomer</NavLink></NavItem>
+        <NavItem dropdown={true}>
+          <DropdownToggle>Other versions</DropdownToggle>
+            <DropdownMenu>
+              <a href="http://oscon-old.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
+                2015 Page
+              </a>
+              <a href="http://oscon.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
+                2016 Page
+              </a>
+              <a href="/graphql" className="dropdown-item" target="_blank">
+                GraphiQL
+              </a>
+            </DropdownMenu>
+          </NavItem>
+        </Navbar>
       )}
     })
 

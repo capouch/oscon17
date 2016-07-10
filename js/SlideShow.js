@@ -9,10 +9,10 @@ import ImageGallery from 'react-image-gallery'
 
 // 1.
 // Cloud assets
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/oscon-test?'
+// const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
 //
 // Local assets
-const assetBase = '/oscon-test?'
+const assetBase = '/graphql?'
 
 // If no parameters fetch all the images
 const defaultQuery= 'query=query+{imageRecs{ title, filename}}'

@@ -23,7 +23,7 @@ let id = '',
 const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
     // Fix me: hardcoded URL won't work if we aim at the cloud!!
-    let URL = '/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     fetch(req).then(function(response) {
       return response.json()
@@ -63,7 +63,7 @@ const EditDeleteWidget = React.createClass({
       sessionStorage.removeItem('browse')
 
       // Put together (awful-looking) query URL
-      let URL="/oscon-test?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
+      let URL="/graphql?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
       // console.log('Sending: ' + queryURL)
@@ -93,7 +93,7 @@ const EditDeleteWidget = React.createClass({
       sessionStorage.removeItem('browse')
 
       // Put together mutation URL
-      let URL="/oscon-test?query=mutation+{deleteImage(id: " + JSON.stringify(id) + ")}",
+      let URL="/graphql?query=mutation+{deleteImage(id: " + JSON.stringify(id) + ")}",
         req = new Request(URL, {method: 'POST', cache: 'reload'})
       // console.log('Sending: ' + URL)
       fetch(req).then(function(response) {

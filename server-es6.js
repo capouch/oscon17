@@ -14,6 +14,8 @@ import bodyParser from 'body-parser'
 import schema from './graphql'
 import configRoutes from './js/routes'
 
+const dbName = 'oscon-test'
+
 const privateKey = fs.readFileSync('/home/brianc/CERTS/palaver.key'),
   certificate = fs.readFileSync('/home/brianc/CERTS/fullchain.pem'),
   credentials = {key: privateKey, cert: certificate}
@@ -32,7 +34,7 @@ app.use(bodyParser.json())
 
 // GraphqQL server route
 // This "route" treated differently therebecause
-app.use('/oscon-test', graphqlHTTP(req => ({
+app.use('/graphql', graphqlHTTP(req => ({
   schema,
   pretty: true,
   // For query/schema debugging turn this on
@@ -51,11 +53,11 @@ mongoose.Promise = global.Promise;
 // assert.equal(query.exec().constructor, global.Promise);
 
 // Connect mongo database
-// mongoose.connect('mongodb://localhost/oscon-test')
+mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server
-server.listen(8111)
-sserver.listen(8112)
+server.listen(2016)
+sserver.listen(2017)
 console.log(
   'Express server listening on port %d in %s mode',
   server.address().port, app.settings.env

@@ -117,7 +117,7 @@ export default React.createClass ( {
     fieldValues = Object.assign({}, fieldValues, fields)
     fieldValues.filename = serverFilename
     // Put together (awful-looking) query URL
-    let URL="/oscon-test?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
+    let URL="/graphql?query=mutation+{addImage(data: { title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
       req = new Request(URL, {method: 'POST', cache: 'reload'})

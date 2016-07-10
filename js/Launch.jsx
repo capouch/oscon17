@@ -69,7 +69,7 @@ export default (props) => {
       <Section>
         <CustomerQuotes>
           <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
-            <p>I have many memories of my grandmother telling me about Homecoming at the church each August.  I cannot wait to see it open again</p>
+            <p>I have many memories of my grandmother telling me about Homecoming at the church each August.  I cannot wait to see it open again.</p>
           </CustomerQuote>
           <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
             <p>Independence is an incredibly important historical resource that people throughout the three-county area can be proud of.</p>

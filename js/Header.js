@@ -35,7 +35,7 @@ const NavHeader = React.createClass({
       this.setState({
         authFunc: this.signOut,
         userName: "",
-        authPrompt: 'Logout'
+        authPrompt: ' (Logout)'
       })
     }
    },
@@ -54,7 +54,7 @@ const NavHeader = React.createClass({
       this.setState( {
         authFunc: this.signOut,
         userName: user.displayName,
-        authPrompt:  ' Logout'
+        authPrompt:  ' (Logout)'
       })
       console.log('User is logged in!!')
     }
@@ -69,7 +69,7 @@ const NavHeader = React.createClass({
   },
   checkSignedInWithMessage () {
     // Return true if the user is signed in Firebase
-      return firebase.auth().currentUser
+    return firebase.auth().currentUser
   },
   render() {
     let authFunc = this.authIn,

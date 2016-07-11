@@ -16,7 +16,7 @@ const brand = <span>{brandName}</span>
 
   const nameStyle = {
     fontWeight: 'bold',
-    color: 'green',
+    color: 'maroon',
   }
 
 const NavHeader = React.createClass({

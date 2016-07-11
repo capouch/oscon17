@@ -14,6 +14,11 @@ import NavLink from './NavLink'
 const brandName = "Independence Church"
 const brand = <span>{brandName}</span>
 
+  const nameStyle = {
+    fontWeight: 'bold',
+    color: 'green',
+  }
+
 const NavHeader = React.createClass({
   getInitialState: function() {
     // Default to Login mode
@@ -31,6 +36,7 @@ const NavHeader = React.createClass({
       this.setState({
         isLoggedIn: true,
         authFunc: this.signOut,
+        userName: "",
         authPrompt: 'Logout'
       })
     }
@@ -50,7 +56,8 @@ const NavHeader = React.createClass({
       this.setState( {
         isLoggedIn: true,
         authFunc: this.signOut,
-        authPrompt: 'Logout'
+        userName: user.displayName,
+        authPrompt:  ' Logout'
       })
       console.log('User is logged in!!')
     }
@@ -58,6 +65,7 @@ const NavHeader = React.createClass({
       this.setState( {
         isLoggedIn: false,
         authFunc: this.authIn,
+        userName: '',
         authPrompt: 'Login'
       })
       console.log('User is logged out')
@@ -78,7 +86,7 @@ const NavHeader = React.createClass({
           <NavLink to="/home" className="nav-link">Home</NavLink>
         </NavItem>
         <NavItem>
-          <a onClick={this.state.authFunc} className="nav-link">{this.state.authPrompt}</a>
+          <a onClick={this.state.authFunc} className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a>
         </NavItem>
         <NavItem>
           <NavLink to="/browse" className="nav-link">Browse</NavLink>

@@ -23,7 +23,6 @@ const NavHeader = React.createClass({
   getInitialState: function() {
     // Default to Login mode
     return {
-      isLoggedIn: false,
       authFunc: this.authIn,
       authPrompt: 'Login'
       }
@@ -34,7 +33,6 @@ const NavHeader = React.createClass({
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
     if (this.checkSignedInWithMessage) {
       this.setState({
-        isLoggedIn: true,
         authFunc: this.signOut,
         userName: "",
         authPrompt: 'Logout'
@@ -54,7 +52,6 @@ const NavHeader = React.createClass({
     // Swap menu state and re-render Header component
     if (user) {
       this.setState( {
-        isLoggedIn: true,
         authFunc: this.signOut,
         userName: user.displayName,
         authPrompt:  ' Logout'
@@ -63,7 +60,6 @@ const NavHeader = React.createClass({
     }
     else {
       this.setState( {
-        isLoggedIn: false,
         authFunc: this.authIn,
         userName: '',
         authPrompt: 'Login'

@@ -43,7 +43,7 @@ export default (props) => {
         <p className="lead">The Oldest Church in Jasper County, Indiana</p>
         <p>
           <a href="http://www.independence-church.org" target="_blank" className="btn btn-white">
-            How can I help?
+            How can you help?
           </a>
         </p>
       </Hero>

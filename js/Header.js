@@ -11,13 +11,13 @@ import {
 
 import NavLink from './NavLink'
 
-const brandName = "Independence Church"
+const brandName = "Independence"
 const brand = <span>{brandName}</span>
 
-  const nameStyle = {
-    fontWeight: 'bold',
-    color: 'maroon',
-  }
+const nameStyle = {
+  fontWeight: 'bold',
+  color: 'maroon',
+}
 
 const NavHeader = React.createClass({
   getInitialState: function() {
@@ -49,7 +49,7 @@ const NavHeader = React.createClass({
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider)
   },
   onAuthStateChanged: function(user) {
-    // Swap menu state and re-render Header component
+    // Swap menu state and re-render Header anchor
     if (user) {
       this.setState( {
         authFunc: this.signOut,

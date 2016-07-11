@@ -115,17 +115,7 @@ export default React.createClass ( {
   },
  checkSignedInWithMessage: function() {
    // Return true if the user is signed in Firebase
-   if (firebase.auth().currentUser) {
-     return true;
-   }
-
-   // Display a message to the user using a Toast.
-   let data = {
-     message: 'You must sign-in first',
-     timeout: 2000
-   };
-   // this.signInSnackbar.MaterialSnackbar.showSnackbar(data);
-   return false
+   return firebase.auth().currentUser
  },
  saveValues: function(fields) {
     // Callback function for InfoFields sub-module

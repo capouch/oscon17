@@ -14,7 +14,7 @@ export default class extends React.Component {
       <div>
         <center>
         <h1>Thanks for your submission</h1>
-        <h1>Choose next action from menu above</h1>
+        <h1>Click <a style={{cursor:'pointer'}} onClick={this.props.resetStep}>here</a> to continue</h1>
         </center>
       </div>
     )

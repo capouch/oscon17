@@ -146,6 +146,9 @@ nextStep: function() {
     step : this.state.step - 1
     })
  },
+ resetStep: function() {
+   this.setState( {step: 1} )
+ },
  render: function() {
    console.log('Login state: ' + this.checkSignedInWithMessage())
    switch(this.state.step) {
@@ -173,7 +176,8 @@ nextStep: function() {
      )
    }
      case 2:
-     return <Confirmation />
+     return <Confirmation
+       resetStep={this.resetStep}/>
    }
  }
 })

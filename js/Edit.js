@@ -70,6 +70,10 @@ const EditDeleteWidget = React.createClass({
       step : this.state.step + 1
     })
   },
+  resetStep: function() {
+    // See you later; when edit finishes go to Home view
+    this.context.router.push('/browse')
+  },
   saveValues: function(fields) {
       // Callback function for InfoFields sub-module
       // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
@@ -162,10 +166,16 @@ const EditDeleteWidget = React.createClass({
         )
       }
       case 2:
-      return <Confirmation />
+      return <Confirmation
+        resetStep={this.resetStep} />
     }
   }
 })
+
+// Attach the router to the widget's context so we can jump out
+EditDeleteWidget.contextTypes = {
+  router: React.PropTypes.object.isRequired
+  }
 
 // Render component
 export default React.createClass ( {

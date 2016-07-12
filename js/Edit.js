@@ -71,7 +71,7 @@ const EditDeleteWidget = React.createClass({
     })
   },
   resetStep: function() {
-    // See you later; when edit finishes go to Home view
+    // See you later; when edit finishes go to Browse view
     this.context.router.push('/browse')
   },
   saveValues: function(fields) {

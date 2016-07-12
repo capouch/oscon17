@@ -82,7 +82,7 @@ const NavHeader = React.createClass({
           <NavLink to="/home" className="nav-link">Home</NavLink>
         </NavItem>
         <NavItem>
-          <a onClick={this.state.authFunc} className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a>
+          <a onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a>
         </NavItem>
         <NavItem>
           <NavLink to="/browse" className="nav-link">Browse</NavLink>

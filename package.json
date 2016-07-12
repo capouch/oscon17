@@ -27,7 +27,7 @@
     "griddle-react": "^0.4.1",
     "mongoose": "^4.5.2",
     "multer": "^1.1.0",
-    "neal-react": "^0.2.3",
+    "neal-react": "^0.2.5",
     "openseadragon": "^2.1.0",
     "path": "^0.12.7",
     "react": "^15.1.0",

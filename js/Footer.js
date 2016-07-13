@@ -8,15 +8,16 @@ import {
 } from "neal-react"
 
 // We appropriate slightly inappropriate names from neal-react sample app
-const brandName = "Independence Property Management"
+const brandName = "Scene:History"
 const brand = <span>{brandName}</span>
 
 const businessAddress = (
   <address>
     <strong>{brandName}</strong><br/>
-    PO Box XYZ<br/>
-    Rensselaer IN 47978<br/>
-  +1 (219) 866-0000
+    Palaver Consulting<br/>
+    8979 N. Lowes Road<br />
+    Monon IN 47959<br/>
+    +1 (219) 253-8181
   </address>
 )
 
@@ -24,7 +25,8 @@ const NavFooter = React.createClass({
   render() {
     return (
       <Footer brandName={brandName}
-        facebookUrl="https://www.facebook.com/jchsmuseum/"
+        facebookUrl="http://www.facebook.com/brian.capouch"
+        githubUrl="https://github.com/capouch"
         address={businessAddress}>
       </Footer>
       )

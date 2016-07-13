@@ -1,4 +1,8 @@
-# SPA for OSCON 2016
+# Scene:History
+
+This software is all about keeping track of high-resolution historical images.
+
+The site incarnate is at http://scene-history.palaver.net
 
 Link to our presentation slides: https://slides.com/capouch/spa-bootcamp/
 

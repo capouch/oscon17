@@ -1,6 +1,7 @@
 /*
   ** Confirmation: Provide confirmation feedback and "do another" link
     This view is posted as "Step 2" of the Upload functionalty
+    and is also used after editing
 */
 
 import React from 'react'

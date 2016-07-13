@@ -23,7 +23,7 @@ import {
 
 const sampleCode =
 `  loadRecordsFromServer: function() {
-    let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = '/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     fetch(req).then(function(response) {
       return response.json()
@@ -39,29 +39,33 @@ export default (props) => {
 
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
-        <h1 className="display-4">Independence Church and Cemetery</h1>
-        <p className="lead">The Oldest Church in Jasper County, Indiana</p>
+        <h1 className="display-4">Scene: History </h1>
+        <p className="lead">Archiving and Presenting Historical Images</p>
         <p>
-          <a href="http://www.independence-church.org" target="_blank" className="btn btn-white">
-            How can you help?
+          <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
+            Get it on github
           </a>
         </p>
       </Hero>
 
+      <Section className="nopad-bottom">
+        <Code lang="jsx" block>{sampleCode}</Code>
+      </Section>
+
       <Section>
         <HorizontalSplit padding="md">
           <div>
-            <p className="lead">Founded in the 1840s</p>
-            <p>Independence Church was founded by Jasper County&#39;s earliest families: The Gillams, Culps, and Randles</p>
+            <p className="lead">Shell executive</p>
+            <p>The initial page load brings in a shell program, written in JavaScript, which then manages the client/UI.</p>
           </div>
           <div>
-            <p className="lead">Church, Cemetery, School</p>
-            <p>Besides the church, which was built in 1872 and remodeled in 1949, there is a large cemetery, and across the road, the remains of Independence School.
+            <p className="lead">Modern Tools</p>
+            <p>Code is written ES6 via Babel, React front end, GraphQL queries and mutations, to a local or remote MongoDB backend.
               </p>
           </div>
           <div>
-            <p className="lead">National Register</p>
-            <p>The church was listed on the National Register of Historic Places in 1976</p>
+            <p className="lead">Views instead of pages</p>
+            <p>React components play nicely with one another, and wrappers exist for many useful tools.</p>
           </div>
         </HorizontalSplit>
       </Section>
@@ -69,13 +73,13 @@ export default (props) => {
       <Section>
         <CustomerQuotes>
           <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
-            <p>I have many memories of my grandmother telling me about Homecoming at the church each August.  I cannot wait to see it open again.</p>
+            <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
           </CustomerQuote>
           <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
-            <p>Independence is an incredibly important historical resource that people throughout the three-county area can be proud of.</p>
+            <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
           </CustomerQuote>
           <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
-            <p>I have over twenty relatives buried in the cemetery.  It is such a peaceful place!</p>
+            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

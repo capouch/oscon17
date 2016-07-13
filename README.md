@@ -2,13 +2,10 @@
 
 This software is all about keeping track of high-resolution historical images.
 
-The site incarnate is at https://scene-history.palaver.net
+The canonical site incarnate is at https://scene-history.palaver.net
 
-Link to our presentation slides: https://slides.com/capouch/spa-bootcamp/
-
-VM with development environment (7GB): http://jsserver.saintjoe-cs.org:8001/OSCONBaseBox.ova     
-Electron .asar file (108MB): http://jsserver.saintjoe-cs.org:8001/spa.zip     
-Mongo dump file: http://jsserver.saintjoe-cs.org:8001/mongoDump.tar.bz2     
+Link to OSCON presentation slides: https://slides.com/capouch/spa-bootcamp/
+    
 Vagrant box and instructions (120MB): http://oscon.saintjoe-cs.org:8111/    
 
 ## Develop locally
@@ -49,8 +46,8 @@ http://127.0.0.1:2016
 ```
 Note the bundle.js file, which webpack creates and is sent to the client is
 *not* kept in the repo and needs to be generated after checkout with
-`npm run build`. Also after any change, `npm run build` has to be
-executed to get the newest version of the code
+`npm run build`. After changing the client-side codebase, `npm run build` must be
+executed to freshen up the bundle
 
 
 ###Development Version

@@ -14,7 +14,7 @@ import bodyParser from 'body-parser'
 import schema from './graphql'
 import configRoutes from './js/routes'
 
-const dbName = 'independence'
+const dbName = 'oscon-test'
 
 const privateKey = fs.readFileSync('/home/brianc/CERTS/palaver.key'),
   certificate = fs.readFileSync('/home/brianc/CERTS/fullchain.pem'),
@@ -56,8 +56,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server
-server.listen(8555)
-sserver.listen(8556)
+server.listen(2016)
+sserver.listen(2017)
 console.log(
   'Express server listening on port %d in %s mode',
   server.address().port, app.settings.env

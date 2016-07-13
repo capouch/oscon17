@@ -11,106 +11,43 @@ import {
 
 import NavLink from './NavLink'
 
-const brandName = "Independence"
+const brandName = "Scene:History"
 const brand = <span>{brandName}</span>
 
-const nameStyle = {
-  fontWeight: 'bold',
-  color: 'maroon',
-}
-
 const NavHeader = React.createClass({
-  getInitialState: function() {
-    // Default to Login mode
-    return {
-      authFunc: this.authIn,
-      authPrompt: 'Login'
-      }
-  },
-  componentDidMount: function() {
-    // This callback seems to confuse react after the first time it's called
-    //   but overall it works--is called on each log in/out
-    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
-    if (this.checkSignedInWithMessage) {
-      this.setState({
-        authFunc: this.signOut,
-        userName: "",
-        authPrompt: ' (Logout)'
-      })
-    }
-   },
-  signOut:  function() {
-  // Sign out of Firebase.
-    firebase.auth().signOut()
-  },
-  authIn: function() {
-    // Sign in Firebase using popup auth and Google as the identity provider
-    //   Only Google for now--maybe ever?
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider)
-  },
-  onAuthStateChanged: function(user) {
-    // Swap menu state and re-render Header anchor
-    if (user) {
-      this.setState( {
-        authFunc: this.signOut,
-        userName: user.displayName,
-        authPrompt:  ' (Logout)'
-      })
-      console.log('User is logged in!!')
-    }
-    else {
-      this.setState( {
-        authFunc: this.authIn,
-        userName: '',
-        authPrompt: 'Login'
-      })
-      console.log('User is logged out')
-    }
-  },
-  checkSignedInWithMessage () {
-    // Return true if the user is signed in Firebase
-    return firebase.auth().currentUser
-  },
   render() {
-    let authFunc = this.authIn,
-      authPrompt = 'Login'
-
     return (
-      // Menu header refreshes on each auth state change
       <Navbar brand={brand}>
-        <NavItem>
-          <NavLink to="/home" className="nav-link">Home</NavLink>
-        </NavItem>
-        <NavItem>
-          <a onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/browse" className="nav-link">Browse</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/slides" className="nav-link">Slideshow</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/upload" className="nav-link">Upload</NavLink>
-        </NavItem>
-        <NavItem>
-          <a
-            href="http://www.independence-church.org"
-            target="_blank"
-            className="nav-link">
-            Old Site
-          </a>
-        </NavItem>
-      </Navbar>
-    )}
-  })
+        <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
+        <NavItem><NavLink to="/login-out" className="nav-link">Login/Logout</NavLink></NavItem>
+        <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
+        <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
+        <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+        <NavItem><NavLink to="/zoomer" className="nav-link">Zoomer</NavLink></NavItem>
+        <NavItem dropdown={true}>
+          <DropdownToggle>Other versions</DropdownToggle>
+            <DropdownMenu>
+              <a href="http://oscon-old.saintjoe-cs.org:8000/" className="dropdown-item" target="_blank">
+                2015 Page
+              </a>
+              <a href="http://oscon.saintjoe-cs.org:5000" className="dropdown-item" target="_blank">
+                2016 Page
+              </a>
+              <a href="/oscon-test" className="dropdown-item" target="_blank">
+                GraphiQL
+              </a>
+            </DropdownMenu>
+          </NavItem>
+        </Navbar>
+      )}
+    })
 
 export default class extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
-      return (
+    return (
         <NavHeader/>
     )
   }

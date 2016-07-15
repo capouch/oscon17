@@ -103,13 +103,10 @@ export default class extends React.Component {
       tailRegex = /(^.*\-.*)-.*$/,
       imageName = ''
 
-    // console.log('clicked on image:' + event.target.src)
     // Everything after the last '/'
     imageName = URLRegex.exec(event.target.src)[0]
-    // console.log('Next step with:' + imageName)
     // Everything before the last '-'
     imageName = tailRegex.exec(imageName)[1]
-    console.log('If we can find the router:' + imageName)
     // Render zoomer view on this image
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
     browserHistory.push('/zoomer/' + imageName)

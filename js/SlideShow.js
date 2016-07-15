@@ -7,6 +7,9 @@ import React from 'react'
 import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'
 
+// For "goto" purposes
+import { browserHistory } from 'react-router'
+
 // 1.
 // Cloud assets
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
@@ -36,8 +39,9 @@ export default class extends React.Component {
   }
   componentDidMount() {
     // console.log('loadUrl is ' + this.state.loadUrl)
-    // If a parameterized custom list, render it
+
     // Note: this test has a callback!!
+    // If a parameterized custom list, render it
     if (this.props.params.viewSet) {
       this.setState({loadUrl: assetBase + this.props.params.viewSet}, function(){
         this.loadRecordsFromServer()
@@ -94,7 +98,21 @@ export default class extends React.Component {
   }
 
   _onImageClick(event) {
-    console.debug('clicked on image ', event.target)
+    // Clicking image will take user to Zoomer view
+    let URLRegex = /([^/]+$)/,
+      tailRegex = /(^.*\-.*)-.*$/,
+      imageName = ''
+
+    // console.log('clicked on image:' + event.target.src)
+    // Everything after the last '/'
+    imageName = URLRegex.exec(event.target.src)[0]
+    // console.log('Next step with:' + imageName)
+    // Everything before the last '-'
+    imageName = tailRegex.exec(imageName)[1]
+    console.log('If we can find the router:' + imageName)
+    // Render zoomer view on this image
+    // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
+    browserHistory.push('/zoomer/' + imageName)
   }
 
   _onImageLoad(event) {
@@ -128,6 +146,7 @@ export default class extends React.Component {
 
     return (
       <Section>
+        <div><center><h2>Click on image to zoom it</h2></center></div>
       <section className='app'>
         <ImageGallery
           ref={i => this._imageGallery = i}

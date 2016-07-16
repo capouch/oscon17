@@ -61,8 +61,6 @@ const NavHeader = React.createClass({
         firebase.auth().signOut();
         // [END signout]
       } else {
-        // var email = document.getElementById('email').value;
-        // var password = document.getElementById('password').value;
         if (this.state.email.length < 4) {
           alert('Please enter an email address.');
           return;

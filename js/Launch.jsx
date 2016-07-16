@@ -23,15 +23,15 @@ import {
 
 const sampleCode =
 `  loadRecordsFromServer: function() {
-    let URL = '/oscon-test?query=query+{imageRec(id: "'
-      + this.props.record + '"){_id, title, filename, description, source, taglist}}',
-      req = new Request(URL, {method: 'POST', cache: 'reload'})
-    fetch(req).then(function(response) {
-      return response.json()
-    }).then (function(json) {
-      // console.log('json object: ' + JSON.stringify(json))
-      this.setState({record: json.data.imageRec})
-    }.bind(this))
+  // Fix me: hardcoded URL won't work if we aim at the cloud!!
+  let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    req = new Request(URL, {method: 'POST', cache: 'reload'})
+  fetch(req).then(function(response) {
+    return response.json()
+  }).then (function(json) {
+    // console.log('json object: ' + JSON.stringify(json))
+    this.setState({record: json.data.imageRec})
+  }.bind(this))
 `
 
 export default (props) => {

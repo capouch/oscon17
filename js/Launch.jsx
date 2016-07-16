@@ -23,7 +23,8 @@ import {
 
 const sampleCode =
 `  loadRecordsFromServer: function() {
-    let URL = '/oscon-test?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = '/oscon-test?query=query+{imageRec(id: "'
+      + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     fetch(req).then(function(response) {
       return response.json()
@@ -48,7 +49,7 @@ export default (props) => {
         </p>
       </Hero>
 
-      <Section className="nopad-bottom">
+      <Section className="nopad-bottom" heading="Sample JavaScript code from project">
         <Code lang="jsx" block>{sampleCode}</Code>
       </Section>
 

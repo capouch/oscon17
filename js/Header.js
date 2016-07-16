@@ -44,8 +44,8 @@ const NavHeader = React.createClass({
     firebase.auth().signOut()
   },
   authIn: function() {
-    // Sign in Firebase using popup auth and Google as the identity provider
-    //   Only Google for now--maybe ever?
+    // Sign in Firebase using popup auth and email as the identity provider
+    //   Only email for now--maybe ever?
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider)
   },
   onAuthStateChanged: function(user) {

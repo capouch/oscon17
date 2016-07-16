@@ -116,7 +116,8 @@ const NavHeader = React.createClass({
     if (this.checkSignedInWithMessage()) {
       // render with sign-in popup
       // console.log('Rendering user-is-logged-in page')
-        // Render with logout
+
+      // How do we avoid this duplicated code?
         return (
         <Navbar brand={brand}>
           <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>

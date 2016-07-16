@@ -44,11 +44,13 @@ const NavHeader = React.createClass({
     }
   },
   onSignIn: function({ name: name, email: email, password: password }) {
-      console.log('email/password: ' + email + " "  + password)
+      // console.log('email/password: ' + email + " "  + password)
       // Note callback here!
       this.setState({email: email, password: password}, function(){
-          this.toggleSignIn()
-          }.bind(this))
+        // I DON'T WANT to use jQuery!!
+        $('#signup-modal').modal('toggle')
+        this.toggleSignIn()
+        }.bind(this))
   },
   toggleSignIn: function() {
     // Sign in Firebase using email as the identity provider
@@ -61,7 +63,6 @@ const NavHeader = React.createClass({
       } else {
         // var email = document.getElementById('email').value;
         // var password = document.getElementById('password').value;
-        console.log('Got down here with: ' + this.state.email + ' ' + this.state.password)
         if (this.state.email.length < 4) {
           alert('Please enter an email address.');
           return;
@@ -121,7 +122,7 @@ const NavHeader = React.createClass({
         return (
         <Navbar brand={brand}>
           <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-          <NavItem><a onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
+          <NavItem><a data-dismiss="modal" data-target="#signup-modal" onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
           <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
           <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
           <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>

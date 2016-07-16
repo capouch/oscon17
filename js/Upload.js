@@ -150,7 +150,7 @@ nextStep: function() {
    this.setState( {step: 1} )
  },
  render: function() {
-   console.log('Login state: ' + this.checkSignedInWithMessage())
+   console.log('Login state: ' + JSON.stringify(this.checkSignedInWithMessage()))
    switch(this.state.step) {
      case 1:
      if (this.checkSignedInWithMessage()) {

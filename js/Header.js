@@ -57,7 +57,7 @@ const NavHeader = React.createClass({
     //   Only email for now--maybe ever?
       if (firebase.auth().currentUser) {
         // [START signout]
-        console.log("Signing out")
+        // console.log("Signing out")
         firebase.auth().signOut();
         // [END signout]
       } else {

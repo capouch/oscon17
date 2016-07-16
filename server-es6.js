@@ -17,7 +17,7 @@ import configRoutes from './js/routes'
 const dbName = 'oscon-test'
 
 const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
-  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org.ca-bundle'),
+  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org.crt'),
   credentials = {key: privateKey, cert: certificate}
 
 const app = express(),

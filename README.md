@@ -2,10 +2,10 @@
 
 This software is all about keeping track of high-resolution historical images.
 
-The canonical site incarnate is at https://scene-history.palaver.net
+The canonical site incarnate is at http://www.scene-history.org
 
 Link to OSCON presentation slides: https://slides.com/capouch/spa-bootcamp/
-    
+
 Vagrant box and instructions (120MB): http://oscon.saintjoe-cs.org:8111/    
 
 ## Develop locally

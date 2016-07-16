@@ -11,15 +11,18 @@ import {
 } from "neal-react"
 
 import NavLink from './NavLink'
-import { browserHistory } from 'react-router'
 
 const brandName = "Scene:History"
 const brand = <span>{brandName}</span>
 
-  const nameStyle = {
-    fontWeight: 'bold',
-    color: 'maroon',
-  }
+// Currently not used due to change in login method
+const nameStyle = {
+  fontWeight: 'bold',
+  color: 'maroon',
+}
+
+let loginModal = undefined,
+  authNavItem = undefined
 
 const NavHeader = React.createClass({
   getInitialState: function() {
@@ -27,12 +30,12 @@ const NavHeader = React.createClass({
     return {
       authFunc: this.toggleSignIn,
       userName: '',
-      authPrompt: 'Blarney',
+      authPrompt: '',
       email: '',
       password: ''
       }
   },
-  componentDidMount: function() {
+  componentWillMount: function() {
     // This callback seems to confuse react after the first time it's called
     //   but overall it works--is called on each log in/out
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
@@ -111,42 +114,39 @@ const NavHeader = React.createClass({
     return firebase.auth().currentUser
   },
   render() {
-    let authPrompt = 'Login'
 
+    // Logic to determine login/logout UI
     if (this.checkSignedInWithMessage()) {
-      // How do we avoid this duplicated code?
+      // User is signed in; configure for logging out
+      loginModal = undefined
+      authNavItem = <NavItem><a onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
+    } else {
+      // Set modal and menu for login
+      loginModal =
+      <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
+        <div>
+          <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
+          <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>
+        </div>
+      </SignupModal>
 
-      // User is signed in
-      return (
-        <Navbar brand={brand}>
-          <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-          <NavItem><a data-dismiss="modal" data-target="#signup-modal" onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
-          <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-          <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
-          <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
-        </Navbar>
-      )}
-    else {
-      // Nobody logged in
+      // Menu option for logging in
+      authNavItem = <NavItem><a data-toggle="modal" data-target="#signup-modal" style={{cursor:'pointer'}} className='nav-link'>Login</a></NavItem>
+      }
+
       return (
         <div>
-        <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
-          <div>
-            <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
-            <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>
-          </div>
-        </SignupModal>
-        <Navbar brand={brand}>
-          <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-          <NavItem><a data-toggle="modal" data-target="#signup-modal" style={{cursor:'pointer'}} className='nav-link'>Login</a></NavItem>
-          <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-          <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
-          <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+          {loginModal}
+          <Navbar brand={brand}>
+            <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
+            {authNavItem}
+            <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
+            <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
+            <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
           </Navbar>
-      </div>
+        </div>
       )}
-    }
-  })
+})
 
 export default class extends React.Component {
   constructor(props) {

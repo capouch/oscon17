@@ -132,8 +132,12 @@ const NavHeader = React.createClass({
       // console.log('Rendering user-is-logged-out page')
     return (
       <div>
-      <SignupModal modalId="signup-modal" onSubmit={this.onSignIn}
-        title="Sign In" buttonText="Sign In"/>
+      <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
+        <div>
+          <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
+          <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>
+        </div>
+      </SignupModal>
       <Navbar brand={brand}>
         <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
         <NavItem><a data-toggle="modal" data-target="#signup-modal" style={{cursor:'pointer'}} className='nav-link'>Login</a></NavItem>

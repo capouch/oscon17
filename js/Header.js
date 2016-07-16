@@ -23,7 +23,6 @@ const NavHeader = React.createClass({
   getInitialState: function() {
     // Default to Login mode
     return {
-      authFunc: this.authIn,
       authPrompt: 'Login'
       }
   },
@@ -33,26 +32,53 @@ const NavHeader = React.createClass({
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
     if (this.checkSignedInWithMessage) {
       this.setState({
-        authFunc: this.signOut,
         userName: "",
         authPrompt: ' (Logout)'
       })
     }
    },
-  signOut:  function() {
-  // Sign out of Firebase.
-    firebase.auth().signOut()
-  },
-  authIn: function() {
+  toggleSignIn: function() {
     // Sign in Firebase using popup auth and email as the identity provider
     //   Only email for now--maybe ever?
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider)
+    let email = 'brianc@palaver.net',
+      password = "getlostman"
+      if (firebase.auth().currentUser) {
+        // [START signout]
+        firebase.auth().signOut();
+        // [END signout]
+      } else {
+        // var email = document.getElementById('email').value;
+        // var password = document.getElementById('password').value;
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START authwithemail]
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+          // [END_EXCLUDE]
+        });
+        // [END authwithemail]
+      }
   },
   onAuthStateChanged: function(user) {
     // Swap menu state and re-render Header anchor
     if (user) {
       this.setState( {
-        authFunc: this.signOut,
         userName: user.displayName,
         authPrompt:  ' (Logout)'
       })
@@ -60,7 +86,6 @@ const NavHeader = React.createClass({
     }
     else {
       this.setState( {
-        authFunc: this.authIn,
         userName: '',
         authPrompt: 'Login'
       })
@@ -72,13 +97,12 @@ const NavHeader = React.createClass({
     return firebase.auth().currentUser
   },
   render() {
-    let authFunc = this.authIn,
-      authPrompt = 'Login'
+    let authPrompt = 'Login'
 
     return (
       <Navbar brand={brand}>
         <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-        <NavItem><a onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
+        <NavItem><a onClick={this.toggleSignIn} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
         <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
         <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
         <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>

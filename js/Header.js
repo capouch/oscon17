@@ -131,7 +131,6 @@ const NavHeader = React.createClass({
     return (
       <div>
       <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
-        // A perfect example of this.props.children
         <div>
           <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
           <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>

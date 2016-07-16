@@ -23,7 +23,6 @@ import {
 
 const sampleCode =
 `  loadRecordsFromServer: function() {
-  // Fix me: hardcoded URL won't work if we aim at the cloud!!
   let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
     req = new Request(URL, {method: 'POST', cache: 'reload'})
   fetch(req).then(function(response) {

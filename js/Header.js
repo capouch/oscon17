@@ -114,11 +114,10 @@ const NavHeader = React.createClass({
     let authPrompt = 'Login'
 
     if (this.checkSignedInWithMessage()) {
-      // render with sign-in popup
-      // console.log('Rendering user-is-logged-in page')
-
       // How do we avoid this duplicated code?
-        return (
+
+      // User is signed in
+      return (
         <Navbar brand={brand}>
           <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
           <NavItem><a data-dismiss="modal" data-target="#signup-modal" onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
@@ -128,22 +127,22 @@ const NavHeader = React.createClass({
         </Navbar>
       )}
     else {
-      // console.log('Rendering user-is-logged-out page')
-    return (
-      <div>
-      <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
+      // Nobody logged in
+      return (
         <div>
-          <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
-          <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>
-        </div>
-      </SignupModal>
-      <Navbar brand={brand}>
-        <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-        <NavItem><a data-toggle="modal" data-target="#signup-modal" style={{cursor:'pointer'}} className='nav-link'>Login</a></NavItem>
-        <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-        <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
-        <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
-        </Navbar>
+        <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
+          <div>
+            <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
+            <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>
+          </div>
+        </SignupModal>
+        <Navbar brand={brand}>
+          <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
+          <NavItem><a data-toggle="modal" data-target="#signup-modal" style={{cursor:'pointer'}} className='nav-link'>Login</a></NavItem>
+          <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
+          <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
+          <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+          </Navbar>
       </div>
       )}
     }

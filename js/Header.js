@@ -117,7 +117,7 @@ const NavHeader = React.createClass({
 
     if (this.checkSignedInWithMessage()) {
       // render with sign-in popup
-      console.log('Rendering user-is-logged-in page')
+      // console.log('Rendering user-is-logged-in page')
         // Render with logout
         return (
         <Navbar brand={brand}>
@@ -129,7 +129,7 @@ const NavHeader = React.createClass({
         </Navbar>
       )}
     else {
-      console.log('Rendering user-is-logged-out page')
+      // console.log('Rendering user-is-logged-out page')
     return (
       <div>
       <SignupModal modalId="signup-modal" onSubmit={this.onSignIn}

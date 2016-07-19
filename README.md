@@ -2,7 +2,7 @@
 
 This software is all about keeping track of high-resolution historical images.
 
-The canonical site incarnate is at http://www.scene-history.org
+The canonical site incarnate is at https://www.scene-history.org
 
 Link to OSCON presentation slides: https://slides.com/capouch/spa-bootcamp/
 

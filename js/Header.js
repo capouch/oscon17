@@ -24,6 +24,8 @@ const nameStyle = {
 let loginModal = undefined,
   authNavItem = undefined
 
+// Puzzle: at first call, this component mounts *twice*
+//  and I can't figure out why.  Doesn't hurt anything, but yet . . . . 
 const NavHeader = React.createClass({
   getInitialState: function() {
     // Default to Login mode
@@ -39,12 +41,14 @@ const NavHeader = React.createClass({
     // This callback seems to confuse react after the first time it's called
     //   but overall it works--is called on each log in/out
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+    /*
     if (this.checkSignedInWithMessage()) {
       this.setState({
         userName: "",
         authPrompt: ' (Logout)'
       })
     }
+    */
   },
   onSignIn: function({ name: name, email: email, password: password }) {
       // console.log('email/password: ' + email + " "  + password)
@@ -92,6 +96,7 @@ const NavHeader = React.createClass({
   },
   onAuthStateChanged: function(user) {
     // Swap menu state and re-render Header anchor
+    console.log('onAuthStateChanged called')
     if (user) {
       this.setState( {
         authFunc: this.toggleSignIn,
@@ -118,10 +123,12 @@ const NavHeader = React.createClass({
     // Logic to determine login/logout UI
     if (this.checkSignedInWithMessage()) {
       // User is signed in; configure for logging out
+      console.log('About to render logout view')
       loginModal = undefined
       authNavItem = <NavItem><a onClick={this.state.authFunc} style={{cursor:'pointer'}}className="nav-link"><span style={nameStyle}>{this.state.userName}</span>{this.state.authPrompt}</a></NavItem>
     } else {
       // Set modal and menu for login
+      console.log('About to render login view')
       loginModal =
       <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
         <div>

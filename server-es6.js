@@ -25,9 +25,9 @@ const app = express(),
   // server = http.createServer( app ),
   http.createServer(function (req, res) {
     console.log('Redirecting!!')
-    res.writeHead(301, { "Location": "https://" + 'localhost:2017'+ req.url });
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
-  }).listen(2016);
+  }).listen(80);
 
   const sserver = https.createServer( credentials, app )
 
@@ -63,7 +63,7 @@ mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server
 // server.listen(2016)
-sserver.listen(2017)
+sserver.listen(443)
 console.log(
   'Express server listening on port %d in %s mode',
   sserver.address().port, app.settings.env

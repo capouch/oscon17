@@ -21,9 +21,15 @@ const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
   credentials = {key: privateKey, cert: certificate}
 
 const app = express(),
-  router = express.Router(),
-  server = http.createServer( app ),
-  sserver = https.createServer( credentials, app )
+  router = express.Router()
+  // server = http.createServer( app ),
+  http.createServer(function (req, res) {
+    console.log('Redirecting!!')
+    res.writeHead(301, { "Location": "https://" + 'localhost:2017'+ req.url });
+    res.end();
+  }).listen(2016);
+
+  const sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images remotely on local-hosted server
 //  Without it, "no cross-domain" policy blocks browser access!!
@@ -42,7 +48,7 @@ app.use('/graphql', graphqlHTTP(req => ({
 })))
 
 // Generic routers
-configRoutes( router, server)
+configRoutes( router, sserver)
 app.use('/', router)
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('/public'));
@@ -56,9 +62,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server
-server.listen(2016)
+// server.listen(2016)
 sserver.listen(2017)
 console.log(
   'Express server listening on port %d in %s mode',
-  server.address().port, app.settings.env
+  sserver.address().port, app.settings.env
 )

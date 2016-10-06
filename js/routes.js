@@ -27,11 +27,6 @@ export default function ( router, server ) {
     root: __dirname + '/../public'
    }
 
-// set up a route to redirect http to https
-// router.get('*',function(req,res){
-//     res.redirect('https://localhost:2017'+req.url)
-// })
-
   router.get('/', function(req, res) {
     res.sendFile('index.html', options)
   })

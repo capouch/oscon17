@@ -27,6 +27,11 @@ export default function ( router, server ) {
     root: __dirname + '/../public'
    }
 
+// set up a route to redirect http to https
+ router.get('*',function(req,res){
+     res.redirect('https://www.scene-history.org'+req.url)
+ })
+
   router.get('/', function(req, res) {
     res.sendFile('index.html', options)
   })

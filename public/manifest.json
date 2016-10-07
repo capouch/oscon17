@@ -1,0 +1,15 @@
+{
+  "name": "Scene History Image Viewer",
+  "short_name": "SceneHistory",
+  "icons": [
+    {
+      "src": "img/ic_launcher.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": 0.75
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}

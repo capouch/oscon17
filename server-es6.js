@@ -24,7 +24,6 @@ const app = express(),
   router = express.Router()
   // server = http.createServer( app ),
   http.createServer(function (req, res) {
-    console.log('Redirecting!!')
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
   }).listen(80);

@@ -10,11 +10,11 @@ module.exports = {
     inline: true,
     proxy: {
       '/uploadHandler*': {
-        target: 'http://localhost:2016',
+        target: 'http://localhost',
         secure: false,
       },
       '/graphql*': {
-      target: 'http://localhost:2016',
+      target: 'http://localhost',
       secure: false,
     },
   },

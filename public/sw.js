@@ -17,12 +17,13 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  // console.log('Looking for ' + event.request.url)
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-          console.log('Returning cached value')
+          console.log('Returning cached value' for event.request.url)
           return response;
         }
         return fetch(event.request);

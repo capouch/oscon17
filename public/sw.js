@@ -3,7 +3,12 @@ var urlsToCache = [
   '/',
   '/index.html',
   '/css/main.css',
-  '/js/bundle.js'
+  '/js/bundle.js',
+  'libs/bootstrap-4.0.0-alpha4.min.js',
+  'libs/jquery-3.1.1.min.js',
+  'libs/firebase-3.1.0.js',
+  'libs/firebase-app-3.1.0.js',
+  'libs/firebase-auth-3.1.0.js',
 ];
 
 self.addEventListener('install', function(event) {

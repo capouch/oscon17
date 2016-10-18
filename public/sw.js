@@ -9,6 +9,7 @@ var urlsToCache = [
   'libs/firebase-3.1.0.js',
   'libs/firebase-app-3.1.0.js',
   'libs/firebase-auth-3.1.0.js',
+  '/img/background.png'
 ];
 
 self.addEventListener('install', function(event) {

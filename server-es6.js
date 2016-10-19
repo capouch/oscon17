@@ -5,6 +5,7 @@ import graphqlHTTP from 'express-graphql'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import fs from 'fs'
+import compression from 'compression'
 
 import http from 'http'
 import https from 'https'
@@ -33,6 +34,9 @@ const app = express(),
 // CORS allows us to fetch images remotely on local-hosted server
 //  Without it, "no cross-domain" policy blocks browser access!!
 app.use(cors())
+
+// Compress outbound service
+app.use(compression())
 
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

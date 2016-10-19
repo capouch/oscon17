@@ -2,6 +2,7 @@ var CACHE_NAME = 'scene-history-v1';
 var urlsToCache = [
   '/',
   '/index.html',
+  'manifest.json',
   '/css/main.css',
   '/js/bundle.js',
   'libs/bootstrap-4.0.0-alpha4.min.js',

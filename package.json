@@ -22,7 +22,7 @@
     "cors": "^2.7.1",
     "es6-promise": "^3.1.2",
     "express": "^4.13.4",
-    "express-graphql": "^0.4.13",
+    "express-graphql": "^0.5.4",
     "fs": "0.0.2",
     "graphql": "^0.4.16",
     "griddle-react": "^0.4.1",

@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   entry: ["babel-polyfill", "./js/Shell.jsx", "./css/main.scss"],
   output: {
@@ -22,14 +24,30 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?|\.js$/,
-        exclude: /(node_modules|bower_components|neal-react)/,
-        loader: "babel-loader",
+      test: /\.jsx?|\.js$/,
+      loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
         loader: "style!css!sass"
       }
     ]
-  }
+  },
+  plugins:
+  [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: false
+    }),
+
+  ],
 };

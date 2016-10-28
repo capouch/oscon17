@@ -101,13 +101,14 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    let URL = this.state.fetchURL,
-      req = new Request(URL, {method: 'POST', cache: 'reload'})
+    let URL = this.state.fetchURL
+    // console.log('Fetching ' + URL)
+    let req = new Request(URL, {method: 'POST', cache: 'reload'})
 
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {
-      // console.log('json object: ' + JSON.stringify(json))
+      //console.log('json object: ' + JSON.stringify(json))
       if (json.data.imageRecs)
         this.setState({records: json.data.imageRecs})
       else

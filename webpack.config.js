@@ -1,5 +1,13 @@
+const webpack = require('webpack')
+
 module.exports = {
-  entry: ["babel-polyfill", "./js/Shell.jsx", "./css/main.scss"],
+  entry: {
+    js: [ "./js/Shell.jsx"],
+    vendor: [
+      'react', 'react-dom', 'openseadragon',
+      'react-image-gallery', 'griddle-react'
+    ]
+  },
   output: {
     path: "public/js",
     publicPath: "/js",
@@ -22,14 +30,35 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?|\.js$/,
-        exclude: /(node_modules|bower_components|neal-react)/,
-        loader: "babel-loader",
+      test: /\.jsx?|\.js$/,
+      loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
         loader: "style!css!sass"
       }
     ]
-  }
+  },
+  plugins:
+  [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.bundle.js'
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      },
+      sourceMap: false
+    }),
+
+  ],
 };

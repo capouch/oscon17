@@ -24,7 +24,7 @@ export default {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  resolve (root, params, options) {
+  resolve (root, params, {}, options) {
     // Project only those properties the query has specified
     const projection = getProjection(options.fieldASTs[0]);
     // We will need to munge the search terms into a regex

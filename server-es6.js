@@ -12,7 +12,7 @@ import https from 'https'
 import bodyParser from 'body-parser'
 
 // Our custom schema
-import schema from './graphql'
+import mySchema from './graphql'
 import configRoutes from './js/routes'
 
 const dbName = 'oscon-test'
@@ -24,12 +24,12 @@ const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
 const app = express(),
   router = express.Router()
   // server = http.createServer( app ),
-  http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
+http.createServer(function (req, res) {
+  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+  res.end();
   }).listen(80);
 
-  const sserver = https.createServer( credentials, app )
+const sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images remotely on local-hosted server
 //  Without it, "no cross-domain" policy blocks browser access!!
@@ -42,13 +42,11 @@ app.use( bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // GraphqQL server route
-// This "route" treated differently therebecause
-app.use('/graphql', graphqlHTTP(req => ({
-  schema,
-  pretty: true,
-  // For query/schema debugging turn this on
+// This "route" is special
+app.use('/graphql' ,graphqlHTTP({
+  schema: mySchema,
   graphiql: true
-})))
+}));
 
 // Generic routers
 configRoutes( router, sserver)

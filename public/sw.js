@@ -4,7 +4,7 @@ var urlsToCache = [
   '/index.html',
   'manifest.json',
   '/css/main.css',
-  '/js/vendor.bundle.js'
+  '/js/vendor.bundle.js',
   '/js/bundle.js',
   'libs/bootstrap-4.0.0-alpha4.min.js',
   'libs/jquery-3.1.1.min.js',

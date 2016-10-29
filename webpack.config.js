@@ -1,7 +1,13 @@
 const webpack = require('webpack')
 
 module.exports = {
-  entry: ["./js/Shell.jsx"],
+  entry: {
+    js: [ "./js/Shell.jsx"],
+    vendor: [
+      'react', 'react-dom', 'openseadragon',
+      'react-image-gallery', 'griddle-react'
+    ]
+  },
   output: {
     path: "public/js",
     publicPath: "/js",
@@ -35,6 +41,11 @@ module.exports = {
   },
   plugins:
   [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.bundle.js'
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false

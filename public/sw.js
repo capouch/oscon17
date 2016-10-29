@@ -4,6 +4,7 @@ var urlsToCache = [
   '/index.html',
   'manifest.json',
   '/css/main.css',
+  '/js/vendor.bundle.js'
   '/js/bundle.js',
   'libs/bootstrap-4.0.0-alpha4.min.js',
   'libs/jquery-3.1.1.min.js',
@@ -24,7 +25,7 @@ self.addEventListener('install', function(event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('SW fetch catch: ', function(event) {
   console.log('Service worker up: ' + event.request.url)
   event.respondWith(
     caches.match(event.request)

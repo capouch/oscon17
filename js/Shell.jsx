@@ -5,8 +5,11 @@
 
 import React from "react"
 import ReactDOM from "react-dom";
-import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router"
+import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
 import { App } from "neal-react"
+
+// Moved from webpack.config
+import "../css/main.scss"
 
 // Controller and view modules
 import Home from "./Launch.jsx"

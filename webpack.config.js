@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 
 module.exports = {
-  entry: ["babel-polyfill", "./js/Shell.jsx", "./css/main.scss"],
+  entry: ["./js/Shell.jsx"],
   output: {
     path: "public/js",
     publicPath: "/js",

@@ -42,14 +42,7 @@ app.use( bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // GraphqQL server route
-// This "route" treated differently therebecause
-//app.use('/graphql', graphqlHTTP(req => ({
-//  schema,
-//  pretty: true,
-  // For query/schema debugging turn this on
-//  graphiql: true
-//})))
-
+// This "route" is special
 app.use('/graphql' ,graphqlHTTP({
   schema: mySchema,
   graphiql: true

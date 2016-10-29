@@ -4,7 +4,7 @@
 */
 
 import React from "react"
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
 import { App } from "neal-react"
 
@@ -41,7 +41,7 @@ class osconSPA extends React.Component {
 }
 
 // Render application in main div
-ReactDOM.render((
+render((
   <Router history = { browserHistory } >
     <Route path = "/" component = { osconSPA } history={ browserHistory } >
       <IndexRoute name ="home" component = { Home } />

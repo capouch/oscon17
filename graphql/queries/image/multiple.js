@@ -10,7 +10,7 @@ export default {
   type: new GraphQLList(imageRecType),
   description: "Retrieves all image documents",
   args: {},
-  resolve (root, params, options) {
+  resolve (root, params, {}, options) {
     const projection = getProjection(options.fieldASTs[0]);
 
     return ImageRecModel

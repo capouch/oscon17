@@ -2,13 +2,12 @@
   ** Shell: Search image database; allow for various viewing options
     This will be the user's primary portal into the content
 */
-
-import React from "react"
+import React from 'react'
 import { render } from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
-import { App } from "neal-react"
 
-// Moved from webpack.config
+// Main component and styling
+import SPA from './App.js'
 import "../css/main.scss"
 
 // Controller and view modules
@@ -18,32 +17,11 @@ import Edit from './Edit'
 import Zoom from './Zoom'
 import Upload from './Upload'
 import SlideShow from './SlideShow.js'
-// import LoginOut from './Login.js'
-
-// Components rendered on every view
-import Header from './Header'
-import Footer from './Footer'
-
-// Create toplevel component
-class osconSPA extends React.Component {
-  render() {
-    return (
-      <div>
-        <Header />
-        <App
-          history={ browserHistory }>
-          { this.props.children }
-        </App>
-        <Footer/>
-      </div>
-    )
-  }
-}
 
 // Render application in main div
 render((
   <Router history = { browserHistory } >
-    <Route path = "/" component = { osconSPA } history={ browserHistory } >
+    <Route path = "/" component = { SPA } history={ browserHistory } >
       <IndexRoute name ="home" component = { Home } />
       <Route path = "browse" component = { Browse } />
       <Route path = "edit/:imageId" component = { Edit } />

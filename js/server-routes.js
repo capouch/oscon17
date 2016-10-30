@@ -1,5 +1,5 @@
 /*
- * routes.js - module to provide server-side routing
+ * server-routes.js - module to provide server-side routing
 */
 
 import sharp from 'sharp'

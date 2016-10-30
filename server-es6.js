@@ -13,7 +13,7 @@ import bodyParser from 'body-parser'
 
 // Our custom schema
 import mySchema from './graphql'
-import configRoutes from './js/routes'
+import configRoutes from './js/server-routes'
 
 const dbName = 'oscon-test'
 

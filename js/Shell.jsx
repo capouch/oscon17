@@ -7,8 +7,17 @@ import { render } from "react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
 
 // Main component and styling
-import SPA from './App.js'
+// import SPA from './App.js'
 import "../css/main.scss"
+
+import rootRoute from './client-routes'
+// Render application in main div
+render(
+  <Router history={browserHistory} routes={rootRoute} />,
+  document.getElementById('main')
+);
+
+/*
 
 // Controller and view modules
 import Home from "./Launch.jsx"
@@ -18,7 +27,7 @@ import Zoom from './Zoom'
 import Upload from './Upload'
 import SlideShow from './SlideShow.js'
 
-// Render application in main div
+
 render((
   <Router history = { browserHistory } >
     <Route path = "/" component = { SPA } history={ browserHistory } >
@@ -34,3 +43,4 @@ render((
     </Route>
   </Router>
 ), document.getElementById("main"))
+*/

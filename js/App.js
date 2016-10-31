@@ -7,7 +7,6 @@ import { App } from "neal-react"
 import Header from './Header'
 import Footer from './Footer'
 
-// Note: check to make sure this has to be in "both placess"
 import { browserHistory } from "react-router/es"
 
 export default class extends React.Component {

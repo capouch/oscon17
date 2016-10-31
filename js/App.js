@@ -19,7 +19,7 @@ export default class extends React.Component {
           history={ browserHistory }>
           { this.props.children }
         </App>
-        <Footer/>
+        <Footer />
       </div>
     )
   }

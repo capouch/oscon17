@@ -3,7 +3,7 @@
     This will be the user's primary portal into the content
 */
 import React from 'react'
-import { render } from "react-dom";
+import { render } from "react-dom"
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
 
 // Main component and styling

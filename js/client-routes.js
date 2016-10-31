@@ -7,7 +7,6 @@
 // Toplevel component
 import SPA from "./App"
 
-
 // Complain on error
 function errorLoading(err) {
   console.error('Dynamic page loading failed', err);
@@ -18,7 +17,7 @@ function loadRoute(cb) {
   return (module) => cb(null, module.default);
 }
 
-// Set up routes
+// Set up client-side routes
 export default {
   component: SPA,
   childRoutes: [

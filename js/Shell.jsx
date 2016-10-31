@@ -1,6 +1,5 @@
 /*
-  ** Shell: Search image database; allow for various viewing options
-    This will be the user's primary portal into the content
+  ** Shell: The App runs the shell, i.e. client-side controller
 */
 import React from 'react'
 import { render } from "react-dom"
@@ -13,6 +12,6 @@ import "../css/main.scss"
 import rootRoute from './client-routes'
 // Render application in main div
 render(
-  <Router history={browserHistory} routes={rootRoute} />,
+  <Router history={ browserHistory } routes={ rootRoute } />,
   document.getElementById('main')
 );

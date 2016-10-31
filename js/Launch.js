@@ -22,15 +22,21 @@ import {
 } from "neal-react"
 
 const sampleCode =
-`  loadRecordsFromServer: function() {
-  let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
-    req = new Request(URL, {method: 'POST', cache: 'reload'})
-  fetch(req).then(function(response) {
-    return response.json()
-  }).then (function(json) {
-    // console.log('json object: ' + JSON.stringify(json))
-    this.setState({record: json.data.imageRec})
-  }.bind(this))
+` self.addEventListener('fetch', function(event) {
+  console.log('Service worker up: ' + event.request.url)
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+          console.log('Returning cached value for: ' + event.request.url)
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
+});
 `
 
 export default (props) => {

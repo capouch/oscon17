@@ -8,7 +8,7 @@ import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'
 
 // For "goto" purposes
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router/es'
 
 // 1.
 // Cloud assets

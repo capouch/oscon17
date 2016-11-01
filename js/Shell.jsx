@@ -1,5 +1,5 @@
 /*
-  ** Shell: The App runs the shell, i.e. client-side controller
+  ** Shell: Boot the SPA app into the main div
 */
 import React from 'react'
 import { render } from "react-dom"

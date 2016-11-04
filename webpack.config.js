@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-//const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin
 
 
 module.exports = {
@@ -61,9 +61,9 @@ module.exports = {
       },
       sourceMap: false
     }),
-    // new StatsWriterPlugin({
-    //  fields:null,
-    //  filename: "stats.json" // Default
-    //})
+    new StatsWriterPlugin({
+      fields:null,
+      filename: "stats.json" // Default
+    })
   ],
 };

@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext js,jsx ."
   },
-  "author": "SJC OSCON 2016 Team",
+  "author": "Brian Capouch",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",

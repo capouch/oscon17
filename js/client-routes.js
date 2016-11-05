@@ -20,6 +20,7 @@ function loadRoute(cb) {
 // Set up client-side routes
 export default {
   component: SPA,
+
   childRoutes: [
       {
         path: '/',

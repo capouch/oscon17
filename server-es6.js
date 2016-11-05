@@ -13,6 +13,7 @@ import bodyParser from 'body-parser'
 
 // Our custom schema
 import mySchema from './graphql'
+// Set server-side routes
 import configRoutes from './js/server-routes'
 
 const dbName = 'oscon-test'
@@ -38,7 +39,7 @@ app.use(cors())
 // Compress outbound service
 app.use(compression())
 
-app.use( bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // GraphqQL server route

@@ -32,8 +32,8 @@ http.createServer(function (req, res) {
 
 const sserver = https.createServer( credentials, app )
 
-// CORS allows us to fetch images remotely on local-hosted server
-//  Without it, "no cross-domain" policy blocks browser access!!
+// CORS allows us to fetch images on local-hosted server
+//  The Wikipedia page is really good
 app.use(cors())
 
 // Compress outbound service
@@ -50,7 +50,7 @@ app.use('/graphql' ,graphqlHTTP({
 }));
 
 // Generic routers
-configRoutes( router, sserver)
+configRoutes(router, sserver)
 app.use('/', router)
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('/public'));

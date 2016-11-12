@@ -108,8 +108,10 @@ export default class extends React.Component {
     // Everything before the last '-'
     imageName = tailRegex.exec(imageName)[1]
     // Render zoomer view on this image
+    console.log('Moving to ' + imageName)
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
     browserHistory.push('/zoomer/' + imageName)
+    console.log('Nothing happened!!')
   }
 
   _onImageLoad(event) {

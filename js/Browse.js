@@ -26,7 +26,7 @@ const assetBase = '/graphql?'
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
-const queryBase = "query={imageRecs{_id, title, filename, description}}"
+const queryBase = "query=query+{imageRecs{_id, title, filename, description}}"
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -103,9 +103,9 @@ const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
     let URL = this.state.fetchURL
     console.log('Fetching ' + URL)
-    let myHeaders = new Headers()
-    myHeaders.append('Content-Type', 'application/graphql')
-    let req = new Request(URL, {method: 'GET', cache: 'reload', headers:myHeaders})
+    // let myHeaders = new Headers()
+    // myHeaders.append('Content-Type', 'application/graphql')
+    let req = new Request(URL, {method: 'GET', cache: 'reload'})
 
     fetch(req).then(function(response) {
       return response.json()

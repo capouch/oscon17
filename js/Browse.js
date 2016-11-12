@@ -102,13 +102,15 @@ const customColumnMetadata = [
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
     let URL = this.state.fetchURL
-    // console.log('Fetching ' + URL)
-    let req = new Request(URL, {method: 'POST', cache: 'reload'})
+    console.log('Fetching ' + URL)
+    let myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/graphql')
+    let req = new Request(URL, {method: 'POST', cache: 'reload', headers:myHeaders})
 
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {
-      //console.log('json object: ' + JSON.stringify(json))
+      console.log('json object: ' + JSON.stringify(json))
       if (json.data.imageRecs)
         this.setState({records: json.data.imageRecs})
       else

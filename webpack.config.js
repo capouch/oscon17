@@ -4,7 +4,7 @@ const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin
 
 module.exports = {
   entry: {
-    js: [ "./js/Shell.jsx"],
+    js: [ "./js/Shell.js"],
     vendor: [
       'react', 'react-dom', 'openseadragon',
       'react-image-gallery', 'griddle-react'

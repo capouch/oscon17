@@ -18,7 +18,7 @@ export default {
   args: {
       data: { type: imageRecUpdateType }
     },
-  async resolve (root, params, options) {
+  async resolve (root, params, {}, options) {
     // Put together update object
     // console.log(params.data._id)
     const query = {

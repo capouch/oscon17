@@ -20,7 +20,7 @@ export default {
         type: new GraphQLNonNull(GraphQLID)
       }
     },
-  async resolve (root, params, options) {
+  async resolve (root, params, {}, options) {
     // console.log('Deleting: ' + params.id)
     const updateResult = ImageRecModel
     .findById(params.id)

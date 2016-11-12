@@ -15,7 +15,7 @@ export default {
       type: new GraphQLNonNull(imageRecInputType)
     }
   },
-  async resolve (root, params, options) {
+  async resolve (root, params, {}, options) {
     const imageRecModel = new ImageRecModel(params.data);
     const newImageRec = await imageRecModel.save();
 

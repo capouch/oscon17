@@ -86,8 +86,8 @@ const EditDeleteWidget = React.createClass({
       let URL="/graphql?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
-      // console.log('Sending: ' + queryURL)
         req = new Request(URL, {method: 'POST', cache: 'reload'})
+      console.log('Sending: ' + URL)
       fetch(req).then(function(response) {
         return response.json()
       }.bind(this))

@@ -27,6 +27,7 @@
     "graphql": "^0.8.1",
     "griddle-react": "^0.4.1",
     "mongoose": "^4.6.7",
+    "morgan": "^1.7.0",
     "multer": "^1.1.0",
     "neal-react": "^0.2.5",
     "openseadragon": "^2.2.1",

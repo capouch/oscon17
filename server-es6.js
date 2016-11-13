@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import morgan from 'morgan'
 import graphql from 'graphql'
 import graphqlHTTP from 'express-graphql'
 import mongoose from 'mongoose'
@@ -24,6 +25,7 @@ const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
 
 const app = express(),
   router = express.Router()
+app.use(morgan('combined'))
   // server = http.createServer( app ),
 http.createServer(function (req, res) {
   res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });

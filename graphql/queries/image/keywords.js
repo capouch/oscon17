@@ -24,9 +24,9 @@ export default {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  resolve (root, params, {}, options) {
+  resolve (root, params, {}, info) {
     // Project only those properties the query has specified
-    const projection = getProjection(options.fieldASTs[0]);
+    const projection = getProjection(info.fieldNodes[0]);
     // We will need to munge the search terms into a regex
     //  That isn't what we're doing here yet, although this illustrates
     //  using the input terms to search multiple properties of the document

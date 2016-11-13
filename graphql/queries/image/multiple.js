@@ -10,8 +10,8 @@ export default {
   type: new GraphQLList(imageRecType),
   description: "Retrieves all image documents",
   args: {},
-  resolve (root, params, {}, options) {
-    const projection = getProjection(options.fieldASTs[0]);
+  resolve (root, params, {}, info) {
+    const projection = getProjection(info.fieldNodes[0]);
 
     return ImageRecModel
       .find()

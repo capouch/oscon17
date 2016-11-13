@@ -57,6 +57,7 @@ const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
     let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
+    console.log('Fetch URL: ' + URL)
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {
@@ -101,7 +102,7 @@ const EditDeleteWidget = React.createClass({
       // Put together mutation URL
       let URL="/graphql?query=mutation+{deleteImage(id: " + JSON.stringify(id) + ")}",
         req = new Request(URL, {method: 'POST', cache: 'reload'})
-      // console.log('Sending: ' + URL)
+      console.log('Sending: ' + URL)
       fetch(req).then(function(response) {
         return response.json()
       }.bind(this))

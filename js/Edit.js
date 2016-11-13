@@ -57,7 +57,7 @@ const EditDeleteWidget = React.createClass({
   loadRecordsFromServer: function() {
     let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
-    console.log('Fetch URL: ' + URL)
+    // console.log('Fetch URL: ' + URL)
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {

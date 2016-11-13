@@ -18,8 +18,8 @@ export default {
     }
   },
   resolve (root, params, {}, info) {
-    const projection = getProjection(options.fieldNodess[0]);
-
+    const projection = getProjection(info.fieldNodes[0]);
+    // console.log('Fetching ' + params.id)
     const imageResult = ImageRecModel
       .findById(params.id)
       .select(projection)

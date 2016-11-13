@@ -88,7 +88,7 @@ const EditDeleteWidget = React.createClass({
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
         req = new Request(URL, {method: 'POST', cache: 'reload'})
-      console.log('Sending: ' + URL)
+      // console.log('Sending: ' + URL)
       fetch(req).then(function(response) {
         return response.json()
       }.bind(this))

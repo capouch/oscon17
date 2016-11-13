@@ -17,8 +17,8 @@ export default {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve (root, params, options) {
-    const projection = getProjection(options.fieldNodes[0]);
+  resolve (root, params, {}, info) {
+    const projection = getProjection(info.fieldNodes[0]);
 
     return GeoPointRecModel
       .find({

@@ -14,9 +14,10 @@ let deleteStyle = { background: "red"},
 // Wrap an HTML button into a component
 const buttonStyle = {
   background: 'red',
-  margin: '10px',
-  width: '80%'
-}
+  marginTop: '1',
+  marginBottom: '1',
+  width: '100%'
+  }
 const DeleteButton = React.createClass({
   render: function () {
     return (
@@ -44,7 +45,7 @@ export default React.createClass({
       deleteButton = undefined
     }
     return (
-      <div className="col-lg-4 col-md-2 form-group">
+      <div className="col-lg-8 col-md-2 form-group">
         <label>Title</label>
         <input
           type="text"

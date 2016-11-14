@@ -10,6 +10,9 @@ module.exports = {
       'react-image-gallery', 'griddle-react'
     ]
   },
+  resolveLoader: {
+    moduleExtensions: ['-loader']
+  },
   output: {
     path: "public/js",
     publicPath: "/js",

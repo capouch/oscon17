@@ -25,13 +25,20 @@ const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
 
 const app = express(),
   router = express.Router()
+
+// Comment this out to quell logging
 app.use(morgan('combined'))
-  // server = http.createServer( app ),
+
+// No non-SSL service in this configuration
+// server = http.createServer( app ),
+
+// Redirect all HTTP requests to secure site version
 http.createServer(function (req, res) {
   res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
   res.end();
   }).listen(80);
 
+// Note that at present this only works for www.scene-history_org
 const sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images on local-hosted server
@@ -45,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // GraphqQL server route
-// This "route" is special
+// This "route" is special API call to GraphQL interface
 app.use('/graphql' ,graphqlHTTP({
   schema: mySchema,
   graphiql: true
@@ -54,19 +61,22 @@ app.use('/graphql' ,graphqlHTTP({
 // Generic routers
 configRoutes(router, sserver)
 app.use('/', router)
+
+// Set up path
 app.use(express.static(path.join(__dirname, '/public')))
-//app.use(express.static('/public'));
 
 // Configure mongoose as per http://mongoosejs.com/docs/promises.html
 // Use native promises
 mongoose.Promise = global.Promise;
 // assert.equal(query.exec().constructor, global.Promise);
 
-// Connect mongo database
+// Connect to mongo database
 mongoose.connect('mongodb://localhost/' + dbName)
 
-// start server
+// start HTTP server
 // server.listen(2016)
+
+// Start HTTPS server
 sserver.listen(443)
 console.log(
   'Express server listening on port %d in %s mode',

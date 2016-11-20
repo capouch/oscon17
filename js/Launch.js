@@ -47,11 +47,6 @@ export default (props) => {
         className="text-xs-center">
         <h1 className="display-4">White County Historical Society </h1>
         <p className="lead">Collect, Preserve, Protect the History of White County</p>
-        <p>
-          <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
-            Get it on github
-          </a>
-        </p>
       </Hero>
 
       <Section className="nopad-bottom" heading="Sample JavaScript code from project">
@@ -78,14 +73,14 @@ export default (props) => {
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
-            <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
+          <CustomerQuote name="Col. Isaac White" imageUrl="img/people/white.jpg">
+            <p>White County is named after Colonel Isaac White</p>
           </CustomerQuote>
-          <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
-            <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
+          <CustomerQuote name="Research" imageUrl="img/people/research.jpg">
+            <p>The WCHS does more than house its history.  Our members participate in current projects and related issues.</p>
           </CustomerQuote>
-          <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
-            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
+          <CustomerQuote name="North Star Book" imageUrl="img/people/northStar.jpg">
+            <p>A true story from the individual journals of Dr. Henry W. Greist, his wife Mollie, who is a trained surgical nurse, and their young son David to tell of the remarkable experiences of this family during the 1920s and 30s at the furthest point north in Alaska.</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

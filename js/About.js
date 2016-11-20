@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
-const html = '<pre>
+const html = `<pre>
 White County Historical Society was the vision of William H. Hamelle as he
 presented the ideas at the White County Old Settlers meeting, August 26, 1911.
 A committee was appointed to organize said Society.  Members of this committee
@@ -38,7 +38,7 @@ Mission Statement: To appreciate and encourage the connection of the past
 to the future by collecting and preserving White County Indianas history.
 
 Motto:  White County Historical Society where history is no mystery
-</pre>'
+</pre>`
 
 export default class extends React.Component {
   render () {

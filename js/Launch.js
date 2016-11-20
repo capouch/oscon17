@@ -22,7 +22,7 @@ import {
 } from "neal-react"
 
 const sampleCode =
-` Mission Statement: To appreciate and encourage the connection of the past to
+`Mission Statement: To appreciate and encourage the connection of the past to
 the future by collecting and preserving White County, Indiana's history.
 
 White County Historical Society is a not-for-profit Society established to bring

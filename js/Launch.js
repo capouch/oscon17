@@ -45,8 +45,8 @@ export default (props) => {
 
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
-        <h1 className="display-4">Scene:History </h1>
-        <p className="lead">Archiving and Presenting Historical Images</p>
+        <h1 className="display-4">White County Historical Society </h1>
+        <p className="lead">Collect, Preserve, Protect the History of White County</p>
         <p>
           <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
             Get it on github

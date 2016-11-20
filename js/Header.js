@@ -12,7 +12,7 @@ import {
 
 import NavLink from './NavLink'
 
-const brandName = "Scene:History"
+const brandName = "White County Historical Society"
 const brand = <span>{brandName}</span>
 
 // Currently not used due to change in login method
@@ -147,9 +147,9 @@ const NavHeader = React.createClass({
           <Navbar brand={brand}>
             <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
             {authNavItem}
-            <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-            <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
-            <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+            <NavItem><NavLink to="/browse" className="nav-link">About</NavLink></NavItem>
+            <NavItem><NavLink to="/slides" className="nav-link">Join Us!</NavLink></NavItem>
+            <NavItem><NavLink to="/upload" className="nav-link">Newsletters</NavLink></NavItem>
           </Navbar>
         </div>
       )}

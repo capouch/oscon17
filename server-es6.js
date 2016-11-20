@@ -19,20 +19,20 @@ import configRoutes from './js/server-routes'
 
 const dbName = 'oscon-test'
 
-const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
-  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org_combined.crt'),
-  credentials = {key: privateKey, cert: certificate}
+//const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
+//  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org_combined.crt'),
+//  credentials = {key: privateKey, cert: certificate}
 
 const app = express(),
   router = express.Router()
 app.use(morgan('combined'))
-  // server = http.createServer( app ),
-http.createServer(function (req, res) {
-  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-  res.end();
-  }).listen(80);
+let server = http.createServer( app )
+//http.createServer(function (req, res) {
+//  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+//  res.end();
+//  }).listen(80);
 
-const sserver = https.createServer( credentials, app )
+//const sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images on local-hosted server
 //  The Wikipedia page is really good
@@ -52,7 +52,7 @@ app.use('/graphql' ,graphqlHTTP({
 }));
 
 // Generic routers
-configRoutes(router, sserver)
+configRoutes(router, server)
 app.use('/', router)
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('/public'));
@@ -66,9 +66,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server
-// server.listen(2016)
-sserver.listen(443)
+server.listen(2016)
+//sserver.listen(443)
 console.log(
   'Express server listening on port %d in %s mode',
-  sserver.address().port, app.settings.env
+  server.address().port, app.settings.env
 )

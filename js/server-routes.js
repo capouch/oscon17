@@ -42,8 +42,8 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
-  router.get('/browse', function(req, res) {
-    console.log('Server browse chosen')
+  router.get('/about', function(req, res) {
+    console.log('Server about chosen')
     res.sendFile('index.html', options)
   })
 

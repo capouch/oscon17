@@ -46,6 +46,7 @@ export default class extends React.Component {
       <Section html = { html } >
         <div>What am I doing here??</div>
         <div dangerouslySetInnerHTML={{__html: this.props.html}}/>
+        <div>{html} </div>
       </Section>
     )
   }

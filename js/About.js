@@ -43,8 +43,9 @@ Motto:  White County Historical Society where history is no mystery
 export default class extends React.Component {
   render () {
     return (
-      <Section html = { html }>
-      <div dangerouslySetInnerHTML={{__html: this.props.html}}/>
+      <Section html = { html } >
+        <div>What am I doing here??</div>
+        <div dangerouslySetInnerHTML={{__html: this.props.html}}/>
       </Section>
     )
   }

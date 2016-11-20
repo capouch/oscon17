@@ -42,8 +42,8 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
-  router.get('/about', function(req, res) {
-    console.log('Server about chosen')
+  router.get('/history', function(req, res) {
+    console.log('Server history chosen')
     res.sendFile('index.html', options)
   })
 

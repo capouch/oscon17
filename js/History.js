@@ -47,7 +47,7 @@ export default class extends React.Component {
   render () {
     return (
       <Section>
-        <h2>About the White County Historical Society</h2>
+        <h2>Brief history of the society</h2>
         <div dangerouslySetInnerHTML={ {__html: html} } />
       </Section>
     )

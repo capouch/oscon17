@@ -10,7 +10,7 @@ import { App } from "neal-react"
 
 // Controller and view modules
 import Home from "./Launch.js"
-import About from './About'
+import History from './History'
 import Edit from './Edit'
 import Zoom from './Zoom'
 import Upload from './Upload'
@@ -45,7 +45,7 @@ ReactDOM.render((
   <Router history = { browserHistory } >
     <Route path = "/" component = { osconSPA } history={ browserHistory } >
       <IndexRoute name ="home" component = { Home } />
-      <Route path = "about" component = { About } />
+      <Route path = "history" component = { History } />
       <Route path = "edit/:imageId" component = { Edit } />
       <Route path = "zoomer" component = { Zoom } />
       <Route path = "zoomer/:imageId" component = { Zoom }/>

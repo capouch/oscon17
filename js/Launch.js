@@ -21,10 +21,12 @@ import {
   TeamMember,
 } from "neal-react"
 
-const sampleCode =
-`Mission Statement: To appreciate and encourage the connection of the past to
-the future by collecting and preserving White County, Indiana's history.
-
+const html =
+`
+<p>
+Mission Statement: To appreciate and encourage the connection of the past to
+the future by collecting and preserving the history of White County, Indiana.
+<p>
 White County Historical Society is a not-for-profit Society established to bring
 together those who share a common interest in White County Indiana's history.
 The Society has a Museum that has many displays recently reworked for public
@@ -46,23 +48,23 @@ export default (props) => {
       </Hero>
 
       <Section className="nopad-bottom" heading="About the society">
-        <Code lang="jsx" block>{sampleCode}</Code>
+        <div dangerouslySetInnerHTML={ {__html: html} } />
       </Section>
 
       <Section>
         <HorizontalSplit padding="md">
           <div>
-            <p className="lead">Shell executive</p>
-            <p>The initial page load brings in a shell program, written in JavaScript, which then manages the client/UI.</p>
+            <p className="lead">Maintaining historical source material</p>
+            <p>The society operates a museum featuring many colllections</p>
           </div>
           <div>
-            <p className="lead">Modern Tools</p>
-            <p>Code is written ES6 via Babel, React front end, GraphQL queries and mutations, to a local or remote MongoDB backend.
+            <p className="lead">Providing research facilities</p>
+            <p>Our reading room contains many historical reference works.
               </p>
           </div>
           <div>
-            <p className="lead">Views instead of pages</p>
-            <p>React components play nicely with one another, and wrappers exist for many useful tools.</p>
+            <p className="lead">Publications</p>
+            <p>The society has published over XX original works of historical interest.</p>
           </div>
         </HorizontalSplit>
       </Section>

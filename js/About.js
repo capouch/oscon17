@@ -56,7 +56,7 @@ export default class extends React.Component {
 
 
       Motto:  White County Historical Society where history is no mystery
-</pre></div>
+</pre></p></div>
     )
   }
 }

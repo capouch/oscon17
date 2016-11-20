@@ -20,9 +20,10 @@ With museum acquisitions growing, the White County Historical Society was in nee
 
 Update: September 2010.
 
-Mission Statement:      To appreciate and encourage the connection of the past to the future by collecting and preserving White County Indiana's history.
+Mission Statement:      To appreciate and encourage the connection of the past to the future by collecting and preserving White County Indianas history.
 
 Motto:  White County Historical Society where history is no mystery
 </pre></div>
     )
   }
+}

@@ -25,7 +25,7 @@ const dbName = 'oscon-test'
 
 const app = express(),
   router = express.Router()
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 let server = http.createServer( app )
 //http.createServer(function (req, res) {
 //  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });

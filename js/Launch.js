@@ -22,21 +22,17 @@ import {
 } from "neal-react"
 
 const sampleCode =
-` self.addEventListener('fetch', function(event) {
-  console.log('Service worker up: ' + event.request.url)
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          console.log('Returning cached value for: ' + event.request.url)
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
+` Mission Statement: To appreciate and encourage the connection of the past to
+the future by collecting and preserving White County, Indiana's history.
+
+White County Historical Society is a not-for-profit Society established to bring
+together those who share a common interest in White County Indiana's history.
+The Society has a Museum that has many displays recently reworked for public
+viewing and a variety of programs for our community.  Our new remodel building
+interior provides the public an opportunity to research and to share their
+research with others.  The current WC Genealogy Society is housed on the main
+floor.  Between the two societies there are many historical files available for
+your research needs.  We also have research services available.
 `
 
 export default (props) => {
@@ -45,11 +41,11 @@ export default (props) => {
 
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
-        <h1 className="display-4">White County Historical Society </h1>
+        <h1 className="display-4">White County Indiana Historical Society </h1>
         <p className="lead">Collect, Preserve, Protect the History of White County</p>
       </Hero>
 
-      <Section className="nopad-bottom" heading="Sample JavaScript code from project">
+      <Section className="nopad-bottom" heading="About the society">
         <Code lang="jsx" block>{sampleCode}</Code>
       </Section>
 

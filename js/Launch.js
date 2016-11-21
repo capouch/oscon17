@@ -41,7 +41,7 @@ export default (props) => {
   return (
     <Page>
 
-      <Hero backgroundImage="img/background.png"
+      <Hero backgroundImage="img/background.jpg"
         className="text-xs-center">
         <h1 className="display-4">White County Indiana Historical Society </h1>
         <p className="lead">Collect, Preserve, Protect the History of White County</p>

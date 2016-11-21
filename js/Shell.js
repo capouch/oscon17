@@ -9,7 +9,7 @@ import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react
 import { App } from "neal-react"
 
 // Controller and view modules
-import Home from "./Launch.js"
+import Home from "./Launch"
 import History from './History'
 import Edit from './Edit'
 import Zoom from './Zoom'

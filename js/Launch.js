@@ -54,16 +54,16 @@ export default (props) => {
       <Section>
         <HorizontalSplit padding="md">
           <div>
-            <p className="lead">Maintaining historical source material</p>
+            <p className="lead">&#8226; Maintaining historical source material</p>
             <p>The society operates a museum featuring many colllections</p>
           </div>
           <div>
-            <p className="lead">Providing research facilities</p>
+            <p className="lead">&#8226; Providing research facilities</p>
             <p>Our reading room contains many historical reference works.
               </p>
           </div>
           <div>
-            <p className="lead">Publications</p>
+            <p className="lead">&#8226; Publications</p>
             <p>The society has published over XX original works of historical interest.</p>
           </div>
         </HorizontalSplit>

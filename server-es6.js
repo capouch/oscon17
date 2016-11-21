@@ -27,7 +27,7 @@ const app = express(),
   router = express.Router()
 
 // Comment this out to quell logging
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 
 // No non-SSL service in this configuration
 // server = http.createServer( app ),

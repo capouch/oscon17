@@ -43,8 +43,8 @@ export default (props) => {
 
       <Hero backgroundImage="img/background.jpg"
         className="text-xs-center">
-        <h1 className="display-4">White County Indiana Historical Society </h1>
-        <p className="lead">Collect, Preserve, Protect the History of White County</p>
+        <h1 className="display-4">White County Historical Society </h1>
+        <p className="lead">Collect, Preserve, Protect the History of White County, Indiana</p>
       </Hero>
 
       <Section className="nopad-bottom" heading="About the society">

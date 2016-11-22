@@ -14,7 +14,8 @@ import History from './History'
 import Edit from './Edit'
 import Zoom from './Zoom'
 import Upload from './Upload'
-import SlideShow from './SlideShow.js'
+import PDFViewer from './Newsletter'
+import SlideShow from './SlideShow'
 // import LoginOut from './Login.js'
 
 // Toplevel CSS
@@ -52,6 +53,7 @@ ReactDOM.render((
       <Route path = "upload" component = { Upload } />
       <Route path = "slides" component = { SlideShow } />
       <Route path = "slides/:viewSet" component = { SlideShow } />
+      <Route path = "newsletter" component = { PDFViewer } />
       <Route path = "*" component = { Home } />
     </Route>
   </Router>

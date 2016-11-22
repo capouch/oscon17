@@ -149,7 +149,7 @@ const NavHeader = React.createClass({
             {authNavItem}
             <NavItem><NavLink to="/history" className="nav-link">History</NavLink></NavItem>
             <NavItem><NavLink to="/slides" className="nav-link">Join Us!</NavLink></NavItem>
-            <NavItem><NavLink to="/upload" className="nav-link">Newsletters</NavLink></NavItem>
+            <NavItem><NavLink to="/newsletter" className="nav-link">Newsletters</NavLink></NavItem>
           </Navbar>
         </div>
       )}

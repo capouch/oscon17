@@ -62,8 +62,8 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
-  router.get('/login-out', function(req, res) {
-    console.log('Server login/out chosen')
+  router.get('/newsletter', function(req, res) {
+    console.log('Server newsletter chosen')
     res.sendFile('index.html', options)
   });
 

@@ -17,7 +17,7 @@ import mySchema from './graphql'
 // Set server-side routes
 import configRoutes from './js/server-routes'
 
-const dbName = 'oscon-test'
+const dbName = 'wchs'
 
 //const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
 //  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org_combined.crt'),

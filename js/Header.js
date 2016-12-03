@@ -151,7 +151,7 @@ const NavHeader = React.createClass({
             <NavItem dropdown={true}>
               <DropdownToggle>Image Galleries</DropdownToggle>
               <DropdownMenu>
-                <NavLink to="/upload" className="nav-link">Upoad</NavLink>
+                <NavLink to="/upload" className="nav-link">Upload</NavLink>
                 <NavLink to="/browse" className="nav-link">Browse</NavLink>
               </DropdownMenu>
             </NavItem>

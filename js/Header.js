@@ -148,7 +148,6 @@ const NavHeader = React.createClass({
             <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
             {authNavItem}
             <NavItem><NavLink to="/history" className="nav-link">History</NavLink></NavItem>
-            <NavItem><NavLink to="/slides" className="nav-link">Slide Show</NavLink></NavItem>
             <NavItem><NavLink to="/newsletter" className="nav-link">Newsletters</NavLink></NavItem>
             <NavItem dropdown={true}>
               <DropdownToggle>Image Galleries</DropdownToggle>
@@ -156,6 +155,7 @@ const NavHeader = React.createClass({
                 <NavLink to="" className="nav-link"></NavLink>
                 <NavLink to="/browse" className="nav-link">Browse</NavLink>
                 <NavLink to="/upload" className="nav-link">Upload</NavLink>
+                <NavLink to="/slides" className="nav-link">Slide Show</NavLink>
               </DropdownMenu>
             </NavItem>
           </Navbar>

@@ -45,7 +45,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // GraphqQL server route
-// This "route" is special
+// This "route" is special API call to GraphQL interface
 app.use('/graphql' ,graphqlHTTP({
   schema: mySchema,
   graphiql: true
@@ -54,15 +54,16 @@ app.use('/graphql' ,graphqlHTTP({
 // Generic routers
 configRoutes(router, server)
 app.use('/', router)
+
+// Set up path
 app.use(express.static(path.join(__dirname, '/public')))
-//app.use(express.static('/public'));
 
 // Configure mongoose as per http://mongoosejs.com/docs/promises.html
 // Use native promises
 mongoose.Promise = global.Promise;
 // assert.equal(query.exec().constructor, global.Promise);
 
-// Connect mongo database
+// Connect to mongo database
 mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server

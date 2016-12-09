@@ -10,6 +10,7 @@ import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
 import Griddle from 'griddle-react'
+import 'whatwg-fetch'
 
 // CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged

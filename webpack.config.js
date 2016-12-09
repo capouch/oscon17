@@ -4,7 +4,7 @@ const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin
 
 module.exports = {
   entry: {
-    js: [ 'babel-polyfill', "./js/Shell.js"],
+    js: [ 'whatwg-fetch', 'babel-polyfill', "./js/Shell.js"],
     vendor: [
       'react', 'react-dom', 'openseadragon',
       'react-image-gallery', 'griddle-react'

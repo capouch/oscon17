@@ -144,7 +144,9 @@ const InfoTable = React.createClass({
     // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
-    if ((this.state.records == null) || this.state.records.length == 0)
+    // Note 9 Dec 2016: audit the precise test conditions--ios issue here?
+    if ((this.state.records == null) || this.state.records.length == 0
+          || this.state.records == undefined)
       this.loadRecordsFromServer()
     },
   componentWillUnmount: function () {

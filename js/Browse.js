@@ -16,6 +16,9 @@ import Griddle from 'griddle-react'
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
 
+// Hey ios/old Explorer, here's the polyfill for fetch()
+import 'whatwg-fetch'
+
 //
 // 1.
 // Select one of the two to configure for local/cloud access

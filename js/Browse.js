@@ -67,7 +67,7 @@ const EditLinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
-    // The rendered object is a zoomer for this image
+    // The rendered object is an icon link to edit/delete data
     const target = this.props.data,
       renderBase = "edit/",
       renderPath = renderBase + target;

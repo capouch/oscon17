@@ -74,7 +74,7 @@ const EditLinkComponent = React.createClass({
       renderPath = renderBase + target;
 
     return <NavLink to={renderPath}>
-      Edit
+      <span className="fa fa-pencil-square-o"></span>
     </NavLink>
   }
 })
@@ -89,11 +89,7 @@ const customColumnMetadata = [
   },
   {
     "columnName": "title",
-    "displayName": "Image Title"
-  },
-  {
-    "columnName": "filename",
-    "displayName": "Zoomer Link",
+    "displayName": "Title",
     "customComponent": ZoomLinkComponent
   },
   {
@@ -196,6 +192,7 @@ const InfoTable = React.createClass({
             </h2>
           </center>
           <SearchBar
+            autoFocus={false}
             placeholder={"Search image database"}
             onChange={this.onSearchChange}
             onSearch={this.onSearch} />
@@ -211,7 +208,7 @@ const InfoTable = React.createClass({
           </div>
           <Griddle
             results={this.state.records}
-            columns={['_id','title','filename', "description"]}
+            columns={['_id','title', "description"]}
             columnMetadata={customColumnMetadata}
             showSettings={true}
             resultsPerPage={10}

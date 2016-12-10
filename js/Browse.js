@@ -72,9 +72,7 @@ const EditLinkComponent = React.createClass({
       renderBase = "edit/",
       renderPath = renderBase + target;
 
-    return <NavLink to={renderPath}>
-      Edit
-    </NavLink>
+    return <a href={renderPath}><span className="fa fa-pencil-square-o"></span></a>
   }
 })
 
@@ -82,17 +80,13 @@ const EditLinkComponent = React.createClass({
 const customColumnMetadata = [
   {
     columnName: "_id",
-    displayName: "",
+    displayName: "Edit",
     cssClassName: "editColumn",
     customComponent: EditLinkComponent
   },
   {
     "columnName": "title",
-    "displayName": "Image Title"
-  },
-  {
-    "columnName": "filename",
-    "displayName": "Zoomer Link",
+    "displayName": "Title",
     "customComponent": ZoomLinkComponent
   },
   {
@@ -208,7 +202,7 @@ const InfoTable = React.createClass({
           </div>
           <Griddle
             results={this.state.records}
-            columns={['_id','title','filename', "description"]}
+            columns={['_id','title', "description"]}
             columnMetadata={customColumnMetadata}
             showSettings={true}
             resultsPerPage={10}

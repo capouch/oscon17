@@ -9,12 +9,13 @@ import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react
 import { App } from "neal-react"
 
 // Controller and view modules
-import Home from "./Launch.js"
+import Home from "./Launch"
 import Browse from './Browse'
 import Edit from './Edit'
+// import Asset from './Asset'
 import Zoom from './Zoom'
 import Upload from './Upload'
-import SlideShow from './SlideShow.js'
+import SlideShow from './SlideShow'
 // import LoginOut from './Login.js'
 
 // Toplevel CSS
@@ -48,7 +49,8 @@ ReactDOM.render((
       <Route path = "browse" component = { Browse } />
       <Route path = "edit/:imageId" component = { Edit } />
       <Route path = "zoomer" component = { Zoom } />
-      <Route path = "zoomer/:imageId" component = { Zoom }/>
+      <Route path = "zoomer/:imageId" component = { Zoom } />
+      // <Route path = "asset:imageId" component = { Asset } />
       <Route path = "upload" component = { Upload } />
       <Route path = "slides" component = { SlideShow } />
       <Route path = "slides/:viewSet" component = { SlideShow } />

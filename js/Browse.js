@@ -72,7 +72,9 @@ const EditLinkComponent = React.createClass({
       renderBase = "edit/",
       renderPath = renderBase + target;
 
-    return <a href={renderPath}><span className="fa fa-pencil-square-o"></span></a>
+    return <NavLink to={renderPath}>
+      <span className="fa fa-pencil-square-o"></span>
+    </NavLink>
   }
 })
 
@@ -80,7 +82,7 @@ const EditLinkComponent = React.createClass({
 const customColumnMetadata = [
   {
     columnName: "_id",
-    displayName: "Edit",
+    displayName: "",
     cssClassName: "editColumn",
     customComponent: EditLinkComponent
   },

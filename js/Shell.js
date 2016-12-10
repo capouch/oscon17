@@ -50,7 +50,6 @@ ReactDOM.render((
       <Route path = "edit/:imageId" component = { Edit } />
       <Route path = "zoomer" component = { Zoom } />
       <Route path = "zoomer/:imageId" component = { Zoom } />
-      // <Route path = "asset:imageId" component = { Asset } />
       <Route path = "upload" component = { Upload } />
       <Route path = "slides" component = { SlideShow } />
       <Route path = "slides/:viewSet" component = { SlideShow } />

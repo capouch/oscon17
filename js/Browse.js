@@ -52,7 +52,7 @@ const ZoomLinkComponent = React.createClass({
   render: function(){
     // Make a NavLink out of a column value
     // The rendered object is a zoomer for this image
-    const target = this.props.data,
+    const target = this.props.rowData.filename,
       renderBase = "zoomer/",
       renderPath = renderBase + target;
 

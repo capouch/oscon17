@@ -189,6 +189,7 @@ const InfoTable = React.createClass({
             </h2>
           </center>
           <SearchBar
+            autoFocus={false}
             placeholder={"Search image database"}
             onChange={this.onSearchChange}
             onSearch={this.onSearch} />

@@ -47,6 +47,14 @@ export default {
         }
       },
       {
+        path: 'asset',
+        getComponent(location, cb) {
+          System.import('./Asset')
+            .then(loadRoute(cb))
+            .catch(errorLoading);
+        }
+      },
+      {
         path: 'edit/:imageId',
         getComponent(location, cb) {
           System.import('./Edit')

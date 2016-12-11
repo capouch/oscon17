@@ -145,126 +145,126 @@ export default class extends React.Component {
 
     return (
       <Section>
-        <div><center><h2>Click on image to zoom it</h2></center></div>
-      <section className='app'>
-        <ImageGallery
-          ref={i => this._imageGallery = i}
-          items={this.state.images}
-          lazyLoad={false}
-          onClick={this._onImageClick}
-          onImageLoad={this._onImageLoad}
-          onSlide={this._onSlide}
-          onPause={this._onPause.bind(this)}
-          onPlay={this._onPlay.bind(this)}
-          infinite={this.state.infinite}
-          showBullets={this.state.showBullets}
-          showThumbnails={this.state.showThumbnails}
-          showIndex={this.state.showIndex}
-          showNav={this.state.showNav}
-          slideInterval={parseInt(this.state.slideInterval)}
-          autoPlay={this.state.isPlaying}
-          slideOnThumbnailHover={this.state.slideOnThumbnailHover}
-        />
+        <center><h4>Click on image for zoomed view</h4></center>
+        <section className='app'>
+          <ImageGallery
+            ref={i => this._imageGallery = i}
+            items={this.state.images}
+            lazyLoad={false}
+            onClick={this._onImageClick}
+            onImageLoad={this._onImageLoad}
+            onSlide={this._onSlide}
+            onPause={this._onPause.bind(this)}
+            onPlay={this._onPlay.bind(this)}
+            infinite={this.state.infinite}
+            showBullets={this.state.showBullets}
+            showThumbnails={this.state.showThumbnails}
+            showIndex={this.state.showIndex}
+            showNav={this.state.showNav}
+            slideInterval={parseInt(this.state.slideInterval)}
+            autoPlay={this.state.isPlaying}
+            slideOnThumbnailHover={this.state.slideOnThumbnailHover}
+            />
 
-      <div className='app-sandbox'>
+          <div className='app-sandbox'>
 
-        <h2 className='app-header'>
-          Prop settings
-        </h2>
+            <h2 className='app-header'>
+              Prop settings
+            </h2>
 
-        <ul className='app-buttons'>
-          <li>
-            <a
-              className={'app-button ' + (this.state.isPlaying ? 'active' : '')}
-              onClick={this._playSlider.bind(this)}>
-              Play
-            </a>
-          </li>
-          <li>
-            <a
-              className={'app-button ' + (!this.state.isPlaying ? 'active' : '')}
-              onClick={this._pauseSlider.bind(this)}>
-              Pause
-            </a>
-          </li>
-          <li>
-            <div className='app-interval-input-group'>
-              <span className='app-interval-label'>interval</span>
-              <input
-                className='app-interval-input'
-                type='text'
-                onChange={this._handleInputChange.bind(this, 'slideInterval')}
-                value={this.state.slideInterval}/>
-            </div>
-          </li>
-        </ul>
+            <ul className='app-buttons'>
+              <li>
+                <a
+                  className={'app-button ' + (this.state.isPlaying ? 'active' : '')}
+                  onClick={this._playSlider.bind(this)}>
+                  Play
+                </a>
+              </li>
+              <li>
+                <a
+                  className={'app-button ' + (!this.state.isPlaying ? 'active' : '')}
+                  onClick={this._pauseSlider.bind(this)}>
+                  Pause
+                </a>
+              </li>
+              <li>
+                <div className='app-interval-input-group'>
+                  <span className='app-interval-label'>interval</span>
+                  <input
+                    className='app-interval-input'
+                    type='text'
+                    onChange={this._handleInputChange.bind(this, 'slideInterval')}
+                    value={this.state.slideInterval}/>
+                </div>
+              </li>
+            </ul>
 
-        <ul className='app-checkboxes'>
-          <li>
-            <input
-              id='infinite'
-              type='checkbox'
-              onChange={this._handleCheckboxChange.bind(this, 'infinite')}
-              checked={this.state.infinite}/>
-            <label htmlFor='infinite'>
-              infinite sliding
-            </label>
-          </li>
-          <li>
-            <input
-              id='show_bullets'
-              type='checkbox'
-              onChange={this._handleCheckboxChange.bind(this, 'showBullets')}
-              checked={this.state.showBullets}/>
-            <label htmlFor='show_bullets'>
-              show bullets
-            </label>
-          </li>
-          <li>
-            <input
-              id='show_thumbnails'
-              type='checkbox'
-              onChange={this._handleCheckboxChange.bind(this, 'showThumbnails')}
-              checked={this.state.showThumbnails}/>
-            <label htmlFor='show_thumbnails'>
-              show thumbnails
-            </label>
-          </li>
-          <li>
-            <input
-              id='show_navigation'
-              type='checkbox'
-              onChange={this._handleCheckboxChange.bind(this, 'showNav')}
-              checked={this.state.showNav}/>
-            <label htmlFor='show_navigation'>
-              show navigation
-            </label>
-          </li>
-          <li>
-            <input
-              id='show_index'
-              type='checkbox'
-              onChange={this._handleCheckboxChange.bind(this, 'showIndex')}
-              checked={this.state.showIndex}/>
-            <label htmlFor='show_index'>
-              show index
-            </label>
-          </li>
-          <li>
-            <input
-              id='slide_on_thumbnail_hover'
-              type='checkbox'
-              onChange={this._handleCheckboxChange.bind(this, 'slideOnThumbnailHover')}
-              checked={this.state.slideOnThumbnailHover}/>
-            <label htmlFor='slide_on_thumbnail_hover'>
-              slide on thumbnail hover (desktop)
-            </label>
-          </li>
-        </ul>
+            <ul className='app-checkboxes'>
+              <li>
+                <input
+                  id='infinite'
+                  type='checkbox'
+                  onChange={this._handleCheckboxChange.bind(this, 'infinite')}
+                  checked={this.state.infinite}/>
+                <label htmlFor='infinite'>
+                  infinite sliding
+                </label>
+              </li>
+              <li>
+                <input
+                  id='show_bullets'
+                  type='checkbox'
+                  onChange={this._handleCheckboxChange.bind(this, 'showBullets')}
+                  checked={this.state.showBullets}/>
+                <label htmlFor='show_bullets'>
+                  show bullets
+                </label>
+              </li>
+              <li>
+                <input
+                  id='show_thumbnails'
+                  type='checkbox'
+                  onChange={this._handleCheckboxChange.bind(this, 'showThumbnails')}
+                  checked={this.state.showThumbnails}/>
+                <label htmlFor='show_thumbnails'>
+                  show thumbnails
+                </label>
+              </li>
+              <li>
+                <input
+                  id='show_navigation'
+                  type='checkbox'
+                  onChange={this._handleCheckboxChange.bind(this, 'showNav')}
+                  checked={this.state.showNav}/>
+                <label htmlFor='show_navigation'>
+                  show navigation
+                </label>
+              </li>
+              <li>
+                <input
+                  id='show_index'
+                  type='checkbox'
+                  onChange={this._handleCheckboxChange.bind(this, 'showIndex')}
+                  checked={this.state.showIndex}/>
+                <label htmlFor='show_index'>
+                  show index
+                </label>
+              </li>
+              <li>
+                <input
+                  id='slide_on_thumbnail_hover'
+                  type='checkbox'
+                  onChange={this._handleCheckboxChange.bind(this, 'slideOnThumbnailHover')}
+                  checked={this.state.slideOnThumbnailHover}/>
+                <label htmlFor='slide_on_thumbnail_hover'>
+                  slide on thumbnail hover (desktop)
+                </label>
+              </li>
+            </ul>
 
-      </div>
-      </section>
-    </Section>
+          </div>
+        </section>
+      </Section>
     )
   }
 }

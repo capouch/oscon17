@@ -48,6 +48,7 @@ ReactDOM.render((
   <Router history = { browserHistory } >
     <Route path = "/" component = { osconSPA } history={ browserHistory } >
       <IndexRoute name ="home" component = { Home } />
+      <Route path = "browse" component = { Browse } />
       <Route path = "history" component = { History } />
       <Route path = "edit/:imageId" component = { Edit } />
       <Route path = "zoomer" component = { Zoom } />

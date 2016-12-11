@@ -25,7 +25,7 @@ let loginModal = undefined,
   authNavItem = undefined
 
 // Puzzle: at first call, this component mounts *twice*
-//  and I can't figure out why.  Doesn't hurt anything, but yet . . . . 
+//  and I can't figure out why.  Doesn't hurt anything, but yet . . . .
 const NavHeader = React.createClass({
   getInitialState: function() {
     // Default to Login mode
@@ -148,7 +148,6 @@ const NavHeader = React.createClass({
             <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
             {authNavItem}
             <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-            <NavItem><NavLink to="/slides" className="nav-link">Slideshow</NavLink></NavItem>
             <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
           </Navbar>
         </div>

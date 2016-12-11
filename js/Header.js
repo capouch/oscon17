@@ -155,7 +155,6 @@ const NavHeader = React.createClass({
                 <NavLink to="" className="nav-link"></NavLink>
                 <NavLink to="/browse" className="nav-link">Browse</NavLink>
                 <NavLink to="/upload" className="nav-link">Upload</NavLink>
-                <NavLink to="/slides" className="nav-link">Slide Show</NavLink>
               </DropdownMenu>
             </NavItem>
           </Navbar>

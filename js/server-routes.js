@@ -62,6 +62,11 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
+  router.get('/asset*', function(req, res) {
+    console.log('Server asset chosen')
+    res.sendFile('index.html', options)
+  });
+
   router.get('/zoomer*', function(req, res) {
     console.log('Server zoomer chosen')
     res.sendFile('index.html', options)

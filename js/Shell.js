@@ -12,6 +12,7 @@ import { App } from "neal-react"
 import Home from "./Launch"
 import History from './History'
 import Edit from './Edit'
+import Asset from './Asset'
 import Zoom from './Zoom'
 import Upload from './Upload'
 import Browse from './Browse'
@@ -50,8 +51,8 @@ ReactDOM.render((
       <Route path = "history" component = { History } />
       <Route path = "edit/:imageId" component = { Edit } />
       <Route path = "zoomer" component = { Zoom } />
-      <Route path = "zoomer/:imageId" component = { Zoom }/>
-      <Route path = "browse" component = { Browse } />
+      <Route path = "zoomer/:imageId" component = { Zoom } />
+      <Route path = "asset/:imageId" component = { Asset } />
       <Route path = "upload" component = { Upload } />
       <Route path = "slides" component = { SlideShow } />
       <Route path = "slides/:viewSet" component = { SlideShow } />

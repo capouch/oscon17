@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { render } from 'react-dom'
+// import { render } from 'react-dom'
 
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
@@ -29,8 +29,8 @@ const assetBase = '/graphql?'
 // Cloud assets
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
 
-let queryTarget = "query=query+{imageRecs{_id, title, filename, description}}"
-const queryBase = "query=query+{imageRecs{_id, title, filename, description}}"
+let queryTarget = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
+const queryBase = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -53,11 +53,11 @@ const ZoomLinkComponent = React.createClass({
   render: function(){
     // Make a NavLink out of a column value
     // The rendered object is a zoomer for this image
-    const target = this.props.rowData.filename,
-      renderBase = "zoomer/",
+    const target = this.props.rowData._id,
+      renderBase = "asset/",
       renderPath = renderBase + target;
 
-    return <NavLink to={renderPath}>
+    return <NavLink to={ renderPath }>
       {this.props.data}
     </NavLink>
   }
@@ -231,7 +231,8 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url={ assetBase + queryBase}/>
+          url={ assetBase + queryBase}
+          />
       </div>
     )
   }

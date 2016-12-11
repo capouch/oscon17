@@ -51,7 +51,6 @@ ReactDOM.render((
       <Route path = "browse" component = { Browse } />
       <Route path = "history" component = { History } />
       <Route path = "edit/:imageId" component = { Edit } />
-      <Route path = "zoomer" component = { Zoom } />
       <Route path = "zoomer/:imageId" component = { Zoom } />
       <Route path = "asset/:imageId" component = { Asset } />
       <Route path = "upload" component = { Upload } />

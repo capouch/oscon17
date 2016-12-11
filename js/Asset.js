@@ -4,12 +4,9 @@
 
 import React from 'react'
 import { Section } from 'neal-react'
-import NavLink from './NavLink'
 
 // For "goto" purposes
 import { browserHistory } from 'react-router/es'
-
-const record = null
 
 export default React.createClass ( {
 
@@ -18,7 +15,6 @@ export default React.createClass ( {
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
     browserHistory.push('/zoomer/' + this.state.fileName)
-    // console.log('Nothing happened!!')
   },
 
   getInitialState: function() {
@@ -67,7 +63,9 @@ export default React.createClass ( {
           <h5>
             <b>Source:</b> { source }
           </h5>
-          <h5><b>Taglist:</b> { tags } </h5>
+          <h5>
+            <b>Taglist:</b> { tags }
+          </h5>
         </div>
       </Section>
   )}

@@ -4,8 +4,6 @@
  */
 
 import React from 'react'
-// import { render } from 'react-dom'
-
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
@@ -52,7 +50,7 @@ const ZoomLinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
-    // The rendered object is a zoomer for this image
+    // Clicking brings up "Asset" view
     const target = this.props.rowData._id,
       renderBase = "asset/",
       renderPath = renderBase + target;

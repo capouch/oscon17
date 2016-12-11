@@ -48,7 +48,6 @@ ReactDOM.render((
       <IndexRoute name ="home" component = { Home } />
       <Route path = "browse" component = { Browse } />
       <Route path = "edit/:imageId" component = { Edit } />
-      <Route path = "zoomer" component = { Zoom } />
       <Route path = "zoomer/:imageId" component = { Zoom } />
       <Route path = "asset/:imageId" component = { Asset } />
       <Route path = "upload" component = { Upload } />

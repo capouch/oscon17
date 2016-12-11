@@ -49,7 +49,8 @@ export default React.createClass ( {
     // Extract fields to print
     title = targetRecord["title"],
     description = targetRecord["description"],
-    source = targetRecord["source"]
+    source = targetRecord["source"],
+    tags = targetRecord["taglist"]
     this.setState({ fileName: fileName })
 
     return (
@@ -66,6 +67,7 @@ export default React.createClass ( {
           <h5>
             <b>Source:</b> { source }
           </h5>
+          <h5><b>Taglist:</b> { tags } </h5>
         </div>
       </Section>
   )}

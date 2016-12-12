@@ -47,7 +47,7 @@ export default {
         }
       },
       {
-        path: 'asset',
+        path: 'asset/:imageId',
         getComponent(location, cb) {
           System.import('./Asset')
             .then(loadRoute(cb))

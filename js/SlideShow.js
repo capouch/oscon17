@@ -78,7 +78,8 @@ export default class extends React.Component {
           }
         })
       this.setState( { images: imageRecs } )
-      // Will we need to do the same here to get the image IDs?
+
+      // Create id/filename mapping for click handler
       const idList = source.map(function (oneImage) {
         return {
           id: oneImage._id,

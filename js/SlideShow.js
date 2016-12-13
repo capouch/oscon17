@@ -161,7 +161,7 @@ export default class extends React.Component {
 
     return (
       <Section>
-        <center><h4>Click on image for zoomed view</h4></center>
+        <center><h4>Click on image for details</h4></center>
         <section className='app'>
           <ImageGallery
             ref={i => this._imageGallery = i}

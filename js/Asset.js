@@ -14,7 +14,7 @@ export default React.createClass ( {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
-    browserHistory.push('/zoomer/' + this.state.displayRecord.filename)
+    browserHistory.push('/zoomer/' + this.state.displayFields.filename)
   },
 
   getInitialState: function() {

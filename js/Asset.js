@@ -14,7 +14,7 @@ export default React.createClass ( {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
-    browserHistory.push('/zoomer/' + this.state.displayRecord.filename)
+    browserHistory.push('/zoomer/' + this.state.displayFields.filename)
   },
 
   getInitialState: function() {
@@ -34,6 +34,7 @@ export default React.createClass ( {
       desiredRecord = this.state.records.find(function (d){
         return d._id == record
       }),
+
       // Put together fields required for view
       displayRecord = {
         filename: desiredRecord["filename"],
@@ -44,25 +45,25 @@ export default React.createClass ( {
         source: desiredRecord["source"],
         tags: desiredRecord["taglist"]
         }
-    this.setState({ displayRecord: displayRecord })
+    this.setState({ displayFields: displayRecord })
   },
   render() {
     return (
       <Section>
         <div>
           <h4>Click on image for zoomed view</h4>
-            <img src={this.state.displayRecord.imageURL} onClick={this.imageClick}/>
+            <img src={this.state.displayFields.imageURL} onClick={this.imageClick}/>
           <h5>
-            <b>Title:</b> { this.state.displayRecord.title }
+            <b>Title:</b> { this.state.displayFields.title }
           </h5>
           <h5>
-            <b>Description:</b> { this.state.displayRecord.description }
+            <b>Description:</b> { this.state.displayFields.description }
           </h5>
           <h5>
-            <b>Source:</b> { this.state.displayRecord.source }
+            <b>Source:</b> { this.state.displayFields.source }
           </h5>
           <h5>
-            <b>Taglist:</b> { this.state.displayRecord.tags }
+            <b>Taglist:</b> { this.state.displayFields.tags }
           </h5>
         </div>
       </Section>

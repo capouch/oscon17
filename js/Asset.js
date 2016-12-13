@@ -14,7 +14,7 @@ export default React.createClass ( {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
-    browserHistory.push('/zoomer/' + this.state.fileName)
+    browserHistory.push('/zoomer/' + this.state.displayRecord.filename)
   },
 
   getInitialState: function() {
@@ -28,43 +28,41 @@ export default React.createClass ( {
       }
     return initValues;
   },
-
-  render() {
-    // For readability: get the desired record from params
+  componentWillMount: function() {
+    // Set up various fields for display
     const record = this.props.params.imageId,
-
-    // Get the data from the session cache
-    targetRecord = this.state.records.find(function (d){
-      return d._id == record
-    }),
-
-    // Set up path to 1k rendering of image
-    fileName = targetRecord["filename"],
-    imageURL = "/images/" + fileName + "-1k",
-
-    // Extract fields to print
-    title = targetRecord["title"],
-    description = targetRecord["description"],
-    source = targetRecord["source"],
-    tags = targetRecord["taglist"]
-    this.setState({ fileName: fileName })
-
+      desiredRecord = this.state.records.find(function (d){
+        return d._id == record
+      }),
+      // Put together fields required for view
+      displayRecord = {
+        filename: desiredRecord["filename"],
+        // Construct path to 1k image
+        imageURL: "/images/" + desiredRecord["filename"] + "-1k",
+        title: desiredRecord["title"],
+        description: desiredRecord["description"],
+        source: desiredRecord["source"],
+        tags: desiredRecord["taglist"]
+        }
+    this.setState({ displayRecord: displayRecord })
+  },
+  render() {
     return (
       <Section>
         <div>
           <h4>Click on image for zoomed view</h4>
-            <img src={imageURL} onClick={this.imageClick}/>
+            <img src={this.state.displayRecord.imageURL} onClick={this.imageClick}/>
           <h5>
-            <b>Title:</b> { title }
+            <b>Title:</b> { this.state.displayRecord.title }
           </h5>
           <h5>
-            <b>Description:</b> { description }
+            <b>Description:</b> { this.state.displayRecord.description }
           </h5>
           <h5>
-            <b>Source:</b> { source }
+            <b>Source:</b> { this.state.displayRecord.source }
           </h5>
           <h5>
-            <b>Taglist:</b> { tags }
+            <b>Taglist:</b> { this.state.displayRecord.tags }
           </h5>
         </div>
       </Section>

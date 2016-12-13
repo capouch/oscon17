@@ -132,18 +132,23 @@ const InfoTable = React.createClass({
   componentDidMount: function() {
     // console.log('Mounting event')
     // Extract query part only of URL (i.e. the part after the '?')
-    queryTarget = (this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
-      || queryTarget)
+
+    queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
+
+    // Note: get records only after state has changed
+    this.setState( {fetchURL: this.props.url}, function() {
+      if ((this.state.records == null) || this.state.records.length == 0)
+        this.loadRecordsFromServer()
+    })
 
     // Initialize fetchURL from props
-    this.state.fetchURL = this.props.url
+    // this.state.fetchURL = this.props.url
     // console.log('Fetching: ' + this.state.fetchURL)
 
     // console.log('State at mounting: ' + JSON.stringify(this.state))
 
     // If just launched get initial imageset
-    if ((this.state.records == null) || this.state.records.length == 0)
-      this.loadRecordsFromServer()
+
     },
   componentWillUnmount: function () {
     // Unused but reserved

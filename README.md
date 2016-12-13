@@ -1,12 +1,12 @@
 # Scene:History
 
 This software is all about keeping track of high-resolution historical images.
+It is also a sample program that implements a number of newer web technologies,
+including GraphQL and service workers.  It is written entirely in ES6 (ES2015)
 
 The canonical site incarnate is at https://www.scene-history.org
 
 Link to OSCON presentation slides: https://slides.com/capouch/spa-bootcamp/
-
-Vagrant box and instructions (120MB): http://oscon.saintjoe-cs.org:8111/    
 
 ## Develop locally
 
@@ -18,20 +18,6 @@ cd oscon16
 npm install
 ```
 
-##ATTENTION MAC USERS
-If npm install gives you errors failing to install sharp, run next commands:
-
-- Only if you are missing node and git:
-```bash
-brew install nodejs
-brew install git
-```
-- Command that should fix the problem with sharp:
-```bash
-brew install homebrew/science/vips --with-webp --with-graphicsmagick
-```
-Try installing sharp now it should work.
-
 
 ###Production Version
 
@@ -39,10 +25,11 @@ Transpile the Javascript using Babel:
 
 ```bash
 npm run build
+(You must be root to run the next command)
 npm start
 ```
 ```bash
-http://127.0.0.1:2016
+http://localhost
 ```
 Note the bundle.js file, which webpack creates and is sent to the client is
 *not* kept in the repo and needs to be generated after checkout with
@@ -59,38 +46,6 @@ npm run serve
 ```
 ```bash
 http://127.0.0.1:8080
-```
-
-###Electron Version
-
-To install the electron client, run (as root or administrator user):
-```bash
-npm install -g electron-prebuilt
-```
-####Online
-Run electron app with access to the online database:
-
-```bash
-git checkout electron-dist
-npm run build
-```
-And then in the separate terminal/tab:
-
-```bash
-electron .
-```
-
-
-####Local
-```bash
-git checkout electron-local
-npm run build
-npm start
-```
-And then in the separate terminal/tab:
-
-```bash
-electron .
 ```
 
 

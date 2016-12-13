@@ -18,7 +18,8 @@ import { browserHistory } from 'react-router/es'
 const assetBase = '/graphql?'
 
 // If no parameters fetch all the images
-const defaultQuery= 'query=query+{imageRecs{ title, filename}}'
+//  Now (12/12/16) I wonder if this case will ever occur?
+const defaultQuery= 'query=query+{imageRecs{ _id, title, filename}}'
 
 // We are just wrapping the react-image-gallery component
 export default class extends React.Component {

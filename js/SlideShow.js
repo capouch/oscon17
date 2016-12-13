@@ -69,6 +69,7 @@ export default class extends React.Component {
         source = json.data.imageRecs
       else
         source = json.data.lookup
+      // Set up images for data set
       const imageRecs = source.map(function (oneImage) {
         return {
           original: urlBase + 'images/' + oneImage.filename + '-1k',
@@ -77,6 +78,14 @@ export default class extends React.Component {
           }
         })
       this.setState( { images: imageRecs } )
+      // Will we need to do the same here to get the image IDs?
+      const idList = source.map(function (oneImage) {
+        return {
+          id: oneImage._id,
+          fileName: oneImage.filename
+          }
+        })
+      this.setState( { idList: idList } )
     }.bind(this))
   }
   componentDidUpdate(prevProps, prevState) {
@@ -107,10 +116,17 @@ export default class extends React.Component {
     imageName = URLRegex.exec(event.target.src)[0]
     // Everything before the last '-'
     imageName = tailRegex.exec(imageName)[1]
-    // Render zoomer view on this image
+    // Render asset view on this image
     // console.log('Moving to ' + imageName)
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
-    browserHistory.push('/zoomer/' + imageName)
+
+    // Find record to match this image name
+    const targetRecord = this.state.idList.find(function (d){
+      return d.fileName == imageName
+    })
+
+    // Jump to asset view
+    browserHistory.push('/asset/' + targetRecord["id"])
     // console.log('Nothing happened!!')
   }
 
@@ -151,7 +167,7 @@ export default class extends React.Component {
             ref={i => this._imageGallery = i}
             items={this.state.images}
             lazyLoad={false}
-            onClick={this._onImageClick}
+            onClick={ (event) => { this._onImageClick(event) }}
             onImageLoad={this._onImageLoad}
             onSlide={this._onSlide}
             onPause={this._onPause.bind(this)}

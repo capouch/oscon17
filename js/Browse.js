@@ -132,7 +132,8 @@ const InfoTable = React.createClass({
   componentDidMount: function() {
     // console.log('Mounting event')
     // Extract query part only of URL (i.e. the part after the '?')
-    queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
+    queryTarget = (this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
+      || queryTarget)
 
     // Initialize fetchURL from props
     this.state.fetchURL = this.props.url

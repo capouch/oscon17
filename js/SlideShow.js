@@ -87,6 +87,7 @@ export default class extends React.Component {
           }
         })
       this.setState( { idList: idList } )
+      console.log('idList is: ' + JSON.stringify(idList))
     }.bind(this))
   }
   componentDidUpdate(prevProps, prevState) {
@@ -127,6 +128,7 @@ export default class extends React.Component {
     })
 
     // Jump to asset view
+    console.log('Heading out for ' + targetRecord["id"])
     browserHistory.push('/asset/' + targetRecord["id"])
     // console.log('Nothing happened!!')
   }

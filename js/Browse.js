@@ -107,7 +107,7 @@ const InfoTable = React.createClass({
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {
-      console.log('json object: ' + JSON.stringify(json))
+      // console.log('json object: ' + JSON.stringify(json))
       if (json.data.imageRecs)
         this.setState({records: json.data.imageRecs})
       else

@@ -25,6 +25,7 @@ import 'whatwg-fetch'
 const assetBase = '/graphql?'
 //
 // Cloud assets
+// OBSOLETE!!!!  Fix or remove!!!
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
@@ -71,6 +72,7 @@ const EditLinkComponent = React.createClass({
       renderBase = "edit/",
       renderPath = renderBase + target;
 
+    // Only an icon!
     return <NavLink to={renderPath}>
       <span className="fa fa-pencil-square-o"></span>
     </NavLink>
@@ -99,20 +101,23 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    let URL = this.state.fetchURL
     // console.log('Fetching ' + URL)
-    // let myHeaders = new Headers()
-    // myHeaders.append('Content-Type', 'application/graphql')
-    let req = new Request(URL, {method: 'POST', cache: 'reload'})
+    let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
+    // Use fetch API; -==> this needs a polyfill in iOS
     fetch(req).then(function(response) {
       return response.json()
     }).then (function(json) {
       // console.log('json object: ' + JSON.stringify(json))
+
+      // All records or just search results? (imageRecs)
       if (json.data.imageRecs)
         this.setState({records: json.data.imageRecs})
       else
+        // Search results (lookup)
         this.setState({records: json.data.lookup})
+
+      // Reset record and cache returned data
       json.data = undefined
       sessionStorage.setItem('browse', JSON.stringify(this.state))
     }.bind(this))
@@ -123,7 +128,7 @@ const InfoTable = React.createClass({
       fetchURL: ""
     }
 
-    // If we're remembering last query, pre-load it from sessionStorage
+    // Pre-load records[] object array from sessionStorage
     // console.log('Checking session storage in initial state')
     if (sessionStorage.getItem('browse') != null) {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
@@ -132,12 +137,13 @@ const InfoTable = React.createClass({
   },
   componentDidMount: function() {
     // console.log('Mounting event')
-    
+
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
 
-    // Note: get records only after state has changed
+    // Async note:
     this.setState( {fetchURL: this.props.url}, function() {
+      //the conditional data fetch here is in a CALLBACK
       if ((this.state.records == null) || this.state.records.length == 0)
         this.loadRecordsFromServer()
       })
@@ -150,13 +156,14 @@ const InfoTable = React.createClass({
     },
   onSearch(input) {
     if (!input) return
-    console.info(`Searching "${input}"`)
+    // console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){_id, title, filename, description, source, taglist}}'
 
     // 2.
     // Local assets
     let searchURL = assetBase + queryTarget
     // Cloud assets
+    // ALSO OUTDATED
     // let searchURL = 'http://oscon.saintjoe-cs.org:2016/graphql?' + queryTarget
 
     // Callback fires when this.state object has been updated
@@ -165,7 +172,7 @@ const InfoTable = React.createClass({
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
     },
-    // This is a very heavy moment we switch to a new view
+    // This is the very heavy moment we switch to a new view
     handleCustomSlideshowClick() {
       this.context.router.push('/slides/' + queryTarget)
     },
@@ -224,7 +231,7 @@ export default React.createClass ( {
     return (
       <div>
         <InfoTable
-          url={ assetBase + queryBase}
+          url={ assetBase + queryBase }
           />
       </div>
     )

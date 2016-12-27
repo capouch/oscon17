@@ -6,9 +6,8 @@ module.exports = {
   entry: {
     js: [ 'whatwg-fetch', 'babel-polyfill', "./js/Shell.js"],
     vendor: [
-      'react', 'react-dom', 'openseadragon',
-      'react-image-gallery', 'griddle-react'
-    ]
+      'react', 'react-dom'
+    ],
   },
   resolveLoader: {
     moduleExtensions: ['-loader']
@@ -35,8 +34,8 @@ module.exports = {
   module: {
     loaders: [
       {
-      test: /\.jsx?|\.js$/,
-      loader: 'babel-loader',
+        test: /\.jsx?|\.js$/,
+        loader: 'babel-loader'
       },
       {
         test: /\.scss$/,
@@ -47,26 +46,26 @@ module.exports = {
   plugins:
   [
   new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: 'vendor.bundle.js'
+    name: 'vendor',
+    minChunks: Infinity,
+    filename: 'vendor.bundle.js'
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
+  new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: false
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    },
+    output: {
+      comments: false
+    },
+    sourceMap: true
     }),
-    new StatsWriterPlugin({
-      fields:null,
-      filename: "stats.json" // Default
+  new StatsWriterPlugin({
+    fields:null,
+    filename: "stats.json" // Default
     })
   ],
 };

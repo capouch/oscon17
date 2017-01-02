@@ -93,7 +93,7 @@ export default function ( router, server ) {
       // Here we leverage sharp.js to rapidly process the uploaded image
       const storedFilename = req.file.filename,
         filePath = './uploads/' + storedFilename,
-        dziBase = './public/tiles/' + storedFilename + '.dzi'
+        dziBase = './public/tiles/' + storedFilename
 
       // We should test for image size, etc., right here to be smarter below!
 

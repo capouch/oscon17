@@ -4,10 +4,8 @@
  */
 
 import OpenSeaDragon from 'openseadragon'
-import React from 'react'
-import ReactDOM from 'react-dom'
-// import React from '../public/libs/react'
-// import ReactDOM from '../public/libs/react-dom-fiber'
+import React from '../public/libs/react'
+import ReactDOM from '../public/libs/react-dom-fiber'
 import { Section } from 'neal-react'
 
 // Function to configure and raise the OpenSeaDragon widget

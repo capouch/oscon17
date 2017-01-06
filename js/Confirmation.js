@@ -4,8 +4,7 @@
     and is also used after editing
 */
 
-// import React from '../public/libs/react'
-import React from 'react'
+import React from '../public/libs/react'
 
 export default class extends React.Component {
   constructor(props) {

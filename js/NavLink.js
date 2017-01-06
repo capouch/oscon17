@@ -3,8 +3,7 @@
     Borrowed essentially verbatim from the react-router-tutorial, which is great
 */
 
-// import React from '../public/libs/react'
-import React from 'react'
+import React from '../public/libs/react'
 import { Link } from 'react-router'
 
 export default React.createClass({

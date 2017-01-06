@@ -2,8 +2,7 @@
   Brian Capouch begun 10 December 2016
 */
 
-// import React from '../public/libs/react'
-import React from 'react'
+import React from '../public/libs/react'
 import { Section } from 'neal-react'
 
 // For "goto" purposes

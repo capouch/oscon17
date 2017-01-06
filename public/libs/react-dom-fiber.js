@@ -5047,6 +5047,7 @@ var ReactDOM = {
     return renderSubtreeIntoContainer(parentComponent, element, containerNode, callback);
   },
   unmountComponentAtNode: function (container) {
+    !isValidContainer(container) ? "development" !== 'production' ? invariant(false, 'unmountComponentAtNode(...): Target container is not a DOM element.') : _prodInvariant('40') : void 0;
     warnAboutUnstableUse();
     if (container._reactRootContainer) {
       // Unmount should not be batched.

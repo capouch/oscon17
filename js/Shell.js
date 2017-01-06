@@ -3,7 +3,7 @@
 */
 import React from 'react'
 import { render } from "react-dom"
-import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
+import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router"
 
 import "../css/main.scss"
 

@@ -3,6 +3,7 @@
   ** Control passes to saveValues in Upload module after user submits form
 */
 
+// import React from '../public/libs/react'
 import React from 'react'
 
 let deleteStyle = { background: "red"},

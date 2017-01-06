@@ -4,7 +4,8 @@
     see http://www.nealjs.com/
 */
 
-import React from "react";
+// import React from "../public/libs/react"
+import React from 'react'
 import { Link } from "react-router";
 import {
   Code,

@@ -3,6 +3,7 @@
  *    Input image metadata
  */
 
+// import React from '../public//libs/react'
 import React from 'react'
 import DropZoneComponent from 'react-dropzone-component'
 import InfoFields from './InfoFields'

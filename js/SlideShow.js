@@ -2,7 +2,7 @@
   ** Slideshow: Provide option-heavy slideshow using converted images
     This is a slightly-patched version of react-image-gallery
 */
-
+// import React from '../public/libs/react'
 import React from 'react'
 import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'

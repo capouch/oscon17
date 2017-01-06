@@ -2,6 +2,7 @@
   ** Edit: Provide facility for editing/deleting main image records
 */
 
+// import React from '../public/libs/react'
 import React from 'react'
 import { Section } from 'neal-react'
 import InfoFields from './InfoFields'

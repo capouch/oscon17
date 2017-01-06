@@ -1,5 +1,5 @@
+// import React from '../public/libs/react'
 import React from 'react'
-
 // We use neal-react component structure
 import { App } from "neal-react"
 

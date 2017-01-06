@@ -2,6 +2,7 @@
   ** Common footer used by all views
 */
 
+// import React from '../public/libs/react'
 import React from 'react'
 import {
   Footer, FooterAddress,

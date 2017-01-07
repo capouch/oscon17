@@ -3,7 +3,7 @@
     This will be the user's primary portal into the content
  */
 
-import React from 'react'
+import React from '../public/libs/react'
 import NavLink from './NavLink'
 import { Section } from 'neal-react'
 

@@ -2,7 +2,7 @@
   ** Common footer used by all views
 */
 
-import React from 'react'
+import React from '../public/libs/react'
 import {
   Footer, FooterAddress,
 } from "neal-react"

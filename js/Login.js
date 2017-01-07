@@ -4,7 +4,7 @@
     Begun 9 July 2016
 */
 
-import React from "react"
+import React from '../public/libs/react'
 import { Section } from "neal-react"
 
 // Wrap an HTML input element into a component

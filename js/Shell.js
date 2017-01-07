@@ -3,8 +3,8 @@
     This will be the user's primary portal into the content
 */
 
-import React from "react"
-import ReactDOM from "react-dom";
+import React from '../public/libs/react'
+import ReactDOM from "../public/libs/react-dom";
 import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
 import { App } from "neal-react"
 

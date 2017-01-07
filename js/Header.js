@@ -2,7 +2,7 @@
   ** Common "Navbar" header used by all views
 */
 
-import React from "react"
+import React from '../public/libs/react'
 import { Link } from "react-router"
 import {
   Navbar, NavItem,

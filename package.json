@@ -24,7 +24,6 @@
     "fs": "0.0.2",
     "graphql": "^0.8.1",
     "griddle-react": "^0.4.1",
-    "history": "^4.5.1",
     "mongoose": "^4.6.7",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",

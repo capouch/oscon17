@@ -52,7 +52,7 @@ const ZoomLinkComponent = React.createClass({
     // Make a NavLink out of a column value
     // Clicking brings up "Asset" view
     const target = this.props.rowData._id,
-      renderBase = "asset/",
+      renderBase = "/asset/",
       renderPath = renderBase + target;
 
     return <NavLink to={ renderPath }>
@@ -68,7 +68,7 @@ const EditLinkComponent = React.createClass({
     // Make a NavLink out of a column value
     // The rendered object is an icon link to edit/delete data
     const target = this.props.data,
-      renderBase = "edit/",
+      renderBase = "/edit/",
       renderPath = renderBase + target;
 
     // Only an icon!

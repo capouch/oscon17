@@ -30,7 +30,7 @@ export default React.createClass ( {
   },
   componentWillMount: function() {
     // Set up various fields for display
-    const record = this.props.params.imageId,
+    const record = this.props.match.params.imageId,
       desiredRecord = this.state.records.find(function (d){
         return d._id == record
       }),

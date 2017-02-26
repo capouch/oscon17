@@ -3,6 +3,10 @@
     This will be the user's primary portal into the content
 */
 
+/* Safekeeping
+<Route path = "*" component = { Home } />
+*/
+
 import React from "react"
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom/es"
@@ -49,16 +53,15 @@ class osconSPA extends React.Component {
 ReactDOM.render((
   <Router history = { BrowserHistory } >
     <div>
-    <Route path = "/" component = { osconSPA } history={ BrowserHistory } />
-      <Route path = "home" component = { Home } />
-      <Route path = "browse" component = { Browse } />
-      <Route path = "edit/:imageId" component = { Edit } />
-      <Route path = "zoomer/:imageId" component = { Zoom } />
-      <Route path = "asset/:imageId" component = { Asset } />
-      <Route path = "upload" component = { Upload } />
-      <Route path = "slides" component = { SlideShow } />
-      <Route path = "slides/:viewSet" component = { SlideShow } />
-      <Route path = "*" component = { Home } />
+    <Route exact path = "/" component = { osconSPA } history={ BrowserHistory } />
+      <Route path = "/home" component = { Home } />
+      <Route path = "/browse" component = { Browse } />
+      <Route path = "/edit/:imageId" component = { Edit } />
+      <Route path = "/zoomer/:imageId" component = { Zoom } />
+      <Route path = "/asset/:imageId" component = { Asset } />
+      <Route path = "/upload" component = { Upload } />
+      <Route exact path = "/slides" component = { SlideShow } />
+      <Route path = "/slides/:viewSet" component = { SlideShow } />
       </div>
   </Router>
 ), document.getElementById("main"))

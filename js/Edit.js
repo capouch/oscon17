@@ -183,7 +183,7 @@ export default React.createClass ( {
     // console.log('rendering main class')
     return (
       <div>
-        <EditDeleteWidget record={this.props.params.imageId}/>
+        <EditDeleteWidget record={this.props.match.params.imageId}/>
       </div>
     )
   }

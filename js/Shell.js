@@ -11,6 +11,7 @@ import React from "react"
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom/es"
 import createHistory from "history/createBrowserHistory"
+// import browserHistory from 'react-history'
 import { App } from "neal-react"
 
 // Controller and view modules
@@ -31,16 +32,16 @@ import Header from './Header'
 import Footer from './Footer'
 
 // History object is no longer kept in react-router?? 2/26
-const BrowserHistory = createHistory()
+// const browserHistory = createHistory()
 
 // Create toplevel component
 class osconSPA extends React.Component {
   render() {
+    // console.log('Shell history object is: ' + JSON.stringify(browserHistory))
     return (
       <div>
         <Header />
-        <App
-          history={ BrowserHistory }>
+        <App>
           { this.props.children }
         </App>
         <Footer/>
@@ -51,9 +52,9 @@ class osconSPA extends React.Component {
 
 // Render application in main div
 ReactDOM.render((
-  <Router history = { BrowserHistory } >
+  <Router>
     <div>
-    <Route exact path = "/" component = { osconSPA } history={ BrowserHistory } />
+    <Route exact path = "/" component = { osconSPA } />
       <Route path = "/home" component = { Home } />
       <Route path = "/browse" component = { Browse } />
       <Route path = "/edit/:imageId" component = { Edit } />

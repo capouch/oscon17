@@ -6,7 +6,7 @@ import React from 'react'
 import { Section } from 'neal-react'
 
 // For "goto" purposes
-import { browserHistory } from 'react-router/es'
+import { browserHistory } from 'react-history'
 
 export default React.createClass ( {
 

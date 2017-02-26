@@ -5,7 +5,8 @@
 
 import React from "react"
 import ReactDOM from "react-dom";
-import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom/es"
+import createHistory from "history/createBrowserHistory"
 import { App } from "neal-react"
 
 // Controller and view modules
@@ -25,6 +26,9 @@ import "../css/main.scss"
 import Header from './Header'
 import Footer from './Footer'
 
+// History object is no longer kept in react-router?? 2/26
+const BrowserHistory = createHistory()
+
 // Create toplevel component
 class osconSPA extends React.Component {
   render() {
@@ -32,7 +36,7 @@ class osconSPA extends React.Component {
       <div>
         <Header />
         <App
-          history={ browserHistory }>
+          history={ BrowserHistory }>
           { this.props.children }
         </App>
         <Footer/>
@@ -43,9 +47,10 @@ class osconSPA extends React.Component {
 
 // Render application in main div
 ReactDOM.render((
-  <Router history = { browserHistory } >
-    <Route path = "/" component = { osconSPA } history={ browserHistory } >
-      <IndexRoute name ="home" component = { Home } />
+  <Router history = { BrowserHistory } >
+    <div>
+    <Route path = "/" component = { osconSPA } history={ BrowserHistory } />
+      <Route path = "home" component = { Home } />
       <Route path = "browse" component = { Browse } />
       <Route path = "edit/:imageId" component = { Edit } />
       <Route path = "zoomer/:imageId" component = { Zoom } />
@@ -54,6 +59,6 @@ ReactDOM.render((
       <Route path = "slides" component = { SlideShow } />
       <Route path = "slides/:viewSet" component = { SlideShow } />
       <Route path = "*" component = { Home } />
-    </Route>
+      </div>
   </Router>
 ), document.getElementById("main"))

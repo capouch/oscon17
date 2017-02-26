@@ -100,7 +100,7 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Fetching ' + URL)
+    console.log('Browse: fetching ' + URL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
     // Use fetch API; -==> this needs a polyfill in iOS

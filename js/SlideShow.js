@@ -43,8 +43,9 @@ export default class extends React.Component {
 
     // Note: this test has a callback!!
     // If a parameterized custom list, render it
-    if (this.props.params.viewSet) {
-      this.setState({loadUrl: assetBase + this.props.params.viewSet}, function(){
+    console.log('Slides props: ', JSON.stringify(this.props))
+    if (this.props.match.params.viewSet) {
+      this.setState({loadUrl: assetBase + this.props.match.params.viewSet}, function(){
         this.loadRecordsFromServer()
         }.bind(this));
     } else {
@@ -129,7 +130,7 @@ export default class extends React.Component {
 
     // Jump to asset view
     // console.log('Heading out for ' + targetRecord["id"])
-    browserHistory.push('/asset/' + targetRecord["id"])
+    this.props.push('/asset/' + targetRecord["id"])
     // console.log('Nothing happened!!')
   }
 

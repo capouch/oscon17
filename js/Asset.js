@@ -32,6 +32,7 @@ export default React.createClass ( {
   },
   componentWillMount: function() {
     // Set up various fields for display
+    console.log('Asset: ', JSON.stringify(this.props))
     const record = this.props.match.params.imageId,
       desiredRecord = this.state.records.find(function (d){
         return d._id == record

@@ -34,6 +34,7 @@ import Footer from './Footer'
 // History object is no longer kept in react-router?? 2/26
 // const browserHistory = createHistory()
 
+/*
 // Create toplevel component
 class osconSPA extends React.Component {
   render() {
@@ -48,14 +49,18 @@ class osconSPA extends React.Component {
       </div>
     )
   }
-}
+*/
+
+// Good idea, but props are swallowed somehow
+const HomePage = props => <div><Header></Header><Home></Home><Footer></Footer></div>
+
 
 // Render application in main div
 ReactDOM.render((
   <Router>
     <div>
-    <Route exact path = "/" component = { osconSPA } />
-      <Route path = "/home" component = { Home } />
+      <Route exact path = "/" component = { HomePage } />
+      <Route path = "/home" component = { HomePage } />
       <Route path = "/browse" component = { Browse } />
       <Route path = "/edit/:imageId" component = { Edit } />
       <Route path = "/zoomer/:imageId" component = { Zoom } />
@@ -63,6 +68,6 @@ ReactDOM.render((
       <Route path = "/upload" component = { Upload } />
       <Route exact path = "/slides" component = { SlideShow } />
       <Route path = "/slides/:viewSet" component = { SlideShow } />
-      </div>
+    </div>
   </Router>
 ), document.getElementById("main"))

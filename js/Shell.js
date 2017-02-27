@@ -52,7 +52,7 @@ class osconSPA extends React.Component {
 */
 
 // Good idea, but props are swallowed somehow
-const HomePage = props => <div><Header></Header><Home></Home><Footer></Footer></div>
+const HomePage = () => <div><Header></Header><Home></Home><Footer></Footer></div>
 
 
 // Render application in main div

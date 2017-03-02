@@ -51,7 +51,7 @@ class osconSPA extends React.Component {
   }
 */
 
-// Good idea, but props are swallowed somehow
+// Kludge to wrap splash page in menu/footer
 const HomePage = () => <div><Header></Header><Home></Home><Footer></Footer></div>
 
 

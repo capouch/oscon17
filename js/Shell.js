@@ -3,15 +3,11 @@
     This will be the user's primary portal into the content
 */
 
-/* Safekeeping
-<Route path = "*" component = { Home } />
-*/
-
 import React from "react"
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom/es"
-import createHistory from "history/createBrowserHistory"
-// import browserHistory from 'react-history'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
+
+// neal-react is an example React application template
 import { App } from "neal-react"
 
 // Controller and view modules
@@ -31,43 +27,24 @@ import "../css/main.scss"
 import Header from './Header'
 import Footer from './Footer'
 
-// History object is no longer kept in react-router?? 2/26
-// const browserHistory = createHistory()
-
-/*
-// Create toplevel component
-class osconSPA extends React.Component {
-  render() {
-    // console.log('Shell history object is: ' + JSON.stringify(browserHistory))
-    return (
-      <div>
-        <Header />
-        <App>
-          { this.props.children }
-        </App>
-        <Footer/>
-      </div>
-    )
-  }
-*/
-
-// Kludge to wrap splash page in menu/footer
-const HomePage = () => <div><Header></Header><Home></Home><Footer></Footer></div>
-
-
-// Render application in main div
+// Render application in main div - upgraded for react-route v4
 ReactDOM.render((
   <Router>
     <div>
-      <Route exact path = "/" component = { HomePage } />
-      <Route path = "/home" component = { HomePage } />
-      <Route path = "/browse" component = { Browse } />
-      <Route path = "/edit/:imageId" component = { Edit } />
-      <Route path = "/zoomer/:imageId" component = { Zoom } />
-      <Route path = "/asset/:imageId" component = { Asset } />
-      <Route path = "/upload" component = { Upload } />
-      <Route exact path = "/slides" component = { SlideShow } />
-      <Route path = "/slides/:viewSet" component = { SlideShow } />
+      <Route component = { Header } />
+      <Route component = { App } />
+      <Switch>
+        <Route exact path = '/' component = { Home } />
+        <Route path = "/home" component = { Home } />
+        <Route path = "/browse" component = { Browse } />
+        <Route path = "/edit/:imageId" component = { Edit } />
+        <Route path = "/zoomer/:imageId" component = { Zoom } />
+        <Route path = "/asset/:imageId" component = { Asset } />
+        <Route path = "/upload" component = { Upload } />
+        <Route exact path = "/slides" component = { SlideShow } />
+        <Route path = "/slides/:viewSet" component = { SlideShow } />
+      </Switch>
+      <Route component = { Footer } />
     </div>
   </Router>
 ), document.getElementById("main"))

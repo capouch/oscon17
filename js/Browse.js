@@ -45,8 +45,8 @@ const Button = React.createClass({
   }
 })
 
-// Compose NavLink to the zoomer view for each image
-const ZoomLinkComponent = React.createClass({
+// Compose NavLink to the Asset view for each image
+const AssetLinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
@@ -55,9 +55,9 @@ const ZoomLinkComponent = React.createClass({
       renderBase = "/asset/",
       renderPath = renderBase + target;
 
-    return <NavLink to={ renderPath }>
-      {this.props.data}
-    </NavLink>
+    return <NavLink to={ renderPath } >
+        {this.props.data}
+      </NavLink>
   }
 })
 
@@ -89,7 +89,7 @@ const customColumnMetadata = [
   {
     "columnName": "title",
     "displayName": "Title",
-    "customComponent": ZoomLinkComponent
+    "customComponent": AssetLinkComponent
   },
   {
     "columnName": "description",

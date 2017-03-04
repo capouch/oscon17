@@ -35,7 +35,8 @@ const EditDeleteWidget = React.createClass({
     let queryTarget = "";
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
 
-    // console.log('State at mounting: ' + JSON.stringify(this.state))
+    console.log('Props at mounting: ' + JSON.stringify(this.props))
+    console.log('Context at mounting ' + JSON.stringify(this.context))
     this.loadRecordsFromServer()
   },
   onAuthStateChanged: function(user) {
@@ -70,6 +71,7 @@ const EditDeleteWidget = React.createClass({
       step : this.state.step + 1
     })
   },
+  // Now superfluous 3/4/17
   resetStep: function() {
     // See you later; when edit finishes go to Browse view
     this.context.router.push('/browse')
@@ -166,8 +168,10 @@ const EditDeleteWidget = React.createClass({
         )
       }
       case 2:
-      return <Confirmation
-        resetStep={this.resetStep} />
+      console.log('Edit resetStep ' + this.resetStep)
+      return (
+        <Confirmation resetStep={this.resetStep} />
+        )
     }
   }
 })

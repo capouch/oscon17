@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import NavLink from './NavLink'
+import { NavLink } from 'react-router-dom'
 import { Section } from 'neal-react'
 
 import Griddle from 'griddle-react'

@@ -3,14 +3,14 @@
 */
 
 import React from "react"
-import { Link } from "react-router-dom/es"
+import { Link } from "react-router-dom"
 import {
   Navbar, NavItem,
   DropdownMenu, DropdownToggle,
   SignupModal,
 } from "neal-react"
 
-import NavLink from './NavLink'
+import { NavLink } from 'react-router-dom'
 
 const brandName = "Scene:History"
 const brand = <span>{brandName}</span>

@@ -7,9 +7,6 @@ import React from "react"
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 
-// neal-react is an example React application template
-import { App } from "neal-react"
-
 // Controller and view modules
 import Home from "./Launch"
 import Browse from './Browse'
@@ -32,7 +29,6 @@ ReactDOM.render((
   <Router>
     <div>
       <Route component = { Header } />
-      <Route component = { App } />
       <Switch>
         <Route exact path = '/' component = { Home } />
         <Route path = "/home" component = { Home } />

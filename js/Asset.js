@@ -6,16 +6,15 @@ import React from 'react'
 import { Section } from 'neal-react'
 
 // For "goto" purposes
-import  browserHistory  from 'react-history'
+// import  browserHistory  from 'react-history'
 
 export default React.createClass ( {
 
   imageClick(event) {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
-    console.log("Asset props: ", JSON.stringify(this.props))
-    console.log('Asset history is on props: ', JSON.stringify(this.props.action))
-    this.props.push('/zoomer/' + this.state.displayFields.filename)
+    // console.log("Asset props: ", JSON.stringify(this.props))
+    this.props.history.push('/zoomer/' + this.state.displayFields.filename)
     console.log('Asset eraseme!!')
   },
 

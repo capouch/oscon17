@@ -5,8 +5,7 @@
 
 import React from "react"
 import ReactDOM from "react-dom";
-import { Router, IndexRoute, Route, Link, Redirect, browserHistory } from "react-router/es"
-import { App } from "neal-react"
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 
 // Controller and view modules
 import Home from "./Launch"
@@ -25,35 +24,23 @@ import "../css/main.scss"
 import Header from './Header'
 import Footer from './Footer'
 
-// Create toplevel component
-class osconSPA extends React.Component {
-  render() {
-    return (
-      <div>
-        <Header />
-        <App
-          history={ browserHistory }>
-          { this.props.children }
-        </App>
-        <Footer/>
-      </div>
-    )
-  }
-}
-
-// Render application in main div
+// Render application in main div - upgraded for react-route v4
 ReactDOM.render((
-  <Router history = { browserHistory } >
-    <Route path = "/" component = { osconSPA } history={ browserHistory } >
-      <IndexRoute name ="home" component = { Home } />
-      <Route path = "browse" component = { Browse } />
-      <Route path = "edit/:imageId" component = { Edit } />
-      <Route path = "zoomer/:imageId" component = { Zoom } />
-      <Route path = "asset/:imageId" component = { Asset } />
-      <Route path = "upload" component = { Upload } />
-      <Route path = "slides" component = { SlideShow } />
-      <Route path = "slides/:viewSet" component = { SlideShow } />
-      <Route path = "*" component = { Home } />
-    </Route>
+  <Router>
+    <div>
+      <Route component = { Header } />
+      <Switch>
+        <Route exact path = '/' component = { Home } />
+        <Route path = "/home" component = { Home } />
+        <Route path = "/browse" component = { Browse } />
+        <Route path = "/edit/:imageId" component = { Edit } />
+        <Route path = "/zoomer/:imageId" component = { Zoom } />
+        <Route path = "/asset/:imageId" component = { Asset } />
+        <Route path = "/upload" component = { Upload } />
+        <Route exact path = "/slides" component = { SlideShow } />
+        <Route path = "/slides/:viewSet" component = { SlideShow } />
+      </Switch>
+      <Route component = { Footer } />
+    </div>
   </Router>
 ), document.getElementById("main"))

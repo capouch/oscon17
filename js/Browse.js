@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import NavLink from './NavLink'
+import { NavLink } from 'react-router-dom'
 import { Section } from 'neal-react'
 
 import Griddle from 'griddle-react'
@@ -45,19 +45,19 @@ const Button = React.createClass({
   }
 })
 
-// Compose NavLink to the zoomer view for each image
-const ZoomLinkComponent = React.createClass({
+// Compose NavLink to the Asset view for each image
+const AssetLinkComponent = React.createClass({
 
   render: function(){
     // Make a NavLink out of a column value
     // Clicking brings up "Asset" view
     const target = this.props.rowData._id,
-      renderBase = "asset/",
+      renderBase = "/asset/",
       renderPath = renderBase + target;
 
-    return <NavLink to={ renderPath }>
-      {this.props.data}
-    </NavLink>
+    return <NavLink to={ renderPath } >
+        {this.props.data}
+      </NavLink>
   }
 })
 
@@ -68,7 +68,7 @@ const EditLinkComponent = React.createClass({
     // Make a NavLink out of a column value
     // The rendered object is an icon link to edit/delete data
     const target = this.props.data,
-      renderBase = "edit/",
+      renderBase = "/edit/",
       renderPath = renderBase + target;
 
     // Only an icon!
@@ -89,7 +89,7 @@ const customColumnMetadata = [
   {
     "columnName": "title",
     "displayName": "Title",
-    "customComponent": ZoomLinkComponent
+    "customComponent": AssetLinkComponent
   },
   {
     "columnName": "description",
@@ -100,7 +100,7 @@ const customColumnMetadata = [
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Fetching ' + URL)
+    console.log('Browse: fetching ' + URL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
     // Use fetch API; -==> this needs a polyfill in iOS

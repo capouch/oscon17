@@ -5,7 +5,7 @@
 */
 
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom/es";
 import {
   Code,
   CustomerQuote, CustomerQuotes,
@@ -42,7 +42,6 @@ const sampleCode =
 export default (props) => {
   return (
     <Page>
-
       <Hero backgroundImage="img/background.png"
         className="text-xs-center">
         <h1 className="display-4">Scene:History </h1>

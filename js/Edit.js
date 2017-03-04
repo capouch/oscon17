@@ -34,9 +34,6 @@ const EditDeleteWidget = React.createClass({
     // Extract query part only of URL (i.e. the part after the '?')
     let queryTarget = "";
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
-
-    console.log('Props at mounting: ' + JSON.stringify(this.props))
-    console.log('Context at mounting ' + JSON.stringify(this.context))
     this.loadRecordsFromServer()
   },
   onAuthStateChanged: function(user) {
@@ -184,7 +181,8 @@ EditDeleteWidget.contextTypes = {
 // Render component
 export default React.createClass ( {
   render() {
-    // console.log('rendering main class')
+    // console.log('Edit props ' + JSON.stringify(this.props))
+    // console.log('Edit context ' + JSON.stringify(this.context))
     return (
       <div>
         <EditDeleteWidget record={this.props.match.params.imageId}/>

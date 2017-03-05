@@ -32,7 +32,6 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-dropzone-component": "^1.0.0",
-    "react-history": "^0.18.2",
     "react-image-gallery": "^0.6.4",
     "react-router-dom": "^4.0.0-beta.7",
     "sharp": "^0.17.0"

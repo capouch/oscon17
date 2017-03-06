@@ -135,7 +135,7 @@ const InfoTable = React.createClass({
     return initValues;
   },
   componentDidMount: function() {
-    // console.log('Mounting event')
+    console.log('Infotable context: ' + JSON.stringify(this.props.history))
 
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
@@ -173,7 +173,8 @@ const InfoTable = React.createClass({
     },
     // This is the very heavy moment we switch to a new view
     handleCustomSlideshowClick() {
-      this.context.router.push('/slides/' + queryTarget)
+      this.props.history.push('/slides/' + queryTarget)
+      // this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
       // console.log('Handling reset click')
@@ -227,9 +228,11 @@ InfoTable.contextTypes = {
 // Render composite component
 export default React.createClass ( {
   render() {
+    console.log('Browse props entry: ' + JSON.stringify(this.props))
     return (
       <div>
         <InfoTable
+          history = { this.props.history }
           url={ assetBase + queryBase }
           />
       </div>

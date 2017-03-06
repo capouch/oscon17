@@ -7,9 +7,6 @@ import React from 'react'
 import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'
 
-// For "goto" purposes
-import { browserHistory } from 'react-history'
-
 // 1.
 // Cloud assets
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
@@ -130,7 +127,7 @@ export default class extends React.Component {
 
     // Jump to asset view
     // console.log('Heading out for ' + targetRecord["id"])
-    this.props.push('/asset/' + targetRecord["id"])
+    this.props.history.push('/asset/' + targetRecord["id"])
     // console.log('Nothing happened!!')
   }
 

@@ -7,9 +7,6 @@ import React from 'react'
 import { Section } from 'neal-react'
 import ImageGallery from 'react-image-gallery'
 
-// For "goto" purposes
-import { browserHistory } from 'react-history'
-
 // 1.
 // Cloud assets
 // const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'

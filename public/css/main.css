@@ -21,3 +21,16 @@
 .editColumn{
     width: 5%;
 }
+
+/*
+  Hopefully fixes hamburger menu bug on bootstrap 4.0.0 alpha6
+*/
+
+.open {
+  > .dropdown-menu {
+    display: block;
+  }
+  > a {
+    outline: 0;
+  }
+}

@@ -127,7 +127,7 @@ export default class extends React.Component {
 
     // Jump to asset view
     // console.log('Heading out for ' + targetRecord["id"])
-    this.props.push('/asset/' + targetRecord["id"])
+    this.props.history.push('/asset/' + targetRecord["id"])
     // console.log('Nothing happened!!')
   }
 

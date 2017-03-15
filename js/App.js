@@ -12,9 +12,7 @@ export default class extends React.Component {
     return (
       <div>
         <Header />
-        <App>
-          { this.props.children }
-        </App>
+        <App />
         <Footer />
       </div>
     )

@@ -5,9 +5,6 @@
 import React from 'react'
 import { Section } from 'neal-react'
 
-// For "goto" purposes
-// import  browserHistory  from 'react-history'
-
 export default React.createClass ( {
 
   imageClick(event) {

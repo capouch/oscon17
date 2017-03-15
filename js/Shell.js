@@ -31,6 +31,7 @@ ReactDOM.render((
       <Route component = { Header } />
       <Switch>
         <Route exact path = '/' component = { Home } />
+        <Route exact path = '/index.html' component = { Home } />
         <Route path = "/home" component = { Home } />
         <Route path = "/browse" component = { Browse } />
         <Route path = "/edit/:imageId" component = { Edit } />

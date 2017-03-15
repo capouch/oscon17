@@ -135,7 +135,8 @@ const InfoTable = React.createClass({
     return initValues;
   },
   componentDidMount: function() {
-    console.log('Infotable context: ' + JSON.stringify(this.props.history))
+    console.log('Infotable history: ' + JSON.stringify(this.props.history))
+    console.log('Infotable context: ' + JSON.stringify(this.context))
 
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
@@ -227,8 +228,12 @@ InfoTable.contextTypes = {
 
 // Render composite component
 export default React.createClass ( {
+  contextTypes: {
+   router: React.PropTypes.func.isRequired
+  },
   render() {
     console.log('Browse props entry: ' + JSON.stringify(this.props))
+    // console.log('Browse context: ' + JSON.stringify(this.context))
     return (
       <div>
         <InfoTable

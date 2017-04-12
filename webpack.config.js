@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin
+const path = require('path')
 
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
     moduleExtensions: ['-loader']
   },
   output: {
-    path: "public/js",
+    path: path.resolve(__dirname, 'public/js'),
     publicPath: "/js",
     filename: "bundle.js"
   },

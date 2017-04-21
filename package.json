@@ -6,6 +6,7 @@
   "main": "js/app.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "node index-local.js",
     "watch": "webpack --watch",
     "serve": "webpack-dev-server --content-base public/ --history-api-fallback",
     "build": "webpack -p",

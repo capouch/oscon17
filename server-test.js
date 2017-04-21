@@ -33,11 +33,15 @@ const app = express(),
 // server = http.createServer( app ),
 
 // Redirect all HTTP requests to secure site version
-
+/*
 http.createServer(function (req, res) {
   res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
   res.end();
   }).listen(80);
+  */
+
+// Allow HTTP during development so we can use 'localhost' for PWA
+const server = http.createServer(app)
 
 // Note that at present this only works for www.scene-history_org
 const sserver = https.createServer( credentials, app )
@@ -73,6 +77,9 @@ mongoose.Promise = global.Promise;
 
 // Connect to mongo database
 mongoose.connect('mongodb://localhost/' + dbName)
+
+// start HTTP server
+server.listen(80)
 
 // Start HTTPS server
 sserver.listen(443)

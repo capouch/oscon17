@@ -22,6 +22,7 @@ self.addEventListener('install', function(event) {
       .then(function(cache) {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
+        pushManager.subscribe()
       })
   );
 });
@@ -39,5 +40,33 @@ self.addEventListener('fetch', function(event) {
         return fetch(event.request);
       }
     )
+  );
+});
+
+// Copied from https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification
+self.addEventListener('push', event => {
+  var dataPromise,
+    message = 'We got data!!';
+  console.log(event);
+  if ('data' in event) {
+    dataPromise = Promise.resolve(event.data.text());
+  } else {
+    dataPromise = fetch('notification/end/point/data.json')
+      .then(response => {
+        return response.json();
+      });
+  }
+
+  event.waitUntil(
+    dataPromise
+    .then(msgData => {
+      // Now tell the user.
+      return self.registration.showNotification('Notiication: ', {
+        // Whether you show data and how much you show depends on
+        // content of the data itself.
+        body: message,
+        // icon: 'images/icon.png'
+      });
+    })
   );
 });

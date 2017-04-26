@@ -61,7 +61,7 @@ self.addEventListener('push', event => {
     dataPromise
     .then(msgData => {
       // Now tell the user.
-      return self.registration.showNotification('Notiication: ', {
+      return self.registration.showNotification('Important PWA Function: ', {
         // Whether you show data and how much you show depends on
         // content of the data itself.
         body: message,

@@ -42,8 +42,8 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 }
 
 function initializeUI() {
-  unsubscribeUser()
-  subscribeUser()
+  // unsubscribeUser()
+  // subscribeUser()
     /* Fix button stuff later
   pushButton = document.querySelector('.js-push-btn');
   pushButton.addEventListener('click', function() {
@@ -67,6 +67,7 @@ function initializeUI() {
       console.log('User IS subscribed.');
     } else {
       console.log('User is NOT subscribed.');
+      subscribeUser()
     }
 
     // updateBtn();

@@ -36,7 +36,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        exclude: /(node_modules)/,
+        exclude: {
+          // web-push is an ES6, so has to be run through babel
+          test   : path.resolve(__dirname, "node_modules"),
+          exclude: path.resolve(__dirname, "node_modules/web-push"),
+        },
         test: /\.jsx?|\.js$/,
         loader: 'babel-loader',
       },
@@ -53,11 +57,11 @@ module.exports = {
       minChunks: Infinity,
       filename: 'vendor.bundle.js'
     }),
-    new webpack.LoaderOptionsPlugin({
+  new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
     }),
-    new webpack.optimize.UglifyJsPlugin({
+  new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       },
@@ -66,7 +70,7 @@ module.exports = {
       },
       sourceMap: false
     }),
-    new StatsWriterPlugin({
+  new StatsWriterPlugin({
       fields:null,
       filename: "stats.json" // Default
     })

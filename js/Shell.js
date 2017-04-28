@@ -24,6 +24,9 @@ import "../css/main.scss"
 import Header from './Header'
 import Footer from './Footer'
 
+// Maybe some notifications for OSCON17?
+import webPush from 'web-push'
+
 // Render application in main div - upgraded for react-route v4
 ReactDOM.render((
   <Router>

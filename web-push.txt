@@ -1,0 +1,3 @@
+web-push send-notification --endpoint="https://fcm.googleapis.com/fcm/send/fhvT-EjqYcw:APA91bGeJuNmyR6F3UoFzYeN7ZeDsTTn1gLsYOYMIDEsoNDP4ynz8V5iFnrEj-0R_3WEFxX4vQ_7VsGtAwRrq75kTvH7E2iTuzem8N-vimLp1aYWk3aBuPgqw7sEs7rEvoyjoFynnJG9" --key="BFL39cDDMmmJGfTjzCJJRSsNH5B49E7kXeGVeUurHA10HTcHCMrVgWIAQfsZaKk2ZYJS-n7737oz1WU8mIPr8NY=" --auth="Ofvc-N1yLgX_eq7pHMoImw==" --vapid-pvtkey="VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8" --vapid-subject="mailto:brianc@palaver.net" --vapid-pubkey="BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA" --payload="I am so so ready for a historic moment"
+
+You have to customize the endpoint, key, and auth for each new registration

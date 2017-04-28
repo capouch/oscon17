@@ -1,0 +1,4 @@
+Vapid Keypair:
+{"publicKey":"BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA","privateKey":"VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8"}
+
+web-push send-notification --endpoint="https://fcm.googleapis.com/fcm/send/ctWrElf7NE8:APA91bHD1Z2hH0J51cRFB23JXLsL7NBAH7Vvhh15XRKdGxJ-kWrLm3KgxJ67RLSRapBVmJbwqH-Mh7ig-o02XsvboRzAvRNvuC0_6_nA-yExXk29iknNL98dXaeiO-ViY9dVeFxi7Hh6" --key="BCfihpOxUtE89E3kS-khGev46SdYk2R1V5a_ODmd9JLDcEY4HZUwCmCBcVIaBQfs5Xw-u_ma1867xT4plZ1B3c0=" --auth="3zGgxWVif41e4Awlz0qw5g==" --vapid-pvtkey="VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8" --vapid-subject="mailto:brianc@palaver.net" --vapid-pubkey="BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA" --payload="Are we there yet??"

@@ -5,6 +5,7 @@
 import sharp from 'sharp'
 import multer from 'multer'
 import cb from 'cb'
+import webPush from 'web-push'
 
 // Multer handles MIME multi-part uploads
 //   Configure it for this usage instance
@@ -74,54 +75,79 @@ export default function ( router, server ) {
 
   // Fetch uploaded file handled by "storage" object in multer
   // Process resulting files for later viewing
-  router.post('/uploadHandler', function(req, res) {
-    if (req.body) {
-        console.log('Req body: ' + JSON.stringify(req.body))
-    }
-
-    /* POST-PROCESSING ENTRY POINT */
-
-    // 1. Attempt to upload file
-    // 2. Process images
-    // 3. Pass pointers back to requesting client
-    upload(req, res, function(err) {
-      if (err) {
-        return res.end('Error uploading file')
+    router.post('/uploadHandler', function(req, res) {
+      if (req.body) {
+          console.log('Req body: ' + JSON.stringify(req.body))
       }
-      console.log('Uploading file: ' + req.file.filename)
 
-      // Here we leverage sharp.js to rapidly process the uploaded image
-      const storedFilename = req.file.filename,
-        filePath = './uploads/' + storedFilename,
-        dziBase = './public/tiles/' + storedFilename
+      /* POST-PROCESSING ENTRY POINT */
 
-      // We should test for image size, etc., right here to be smarter below!
+      // 1. Attempt to upload file
+      // 2. Process images
+      // 3. Pass pointers back to requesting client
+      upload(req, res, function(err) {
+        if (err) {
+          return res.end('Error uploading file')
+        }
+        console.log('Uploading file: ' + req.file.filename)
 
-      // Make a thumbnail 200 px wide, scaled, MUST BE JPG for lightbox
-      sharp(filePath)
-        .resize(200)
-        .jpeg()
-        .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
-          console.log(err)
-        })
+        // Here we leverage sharp.js to rapidly process the uploaded image
+        const storedFilename = req.file.filename,
+          filePath = './uploads/' + storedFilename,
+          dziBase = './public/tiles/' + storedFilename
 
-      // This scales down larger images to cut down file size
-      //   (except currently it scales up, too . . . . )
-      sharp(filePath)
-        .resize(1000)
-        .png()
-        .toFile('./public/images/' + storedFilename + '-1k', function(err) {
-          console.log(err)
-        })
+        // We should test for image size, etc., right here to be smarter below!
 
-      // Generate zoomer tiles
-      sharp(filePath).tile(256)
-        .toFile(dziBase, function(err, info) {
-          console.log(err)
-        })
-    // Pass back name -- maybe more soon??
-    res.send(JSON.stringify(storedFilename))
-    //res.sendStatus(200);
+        // Make a thumbnail 200 px wide, scaled, MUST BE JPG for lightbox
+        sharp(filePath)
+          .resize(200)
+          .jpeg()
+          .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
+            console.log(err)
+          })
+
+        // This scales down larger images to cut down file size
+        //   (except currently it scales up, too . . . . )
+        sharp(filePath)
+          .resize(1000)
+          .png()
+          .toFile('./public/images/' + storedFilename + '-1k', function(err) {
+            console.log(err)
+          })
+
+        // Generate zoomer tiles
+        sharp(filePath).tile(256)
+          .toFile(dziBase, function(err, info) {
+            console.log(err)
+          })
+      // Pass back name -- maybe more soon??
+      res.send(JSON.stringify(storedFilename))
+      //res.sendStatus(200);
+    })
   })
-})
+  // Service routines for push notifications
+  const pushSubscription = {
+    endpoint: '< Push Subscription URL >',
+    keys: {
+      p256dh: '< User Public Encryption Key >',
+      auth: '< User Auth Secret >'
+    }
+  };
+
+  const payload = '< Push Payload String >';
+
+  const pushOptions = {
+    gcmAPIKey: '< GCM API Key >',
+    vapidDetails: {
+      subject: '< \'mailto\' Address or URL >',
+      publicKey: '< URL Safe Base64 Encoded Public Key >',
+      privateKey: '< URL Safe Base64 Encoded Private Key >'
+    },
+  }
+
+  webPush.sendNotification(
+    pushSubscription,
+    payload,
+    pushOptions
+  );
 }

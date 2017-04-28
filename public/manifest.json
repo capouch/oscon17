@@ -1,7 +1,6 @@
 {
   "name": "Scene History Image Viewer",
   "short_name": "SceneHistory",
-  "gcm_sender_id": "103953800507",
   "icons": [
     {
   "src": "img/android-chrome-192x192.png",

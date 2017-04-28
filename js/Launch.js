@@ -21,9 +21,6 @@ import {
   TeamMember,
 } from "neal-react"
 
-// Maybe some notifications for OSCON17?
-import webPush from 'web-push'
-
 const sampleCode =
 ` self.addEventListener('fetch', function(event) {
   console.log('Service worker up: ' + event.request.url)

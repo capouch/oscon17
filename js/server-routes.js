@@ -112,18 +112,22 @@ export default function ( router, server ) {
 
     // This doesn't even come close to working . .
     function saveSubscriptionToDatabase(subscription) {
+      console.log('In save part of routine')
+      console.log('Sub details' + JSON.stringify(subscription))
+      sendNotification(subscription)
       return new Promise(function(resolve, reject) {
+        /*
         db.insert(subscription, function(err, newDoc) {
           if (err) {
             reject(err);
             return;
           }
-
-          resolve(newDoc._id);
-        });
-      });
-    };
-  })
+          */
+          // resolve(newDoc._id);
+          resolve('ABCDEFG')
+        })
+      }
+    })
 
   // Fetch uploaded file handled by "storage" object in multer
   // Process resulting files for later viewing
@@ -178,28 +182,32 @@ export default function ( router, server ) {
     })
   })
   // Service routines for push notifications
-  const pushSubscription = {
-    // Values to be gotten from saved subscription registration
-    endpoint: '< Push Subscription URL >',
-    keys: {
-      p256dh: '< User Public Encryption Key >',
-      auth: '< User Auth Secret >'
+  function sendNotification(subscription) {
+    /* I don't think this is needed for this setup
+    const pushSubscription = {
+      // Values to be gotten from saved subscription registration
+      endpoint: '< Push Subscription URL >',
+      keys: {
+        p256dh: '< User Public Encryption Key >',
+        auth: '< User Auth Secret >'
+      }
+    };
+    */
+
+    const payload = 'This is a friendly server notification!!';
+
+    const pushOptions = {
+      vapidDetails: {
+        subject: 'mailto:brianc@palaver.net',
+        publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
+        privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
+      },
     }
-  };
 
-  const payload = 'This is a friendly server notification!!';
-
-  const pushOptions = {
-    vapidDetails: {
-      subject: 'mailto:brianc@palaver.net',
-      publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
-      privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
-    },
+    webPush.sendNotification(
+      subscription,
+      payload,
+      pushOptions
+    );
   }
-
-  webPush.sendNotification(
-    pushSubscription,
-    payload,
-    pushOptions
-  );
 }

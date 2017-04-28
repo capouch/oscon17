@@ -142,7 +142,29 @@ function updateSubscriptionOnServer(subscription) {
 if (subscription) {
   const subscriptionJson = document.querySelector('.show-sub');
     let subRecord = JSON.stringify(subscription)
-    subscriptionJson.textContent = JSON.stringify(subscription)
+    // subscriptionJson.textContent = JSON.stringify(subscription)
     console.log("Sub: " + subRecord)
+    sendSubscriptionToBackEnd(subscription)
     }
+}
+
+function sendSubscriptionToBackEnd(subscription) {
+  return fetch('/save-subscription/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(subscription)
+  })
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error('Bad status code from server.');
+    }
+    return response.json();
+  })
+  .then(function(responseData) {
+    if (!(responseData.data && responseData.data.success)) {
+      throw new Error('Bad response from server.');
+    }
+  });
 }

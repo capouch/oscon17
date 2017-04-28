@@ -28,6 +28,8 @@ export default function ( router, server ) {
     root: __dirname + '/../public'
    }
 
+// Actual routes
+
   router.get('/', function(req, res) {
     res.sendFile('index.html', options)
   })
@@ -73,6 +75,55 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
+  // Post route to accept demo push subscription
+  // For OSCON demo purposes only--NOT ROBUST!
+  app.post('/save-subscription/', function (req, res) {
+    const isValidSaveRequest = (req, res) => {
+      // Check the request body has at least an endpoint.
+      if (!req.body || !req.body.endpoint) {
+        // Not a valid subscription.
+        res.status(400);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+          error: {
+            id: 'no-endpoint',
+            message: 'Subscription must have an endpoint.'
+          }
+        }));
+        return false;
+      }
+      return true;
+    };
+    return saveSubscriptionToDatabase(req.body)
+    .then(function(subscriptionId) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ data: { success: true } }));
+    })
+    .catch(function(err) {
+      res.status(500);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({
+        error: {
+          id: 'unable-to-save-subscription',
+          message: 'The subscription was received but we were unable to save it to our database.'
+        }
+      }));
+    });
+
+    // This doesn't even come close to working . .
+    function saveSubscriptionToDatabase(subscription) {
+      return new Promise(function(resolve, reject) {
+        db.insert(subscription, function(err, newDoc) {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          resolve(newDoc._id);
+        });
+      });
+    };
+  }
   // Fetch uploaded file handled by "storage" object in multer
   // Process resulting files for later viewing
     router.post('/uploadHandler', function(req, res) {
@@ -127,6 +178,7 @@ export default function ( router, server ) {
   })
   // Service routines for push notifications
   const pushSubscription = {
+    // Values to be gotten from saved subscription registration
     endpoint: '< Push Subscription URL >',
     keys: {
       p256dh: '< User Public Encryption Key >',
@@ -134,14 +186,13 @@ export default function ( router, server ) {
     }
   };
 
-  const payload = '< Push Payload String >';
+  const payload = 'This is a friendly server notification!!';
 
   const pushOptions = {
-    gcmAPIKey: '< GCM API Key >',
     vapidDetails: {
-      subject: '< \'mailto\' Address or URL >',
-      publicKey: '< URL Safe Base64 Encoded Public Key >',
-      privateKey: '< URL Safe Base64 Encoded Private Key >'
+      subject: 'mailto:brianc@palaver.net',
+      publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
+      privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
     },
   }
 

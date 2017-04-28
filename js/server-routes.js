@@ -77,7 +77,7 @@ export default function ( router, server ) {
 
   // Post route to accept demo push subscription
   // For OSCON demo purposes only--NOT ROBUST!
-  app.post('/save-subscription/', function (req, res) {
+  router.post('/save-subscription/', function (req, res) {
     const isValidSaveRequest = (req, res) => {
       // Check the request body has at least an endpoint.
       if (!req.body || !req.body.endpoint) {
@@ -123,7 +123,8 @@ export default function ( router, server ) {
         });
       });
     };
-  }
+  })
+
   // Fetch uploaded file handled by "storage" object in multer
   // Process resulting files for later viewing
     router.post('/uploadHandler', function(req, res) {

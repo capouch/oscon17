@@ -4,8 +4,8 @@
     see http://www.nealjs.com/
 */
 
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
 import {
   Code,
   CustomerQuote, CustomerQuotes,
@@ -20,6 +20,9 @@ import {
   Team,
   TeamMember,
 } from "neal-react"
+
+// Maybe some notifications for OSCON17?
+import webPush from 'web-push'
 
 const sampleCode =
 ` self.addEventListener('fetch', function(event) {

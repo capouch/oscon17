@@ -149,7 +149,6 @@ const NavHeader = React.createClass({
             {authNavItem}
             <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
             <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
-            <NavItem><button disabled class="js-push-btn">Notify me!!</button></NavItem>
           </Navbar>
         </div>
       )}

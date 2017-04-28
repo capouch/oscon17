@@ -53,8 +53,8 @@ self.addEventListener('push', event => {
     const title = 'Scene History';
     const options = {
       body: thisMessage,
-      icon: 'images/icon.png',
-      badge: 'images/badge.png'
+      // icon: 'images/icon.png',
+      // badge: 'images/badge.png'
     };
 
     event.waitUntil(self.registration.showNotification(title, options));

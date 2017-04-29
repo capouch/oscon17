@@ -72,8 +72,8 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
-  router.get('/sknnzix', function(req, res) {
-    let customMessage = req.param('msg')
+  router.get(['/sknnzix', '/sknnzix/:msg'], function(req, res) {
+    let customMessage = req.params.msg
     console.log('Sending notification with ' + customMessage)
     // res.sendFile('index.html', options)
     sendNotification(savedSubscription, customMessage);

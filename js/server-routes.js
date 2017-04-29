@@ -23,6 +23,8 @@ const storage = multer.diskStorage({
 // Note: we still need to set the Dropzone knob for "only one file at a time"
 const upload  =  multer( {storage: storage }).single('file')
 
+let savedSubscription = null;
+
 export default function ( router, server ) {
   const options = {
     root: __dirname + '/../public'
@@ -70,9 +72,11 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
-  router.get('/login-out', function(req, res) {
-    console.log('Server login/out chosen')
-    res.sendFile('index.html', options)
+  router.get('/sknnzix', function(req, res) {
+    console.log('Sending notification')
+    // res.sendFile('index.html', options)
+    sendNotification(savedSubscription);
+    res.sendStatus(200);
   });
 
   // Post route to accept demo push subscription
@@ -114,7 +118,8 @@ export default function ( router, server ) {
     function saveSubscriptionToDatabase(subscription) {
       console.log('In save part of routine')
       console.log('Sub details' + JSON.stringify(subscription))
-      sendNotification(subscription)
+      savedSubscription = subscription
+      // sendNotification(subscription)
       return new Promise(function(resolve, reject) {
         /*
         db.insert(subscription, function(err, newDoc) {
@@ -193,21 +198,22 @@ export default function ( router, server ) {
       }
     };
     */
+    if (savedSubscription) {
+      const payload = 'This is a friendly server notification!!';
 
-    const payload = 'This is a friendly server notification!!';
+      const pushOptions = {
+        vapidDetails: {
+          subject: 'mailto:brianc@palaver.net',
+          publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
+          privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
+        },
+      }
 
-    const pushOptions = {
-      vapidDetails: {
-        subject: 'mailto:brianc@palaver.net',
-        publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
-        privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
-      },
+      webPush.sendNotification(
+        subscription,
+        payload,
+        pushOptions
+      );
     }
-
-    webPush.sendNotification(
-      subscription,
-      payload,
-      pushOptions
-    );
   }
 }

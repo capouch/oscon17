@@ -73,9 +73,10 @@ export default function ( router, server ) {
   });
 
   router.get('/sknnzix', function(req, res) {
-    console.log('Sending notification')
+    let customMessage = req.param('msg')
+    console.log('Sending notification with ' + customMessage)
     // res.sendFile('index.html', options)
-    sendNotification(savedSubscription);
+    sendNotification(savedSubscription, customMessage);
     res.sendStatus(200);
   });
 
@@ -114,7 +115,7 @@ export default function ( router, server ) {
       }));
     });
 
-    // This doesn't even come close to working . .
+    // Doesn't really save anything ATM
     function saveSubscriptionToDatabase(subscription, ipAddr, port) {
       console.log('In save part of routine')
       console.log('Sub details' + JSON.stringify(subscription))
@@ -122,6 +123,8 @@ export default function ( router, server ) {
       savedSubscription = subscription
       // sendNotification(subscription)
       return new Promise(function(resolve, reject) {
+
+        // TODO: add persistence
         /*
         db.insert(subscription, function(err, newDoc) {
           if (err) {
@@ -188,7 +191,7 @@ export default function ( router, server ) {
     })
   })
   // Service routines for push notifications
-  function sendNotification(subscription) {
+  function sendNotification(subscription, customMessage) {
     /* I don't think this is needed for this setup
     const pushSubscription = {
       // Values to be gotten from saved subscription registration
@@ -200,7 +203,11 @@ export default function ( router, server ) {
     };
     */
     if (savedSubscription) {
-      const payload = 'This is a friendly server notification!!';
+
+      let payload = 'This is a generic server notification!!';
+      if (typeof customMessage !== 'undefined') {
+        payload = customMessage
+      }
 
       const pushOptions = {
         vapidDetails: {

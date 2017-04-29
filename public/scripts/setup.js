@@ -9,21 +9,7 @@ let pushButton = null;
 let isSubscribed = false;
 let swRegistration = null;
 
-function urlB64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
-    .replace(/_/g, '/');
-
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
-  }
-  return outputArray;
-}
-
+// Register service worker and check for push support
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('Service Worker and Push is supported');
 
@@ -41,6 +27,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   pushButton.textContent = 'Push Not Supported';
 }
 
+// Called after service worker installation
 function initializeUI() {
   // unsubscribeUser()
   // subscribeUser()
@@ -61,6 +48,7 @@ function initializeUI() {
   .then(function(subscription) {
     isSubscribed = !(subscription === null);
 
+    // Tell server about sub
     updateSubscriptionOnServer(subscription);
 
     if (isSubscribed) {
@@ -74,6 +62,7 @@ function initializeUI() {
   });
 }
 
+// CURRENTLY NOT ENABLED!!
 function updateBtn() {
   if (Notification.permission === 'denied') {
     pushButton.textContent = 'Push Messaging Blocked.';
@@ -91,6 +80,7 @@ function updateBtn() {
   pushButton.disabled = false;
 }
 
+// Set up new subsciprtion--note only interacting with browser, not web
 function subscribeUser() {
   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
@@ -132,6 +122,7 @@ function unsubscribeUser() {
   });
 }
 
+// Tell server about this subscription
 function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server
 
@@ -148,6 +139,7 @@ if (subscription) {
     }
 }
 
+// Service routine to contact our speciic server
 function sendSubscriptionToBackEnd(subscription) {
   return fetch('/save-subscription/', {
     method: 'POST',
@@ -166,5 +158,22 @@ function sendSubscriptionToBackEnd(subscription) {
     if (!(responseData.data && responseData.data.success)) {
       throw new Error('Bad response from server.');
     }
+    console.log(JSON.stringify(responseData.data))
   });
+}
+
+// Service routine to create Uint8 array
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
 }

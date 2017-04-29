@@ -98,7 +98,7 @@ export default function ( router, server ) {
       }
       return true;
     };
-    return saveSubscriptionToDatabase(req.body)
+    return saveSubscriptionToDatabase(req.body, req.ip, req.connection.remotePort)
     .then(function(subscriptionId) {
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify({ data: { success: true } }));
@@ -115,9 +115,10 @@ export default function ( router, server ) {
     });
 
     // This doesn't even come close to working . .
-    function saveSubscriptionToDatabase(subscription) {
+    function saveSubscriptionToDatabase(subscription, ipAddr, port) {
       console.log('In save part of routine')
       console.log('Sub details' + JSON.stringify(subscription))
+      console.log('Source: ' + ipAddr + ':' + port)
       savedSubscription = subscription
       // sendNotification(subscription)
       return new Promise(function(resolve, reject) {

@@ -66,6 +66,6 @@ self.addEventListener('push', event => {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('https://developers.google.com/web/')
+    clients.openWindow('https://www.scene-history.org')
   )
 })

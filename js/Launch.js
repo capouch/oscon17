@@ -21,6 +21,17 @@ import {
   TeamMember,
 } from "neal-react"
 
+let urlBase = ''
+// Send request
+const ipc = window.require('electron').ipcRenderer
+ipc.send('get-app-path')
+// Process update message
+// This is an observer pattern
+ipc.on('got-app-path', function(app,path) {
+  console.log('ipc Path= ' + path)
+  urlBase = path + '/' + 'public/'
+})
+
 const sampleCode =
 ` self.addEventListener('fetch', function(event) {
   console.log('Service worker up: ' + event.request.url)
@@ -42,7 +53,7 @@ const sampleCode =
 export default (props) => {
   return (
     <Page>
-      <Hero backgroundImage="img/background.png"
+      <Hero backgroundImage= { urlBase + "img/background.png" }
         className="text-xs-center">
         <h1 className="display-4">Scene:History </h1>
         <p className="lead">Archiving and Presenting Historical Images</p>
@@ -77,14 +88,11 @@ export default (props) => {
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
+          <CustomerQuote name="Danilo Zekovic" imageUrl=  { urlBase + "img/people/daniloOSCON.jpg" } > 
             <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
           </CustomerQuote>
-          <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
+          <CustomerQuote name="Brian Capouch" imageUrl= {  urlBase + "img/people/bcOSCON.jpg" } >
             <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
-          </CustomerQuote>
-          <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
-            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

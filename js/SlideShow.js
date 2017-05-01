@@ -9,10 +9,10 @@ import ImageGallery from 'react-image-gallery'
 
 // 1.
 // Cloud assets
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
+const assetBase = 'https://www.scene-history.org/graphql?'
 //
 // Local assets
-const assetBase = '/graphql?'
+// const assetBase = '/graphql?'
 
 // If no parameters fetch all the images
 //  Now (12/12/16) I wonder if this case will ever occur?
@@ -62,7 +62,7 @@ export default class extends React.Component {
       // cloud assets:
       // const urlBase = 'http://oscon.saintjoe-cs.org:2016/'
       // local assets:
-      const urlBase = '/'
+      const urlBase = 'https://www.scene-history.org/'
       let source = []
       if (json.data.imageRecs)
         source = json.data.imageRecs

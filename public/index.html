@@ -2,20 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <script async src="/libs/jquery.min.js"></script>
-    <script async src="/libs/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/font-awesome.min.css" lazyload>
+    <script async src="../public/libs/jquery.min.js"></script>
+    <script async src="../public/libs/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css" lazyload>
 
-    <link rel=stylesheet href=/css/base.css>
+    <link rel=stylesheet href=../public/css/base.css>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../public/manifest.json">
 
     <title>Scene:History</title>
-    <script src="/libs/firebase.js"></script>
-    <script src="/libs/firebase-app.js"></script>
-    <script src="/libs/firebase-auth.js"></script>
+    <script src="../public/libs/firebase.js"></script>
+    <script src="../public/libs/firebase-app.js"></script>
+    <script src="../public/libs/firebase-auth.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -25,7 +25,7 @@
       firebase.initializeApp(config);
     </script>
 
-    <script src="/scripts/setup.js"></script>
+    <script src="../scripts/setup.js"></script>
   </head>
   <body>
     <pre><code class="show-sub"></code></pre>
@@ -35,7 +35,7 @@
       console.log('Notification permission status:', status);
     });
     </script>
-    <script src="/js/vendor.bundle.js"></script>
-    <script src="/js/bundle.js"></script>
+    <script src="../public/js/vendor.bundle.js"></script>
+    <script src="../public/js/bundle.js"></script>
   </body>
 </html>

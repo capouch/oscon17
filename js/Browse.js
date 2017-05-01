@@ -21,7 +21,9 @@ import 'whatwg-fetch'
 // 1.
 // Select one of the two to configure for local/cloud access
 // Local assets
-const assetBase = '/graphql?'
+// const assetBase = '/graphql?'
+// const assetBase = 'http://127.0.0.1:2016' + '/oscon-test?'
+const assetBase = "https://www.scene-history.org/graphql?"
 //
 // Cloud assets
 // OBSOLETE!!!!  Fix or remove!!!
@@ -47,13 +49,14 @@ const Button = React.createClass({
 
 // Compose NavLink to the Asset view for each image
 const AssetLinkComponent = React.createClass({
-
   render: function(){
     // Make a NavLink out of a column value
     // Clicking brings up "Asset" view
+
     const target = this.props.rowData._id,
       renderBase = "/asset/",
       renderPath = renderBase + target;
+      console.log('Browse: writing render path ' + renderPath)
 
     return <NavLink to={ renderPath } >
         {this.props.data}
@@ -238,7 +241,7 @@ export default React.createClass ( {
       <div>
         <InfoTable
           history = { this.props.history }
-          url={ assetBase + queryBase }
+          url = { assetBase + queryBase }
           />
       </div>
     )

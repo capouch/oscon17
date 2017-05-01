@@ -8,6 +8,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Section } from 'neal-react'
 
+// Current source of tiles and .dzi info
+const urlBase = "https://www.scene-history.org/tiles/"
+
+// Discover path to local assets
+let assetBase = ''
+// Send request
+const ipc = window.require('electron').ipcRenderer
+ipc.send('get-app-path')
+// Process update message
+// This is an observer pattern
+ipc.on('got-app-path', function(app,path) {
+  console.log('ipc Path= ' + path)
+  assetBase = path + '/' + 'public/'
+})
+
 // Function to configure and raise the OpenSeaDragon widget
 const renderImage = function(selection) {
 
@@ -17,14 +32,13 @@ const renderImage = function(selection) {
   // const assetBase ="http://oscon.saintjoe-cs.org:2016/"
   //
   // Use local assets
-  const assetBase = ''
+  // const assetBase = ''
 
-
-  const baseName = assetBase + selection + '.dzi'
+  const baseName = urlBase + selection + '.dzi'
   // console.log('In the renderImage method about to render ' + baseName)
   const viewer = OpenSeadragon({
     id: "zoomer-view",
-    prefixUrl: "/img-icons/",
+    prefixUrl: assetBase + "img-icons/",
     tileSources: baseName
   })
 }

@@ -40,7 +40,7 @@ const NavHeader = React.createClass({
   componentWillMount: function() {
     // This callback seems to confuse react after the first time it's called
     //   but overall it works--is called on each log in/out
-    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+    // firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
     /*
     if (this.checkSignedInWithMessage()) {
       this.setState({
@@ -143,10 +143,11 @@ const NavHeader = React.createClass({
 
       return (
         <div>
-          {loginModal}
+          { /* Commented out are login-related fixtures */ }
+          { /* loginModal */}
           <Navbar brand={brand}>
             <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
-            {authNavItem}
+            { /* authNavItem */ }
             <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
             <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
           </Navbar>

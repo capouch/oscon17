@@ -43,6 +43,7 @@ ReactDOM.render((
         <Route path = "/upload" component = { Upload } />
         <Route exact path = "/slides" component = { SlideShow } />
         <Route path = "/slides/:viewSet" component = { SlideShow } />
+        <Route component = { Home } />
       </Switch>
       <Route component = { Footer } />
     </div>

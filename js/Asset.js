@@ -5,6 +5,8 @@
 import React from 'react'
 import { Section } from 'neal-react'
 
+const urlBase = 'https://www.scene-history.org/images/'
+
 export default React.createClass ( {
 
   imageClick(event) {
@@ -29,6 +31,7 @@ export default React.createClass ( {
   componentWillMount: function() {
     // Set up various fields for display
     console.log('Asset: ', JSON.stringify(this.props))
+
     const record = this.props.match.params.imageId,
       desiredRecord = this.state.records.find(function (d){
         return d._id == record
@@ -38,12 +41,13 @@ export default React.createClass ( {
       displayRecord = {
         filename: desiredRecord["filename"],
         // Construct path to 1k image
-        imageURL: "/images/" + desiredRecord["filename"] + "-1k",
+        imageURL: urlBase + desiredRecord["filename"] + "-1k",
         title: desiredRecord["title"],
         description: desiredRecord["description"],
         source: desiredRecord["source"],
         tags: desiredRecord["taglist"]
         }
+    console.log("Asset after record " + JSON.stringify(displayRecord))
     this.setState({ displayFields: displayRecord })
   },
   render() {

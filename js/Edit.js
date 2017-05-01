@@ -7,6 +7,9 @@ import { Section } from 'neal-react'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
 
+// Needed or contacting remote server
+const urlBase = "https://www.scene-history.org"
+
 // fieldValues provide form input
 let fieldValues = {
   title : null,
@@ -23,7 +26,7 @@ let id = '',
 const EditDeleteWidget = React.createClass({
   getInitialState: function() {
     return {
-      isLoggedIn: this.checkSignedInWithMessage(),
+      // isLoggedIn: this.checkSignedInWithMessage(),
       step: 1
     }
   },
@@ -33,7 +36,7 @@ const EditDeleteWidget = React.createClass({
 
     // Extract query part only of URL (i.e. the part after the '?')
     let queryTarget = "";
-    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+    // firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
     this.loadRecordsFromServer()
   },
   onAuthStateChanged: function(user) {
@@ -50,10 +53,10 @@ const EditDeleteWidget = React.createClass({
    },
   checkSignedInWithMessage: function() {
     // Return true if the user is signed in Firebase
-    return firebase.auth().currentUser;
+    // return firebase.auth().currentUser;
   },
   loadRecordsFromServer: function() {
-    let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
+    let URL = urlBase + '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     // console.log('Fetch URL: ' + URL)
     fetch(req).then(function(response) {
@@ -83,7 +86,7 @@ const EditDeleteWidget = React.createClass({
       sessionStorage.removeItem('browse')
 
       // Put together (awful-looking) query URL
-      let URL="/graphql?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
+      let URL= urlBase + "/graphql?query=mutation+{updateImage(data: { _id: " + JSON.stringify(id) + ", title: " + JSON.stringify(fieldValues.title) +
       ",description: " + JSON.stringify(fieldValues.description) + ", filename: " + JSON.stringify(fieldValues.filename)
       +", source: " + JSON.stringify(fieldValues.source) + ", taglist: " + JSON.stringify(fieldValues.taglist)+ "})}",
         req = new Request(URL, {method: 'POST', cache: 'reload'})
@@ -99,7 +102,7 @@ const EditDeleteWidget = React.createClass({
       sessionStorage.removeItem('browse')
 
       // Put together mutation URL
-      let URL="/graphql?query=mutation+{deleteImage(id: " + JSON.stringify(id) + ")}",
+      let URL= urlBase + "/graphql?query=mutation+{deleteImage(id: " + JSON.stringify(id) + ")}",
         req = new Request(URL, {method: 'POST', cache: 'reload'})
       console.log('Sending: ' + URL)
       fetch(req).then(function(response) {
@@ -112,8 +115,8 @@ const EditDeleteWidget = React.createClass({
   render: function() {
     // console.log('rendering widget')
     switch(this.state.step) {
-      case 1:
-      if (this.checkSignedInWithMessage()) {
+      case 1: {
+        { /*if (this.checkSignedInWithMessage()) { */ }
         // Only allow editing when there is a valid logged-in user
         if (!this.state.record) {
           // Data is not ready yet
@@ -150,7 +153,7 @@ const EditDeleteWidget = React.createClass({
             </div>
           )
         }
-      } else {
+       } { /*else {
         // Post message that edits are only for authorized users
         return (
           <Section>
@@ -162,7 +165,7 @@ const EditDeleteWidget = React.createClass({
               </center>
             </div>
           </Section>
-        )
+        ) */
       }
       case 2:
       console.log('Edit resetStep ' + this.resetStep)

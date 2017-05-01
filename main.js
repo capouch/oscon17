@@ -7,7 +7,7 @@ const { app, BrowserWindow } = electron;
 // Respond to any requests for the filesystem path via IPC
 // Renderer processes act as observers to find where they're running
 ipc.on('get-app-path', function (event) {
-  console.log('Got path request')
+  // console.log('Got path request')
   event.sender.send('got-app-path', app.getAppPath())
 })
 
@@ -21,7 +21,7 @@ function createWindow() {
 
   // Adjust launch window side as percentage of containing window
   const size = electronScreen.getPrimaryDisplay().workAreaSize
-  console.log('Screen: ' + size.width + ' ' + size.height)
+  // console.log('Screen: ' + size.width + ' ' + size.height)
   // win = new BrowserWindow({width: 1120, height: 580, autoHideMenuBar: true});
   win = new BrowserWindow({width: (size.width - 40) , height: (size.height - 120), autoHideMenuBar: true});
 

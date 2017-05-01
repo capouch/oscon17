@@ -75,6 +75,7 @@ const EditLinkComponent = React.createClass({
       renderPath = renderBase + target;
 
     // Only an icon!
+    console.log('Edit link: ' + renderPath)
     return <NavLink to={renderPath}>
       <span className="fa fa-pencil-square-o"></span>
     </NavLink>

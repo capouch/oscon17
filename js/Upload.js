@@ -98,7 +98,7 @@ export default React.createClass ( {
  },
  componentDidMount: function() {
    // This callback seems to confuse react after the first time it's called
-   firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+   // firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
   },
   onAuthStateChanged: function(user) {
     if (user) {
@@ -152,7 +152,7 @@ nextStep: function() {
    // console.log('Login state: ' + JSON.stringify(this.checkSignedInWithMessage()))
    switch(this.state.step) {
      case 1:
-     if (this.checkSignedInWithMessage()) {
+     {/* if (this.checkSignedInWithMessage()) { */}
      return (
        <Section>
          <DropZoneComponent
@@ -167,13 +167,14 @@ nextStep: function() {
            saveValues={this.saveValues} />
        </Section>
      )
-   } else {
-     return (
-       <Section>
-        <div><center><h2>You must be logged in to Upload</h2></center></div>
-       </Section>
+       {/*     )
+          } else {
+            return (
+              <Section>
+               <div><center><h2>You must be logged in to Upload</h2></center></div>
+              </Section>
      )
-   }
+   } */}
      case 2:
      return <Confirmation
        resetStep={this.resetStep}/>

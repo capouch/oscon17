@@ -28,7 +28,7 @@ ipc.send('get-app-path')
 // Process update message
 // This is an observer pattern
 ipc.on('got-app-path', function(app,path) {
-  console.log('ipc Path= ' + path)
+  // console.log('ipc Path= ' + path)
   urlBase = path + '/' + 'public/'
 })
 
@@ -88,7 +88,7 @@ export default (props) => {
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" imageUrl=  { urlBase + "img/people/daniloOSCON.jpg" } > 
+          <CustomerQuote name="Danilo Zekovic" imageUrl=  { urlBase + "img/people/daniloOSCON.jpg" } >
             <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
           </CustomerQuote>
           <CustomerQuote name="Brian Capouch" imageUrl= {  urlBase + "img/people/bcOSCON.jpg" } >

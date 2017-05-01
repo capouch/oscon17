@@ -19,7 +19,7 @@ ipc.send('get-app-path')
 // Process update message
 // This is an observer pattern
 ipc.on('got-app-path', function(app,path) {
-  console.log('ipc Path= ' + path)
+  // console.log('ipc Path= ' + path)
   assetBase = path + '/' + 'public/'
 })
 

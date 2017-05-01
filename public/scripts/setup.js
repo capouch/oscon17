@@ -29,9 +29,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
 // Called after service worker installation
 function initializeUI() {
-  // unsubscribeUser()
-  // subscribeUser()
-    /* Fix button stuff later
+  /* Fix button stuff later
   pushButton = document.querySelector('.js-push-btn');
   pushButton.addEventListener('click', function() {
     pushButton.disabled = true;
@@ -57,7 +55,6 @@ function initializeUI() {
       console.log('User is NOT subscribed.');
       subscribeUser()
     }
-
     // updateBtn();
   });
 }
@@ -89,11 +86,8 @@ function subscribeUser() {
   })
   .then(function(subscription) {
     console.log('User is subscribed.');
-
     updateSubscriptionOnServer(subscription);
-
     isSubscribed = true;
-
     // updateBtn();
   })
   .catch(function(err) {
@@ -113,8 +107,8 @@ function unsubscribeUser() {
     console.log('Error unsubscribing', error);
   })
   .then(function() {
+    // Should this be uncommented?
     // updateSubscriptionOnServer(null);
-
     console.log('User is unsubscribed.');
     isSubscribed = false;
 
@@ -124,12 +118,7 @@ function unsubscribeUser() {
 
 // Tell server about this subscription
 function updateSubscriptionOnServer(subscription) {
-  // TODO: Send subscription to application server
-
-  // const subscriptionJson = document.querySelector('.js-subscription-json');
-  // const subscriptionDetails =
-    // document.querySelector('.js-subscription-details');
-
+// Only talk to server if we have a subscription object
 if (subscription) {
   const subscriptionJson = document.querySelector('.show-sub');
     let subRecord = JSON.stringify(subscription)

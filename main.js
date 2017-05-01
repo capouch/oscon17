@@ -17,10 +17,13 @@ let win;
 
 function createWindow() {
   // Create the browser window
-  const { swidth, sheight } = electron.screen.getPrimaryDisplay().workAreaSize
-  console.log('Screen: ' + swidth + ' ' + sheight)
-  win = new BrowserWindow({width: 1120, height: 580, autoHideMenuBar: true});
-  // win = new BrowserWindow({width: swidth * .9 , height: sheight * .6, autoHideMenuBar: true});
+  const electronScreen = electron.screen
+
+  // Adjust launch window side as percentage of containing window
+  const size = electronScreen.getPrimaryDisplay().workAreaSize
+  console.log('Screen: ' + size.width + ' ' + size.height)
+  // win = new BrowserWindow({width: 1120, height: 580, autoHideMenuBar: true});
+  win = new BrowserWindow({width: (size.width - 40) , height: (size.height - 120), autoHideMenuBar: true});
 
   // and load the index.html of the app.
   win.loadURL(`file://${__dirname}/public/index.html`);

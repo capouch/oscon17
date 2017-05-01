@@ -29,9 +29,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
 // Called after service worker installation
 function initializeUI() {
-  // unsubscribeUser()
-  // subscribeUser()
-    /* Fix button stuff later
+  /* User control button functionality is disabled!!
   pushButton = document.querySelector('.js-push-btn');
   pushButton.addEventListener('click', function() {
     pushButton.disabled = true;

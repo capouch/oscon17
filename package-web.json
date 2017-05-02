@@ -1,10 +1,9 @@
 {
   "name": "oscon16-spa",
-  "productName": "scene-history",
   "version": "0.1.0",
   "description": "An example SPA",
   "repository": "https://github.com/capouch/oscon16.git",
-  "main": "main.js",
+  "main": "js/app.js",
   "scripts": {
     "start": "node index.js",
     "dev": "node index-local.js",

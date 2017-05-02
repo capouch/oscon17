@@ -34,3 +34,6 @@ node_modules
 
 # Webpack bundle file
 public/js/
+
+# Release builds dir
+release-builds

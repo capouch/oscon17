@@ -23,7 +23,8 @@ const storage = multer.diskStorage({
 // Note: we still need to set the Dropzone knob for "only one file at a time"
 const upload  =  multer( {storage: storage }).single('file')
 
-let savedSubscription = null;
+let savedSubscription = null,
+  subscriptions = []
 
 export default function ( router, server ) {
   const options = {
@@ -74,9 +75,10 @@ export default function ( router, server ) {
 
   router.get(['/sknnzix', '/sknnzix/:msg'], function(req, res) {
     let customMessage = req.params.msg
-    console.log('Sending notification with ' + customMessage)
+    console.log('Sending notifications with ' + customMessage)
+    console.log(' to ' + Object.keys(subscriptions).length + ' subscribers')
     // res.sendFile('index.html', options)
-    sendNotification(savedSubscription, customMessage);
+    sendNotifications(customMessage);
     res.sendStatus(200);
   });
 
@@ -84,7 +86,7 @@ export default function ( router, server ) {
   // For OSCON demo purposes only--NOT ROBUST!
   router.post('/save-subscription/', function (req, res) {
     const isValidSaveRequest = (req, res) => {
-      // Check the request body has at least an endpoint.
+      // TODO: check for complete subscription data
       if (!req.body || !req.body.endpoint) {
         // Not a valid subscription.
         res.status(400);
@@ -118,9 +120,17 @@ export default function ( router, server ) {
     // Doesn't really save anything ATM
     function saveSubscriptionToDatabase(subscription, ipAddr, port) {
       console.log('In save part of routine')
-      console.log('Sub details' + JSON.stringify(subscription))
-      console.log('Source: ' + ipAddr + ':' + port)
+      // console.log('Sub details' + JSON.stringify(subscription))
+      let source = ipAddr + ':' + port
+      // Cut syntactic cruft from front of address
+      source = source.slice(7)
+      console.log('Source: ' +  source)
       savedSubscription = subscription
+      subscriptions[source] = subscription
+      // Debugging time; let's log whole array
+      for (let [source, subscription] of Object.entries(subscriptions)) {
+          console.log("Entry: " + JSON.stringify(subscriptions[source]) + ' for ' + source)
+        }
       // sendNotification(subscription)
       return new Promise(function(resolve, reject) {
 
@@ -191,24 +201,17 @@ export default function ( router, server ) {
     })
   })
   // Service routines for push notifications
-  function sendNotification(subscription, customMessage) {
-    /* I don't think this is needed for this setup
-    const pushSubscription = {
-      // Values to be gotten from saved subscription registration
-      endpoint: '< Push Subscription URL >',
-      keys: {
-        p256dh: '< User Public Encryption Key >',
-        auth: '< User Auth Secret >'
-      }
-    };
-    */
-    if (savedSubscription) {
-
-      let payload = 'This is a generic server notification!!';
+  function sendNotifications(customMessage) {
+    // Track index in case we have to delete
+    let counter = 0;
+    // Iterate through current list of subscriptions
+    for (let [source, subscription] of Object.entries(subscriptions)) {
+      // console.log("Entry: " + JSON.stringify(subscriptions[source]) + ' for ' + source)
+      let payload = 'This is your generic server notification!!';
       if (typeof customMessage !== 'undefined') {
         payload = customMessage
       }
-
+      // Code to send notify; remove item if subscription has lapsed
       const pushOptions = {
         vapidDetails: {
           subject: 'mailto:brianc@palaver.net',
@@ -221,7 +224,17 @@ export default function ( router, server ) {
         subscription,
         payload,
         pushOptions
-      );
+      )
+      // Remove item from array if message server rejects
+      .catch((err) => {
+        if (err.statusCode === 410) {
+          console.log('Removing bad subscription from array')
+          delete subscriptions[source]
+        } else {
+          console.log('Subscription is no longer valid: ', err);
+        }
+      })
+      counter++
     }
   }
 }

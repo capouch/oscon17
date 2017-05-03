@@ -141,7 +141,7 @@ function sendSubscriptionToBackEnd(subscription) {
     if (!response.ok) {
       throw new Error('Bad status code from server.');
     }
-    console.log('Subscribe response: ' + JSON.stringify(reponse.data))
+    // console.log('Subscribe response: ' + JSON.stringify(reponse.data))
     return response.json();
   })
   .then(function(responseData) {

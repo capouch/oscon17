@@ -116,26 +116,30 @@ function unsubscribeUser() {
   });
 }
 
-// Tell server about this subscription
+// Process fresh subscription
 function updateSubscriptionOnServer(subscription) {
 // Only talk to server if we have a subscription object
 if (subscription) {
-  const subscriptionJson = document.querySelector('.show-sub');
-    let subRecord = JSON.stringify(subscription)
-    // subscriptionJson.textContent = JSON.stringify(subscription)
-    console.log("Sub: " + subRecord)
-    sendSubscriptionToBackEnd(subscription)
-    }
+  // Test sending some addition properties
+  let tagList = { tags: ["monthly", "premium"] }
+  sendSubscriptionToBackEnd(subscription, tagList)
+  }
 }
 
 // Service routine to contact our speciic server
-function sendSubscriptionToBackEnd(subscription) {
+function sendSubscriptionToBackEnd(subscription, tagList) {
+  // Convert the subscription to a simple object
+  let bodyObject = subscription.toJSON()
+  // Add tags to request object
+  bodyObject = Object.assign({}, bodyObject, tagList)
+  console.log('Body object 2: ' + JSON.stringify(bodyObject))
+
   return fetch('/save-subscription/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(subscription)
+    body: JSON.stringify(bodyObject)
   })
   .then(function(response) {
     if (!response.ok) {

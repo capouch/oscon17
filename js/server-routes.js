@@ -87,6 +87,7 @@ export default function ( router, server ) {
   router.post('/save-subscription/', function (req, res) {
     const isValidSaveRequest = (req, res) => {
       // TODO: check for complete subscription data
+      console.log('Taglist? ' + JSON.stringify(req.body.tags))
       if (!req.body || !req.body.endpoint) {
         // Not a valid subscription.
         res.status(400);
@@ -211,6 +212,7 @@ export default function ( router, server ) {
       if (typeof customMessage !== 'undefined') {
         payload = customMessage
       }
+      console.log('At sending, we have tags of: ' + JSON.stringify(subscription.tags))
       // Code to send notify; remove item if subscription has lapsed
       const pushOptions = {
         vapidDetails: {

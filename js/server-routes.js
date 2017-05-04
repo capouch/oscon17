@@ -7,6 +7,9 @@ import multer from 'multer'
 import cb from 'cb'
 import webPush from 'web-push'
 
+// Set of possible notification classes
+const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+
 // Multer handles MIME multi-part uploads
 //   Configure it for this usage instance
 // const multer = require('multer'),
@@ -77,6 +80,10 @@ export default function ( router, server ) {
   // Send a notification to one or more subscribed clients
   router.get(['/sknnzix', '/sknnzix/:msg', '/sknnzix/:type/:msg'], function(req, res) {
     messageType = req.params.type
+    console.log('Test message type 1: ' + messageType)
+    if (!notifyGroups.includes(messageType))
+      messageType = null
+    console.log('Test message type 2: ' + messageType)
     customMessage = req.params.msg
     // Let the debuggers know what's going on under the hood
     console.log('Sending notifications with ' + customMessage + ' and ' + messageType)
@@ -217,7 +224,7 @@ export default function ( router, server ) {
       }
       console.log('At sending, we have tags of: ' + JSON.stringify(subscription.tags))
       // Code to send notify; remove item if subscription has lapsed
-      if (subscription.tags.includes(messageType) || typeof messageType == 'undefined') {
+      if (subscription.tags.includes(messageType)) {
       const pushOptions = {
         vapidDetails: {
           subject: 'mailto:brianc@palaver.net',

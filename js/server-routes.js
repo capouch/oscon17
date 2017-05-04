@@ -33,8 +33,7 @@ export default function ( router, server ) {
     root: __dirname + '/../public'
    }
 
-// Actual routes
-
+   // Home and view routes
   router.get('/', function(req, res) {
     res.sendFile('index.html', options)
   })
@@ -75,6 +74,7 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
+  // Send a notification to one or more subscribed clients
   router.get(['/sknnzix', '/sknnzix/:msg', '/sknnzix/:type/:msg'], function(req, res) {
     messageType = req.params.type
     customMessage = req.params.msg
@@ -87,7 +87,6 @@ export default function ( router, server ) {
   });
 
   // Post route to accept demo push subscription
-  // For OSCON demo purposes only--NOT ROBUST!
   router.post('/save-subscription/', function (req, res) {
     const isValidSaveRequest = (req, res) => {
       // TODO: check for complete subscription data
@@ -122,7 +121,7 @@ export default function ( router, server ) {
       }));
     });
 
-    // Doesn't really save anything ATM
+    // Non-persistent save routine--refreshes with server restart
     function saveSubscriptionToDatabase(subscription, ipAddr, port) {
       console.log('In save part of routine')
       // console.log('Sub details' + JSON.stringify(subscription))
@@ -148,58 +147,58 @@ export default function ( router, server ) {
           }
           */
           // resolve(newDoc._id);
-          resolve('ABCDEFG')
+          resolve(true)
         })
       }
     })
 
   // Fetch uploaded file handled by "storage" object in multer
   // Process resulting files for later viewing
-    router.post('/uploadHandler', function(req, res) {
-      if (req.body) {
-          console.log('Req body: ' + JSON.stringify(req.body))
+  router.post('/uploadHandler', function(req, res) {
+    if (req.body) {
+        console.log('Req body: ' + JSON.stringify(req.body))
+    }
+
+    /* POST-PROCESSING ENTRY POINT */
+
+    // 1. Attempt to upload file
+    // 2. Process images
+    // 3. Pass pointers back to requesting client
+    upload(req, res, function(err) {
+      if (err) {
+        return res.end('Error uploading file')
       }
+      console.log('Uploading file: ' + req.file.filename)
 
-      /* POST-PROCESSING ENTRY POINT */
+      // Here we leverage sharp.js to rapidly process the uploaded image
+      const storedFilename = req.file.filename,
+        filePath = './uploads/' + storedFilename,
+        dziBase = './public/tiles/' + storedFilename
 
-      // 1. Attempt to upload file
-      // 2. Process images
-      // 3. Pass pointers back to requesting client
-      upload(req, res, function(err) {
-        if (err) {
-          return res.end('Error uploading file')
-        }
-        console.log('Uploading file: ' + req.file.filename)
+      // We should test for image size, etc., right here to be smarter below!
 
-        // Here we leverage sharp.js to rapidly process the uploaded image
-        const storedFilename = req.file.filename,
-          filePath = './uploads/' + storedFilename,
-          dziBase = './public/tiles/' + storedFilename
+      // Make a thumbnail 200 px wide, scaled, MUST BE JPG for lightbox
+      sharp(filePath)
+        .resize(200)
+        .jpeg()
+        .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
+          console.log(err)
+        })
 
-        // We should test for image size, etc., right here to be smarter below!
+      // This scales down larger images to cut down file size
+      //   (except currently it scales up, too . . . . )
+      sharp(filePath)
+        .resize(1000)
+        .png()
+        .toFile('./public/images/' + storedFilename + '-1k', function(err) {
+          console.log(err)
+        })
 
-        // Make a thumbnail 200 px wide, scaled, MUST BE JPG for lightbox
-        sharp(filePath)
-          .resize(200)
-          .jpeg()
-          .toFile('./public/thumbs/' + storedFilename + '-thumb', function(err) {
-            console.log(err)
-          })
-
-        // This scales down larger images to cut down file size
-        //   (except currently it scales up, too . . . . )
-        sharp(filePath)
-          .resize(1000)
-          .png()
-          .toFile('./public/images/' + storedFilename + '-1k', function(err) {
-            console.log(err)
-          })
-
-        // Generate zoomer tiles
-        sharp(filePath).tile(256)
-          .toFile(dziBase, function(err, info) {
-            console.log(err)
-          })
+      // Generate zoomer tiles
+      sharp(filePath).tile(256)
+        .toFile(dziBase, function(err, info) {
+          console.log(err)
+        })
       // Pass back name -- maybe more soon??
       res.send(JSON.stringify(storedFilename))
       //res.sendStatus(200);

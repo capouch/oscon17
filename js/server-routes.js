@@ -24,6 +24,8 @@ const storage = multer.diskStorage({
 const upload  =  multer( {storage: storage }).single('file')
 
 let savedSubscription = null,
+  messageType = null,
+  customMessage = null,
   subscriptions = []
 
 export default function ( router, server ) {
@@ -73,9 +75,11 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
-  router.get(['/sknnzix', '/sknnzix/:msg'], function(req, res) {
-    let customMessage = req.params.msg
-    console.log('Sending notifications with ' + customMessage)
+  router.get(['/sknnzix', '/sknnzix/:msg', '/sknnzix/:type/:msg'], function(req, res) {
+    messageType = req.params.type
+    customMessage = req.params.msg
+    // Let the debuggers know what's going on under the hood
+    console.log('Sending notifications with ' + customMessage + ' and ' + messageType)
     console.log(' to ' + Object.keys(subscriptions).length + ' subscribers')
     // res.sendFile('index.html', options)
     sendNotifications(customMessage);
@@ -214,6 +218,7 @@ export default function ( router, server ) {
       }
       console.log('At sending, we have tags of: ' + JSON.stringify(subscription.tags))
       // Code to send notify; remove item if subscription has lapsed
+      if (subscription.tags.includes(messageType) || typeof messageType == 'undefined') {
       const pushOptions = {
         vapidDetails: {
           subject: 'mailto:brianc@palaver.net',
@@ -236,6 +241,7 @@ export default function ( router, server ) {
           console.log('Subscription is no longer valid: ', err);
         }
       })
+    }
       counter++
     }
   }

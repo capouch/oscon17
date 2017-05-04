@@ -9,6 +9,8 @@ let pushButton = null;
 let isSubscribed = false;
 let swRegistration = null;
 
+const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+
 // Register service worker and check for push support
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('Service Worker and Push is supported');
@@ -120,8 +122,13 @@ function unsubscribeUser() {
 function updateSubscriptionOnServer(subscription) {
 // Only talk to server if we have a subscription object
 if (subscription) {
-  // Test sending some addition properties
-  let tagList = { tags: ["monthly", "premium"] }
+  // "Custom" groupings; for now just one chosen at random
+  // ["watch", "warning", "closure", "amber, "police"]
+  let value = Math.floor(Math.random() * 5)
+  console.log('Random group value: ' + value)
+  let tag = notifyGroups[value]
+  console.log('Picked tag: ' + tag)
+  let tagList = { tags: [tag] }
   sendSubscriptionToBackEnd(subscription, tagList)
   }
 }

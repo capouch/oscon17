@@ -3,14 +3,13 @@ import React from "react"
 import { Link } from "react-router-dom"
 import Select from 'react-select';
 
-// Sytles for select box
-// This breaks dramatically
-// import 'react-select/dist/react-select.css';
-
+// This variable currently not used
 const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+
+// Current values of selected notify tags
 var tagValues = ""
 
-// Select component for notify categories
+// Config for react-select component for notify categories
 var options = [
   { value: 'watch', label: 'Weather Watch' },
   { value: 'warning', label: 'Weather Warning' },
@@ -19,25 +18,23 @@ var options = [
   { value: 'police', label: 'Law Enforcement Notice' },
 ];
 
-function logChange(val) {
-  console.log("Selected: " + JSON.stringify(val));
-}
-
-// Wrap an HTML button into a component
+// Wrap an HTML button into a subscribe buttoncomponent
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
 
-const Button = React.createClass({
+const SubscribeButton = React.createClass({
   getInitialState: function() {
-
+    // Set button label appropriately (isSubscribed is global to app)
     let label = isSubscribed?'Unsubscribe':'Subscribe'
+
+    //
     let initValues = {
       label: label,
-      isSubscribed: isSubscribed
       }
     return initValues
-    },
+  },
+  // Click handler for Subscribe button
   updateBtn: function () {
     if (isSubscribed) {
       console.log('Tag values: ' + tagValues)
@@ -50,11 +47,7 @@ const Button = React.createClass({
         this.setState({label: 'Unsubscribe'})
         }
     }
-    // let text = (isSubscribed ? 'Unsubscribe':'Subscribe')
-    // console.log('Set button text to: ' + text)
-    // this.setState({label: text})
-    console.log('State: ' + JSON.stringify(this.state))
-    },
+  },
   render: function () {
     return (
       <button
@@ -65,12 +58,16 @@ const Button = React.createClass({
   }
 })
 
-// Render composite component
+// Render composite component - Select widget + Subscribe Button
 export default React.createClass ( {
   componentDidMount: function() {
-    console.log('Mount main')
-    tagValues = ""
+    if (tagValues.length > 0 ) {
+      // These are the topics currently subscribed
+      console.log('We should tell the user about tags ' + tagValues)
+      tagValues = ""
+      }
   },
+  // Configure and post react-select component
   displayName: 'MultiSelectField',
 	propTypes: {
 		label: React.PropTypes.string,
@@ -83,21 +80,19 @@ export default React.createClass ( {
 			value: [],
 		};
 	},
+  // Called for each select/deselect of a topic
 	handleSelectChange (value) {
 		this.setState({ value },function(){
       tagValues = this.state.value
       console.log('Value = ' + this.state.value + ' ' + JSON.stringify(tagValues))
     })
 	},
-	toggleDisabled (e) {
-		this.setState({ disabled: e.target.checked });
-	},
   render() {
     return (
       <div>
         <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
         <center>
-        <Button
+        <SubscribeButton
           />
         </center>
       </div>
@@ -105,6 +100,7 @@ export default React.createClass ( {
   }
 })
 
+// Service routines to handle subscription activities
 function subscribeUser() {
   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
@@ -157,10 +153,11 @@ if (subscription) {
 function sendSubscriptionToBackEnd(subscription) {
   // Convert the subscription to a simple object
   let bodyObject = subscription.toJSON()
-  // Add tags to request object
+
+  // Add selected tags to request object
   let tagList = { tags: tagValues.split(',') }
   bodyObject = Object.assign({}, bodyObject, tagList)
-  console.log('Body object 2: ' + JSON.stringify(bodyObject))
+  console.log('Body object: ' + JSON.stringify(bodyObject))
 
   return fetch('/save-subscription/', {
     method: 'POST',
@@ -183,7 +180,8 @@ function sendSubscriptionToBackEnd(subscription) {
     console.log(JSON.stringify(responseData.data))
   });
 }
-// Service routine to create Uint8 array
+
+// Service routine to create Uint8 array for subscribe
 function urlB64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)

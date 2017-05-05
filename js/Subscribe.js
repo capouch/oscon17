@@ -51,7 +51,7 @@ const SubscribeButton = React.createClass({
   render: function () {
     return (
       <button
-        className="btn btn-default"
+        className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
         style={buttonStyle}
         onClick={this.updateBtn}>{this.state.label}</button>
     )

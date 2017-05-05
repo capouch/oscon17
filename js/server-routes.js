@@ -77,10 +77,12 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
+  /* Not going to allow server loading until the async thing is figured out
   router.get('/subscribe', function(req, res) {
     console.log('Server notify chosen')
     res.sendFile('index.html', options)
   });
+ */
 
 
   // Send a notification to one or more subscribed clients

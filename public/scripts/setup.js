@@ -6,7 +6,9 @@ const applicationServerPublicKey = 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22g
 
 let pushButton = null;
 
-let isSubscribed = false;
+console.log('Setting isSubscribed to false')
+var isSubscribed = false;
+var permStatus = 'denied'
 var swRegistration = null;
 
 // Register service worker and check for push support
@@ -17,7 +19,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   .then(function(swReg) {
     console.log('Service Worker is registered', swReg);
     swRegistration = swReg
-    // initializeUI()
+    //initializeUI()
   })
   .catch(function(error) {
     console.error('Service Worker Error', error);
@@ -41,20 +43,29 @@ function initializeUI() {
   });
   */
 
+  Notification.requestPermission(function(status) {
+    permStatus = status;
+    console.log('Notification permission status:', status);
+  });
+
   // Set the initial subscription value
-  swRegistration.pushManager.getSubscription()
-  .then(function(subscription) {
-    isSubscribed = !(subscription === null);
+  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+    swRegistration.pushManager.getSubscription()
+    .then(function(subscription) {
+      console.log('Service worker got subscription')
+      isSubscribed = !(subscription === null);
+      console.log('And found it to be ' + isSubscribed)
+      })
+    })
 
     // Tell server about sub
-    updateSubscriptionOnServer(subscription);
+    // updateSubscriptionOnServer(subscription);
 
     if (isSubscribed) {
+      console.log('WTF? ' + JSON.stringify(subscription))
       console.log('User IS subscribed.');
     } else {
       console.log('User is NOT subscribed.');
-      subscribeUser()
     }
     // updateBtn();
-  });
 }

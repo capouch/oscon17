@@ -26,13 +26,20 @@ const buttonStyle = {
 const SubscribeButton = React.createClass({
   getInitialState: function() {
     // Set button label appropriately (isSubscribed is global to app)
+    console.log('Init Current state of isSubscribed: ' + isSubscribed)
     let label = isSubscribed?'Unsubscribe':'Subscribe'
 
     //
     let initValues = {
       label: label,
+      enabled: true
       }
     return initValues
+  },
+  componentDidMount: function() {
+    console.log('Mount curent state of isSubscribed: ' + isSubscribed)
+    let label = isSubscribed?'Unsubscribe':'Subscribe'
+    this.setState({label: label})
   },
   // Click handler for Subscribe button
   updateBtn: function () {
@@ -90,6 +97,7 @@ export default React.createClass ( {
   render() {
     return (
       <div>
+        <h3><center>Let's pretend to be a public service site!</center></h3>
         <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
         <center>
         <SubscribeButton
@@ -114,6 +122,7 @@ function subscribeUser() {
     // updateBtn();
   })
   .catch(function(err) {
+    // We need to disable the SubscribeButton here
     console.log('Failed to subscribe the user: ', err);
     // updateBtn();
   });

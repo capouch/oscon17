@@ -34,6 +34,7 @@
     "react-dom": "^15.4.2",
     "react-dropzone-component": "^1.0.0",
     "react-image-gallery": "^0.7.13",
+    "react-popup": "^0.7.1",
     "react-router-dom": "^4.0.0-beta.7",
     "sharp": "^0.17.0",
     "web-push": "^3.2.2"

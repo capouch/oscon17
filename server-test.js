@@ -79,10 +79,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/' + dbName)
 
 // start HTTP server
-server.listen(80)
+server.listen(8080)
 
 // Start HTTPS server
-sserver.listen(443)
+sserver.listen(4443)
 console.log(
   'Express server listening on port %d in %s mode',
   sserver.address().port, app.settings.env

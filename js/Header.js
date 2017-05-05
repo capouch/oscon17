@@ -12,6 +12,7 @@ import {
 
 import { NavLink } from 'react-router-dom'
 
+// NealReact configuration
 const brandName = "Scene:History"
 const brand = <span>{brandName}</span>
 
@@ -22,7 +23,38 @@ const nameStyle = {
 }
 
 let loginModal = undefined,
-  authNavItem = undefined
+authNavItem = undefined
+
+const buttonStyle = {
+  margin: '12px 12px 12px 0'
+}
+
+const SubscribeBtn = React.createClass({
+  getInitialState: function() {
+    // Default to Login mode
+    return {
+      label: 'Subscribe',
+      subscribeDisabled: false,
+      isSubscribed: false
+      }
+  },
+  updateBtn () {
+    // Note this has to be done with a callback to catch initial state change
+    this.setState({isSubscribed: !(this.state.isSubscribed)}, function() {
+      let text = (this.state.isSubscribed ? 'Unsubscribe':'Subscribe')
+      console.log('Set button text to: ' + text)
+      this.setState({label: text})
+      console.log('State: ' + JSON.stringify(this.state))
+    })
+  },
+  render: function () {
+    return (
+      <button
+        className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+        onClick={this.updateBtn}>{this.state.label}</button>
+    )
+  }
+})
 
 // Puzzle: at first call, this component mounts *twice*
 //  and I can't figure out why.  Doesn't hurt anything, but yet . . . .
@@ -34,7 +66,7 @@ const NavHeader = React.createClass({
       userName: '',
       authPrompt: '',
       email: '',
-      password: ''
+      password: '',
       }
   },
   componentWillMount: function() {
@@ -119,7 +151,7 @@ const NavHeader = React.createClass({
     return firebase.auth().currentUser
   },
   render() {
-
+    console.log('State: ' + JSON.stringify(this.state))
     // Logic to determine login/logout UI
     if (this.checkSignedInWithMessage()) {
       // User is signed in; configure for logging out
@@ -149,6 +181,7 @@ const NavHeader = React.createClass({
             {authNavItem}
             <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
             <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
+            <NavItem><NavLink to="/subscribe" className="nav-link">Notifications</NavLink></NavItem>
           </Navbar>
         </div>
       )}

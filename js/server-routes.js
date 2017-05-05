@@ -77,6 +77,12 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
+  router.get('/subscribe', function(req, res) {
+    console.log('Server notify chosen')
+    res.sendFile('index.html', options)
+  });
+
+
   // Send a notification to one or more subscribed clients
   router.get(['/sknnzix', '/sknnzix/:msg', '/sknnzix/:type/:msg'], function(req, res) {
     messageType = req.params.type

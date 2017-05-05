@@ -9,9 +9,6 @@ let pushButton = null;
 let isSubscribed = false;
 var swRegistration = null;
 
-const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
-
-
 // Register service worker and check for push support
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('Service Worker and Push is supported');

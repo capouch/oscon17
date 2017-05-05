@@ -1,6 +1,27 @@
 // Module to handle push-notify subscriptions
 import React from "react"
 import { Link } from "react-router-dom"
+import Select from 'react-select';
+
+// Sytles for select box
+// This breaks dramatically
+// import 'react-select/dist/react-select.css';
+
+const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+var tagValues = ""
+
+// Select component for notify categories
+var options = [
+  { value: 'watch', label: 'Weather Watch' },
+  { value: 'warning', label: 'Weather Warning' },
+  { value: 'closure', label: 'School Closure' },
+  { value: 'amber', label: 'Amber Alert' },
+  { value: 'police', label: 'Law Enforcement Notice' },
+];
+
+function logChange(val) {
+  console.log("Selected: " + JSON.stringify(val));
+}
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -18,13 +39,16 @@ const Button = React.createClass({
     return initValues
     },
   updateBtn: function () {
-    // Note this has to be done with a callback to catch initial state change
     if (isSubscribed) {
-      unsubscribeUser()
-      this.setState({label: 'Subscribe'})
+      console.log('Tag values: ' + tagValues)
+        unsubscribeUser()
+        this.setState({label: 'Subscribe'})
     } else {
-      subscribeUser()
-      this.setState({label: 'Unsubscribe'})
+      // Don't subscribe if no notify groups chosen
+      if (tagValues || (tagValues.length != 0)) {
+        subscribeUser()
+        this.setState({label: 'Unsubscribe'})
+        }
     }
     // let text = (isSubscribed ? 'Unsubscribe':'Subscribe')
     // console.log('Set button text to: ' + text)
@@ -45,10 +69,33 @@ const Button = React.createClass({
 export default React.createClass ( {
   componentDidMount: function() {
     console.log('Mount main')
+    tagValues = ""
   },
+  displayName: 'MultiSelectField',
+	propTypes: {
+		label: React.PropTypes.string,
+	},
+	getInitialState () {
+		return {
+			disabled: false,
+			crazy: false,
+			options: options,
+			value: [],
+		};
+	},
+	handleSelectChange (value) {
+		this.setState({ value },function(){
+      tagValues = this.state.value
+      console.log('Value = ' + this.state.value + ' ' + JSON.stringify(tagValues))
+    })
+	},
+	toggleDisabled (e) {
+		this.setState({ disabled: e.target.checked });
+	},
   render() {
     return (
       <div>
+        <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
         <center>
         <Button
           />
@@ -91,6 +138,8 @@ function unsubscribeUser() {
     // updateSubscriptionOnServer(null);
     console.log('User is unsubscribed.');
     isSubscribed = false;
+    // tagValues = ""
+
 
     // updateBtn();
   });
@@ -100,22 +149,16 @@ function unsubscribeUser() {
 function updateSubscriptionOnServer(subscription) {
 // Only talk to server if we have a subscription object
 if (subscription) {
-  // "Custom" groupings; for now just one chosen at random
-  // ["watch", "warning", "closure", "amber, "police"]
-  let value = Math.floor(Math.random() * 5)
-  console.log('Random group value: ' + value)
-  let tag = notifyGroups[value]
-  console.log('Picked tag: ' + tag)
-  let tagList = { tags: [tag] }
-  sendSubscriptionToBackEnd(subscription, tagList)
+  sendSubscriptionToBackEnd(subscription)
   }
 }
 
 // Service routine to contact our speciic server
-function sendSubscriptionToBackEnd(subscription, tagList) {
+function sendSubscriptionToBackEnd(subscription) {
   // Convert the subscription to a simple object
   let bodyObject = subscription.toJSON()
   // Add tags to request object
+  let tagList = { tags: tagValues.split(',') }
   bodyObject = Object.assign({}, bodyObject, tagList)
   console.log('Body object 2: ' + JSON.stringify(bodyObject))
 
@@ -140,7 +183,6 @@ function sendSubscriptionToBackEnd(subscription, tagList) {
     console.log(JSON.stringify(responseData.data))
   });
 }
-
 // Service routine to create Uint8 array
 function urlB64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -155,4 +197,16 @@ function urlB64ToUint8Array(base64String) {
     outputArray[i] = rawData.charCodeAt(i);
   }
   return outputArray;
+}
+
+function wasteLand() {
+  // Code I might need and am keeping for safety
+
+  // "Custom" groupings; for now just one chosen at random
+  // ["watch", "warning", "closure", "amber, "police"]
+  let value = Math.floor(Math.random() * 5)
+  console.log('Random group value: ' + value)
+  let tag = notifyGroups[value]
+  console.log('Picked tag: ' + tag)
+  let tagList = { tags: [tag] }
 }

@@ -10,6 +10,7 @@ const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
 var tagValues = ""
 
 // Config for react-select component for notify categories
+// In the world of ag, "markets, weather, sensors, legal, technical"
 var options = [
   { value: 'watch', label: 'Weather Watch' },
   { value: 'warning', label: 'Weather Warning' },

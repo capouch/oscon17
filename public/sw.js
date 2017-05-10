@@ -45,10 +45,13 @@ self.addEventListener('fetch', function(event) {
 
 // Copied from https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification
 self.addEventListener('push', event => {
-  let thisMessage = event.data.text()
+  let thisMessage = event.data.text(),
+    thisData = event.data
     console.log("We got this message: " + thisMessage)
     console.log('[Service Worker] Push Received.');
-    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+    console.log(`[Service Worker] Push had this data text: "${event.data.text()}"`);
+    console.log(`[Service Worker] Push had this data: "${event.data}"`);
+    console.log('[Service Worker] push full data ' + thisData)
 
     const title = 'Scene History';
     const options = {

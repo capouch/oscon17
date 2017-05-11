@@ -28,7 +28,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log('Service worker got: ' + event.request.url)
+  console.log('SW Interceptingt: ' + event.request.url)
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {

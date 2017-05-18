@@ -19,7 +19,7 @@ var urlsToCache = [
 var thisMessage = {}
 
 // Development vs. production
-var runAsDevel = false
+var runAsDevel = true
 
 self.addEventListener('install', function(event) {
   // Perform install steps
@@ -73,7 +73,10 @@ self.addEventListener('push', event => {
 
   event.notification.close();
   let targetURL = runAsDevel?'http://localhost:8080/':'https://www.scene-history.org/'
+  targetURL += thisMessage.url
+  targetURL = encodeURI(targetURL)
+  console.log('SW gonna waitUntil: ' + targetURL)
   event.waitUntil(
-    clients.openWindow(targetURL + thisMessage.url)
+    clients.openWindow(targetURL)
   )
 })

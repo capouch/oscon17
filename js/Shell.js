@@ -16,6 +16,7 @@ import Zoom from './Zoom'
 import Upload from './Upload'
 import SlideShow from './SlideShow'
 import Subscribe from './Subscribe'
+import Announce from './Announce'
 // import LoginOut from './Login.js'
 
 // Toplevel CSS
@@ -45,6 +46,7 @@ ReactDOM.render((
         <Route exact path = "/slides" component = { SlideShow } />
         <Route path = "/slides/:viewSet" component = { SlideShow } />
         <Route path = "/subscribe" component = { Subscribe } />
+        <Route path = "/announce/:topic" component = { Announce } />
       </Switch>
       <Route component = { Footer } />
     </div>

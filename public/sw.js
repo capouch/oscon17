@@ -15,6 +15,12 @@ var urlsToCache = [
   '/img/background.png'
 ];
 
+// Need this to be global to this module
+var thisMessage = {}
+
+// Development vs. production
+var runAsDevel = false
+
 self.addEventListener('install', function(event) {
   // Perform install steps
   event.waitUntil(
@@ -28,7 +34,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log('SW Interceptingt: ' + event.request.url)
+  console.log('SW Intercepting: ' + event.request.url)
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
@@ -45,30 +51,29 @@ self.addEventListener('fetch', function(event) {
 
 // Copied from https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification
 self.addEventListener('push', event => {
-  let thisMessage = event.data.text(),
-    thisData = event.data
-    console.log("We got this message: " + thisMessage)
-    console.log('[Service Worker] Push Received.');
-    console.log(`[Service Worker] Push had this data text: "${event.data.text()}"`);
-    console.log(`[Service Worker] Push had this data: "${event.data}"`);
-    console.log('[Service Worker] push full data ' + thisData)
+  thisMessage = JSON.parse(event.data.text())
 
-    const title = 'Scene History';
-    const options = {
-      body: thisMessage,
-      // icon: 'images/icon.png',
-      // badge: 'images/badge.png'
-    };
+  console.log('[Service Worker] Push Received.');
+  console.log('This message text: ' + thisMessage.text)
+  console.log('URL: ' + thisMessage.url)
+  console.log(`[Service Worker] Push had this data: "${event.data}"`);
 
-    event.waitUntil(self.registration.showNotification(title, options));
-  })
+  const title = 'Scene History';
+  const options = {
+    body: thisMessage.text,
+    // icon: 'images/icon.png',
+    // badge: 'images/badge.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+})
 
   self.addEventListener('notificationclick', function(event) {
   console.log('[Service Worker] Notification click Received.');
 
   event.notification.close();
-
+  let targetURL = runAsDevel?'http://localhost:8080/':'https://www.scene-history.org/'
   event.waitUntil(
-    clients.openWindow('https://www.scene-history.org')
+    clients.openWindow(targetURL + thisMessage.url)
   )
 })

@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 // Note: we still need to set the Dropzone knob for "only one file at a time"
 const upload  =  multer( {storage: storage }).single('file')
 
+// Module-wide variables
 let savedSubscription = null,
   messageType = null,
   customMessage = null,
@@ -76,7 +77,11 @@ export default function ( router, server ) {
     console.log('Server zoomer chosen')
     res.sendFile('index.html', options)
   });
-
+  
+  router.get('/announce*', function(req, res) {
+    console.log('Server announce chosen')
+    res.sendFile('index.html', options)
+  });
   /* Not going to allow server loading until the async thing is figured out
   router.get('/subscribe', function(req, res) {
     console.log('Server notify chosen')
@@ -84,9 +89,9 @@ export default function ( router, server ) {
   });
  */
 
-
   // Send a notification to one or more subscribed clients
   router.get(['/sknnzix', '/sknnzix/:msg', '/sknnzix/:type/:msg'], function(req, res) {
+
     messageType = req.params.type
     if (typeof messageType != 'undefined' && (!notifyGroups.includes(messageType))) {
       // console.log('Illegal type detected ' + messageType)
@@ -141,16 +146,18 @@ export default function ( router, server ) {
       console.log('In save part of routine')
       // console.log('Sub details' + JSON.stringify(subscription))
       let source = ipAddr + ':' + port
-      // Cut syntactic cruft from front of address
+      // Cut syntactic ipv6 cruft from front of address
       source = source.slice(7)
       console.log('Source: ' +  source)
-      savedSubscription = subscription
+
+      // In memory database store
+      // savedSubscription = subscription ; debug
       subscriptions[source] = subscription
+
       // Debugging time; let's log whole array
       for (let [source, subscription] of Object.entries(subscriptions)) {
           console.log("Entry: " + JSON.stringify(subscriptions[source]) + ' for ' + source)
         }
-      // sendNotification(subscription)
       return new Promise(function(resolve, reject) {
 
         // TODO: add persistence
@@ -221,17 +228,23 @@ export default function ( router, server ) {
   })
   // Service routines for push notifications
   function sendNotifications(customMessage) {
-    // Track index in case we have to delete
-    let counter = 0;
+
     // Iterate through current list of subscriptions
     for (let [source, subscription] of Object.entries(subscriptions)) {
       // console.log("Entry: " + JSON.stringify(subscriptions[source]) + ' for ' + source)
-      let payload = 'This is your generic server notification!!';
+
+      // Put together (stringified) notiication object
+
+      // First the generic response if no tag/message chosen
+      let payload = '{"text": "Generic server message", "url": ""}'
+
+      // If there is a message, then put tag and message into string JSON object
       if (typeof customMessage !== 'undefined') {
-        payload = customMessage
-      }
-      // console.log('At sending, we have tags of: ' + JSON.stringify(subscription.tags))
-      // Code to send notify; remove item if subscription has lapsed
+         payload = '{"text": "' + customMessage + '", "url": "announce/' + messageType + '"}'
+        }
+      console.log('Push payload: ' + payload)
+
+      // Code to send notify; remove item if subscription isn't valid
       if (subscription.tags.includes(messageType) || messageType == null) {
       const pushOptions = {
         vapidDetails: {
@@ -253,10 +266,10 @@ export default function ( router, server ) {
           delete subscriptions[source]
         } else {
           console.log('Subscription is no longer valid: ', err);
+          delete subscriptions[source]
         }
       })
     }
-      counter++
     }
   }
 }

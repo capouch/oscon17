@@ -19,7 +19,7 @@ var urlsToCache = [
 var thisMessage = {}
 
 // Development vs. production
-var runAsDevel = true
+var runAsDevel = false
 
 self.addEventListener('install', function(event) {
   // Perform install steps

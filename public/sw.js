@@ -18,9 +18,6 @@ var urlsToCache = [
 // Need this to be global to this module
 var thisMessage = {}
 
-// Development vs. production
-var runAsDevel = false
-
 self.addEventListener('install', function(event) {
   // Perform install steps
   event.waitUntil(
@@ -72,11 +69,19 @@ self.addEventListener('push', event => {
   console.log('[Service Worker] Notification click Received.');
 
   event.notification.close();
-  let targetURL = runAsDevel?'http://localhost:8080/':'https://www.scene-history.org/'
-  targetURL += thisMessage.url
+  targetURL = '/' + thisMessage.url
+  // Is this necessary?
   targetURL = encodeURI(targetURL)
   console.log('SW gonna waitUntil: ' + targetURL)
-  event.waitUntil(
-    clients.openWindow(targetURL)
-  )
-})
+  // event.waitUntil(
+    // clients.openWindow(targetURL)
+  var promise = new Promise(function(resolve) {
+        setTimeout(resolve, 10);
+    }).then(function() {
+        // return the promise returned by openWindow, just in case.
+        // Opening any origin only works in Chrome 43+.
+        return clients.openWindow(targetURL);
+    });
+    // Now wait for the promise to keep the permission alive.
+    event.waitUntil(promise);
+  })

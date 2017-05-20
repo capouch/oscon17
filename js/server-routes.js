@@ -77,10 +77,10 @@ export default function ( router, server ) {
     console.log('Server zoomer chosen')
     res.sendFile('index.html', options)
   });
-  
+
   router.get('/announce*', function(req, res) {
     console.log('Server announce chosen')
-    res.sendFile('index.html', options)
+    res.sendFile('announce.html', options)
   });
   /* Not going to allow server loading until the async thing is figured out
   router.get('/subscribe', function(req, res) {
@@ -240,36 +240,36 @@ export default function ( router, server ) {
 
       // If there is a message, then put tag and message into string JSON object
       if (typeof customMessage !== 'undefined') {
-         payload = '{"text": "' + customMessage + '", "url": "announce/' + messageType + '"}'
+         payload = '{"text": "' + customMessage + '", "url": "announce?topic=' + messageType + '"}'
         }
-      console.log('Push payload: ' + payload)
 
       // Code to send notify; remove item if subscription isn't valid
-      if (subscription.tags.includes(messageType) || messageType == null) {
-      const pushOptions = {
-        vapidDetails: {
-          subject: 'mailto:brianc@palaver.net',
-          publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
-          privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
-        },
-      }
-
-      webPush.sendNotification(
-        subscription,
-        payload,
-        pushOptions
-      )
-      // Remove item from array if message server rejects
-      .catch((err) => {
-        if (err.statusCode === 410) {
-          console.log('Removing bad subscription from array')
-          delete subscriptions[source]
-        } else {
-          console.log('Subscription is no longer valid: ', err);
-          delete subscriptions[source]
+        if (subscription.tags.includes(messageType) || messageType == null) {
+        console.log('Push payload: ' + payload)
+        const pushOptions = {
+          vapidDetails: {
+            subject: 'mailto:brianc@palaver.net',
+            publicKey: 'BJZhZZUqIwbwbGci_pheC3wTwNFcF5btmH7JPCFCF22gk7iJaXmrLznrtBQI_C_HtWZh9BFnwCVKfz7oVgTmaPA',
+            privateKey: 'VCtWHVxRI-MuLAYzcONx-UW38Hwi2qKK2RND_QsgvS8'
+          },
         }
-      })
-    }
+
+        webPush.sendNotification(
+          subscription,
+          payload,
+          pushOptions
+        )
+        // Remove item from array if message server rejects
+        .catch((err) => {
+          if (err.statusCode === 410) {
+            console.log('Removing bad subscription from array')
+            delete subscriptions[source]
+          } else {
+            console.log('Subscription is no longer valid: ', err);
+            delete subscriptions[source]
+          }
+        })
+      }
     }
   }
 }

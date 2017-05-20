@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <main id="announcement"/>
+    <div>
+      <h2><center>Announcement Page</center></h2>
+      <h4 style="display:inline">Placeholder for announcement details for </h4>
+      <div style="display:inline"id="message"></div>
+    </div>
+    <script>
+      var url = window.location.href; // or window.location.href for current url
+      var captured = /topic=([^&]+)/.exec(url)[1]; // Value is in [1] ('384' in our case)
+      var result = captured ? captured : 'unknown';
+      console.log('Now to get ' + result + ' onto the page!!')
+      document.getElementById("message").innerHTML = result;
+    </script>
+  </body>
+</html>

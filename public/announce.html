@@ -9,9 +9,11 @@
       <div style="display:inline"id="message"></div>
     </div>
     <script>
-      var url = window.location.href; // or window.location.href for current url
-      var captured = /topic=([^&]+)/.exec(url)[1]; // Value is in [1] ('384' in our case)
-      var result = captured ? captured : 'unknown';
+      // Extract type paramter from get URL
+      let url = window.location.href,
+        captured = /topic=([^&]+)/.exec(url)[1], // Value is in [1]
+        result = captured ? captured : 'unknown'
+      // Show we got the right topic; work to be done here!!
       console.log('Now to get ' + result + ' onto the page!!')
       document.getElementById("message").innerHTML = result;
     </script>

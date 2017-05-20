@@ -74,7 +74,7 @@ self.addEventListener('push', event => {
   targetURL = encodeURI(targetURL)
   console.log('SW gonna waitUntil: ' + targetURL)
   // event.waitUntil(
-    // clients.openWindow(targetURL)
+  // clients.openWindow(targetURL)
   var promise = new Promise(function(resolve) {
         setTimeout(resolve, 10);
     }).then(function() {

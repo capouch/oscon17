@@ -45,7 +45,7 @@ const rowDataSelector = (state, { griddleKey }) => {
 // Actually put it into the rowData object
 const enhancedWithRowData = connect((state, props) => {
   return {
-    // rowData will be available into MyCustomComponent
+    // rowData will be available into AssetLinkComponent
     rowData: rowDataSelector(state, props)
   };
 });
@@ -116,7 +116,8 @@ const InfoTable = React.createClass({
   getInitialState: function() {
     let initValues = {
       records: [],
-      fetchURL: ""
+      fetchURL: "",
+      currentPage: 0
     }
 
     // Pre-load records[] object array from sessionStorage
@@ -141,7 +142,7 @@ const InfoTable = React.createClass({
       })
     },
   componentWillUnmount: function () {
-    // Unused but reserved
+    // Need to remember which page we're on before leaving
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -176,6 +177,13 @@ const InfoTable = React.createClass({
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
+    // Functions to remember current page across mounts
+    _onNext: () => {
+      console.log('Received onNext event')
+      },
+    _onPrevious: () => {
+      console.log('Received onPrevious event')
+      },
     render: function() {
       return (
         <Section>
@@ -200,7 +208,12 @@ const InfoTable = React.createClass({
               />
           </div>
           <Griddle
-            data={this.state.records} plugins={[plugins.LocalPlugin]}>
+            data={this.state.records}
+            plugins={[plugins.LocalPlugin]}
+            events={{
+              onNext: this._onNext,
+              onPrevious: this._onPrevious,
+            }} >
             <RowDefinition>
               <ColumnDefinition id="_id" title="ID" customComponent={ EditLinkComponent } />
               <ColumnDefinition id="title" title="Title" customComponent={ enhancedWithRowData(AssetLinkComponent) }/>

@@ -25,8 +25,7 @@ import 'whatwg-fetch'
 const assetBase = '/graphql?'
 //
 // Cloud assets
-// OBSOLETE!!!!  Fix or remove!!!
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
+// const assetBase = 'http://www.scene-history.org/graphql?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 const queryBase = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"

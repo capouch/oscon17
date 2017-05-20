@@ -117,7 +117,7 @@ const InfoTable = React.createClass({
     let initValues = {
       records: [],
       fetchURL: "",
-      currentPage: 0
+      currentPage: 1,
     }
 
     // Pre-load records[] object array from sessionStorage
@@ -128,8 +128,8 @@ const InfoTable = React.createClass({
     return initValues;
   },
   componentDidMount: function() {
-    console.log('Infotable history: ' + JSON.stringify(this.props.history))
-    console.log('Infotable context: ' + JSON.stringify(this.context))
+    // console.log('Infotable history: ' + JSON.stringify(this.props.history))
+    // console.log('Infotable state: ' + JSON.stringify(this.state))
 
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
@@ -143,6 +143,7 @@ const InfoTable = React.createClass({
     },
   componentWillUnmount: function () {
     // Need to remember which page we're on before leaving
+    sessionStorage.setItem('browse', JSON.stringify(this.state))
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -178,11 +179,18 @@ const InfoTable = React.createClass({
       this.loadRecordsFromServer()
     },
     // Functions to remember current page across mounts
-    _onNext: () => {
-      console.log('Received onNext event')
+    _onNext: function() {
+      //const { currentPage } = this.state
+      let thisPage = this.state.currentPage + 1
+      this.setState( { currentPage: thisPage} , function() {
+        })
       },
-    _onPrevious: () => {
-      console.log('Received onPrevious event')
+    _onPrevious: function() {
+      //const { currentPage } = this.state
+      let thisPage = this.state.currentPage
+      // This protection shouldn't be necessary . . .
+      thisPage = (thisPage == 1)?1:--thisPage
+      this.setState( { currentPage: thisPage})
       },
     render: function() {
       return (
@@ -213,6 +221,10 @@ const InfoTable = React.createClass({
             events={{
               onNext: this._onNext,
               onPrevious: this._onPrevious,
+                }}
+            pageProperties={{
+              currentPage: this.state.currentPage,
+              pageSize: 15,
             }} >
             <RowDefinition>
               <ColumnDefinition id="_id" title="ID" customComponent={ EditLinkComponent } />
@@ -238,7 +250,7 @@ export default React.createClass ( {
    router: React.PropTypes.func.isRequired
   },
   render() {
-    console.log('Browse props entry: ' + JSON.stringify(this.props))
+    // console.log('Browse props entry: ' + JSON.stringify(this.props))
     // console.log('Browse context: ' + JSON.stringify(this.context))
     return (
       <div>

@@ -7,7 +7,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Section } from 'neal-react'
 
-import Griddle from 'griddle-react'
+import Griddle, {RowDefinition, ColumnDefinition, plugins} from 'griddle-react'
+import { connect } from 'react-redux'
 
 // CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged
@@ -30,6 +31,49 @@ const assetBase = '/graphql?'
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 const queryBase = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 
+// Until I figure out griddle-react 1.0 components
+// Thank God for https://griddlegriddle.github.io/Griddle/examples/getDataFromRowIntoCell/
+
+// Get all the data for this row
+const rowDataSelector = (state, { griddleKey }) => {
+  return state
+    .get('data')
+    .find(rowMap => rowMap.get('griddleKey') === griddleKey)
+    .toJSON();
+};
+
+// Actually put it into the rowData object
+const enhancedWithRowData = connect((state, props) => {
+  return {
+    // rowData will be available into MyCustomComponent
+    rowData: rowDataSelector(state, props)
+  };
+});
+
+// Use rowData _id in title column
+function AssetLinkComponent({ value, griddleKey, rowData }) {
+  const renderBase = "/asset/"
+  let target = rowData._id
+  let renderPath = renderBase + target;
+
+    return <NavLink to={ renderPath } >
+        { value }
+      </NavLink>
+  }
+
+// Generate pencil icon link to edit
+const EditLinkComponent = function({ value }) {
+  let target = { value }
+  const renderBase = "/edit/"
+  target = target.value
+  let renderPath = renderBase + target
+
+  // Only an icon!
+  return <NavLink to={renderPath}>
+    <span className="fa fa-pencil-square-o"></span>
+  </NavLink>
+}
+
 // Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -44,58 +88,6 @@ const Button = React.createClass({
     )
   }
 })
-
-// Compose NavLink to the Asset view for each image
-const AssetLinkComponent = React.createClass({
-
-  render: function(){
-    // Make a NavLink out of a column value
-    // Clicking brings up "Asset" view
-    const target = this.props.rowData._id,
-      renderBase = "/asset/",
-      renderPath = renderBase + target;
-
-    return <NavLink to={ renderPath } >
-        {this.props.data}
-      </NavLink>
-  }
-})
-
-// Compose NavLink to edit function
-const EditLinkComponent = React.createClass({
-
-  render: function(){
-    // Make a NavLink out of a column value
-    // The rendered object is an icon link to edit/delete data
-    const target = this.props.data,
-      renderBase = "/edit/",
-      renderPath = renderBase + target;
-
-    // Only an icon!
-    return <NavLink to={renderPath}>
-      <span className="fa fa-pencil-square-o"></span>
-    </NavLink>
-  }
-})
-
-// Configuration object for Griddle
-const customColumnMetadata = [
-  {
-    columnName: "_id",
-    displayName: "",
-    cssClassName: "editColumn",
-    customComponent: EditLinkComponent
-  },
-  {
-    "columnName": "title",
-    "displayName": "Title",
-    "customComponent": AssetLinkComponent
-  },
-  {
-    "columnName": "description",
-    "displayName": "Description"
-  }
- ]
 
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
@@ -208,12 +200,13 @@ const InfoTable = React.createClass({
               />
           </div>
           <Griddle
-            results={this.state.records}
-            columns={['_id','title', "description"]}
-            columnMetadata={customColumnMetadata}
-            showSettings={true}
-            resultsPerPage={10}
-            />
+            data={this.state.records} plugins={[plugins.LocalPlugin]}>
+            <RowDefinition>
+              <ColumnDefinition id="_id" title="ID" customComponent={ EditLinkComponent } />
+              <ColumnDefinition id="title" title="Title" customComponent={ enhancedWithRowData(AssetLinkComponent) }/>
+              <ColumnDefinition id="description" title="Description" />
+            </RowDefinition>
+          </Griddle>
         </Section>
       )}
   })

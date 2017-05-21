@@ -24,7 +24,7 @@
     "express-graphql": "^0.5.4",
     "fs": "0.0.2",
     "graphql": "^0.8.1",
-    "griddle-react": "^0.6.0",
+    "griddle-react": "^1.5.0",
     "mongoose": "^4.6.7",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",

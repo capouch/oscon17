@@ -19,20 +19,24 @@ import configRoutes from './js/server-routes'
 
 const dbName = 'wchs'
 
-//const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
-//  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org_combined.crt'),
-//  credentials = {key: privateKey, cert: certificate}
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/www.white-county-history.org/privkey.pem'),
+certificate = fs.readFileSync('/etc/letsencrypt/live/www.white-county-history.org/fullchain.pem'),
+credentials = {key: privateKey, cert: certificate}
 
 const app = express(),
   router = express.Router()
 // app.use(morgan('combined'))
-let server = http.createServer( app )
-//http.createServer(function (req, res) {
-//  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-//  res.end();
-//  }).listen(80);
 
-//const sserver = https.createServer( credentials, app )
+// We want ONLY HTTPS here for service worker
+// let server = http.createServer( app )
+
+// Redirect all HTTP requests to secure server
+http.createServer(function (req, res) {
+  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+  res.end();
+  }).listen(80);
+
+const sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images on local-hosted server
 //  The Wikipedia page is really good
@@ -67,8 +71,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/' + dbName)
 
 // start server
-server.listen(80)
-//sserver.listen(443)
+// server.listen(80)
+sserver.listen(443)
 console.log(
   'Express server listening on port %d in %s mode',
   server.address().port, app.settings.env

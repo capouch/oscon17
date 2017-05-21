@@ -73,6 +73,15 @@ const EditLinkComponent = function({ value }) {
   </NavLink>
 }
 
+// We also do not want a filter--it messes with the search function
+const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
+  <div>
+    <SettingsWrapper />
+    <Table />
+    <Pagination />
+  </div>
+)
+
 // Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -220,6 +229,9 @@ const InfoTable = React.createClass({
             events={{
               onNext: this._onNext,
               onPrevious: this._onPrevious,
+                }}
+            components={{
+              Layout: NewLayout
                 }}
             pageProperties={{
               currentPage: this.state.currentPage,

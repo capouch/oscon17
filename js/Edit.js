@@ -34,8 +34,6 @@ const EditDeleteWidget = React.createClass({
     // Extract query part only of URL (i.e. the part after the '?')
     let queryTarget = "";
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
-
-    // console.log('State at mounting: ' + JSON.stringify(this.state))
     this.loadRecordsFromServer()
   },
   onAuthStateChanged: function(user) {
@@ -70,6 +68,7 @@ const EditDeleteWidget = React.createClass({
       step : this.state.step + 1
     })
   },
+  // Now superfluous 3/4/17
   resetStep: function() {
     // See you later; when edit finishes go to Browse view
     this.context.router.push('/browse')
@@ -166,8 +165,10 @@ const EditDeleteWidget = React.createClass({
         )
       }
       case 2:
-      return <Confirmation
-        resetStep={this.resetStep} />
+      console.log('Edit resetStep ' + this.resetStep)
+      return (
+        <Confirmation resetStep={this.resetStep} />
+        )
     }
   }
 })
@@ -180,10 +181,11 @@ EditDeleteWidget.contextTypes = {
 // Render component
 export default React.createClass ( {
   render() {
-    // console.log('rendering main class')
+    // console.log('Edit props ' + JSON.stringify(this.props))
+    // console.log('Edit context ' + JSON.stringify(this.context))
     return (
       <div>
-        <EditDeleteWidget record={this.props.params.imageId}/>
+        <EditDeleteWidget record={this.props.match.params.imageId}/>
       </div>
     )
   }

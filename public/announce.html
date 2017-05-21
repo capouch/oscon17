@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <main id="announcement"/>
+    <div>
+      <h2><center>Announcement Page</center></h2>
+      <h4 style="display:inline">Announcement details for </h4>
+      <div style="display:inline"id="message"></div>
+    </div>
+    <script>
+      // Extract type paramter from get URL
+      let url = window.location.href,
+        captured = /topic=([^&]+)/.exec(url)[1], // Value is in [1]
+        result = captured ? captured : 'unknown'
+      // Show we got the right topic; work to be done here!!
+      console.log('Now to get ' + result + ' onto the page!!')
+      document.getElementById("message").innerHTML = result;
+    </script>
+  </body>
+</html>

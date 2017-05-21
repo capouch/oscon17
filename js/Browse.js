@@ -4,11 +4,11 @@
  */
 
 import React from 'react'
-import NavLink from './NavLink'
+import { NavLink } from 'react-router-dom'
 import { Section } from 'neal-react'
 
-import Griddle from 'griddle-react'
-import 'whatwg-fetch'
+import Griddle, {RowDefinition, ColumnDefinition, plugins} from 'griddle-react'
+import { connect } from 'react-redux'
 
 // CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged
@@ -25,11 +25,63 @@ import 'whatwg-fetch'
 const assetBase = '/graphql?'
 //
 // Cloud assets
-// OBSOLETE!!!!  Fix or remove!!!
-// const assetBase = 'http://oscon.saintjoe-cs.org:2016/graphql?'
+// const assetBase = 'http://www.scene-history.org/graphql?'
 
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 const queryBase = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
+
+// Working to figure out griddle-react 1.0 components
+// Thank God for https://griddlegriddle.github.io/Griddle/examples/getDataFromRowIntoCell/
+
+// Get all the data for this row
+const rowDataSelector = (state, { griddleKey }) => {
+  return state
+    .get('data')
+    .find(rowMap => rowMap.get('griddleKey') === griddleKey)
+    .toJSON();
+};
+
+// Actually put it into the rowData object
+const enhancedWithRowData = connect((state, props) => {
+  return {
+    // rowData will be available into AssetLinkComponent
+    rowData: rowDataSelector(state, props)
+  };
+});
+
+// Use rowData _id in title column
+function AssetLinkComponent({ value, griddleKey, rowData }) {
+  const renderBase = "/asset/"
+  let target = rowData._id
+  let renderPath = renderBase + target;
+
+    return <NavLink to={ renderPath } >
+        { value }
+      </NavLink>
+  }
+
+// Generate pencil icon link to edit
+const EditLinkComponent = function({ value }) {
+  let target = { value }
+  const renderBase = "/edit/"
+  target = target.value
+  let renderPath = renderBase + target
+
+  // Only an icon!
+  return <NavLink to={renderPath}>
+    <span className="fa fa-pencil-square-o"></span>
+  </NavLink>
+}
+
+// We also do not want a filter--it messes with the search function
+const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
+  <div>
+    <SettingsWrapper />
+    <Table />
+    <Pagination />
+  </div>
+)
+/* ** End of Griddle-related code ** */
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -46,62 +98,10 @@ const Button = React.createClass({
   }
 })
 
-// Compose NavLink to the zoomer view for each image
-const ZoomLinkComponent = React.createClass({
-
-  render: function(){
-    // Make a NavLink out of a column value
-    // Clicking brings up "Asset" view
-    const target = this.props.rowData._id,
-      renderBase = "asset/",
-      renderPath = renderBase + target;
-
-    return <NavLink to={ renderPath }>
-      {this.props.data}
-    </NavLink>
-  }
-})
-
-// Compose NavLink to edit function
-const EditLinkComponent = React.createClass({
-
-  render: function(){
-    // Make a NavLink out of a column value
-    // The rendered object is an icon link to edit/delete data
-    const target = this.props.data,
-      renderBase = "edit/",
-      renderPath = renderBase + target;
-
-    // Only an icon!
-    return <NavLink to={renderPath}>
-      <span className="fa fa-pencil-square-o"></span>
-    </NavLink>
-  }
-})
-
-// Configuration object for Griddle
-const customColumnMetadata = [
-  {
-    columnName: "_id",
-    displayName: "",
-    cssClassName: "editColumn",
-    customComponent: EditLinkComponent
-  },
-  {
-    "columnName": "title",
-    "displayName": "Title",
-    "customComponent": ZoomLinkComponent
-  },
-  {
-    "columnName": "description",
-    "displayName": "Description"
-  }
- ]
-
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({
   loadRecordsFromServer: function() {
-    // console.log('Fetching ' + URL)
+    console.log('Browse: fetching ' + URL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
     // Use fetch API; -==> this needs a polyfill in iOS
@@ -125,7 +125,8 @@ const InfoTable = React.createClass({
   getInitialState: function() {
     let initValues = {
       records: [],
-      fetchURL: ""
+      fetchURL: "",
+      currentPage: 1,
     }
 
     // Pre-load records[] object array from sessionStorage
@@ -136,7 +137,8 @@ const InfoTable = React.createClass({
     return initValues;
   },
   componentDidMount: function() {
-    // console.log('Mounting event')
+    // console.log('Infotable history: ' + JSON.stringify(this.props.history))
+    // console.log('Infotable state: ' + JSON.stringify(this.state))
 
     // Extract query part only of URL (i.e. the part after the '?')
     queryTarget = this.state.fetchURL.substring(this.state.fetchURL.indexOf('?')+1)
@@ -149,7 +151,8 @@ const InfoTable = React.createClass({
       })
     },
   componentWillUnmount: function () {
-    // Unused but reserved
+    // Need to remember which page we're on before leaving
+    sessionStorage.setItem('browse', JSON.stringify(this.state))
   },
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
@@ -174,7 +177,8 @@ const InfoTable = React.createClass({
     },
     // This is the very heavy moment we switch to a new view
     handleCustomSlideshowClick() {
-      this.context.router.push('/slides/' + queryTarget)
+      this.props.history.push('/slides/' + queryTarget)
+      // this.context.router.push('/slides/' + queryTarget)
     },
     clearStore() {
       // console.log('Handling reset click')
@@ -183,6 +187,17 @@ const InfoTable = React.createClass({
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
     },
+    // Functions to remember current page across mounts
+    _onNext: function() {
+      let thisPage = this.state.currentPage + 1
+      this.setState( { currentPage: thisPage} )
+      },
+    _onPrevious: function() {
+      let thisPage = this.state.currentPage
+      // This protection shouldn't be necessary . . .
+      thisPage = (thisPage == 1)?1:--thisPage
+      this.setState( { currentPage: thisPage})
+      },
     render: function() {
       return (
         <Section>
@@ -207,12 +222,25 @@ const InfoTable = React.createClass({
               />
           </div>
           <Griddle
-            results={this.state.records}
-            columns={['_id','title', "description"]}
-            columnMetadata={customColumnMetadata}
-            showSettings={true}
-            resultsPerPage={10}
-            />
+            data={this.state.records}
+            plugins={[plugins.LocalPlugin]}
+            events={{
+              onNext: this._onNext,
+              onPrevious: this._onPrevious,
+                }}
+            components={{
+              Layout: NewLayout
+                }}
+            pageProperties={{
+              currentPage: this.state.currentPage,
+              pageSize: 15,
+            }} >
+            <RowDefinition>
+              <ColumnDefinition id="_id" title="*" customComponent={ EditLinkComponent } />
+              <ColumnDefinition id="title" title="Title" customComponent={ enhancedWithRowData(AssetLinkComponent) }/>
+              <ColumnDefinition id="description" title="Description" />
+            </RowDefinition>
+          </Griddle>
         </Section>
       )}
   })
@@ -227,10 +255,16 @@ InfoTable.contextTypes = {
 
 // Render composite component
 export default React.createClass ( {
+  contextTypes: {
+   router: React.PropTypes.func.isRequired
+  },
   render() {
+    // console.log('Browse props entry: ' + JSON.stringify(this.props))
+    // console.log('Browse context: ' + JSON.stringify(this.context))
     return (
       <div>
         <InfoTable
+          history = { this.props.history }
           url={ assetBase + queryBase }
           />
       </div>

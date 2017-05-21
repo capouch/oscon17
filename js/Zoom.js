@@ -57,10 +57,11 @@ export default class UniqueNewYork extends React.Component {
     // This module has two routes, and thus two entry points
     // The default case, i.e. Zoomer with no parameters
     let sendParms = "../tiles/bremer"
+    // console.log("Zoomer props: ", JSON.stringify(this.props))
 
     // This fires when properties are sent explictly
-    if ( this.props.params.imageId ) {
-      sendParms = '../tiles/' + this.props.params.imageId
+    if ( this.props.match.params.imageId ) {
+      sendParms = '../tiles/' + this.props.match.params.imageId
       // console.log('Going after: ' + sendParms)
       }
     return (

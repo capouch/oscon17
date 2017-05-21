@@ -7,17 +7,12 @@ import { App } from "neal-react"
 import Header from './Header'
 import Footer from './Footer'
 
-import { browserHistory } from "react-router/es"
-
 export default class extends React.Component {
   render() {
     return (
       <div>
         <Header />
-        <App
-          history={ browserHistory }>
-          { this.props.children }
-        </App>
+        <App />
         <Footer />
       </div>
     )

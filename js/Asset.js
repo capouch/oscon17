@@ -5,16 +5,14 @@
 import React from 'react'
 import { Section } from 'neal-react'
 
-// For "goto" purposes
-import { browserHistory } from 'react-router/es'
-
 export default React.createClass ( {
 
   imageClick(event) {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
-
-    browserHistory.push('/zoomer/' + this.state.displayFields.filename)
+    // console.log("Asset props: ", JSON.stringify(this.props))
+    this.props.history.push('/zoomer/' + this.state.displayFields.filename)
+    console.log('Asset eraseme!!')
   },
 
   getInitialState: function() {
@@ -30,7 +28,8 @@ export default React.createClass ( {
   },
   componentWillMount: function() {
     // Set up various fields for display
-    const record = this.props.params.imageId,
+    console.log('Asset: ', JSON.stringify(this.props))
+    const record = this.props.match.params.imageId,
       desiredRecord = this.state.records.find(function (d){
         return d._id == record
       }),

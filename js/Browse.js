@@ -35,6 +35,7 @@ const queryBase = "query=query+{imageRecs{_id, title, filename, description, sou
 
 // Get all the data for this row
 const rowDataSelector = (state, { griddleKey }) => {
+  console.log('Griddle key: ' + JSON.stringify(griddleKey))
   return state
     .get('data')
     .find(rowMap => rowMap.get('griddleKey') === griddleKey)
@@ -81,6 +82,7 @@ const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
     <Pagination />
   </div>
 )
+/* ** End of Griddle-related code ** */
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -188,13 +190,10 @@ const InfoTable = React.createClass({
     },
     // Functions to remember current page across mounts
     _onNext: function() {
-      //const { currentPage } = this.state
       let thisPage = this.state.currentPage + 1
-      this.setState( { currentPage: thisPage} , function() {
-        })
+      this.setState( { currentPage: thisPage} )
       },
     _onPrevious: function() {
-      //const { currentPage } = this.state
       let thisPage = this.state.currentPage
       // This protection shouldn't be necessary . . .
       thisPage = (thisPage == 1)?1:--thisPage
@@ -238,7 +237,7 @@ const InfoTable = React.createClass({
               pageSize: 15,
             }} >
             <RowDefinition>
-              <ColumnDefinition id="_id" title="ID" customComponent={ EditLinkComponent } />
+              <ColumnDefinition id="_id" title="Edit " customComponent={ EditLinkComponent } />
               <ColumnDefinition id="title" title="Title" customComponent={ enhancedWithRowData(AssetLinkComponent) }/>
               <ColumnDefinition id="description" title="Description" />
             </RowDefinition>

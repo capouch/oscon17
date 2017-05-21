@@ -35,7 +35,6 @@ const queryBase = "query=query+{imageRecs{_id, title, filename, description, sou
 
 // Get all the data for this row
 const rowDataSelector = (state, { griddleKey }) => {
-  console.log('Griddle key: ' + JSON.stringify(griddleKey))
   return state
     .get('data')
     .find(rowMap => rowMap.get('griddleKey') === griddleKey)
@@ -237,7 +236,7 @@ const InfoTable = React.createClass({
               pageSize: 15,
             }} >
             <RowDefinition>
-              <ColumnDefinition id="_id" title="" customComponent={ EditLinkComponent } />
+              <ColumnDefinition id="_id" title="*" customComponent={ EditLinkComponent } />
               <ColumnDefinition id="title" title="Title" customComponent={ enhancedWithRowData(AssetLinkComponent) }/>
               <ColumnDefinition id="description" title="Description" />
             </RowDefinition>

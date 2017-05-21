@@ -56,7 +56,7 @@ app.use('/graphql' ,graphqlHTTP({
 }));
 
 // Generic routers
-configRoutes(router, server)
+configRoutes(router, sserver)
 app.use('/', router)
 
 // Set up path

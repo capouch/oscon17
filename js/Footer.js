@@ -8,16 +8,17 @@ import {
 } from "neal-react"
 
 // We appropriate slightly inappropriate names from neal-react sample app
-const brandName = "Scene:History"
+const brandName = "WCHS"
 const brand = <span>{brandName}</span>
 
 const businessAddress = (
   <address>
     <strong>{brandName}</strong><br/>
-    Palaver Consulting<br/>
-    8979 N. Lowes Road<br />
-    Monon IN 47959<br/>
-    +1 (219) 253-8181
+    White County Historical Society<br/>
+    101 South Bluff St.<br />
+    Monticello, IN 47960<br/>
+    +1 (574) 583-3998<br />
+    <a href="mailto:museum@lightstreamin.com">Email us!</a><br />
   </address>
 )
 
@@ -25,8 +26,7 @@ const NavFooter = React.createClass({
   render() {
     return (
       <Footer brandName={brandName}
-        facebookUrl="http://www.facebook.com/brian.capouch"
-        githubUrl="https://github.com/capouch"
+        facebookUrl="http://www.facebook.com/White-County-Indiana-Historical-Society-112322192144341/"
         address={businessAddress}>
       </Footer>
       )

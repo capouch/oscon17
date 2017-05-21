@@ -98,7 +98,7 @@ export default React.createClass ( {
   render() {
     return (
       <div>
-        <h3><center>Subscribe to event notifications</center></h3>
+        <h3><center>Choose to receive event notifications below</center></h3>
         <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
         <center>
         <SubscribeButton

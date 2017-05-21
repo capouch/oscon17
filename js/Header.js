@@ -12,8 +12,7 @@ import {
 
 import { NavLink } from 'react-router-dom'
 
-// NealReact configuration
-const brandName = "Scene:History"
+const brandName = "White County Historical Society"
 const brand = <span>{brandName}</span>
 
 // Currently not used due to change in login method
@@ -179,9 +178,17 @@ const NavHeader = React.createClass({
           <Navbar brand={brand}>
             <NavItem><NavLink to="/home" className="nav-link">Home</NavLink></NavItem>
             {authNavItem}
-            <NavItem><NavLink to="/browse" className="nav-link">Browse</NavLink></NavItem>
-            <NavItem><NavLink to="/upload" className="nav-link">Upload</NavLink></NavItem>
-            <NavItem><NavLink to="/subscribe" className="nav-link">Notifications</NavLink></NavItem>
+            <NavItem><NavLink to="/history" className="nav-link">History</NavLink></NavItem>
+            <NavItem><NavLink to="/newsletter" className="nav-link">Articles</NavLink></NavItem>
+            <NavItem><NavLink to="/subscribe" className="nav-link">Notices</NavLink></NavItem>
+            <NavItem dropdown={true}>
+              <DropdownToggle>Image Galleries</DropdownToggle>
+              <DropdownMenu>
+                <NavLink to="" className="nav-link"></NavLink>
+                <NavLink to="/browse" className="nav-link">Browse</NavLink>
+                <NavLink to="/upload" className="nav-link">Upload</NavLink>
+              </DropdownMenu>
+            </NavItem>
           </Navbar>
         </div>
       )}

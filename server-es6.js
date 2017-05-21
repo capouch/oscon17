@@ -17,29 +17,25 @@ import mySchema from './graphql'
 // Set server-side routes
 import configRoutes from './js/server-routes'
 
-const dbName = 'oscon-test'
+const dbName = 'wchs'
 
-const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
-  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org_combined.crt'),
-  credentials = {key: privateKey, cert: certificate}
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/www.white-county-history.org/privkey.pem'),
+certificate = fs.readFileSync('/etc/letsencrypt/live/www.white-county-history.org/fullchain.pem'),
+credentials = {key: privateKey, cert: certificate}
 
 const app = express(),
   router = express.Router()
-
-// Comment this out to quell logging
 // app.use(morgan('combined'))
 
-// No non-SSL service in this configuration
-// server = http.createServer( app ),
+// We want ONLY HTTPS here for service worker
+// let server = http.createServer( app )
 
-// Redirect all HTTP requests to secure site version
-
+// Redirect all HTTP requests to secure server
 http.createServer(function (req, res) {
   res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
   res.end();
   }).listen(80);
 
-// Note that at present this only works for www.scene-history_org
 const sserver = https.createServer( credentials, app )
 
 // CORS allows us to fetch images on local-hosted server
@@ -74,7 +70,8 @@ mongoose.Promise = global.Promise;
 // Connect to mongo database
 mongoose.connect('mongodb://localhost/' + dbName)
 
-// Start HTTPS server
+// start server
+// server.listen(80)
 sserver.listen(443)
 console.log(
   'Express server listening on port %d in %s mode',

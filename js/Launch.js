@@ -21,70 +21,64 @@ import {
   TeamMember,
 } from "neal-react"
 
-const sampleCode =
-` self.addEventListener('fetch', function(event) {
-  console.log('Service worker up: ' + event.request.url)
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          console.log('Returning cached value for: ' + event.request.url)
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
+const html =
+`
+<p>
+Mission Statement: To appreciate and encourage the connection of the past to
+the future by collecting and preserving the history of White County, Indiana.
+<p>
+White County Historical Society is a not-for-profit Society established to bring
+together those who share a common interest in White County Indiana's history.
+The Society has a Museum that has many displays recently reworked for public
+viewing and a variety of programs for our community.  Our new remodel building
+interior provides the public an opportunity to research and to share their
+research with others.  The current WC Genealogy Society is housed on the main
+floor.  Between the two societies there are many historical files available for
+your research needs.  We also have research services available.
 `
 
 export default (props) => {
   return (
     <Page>
-      <Hero backgroundImage="img/background.png"
+
+      <Hero backgroundImage="img/background.jpg"
         className="text-xs-center">
-        <h1 className="display-4">Scene:History </h1>
-        <p className="lead">Archiving and Presenting Historical Images</p>
-        <p>
-          <a href="https://github.com/capouch/oscon16" target="_blank" className="btn btn-white">
-            Get it on github
-          </a>
-        </p>
+        <h1 className="display-4">White County Historical Society </h1>
+        <p className="lead">Collect, Preserve, Protect the History of White County, Indiana</p>
       </Hero>
 
-      <Section className="nopad-bottom" heading="Sample JavaScript code from project">
-        <Code lang="jsx" block>{sampleCode}</Code>
+      <Section className="nopad-bottom" heading="About the society">
+        <div dangerouslySetInnerHTML={ {__html: html} } />
       </Section>
 
       <Section>
         <HorizontalSplit padding="md">
           <div>
-            <p className="lead">Shell executive</p>
-            <p>The initial page load brings in a shell program, written in JavaScript, which then manages the client/UI.</p>
+            <p className="lead">&#8226; Maintaining historical source material</p>
+            <p>The society operates a museum featuring many colllections</p>
           </div>
           <div>
-            <p className="lead">Modern Tools</p>
-            <p>Code is written ES6 via Babel, React front end, GraphQL queries and mutations, to a local or remote MongoDB backend.
+            <p className="lead">&#8226; Providing research facilities</p>
+            <p>Our reading room contains many historical reference works.
               </p>
           </div>
           <div>
-            <p className="lead">Views instead of pages</p>
-            <p>React components play nicely with one another, and wrappers exist for many useful tools.</p>
+            <p className="lead">&#8226; Publications</p>
+            <p>The society has published over XX original works of historical interest.</p>
           </div>
         </HorizontalSplit>
       </Section>
 
       <Section>
         <CustomerQuotes>
-          <CustomerQuote name="Danilo Zekovic" imageUrl="img/people/daniloOSCON.jpg">
-            <p>The world is changing, and our job is to keep up with it. Developing SPAs is just one small step in that direction</p>
+          <CustomerQuote name="Col. Isaac White" imageUrl="img/people/white.jpg">
+            <p>White County is named after Colonel Isaac White</p>
           </CustomerQuote>
-          <CustomerQuote name="Brian Capouch" imageUrl="img/people/bcOSCON.jpg">
-            <p>The essence of the SPA is that the strictly genericized browser engine will become the standard virtual application container: on the web, on mobile devices, and on the desktop.</p>
+          <CustomerQuote name="Research" imageUrl="img/people/research.jpg">
+            <p>The WCHS does more than house its history.  Our members participate in current projects and related issues.</p>
           </CustomerQuote>
-          <CustomerQuote name="Ben Davisson" imageUrl="img/people/benOSCON.jpg">
-            <p>Live your life like a 'while' loop.  Set a goal and accomplish it...or break the system to do so!</p>
+          <CustomerQuote name="North Star Book" imageUrl="img/people/northStar.jpg">
+            <p>A true story from the individual journals of Dr. Henry W. Greist, his wife Mollie, who is a trained surgical nurse, and their young son David to tell of the remarkable experiences of this family during the 1920s and 30s at the furthest point north in Alaska.</p>
           </CustomerQuote>
         </CustomerQuotes>
       </Section>

@@ -58,6 +58,11 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
+  router.get('/history', function(req, res) {
+    console.log('Server history chosen')
+    res.sendFile('index.html', options)
+  })
+
   router.get('/slides*', function(req, res) {
     console.log('Server slides chosen')
     res.sendFile('index.html', options)
@@ -78,16 +83,23 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   });
 
-  router.get('/announce*', function(req, res) {
-    console.log('Server announce chosen')
-    res.sendFile('announce.html', options)
-  });
-  /* Not going to allow server loading until the async thing is figured out
-  router.get('/subscribe', function(req, res) {
-    console.log('Server notify chosen')
+  router.get('/newsletter', function(req, res) {
+    console.log('Server newsletter chosen')
     res.sendFile('index.html', options)
   });
- */
+
+  router.get('/announce*', function(req, res) {
+   console.log('Server announce chosen')
+   res.sendFile('announce.html', options)
+ });
+
+ /* Not going to allow server loading until the async thing is figured out
+ router.get('/subscribe', function(req, res) {
+   console.log('Server notify chosen')
+   res.sendFile('index.html', options)
+ });
+*/
+
 
   // Send a notification to one or more subscribed clients
   router.get(['/sknnzix', '/sknnzix/:msg', '/sknnzix/:type/:msg'], function(req, res) {

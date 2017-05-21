@@ -12,7 +12,7 @@ var urlsToCache = [
   'libs/firebase.js',
   'libs/firebase-app.js',
   'libs/firebase-auth.js',
-  '/img/background.png'
+  '/img/background.jpg'
 ];
 
 // Need this to be global to this module

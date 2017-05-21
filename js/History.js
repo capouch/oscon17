@@ -1,8 +1,7 @@
 
 import React from 'react'
-import { render } from 'react-dom'
+// import { render } from 'react-dom'
 
-import NavLink from './NavLink'
 import { Section } from 'neal-react'
 
 

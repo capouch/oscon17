@@ -40,7 +40,7 @@ ReactDOM.render((
         <Route exact path = '/' component = { Home } />
         <Route exact path = '/index.html' component = { Home } />
         <Route path = "/home" component = { Home } />
-        <Route path = "history" component = { History } />
+        <Route path = "/history" component = { History } />
         <Route path = "/browse" component = { Browse } />
         <Route path = "/edit/:imageId" component = { Edit } />
         <Route path = "/zoomer/:imageId" component = { Zoom } />
@@ -48,7 +48,7 @@ ReactDOM.render((
         <Route path = "/upload" component = { Upload } />
         <Route exact path = "/slides" component = { SlideShow } />
         <Route path = "/slides/:viewSet" component = { SlideShow } />
-        <Route path = "newsletter" component = { PDFViewer } />
+        <Route path = "/newsletter" component = { PDFViewer } />
         <Route path = "/subscribe" component = { Subscribe } />
         <Route path = "/announce/:topic" component = { Announce } />
       </Switch>

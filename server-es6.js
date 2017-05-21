@@ -75,5 +75,5 @@ mongoose.connect('mongodb://localhost/' + dbName)
 sserver.listen(443)
 console.log(
   'Express server listening on port %d in %s mode',
-  server.address().port, app.settings.env
+  sserver.address().port, app.settings.env
 )

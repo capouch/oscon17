@@ -30,7 +30,7 @@ const assetBase = '/graphql?'
 let queryTarget = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 const queryBase = "query=query+{imageRecs{_id, title, filename, description, source, taglist}}"
 
-// Until I figure out griddle-react 1.0 components
+// Working to figure out griddle-react 1.0 components
 // Thank God for https://griddlegriddle.github.io/Griddle/examples/getDataFromRowIntoCell/
 
 // Get all the data for this row

@@ -7,21 +7,12 @@ var urlsToCache = [
   '/css/font-awesome.min.css',
   '/js/vendor.bundle.js',
   '/js/bundle.js',
-<<<<<<< HEAD
-  'libs/bootstrap-4.0.0-alpha5.min.js',
-  'libs/jquery-3.1.1.min.js',
-  'libs/firebase-3.1.0.js',
-  'libs/firebase-app-3.1.0.js',
-  'libs/firebase-auth-3.1.0.js',
-  '/img/background.jpg'
-=======
   'libs/bootstrap.min.js',
   'libs/jquery.min.js',
   'libs/firebase.js',
   'libs/firebase-app.js',
   'libs/firebase-auth.js',
   '/img/background.png'
->>>>>>> master
 ];
 
 // Need this to be global to this module

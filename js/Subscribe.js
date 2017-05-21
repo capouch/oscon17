@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import Select from 'react-select';
 
 // This variable currently not used
-const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+const notifyGroups = ["image", "news", "publish", "program", "meeting"]
 
 // Current values of selected notify tags
 var tagValues = ""
@@ -12,11 +12,11 @@ var tagValues = ""
 // Config for react-select component for notify categories
 // In the world of ag, "markets, weather, sensors, legal, technical"
 var options = [
-  { value: 'watch', label: 'Weather Watch' },
-  { value: 'warning', label: 'Weather Warning' },
-  { value: 'closure', label: 'School Closure' },
-  { value: 'amber', label: 'Amber Alert' },
-  { value: 'police', label: 'Law Enforcement Notice' },
+  { value: 'image', label: 'New Images' },
+  { value: 'news', label: 'Newsletter' },
+  { value: 'publish', label: 'Publication Available' },
+  { value: 'program', label: 'Program Announcement' },
+  { value: 'meeting', label: 'Board Meeting' },
 ];
 
 // Wrap an HTML button into a subscribe buttoncomponent
@@ -98,7 +98,7 @@ export default React.createClass ( {
   render() {
     return (
       <div>
-        <h3><center>Let's pretend to be a public service site!</center></h3>
+        <h3><center>Subscribe to event notifications</center></h3>
         <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
         <center>
         <SubscribeButton

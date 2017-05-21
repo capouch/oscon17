@@ -237,7 +237,7 @@ const InfoTable = React.createClass({
               pageSize: 15,
             }} >
             <RowDefinition>
-              <ColumnDefinition id="_id" title="Edit " customComponent={ EditLinkComponent } />
+              <ColumnDefinition id="_id" title="" customComponent={ EditLinkComponent } />
               <ColumnDefinition id="title" title="Title" customComponent={ enhancedWithRowData(AssetLinkComponent) }/>
               <ColumnDefinition id="description" title="Description" />
             </RowDefinition>

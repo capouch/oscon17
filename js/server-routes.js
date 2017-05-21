@@ -8,7 +8,7 @@ import cb from 'cb'
 import webPush from 'web-push'
 
 // Set of possible notification classes
-const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+const notifyGroups = ["image", "news", "publish", "program", "meeting"]
 
 // Multer handles MIME multi-part uploads
 //   Configure it for this usage instance

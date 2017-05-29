@@ -48,6 +48,7 @@ self.addEventListener('fetch', function(event) {
 
 // Copied from https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification
 self.addEventListener('push', event => {
+  // Note this is global b/c it's needed by the noticationClick handler below
   thisMessage = JSON.parse(event.data.text())
 
   console.log('[Service Worker] Push Received.');

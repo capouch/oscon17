@@ -34,21 +34,21 @@ module.exports = {
   },
 },
   module: {
-    loaders: [
-      {
-        exclude: {
-          // web-push is an ES6, so has to be run through babel
-          test   : path.resolve(__dirname, "node_modules"),
-          exclude: path.resolve(__dirname, "node_modules/web-push"),
+      rules: [
+        {
+          exclude: {
+            // web-push is an ES6, so has to be run through babel
+            test   : path.resolve(__dirname, "node_modules"),
+            exclude: path.resolve(__dirname, "node_modules/web-push"),
+          },
+          test: /\.jsx?|\.js$/,
+          loader: 'babel-loader',
         },
-        test: /\.jsx?|\.js$/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.scss$/,
-        loader: ["style", "css", "sass"]
-      }
-    ]
+        {
+          test: /\.scss$/,
+          loader: ["style", "css", "sass"]
+        }
+      ]
   },
   plugins:
   [
@@ -58,18 +58,17 @@ module.exports = {
       filename: 'vendor.bundle.js'
     }),
   new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
+    options: {
+       context: __dirname,
+       minimize: true,
+       debug: false
+     }
     }),
   new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: false
-    }),
+    output: {
+      comments: false
+    }
+  }),
   new StatsWriterPlugin({
       fields:null,
       filename: "stats.json" // Default

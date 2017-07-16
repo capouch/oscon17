@@ -22,7 +22,7 @@ const renderImage = function(selection) {
 
   const baseName = assetBase + selection + '.dzi'
   // console.log('In the renderImage method about to render ' + baseName)
-  const viewer = OpenSeadragon({
+  const viewer = OpenSeaDragon({
     id: "zoomer-view",
     prefixUrl: "/img-icons/",
     tileSources: baseName

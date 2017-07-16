@@ -161,6 +161,7 @@ const NavHeader = React.createClass({
     } else {
       // Set modal and menu for login
       console.log('About to render login view')
+      // SingupModal uses now-deprecated modal dialog window; needs replaced
       loginModal =
       <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
         <div>

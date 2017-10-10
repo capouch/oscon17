@@ -11,8 +11,8 @@ import { Section } from "neal-react"
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
-const Button = React.createClass({
-  render: function () {
+class Button extends React.Component {
+  render() {
     return (
       <input
         type="image"
@@ -22,15 +22,16 @@ const Button = React.createClass({
         onClick={this.props.handleClick}></input>
     )
   }
-})
+}
 
-export default React.createClass ( {
-  getInitialState: function() {
+export default class extends React.Component {
+  getInitialState() {
     return {
       isLoggedIn: false,
       }
-  },
-  componentWillMount: function() {
+  }
+
+  componentWillMount() {
     // This callback seems to confuse react after the first time it's called
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
    },
@@ -43,12 +44,14 @@ export default React.createClass ( {
       this.setState( { isLoggedIn: false})
       console.log('User is logged out')
     }
-  },
-  googleSignIn: function() {
+  }
+
+  googleSignIn() {
   // Sign in Firebase using popup auth and Google as the identity provider.
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider);
-  },
-  fbSignIn: function () {
+  }
+
+  fbSignIn() {
     firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(function(result) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       var token = result.credential.accessToken;
@@ -65,7 +68,8 @@ export default React.createClass ( {
       console.log("Facebook failure: " + errorMessage + 'and ' + email)
       // ...
     });
-  },
+  }
+
   /* Code below will need to be used to resolve Firebase's only one email deal
   // In other words, this is documentation for a future work session
   auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch(function(error) {
@@ -121,12 +125,13 @@ export default React.createClass ( {
   }
 });
 */
-  signOut:  function() {
+  signOut() {
   // Sign out of Firebase.
     firebase.auth().signOut();
-  },
+  }
+
   // Returns true if user is signed-in. Otherwise false and displays a message.
-  checkSignedInWithMessage: function() {
+  checkSignedInWithMessage() {
     // Return true if the user is signed in Firebase
     if (firebase.auth().currentUser) {
       return true;
@@ -140,8 +145,9 @@ export default React.createClass ( {
     };
     // this.signInSnackbar.MaterialSnackbar.showSnackbar(data);
     return false
-  },
-  render: function() {
+  }
+
+  render() {
     if (this.checkSignedInWithMessage())
        return (
          <Section>
@@ -170,4 +176,4 @@ export default React.createClass ( {
         </Section>
       )
     }
-  })
+  }

@@ -1,5 +1,6 @@
 // Module to handle push-notify subscriptions
 import React from "react"
+import { PropTypes } from "prop-types"
 import { Link } from "react-router-dom"
 import Select from 'react-select';
 
@@ -24,8 +25,8 @@ const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
 
-const SubscribeButton = React.createClass({
-  getInitialState: function() {
+class SubscribeButton extends React.Component {
+  getInitialState() {
     // Set button label appropriately (isSubscribed is global to app)
     console.log('Init Current state of isSubscribed: ' + isSubscribed)
     let label = isSubscribed?'Unsubscribe':'Subscribe'
@@ -36,14 +37,16 @@ const SubscribeButton = React.createClass({
       enabled: true
       }
     return initValues
-  },
-  componentDidMount: function() {
+  }
+
+  componentDidMount() {
     console.log('Mount curent state of isSubscribed: ' + isSubscribed)
     let label = isSubscribed?'Unsubscribe':'Subscribe'
     this.setState({label: label})
-  },
+  }
+
   // Click handler for Subscribe button
-  updateBtn: function () {
+  updateBtn() {
     if (isSubscribed) {
       console.log('Tag values: ' + tagValues)
         unsubscribeUser()
@@ -55,8 +58,9 @@ const SubscribeButton = React.createClass({
         this.setState({label: 'Unsubscribe'})
         }
     }
-  },
-  render: function () {
+  }
+
+  render() {
     return (
       <button
         className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
@@ -64,22 +68,25 @@ const SubscribeButton = React.createClass({
         onClick={this.updateBtn}>{this.state.label}</button>
     )
   }
-})
+}
 
 // Render composite component - Select widget + Subscribe Button
-export default React.createClass ( {
-  componentDidMount: function() {
+export default class extends React.Component {
+  componentDidMount() {
     if (tagValues.length > 0 ) {
       // These are the topics currently subscribed
       console.log('We should tell the user about tags ' + tagValues)
       tagValues = ""
       }
-  },
+  }
+
   // Configure and post react-select component
-  displayName: 'MultiSelectField',
+  displayName: 'MultiSelectField'
+  
 	propTypes: {
-		label: React.PropTypes.string,
-	},
+		label: PropTypes.string,
+	}
+
 	getInitialState () {
 		return {
 			disabled: false,
@@ -87,14 +94,16 @@ export default React.createClass ( {
 			options: options,
 			value: [],
 		};
-	},
+	}
+
   // Called for each select/deselect of a topic
-	handleSelectChange (value) {
+	handleSelectChange(value) {
 		this.setState({ value },function(){
       tagValues = this.state.value
       console.log('Value = ' + this.state.value + ' ' + JSON.stringify(tagValues))
     })
-	},
+	}
+
   render() {
     return (
       <div>
@@ -107,7 +116,7 @@ export default React.createClass ( {
       </div>
     )
   }
-})
+}
 
 // Service routines to handle subscription activities
 function subscribeUser() {

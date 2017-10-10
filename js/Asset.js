@@ -5,17 +5,19 @@
 import React from 'react'
 import { Section } from 'neal-react'
 
-export default React.createClass ( {
+export default class extends React.Component {
 
-  imageClick(event) {
+/*  This worked pre-React-16 but now throws a build error
+  imageClick = (event) => {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
     // console.log("Asset props: ", JSON.stringify(this.props))
     this.props.history.push('/zoomer/' + this.state.displayFields.filename)
     console.log('Asset eraseme!!')
-  },
+  }
+  */
 
-  getInitialState: function() {
+  getInitialState() {
     let initValues = {
       records: [],
     }
@@ -25,14 +27,15 @@ export default React.createClass ( {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     return initValues;
-  },
-  componentWillMount: function() {
+  }
+
+  componentWillMount() {
     // Set up various fields for display
     console.log('Asset: ', JSON.stringify(this.props))
     const record = this.props.match.params.imageId,
       desiredRecord = this.state.records.find(function (d){
         return d._id == record
-      }),
+      })
 
       // Put together fields required for view
       displayRecord = {
@@ -45,7 +48,8 @@ export default React.createClass ( {
         tags: desiredRecord["taglist"]
         }
     this.setState({ displayFields: displayRecord })
-  },
+  }
+
   render() {
     return (
       <Section>
@@ -67,4 +71,4 @@ export default React.createClass ( {
         </div>
       </Section>
   )}
-})
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Render composite component - Select widget + Subscribe Button
-export default React.createClass ( {
+export default class extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ export default React.createClass ( {
       </div>
     )
   }
-})
+}

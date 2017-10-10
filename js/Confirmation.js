@@ -11,6 +11,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props)
   }
+  
   render() {
     console.log('Conf props: ', JSON.stringify(this.props))
     return (

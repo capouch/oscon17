@@ -50,6 +50,7 @@ export default class extends React.Component {
       this.loadRecordsFromServer()
     }
   }
+
   loadRecordsFromServer() {
     // console.log('Slideshow: Getting records')
     let URL = this.state.loadUrl,
@@ -88,6 +89,7 @@ export default class extends React.Component {
       this.setState( { idList: idList } )
     }.bind(this))
   }
+  
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
       // refresh setInterval

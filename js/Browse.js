@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { Section } from 'neal-react'
 
@@ -99,8 +100,8 @@ const Button = React.createClass({
 })
 
 // InfoTable wraps Griddle, SearchBar, and Button components
-const InfoTable = React.createClass({
-  loadRecordsFromServer: function() {
+class InfoTable extends React.Component {
+  loadRecordsFromServer() {
     console.log('Browse: fetching ' + URL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
@@ -121,8 +122,9 @@ const InfoTable = React.createClass({
       json.data = undefined
       sessionStorage.setItem('browse', JSON.stringify(this.state))
     }.bind(this))
-  },
-  getInitialState: function() {
+  }
+
+  getInitialState() {
     let initValues = {
       records: [],
       fetchURL: "",
@@ -135,8 +137,9 @@ const InfoTable = React.createClass({
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     return initValues;
-  },
-  componentDidMount: function() {
+  }
+
+  componentDidMount() {
     // console.log('Infotable history: ' + JSON.stringify(this.props.history))
     // console.log('Infotable state: ' + JSON.stringify(this.state))
 
@@ -149,14 +152,17 @@ const InfoTable = React.createClass({
       if ((this.state.records == null) || this.state.records.length == 0)
         this.loadRecordsFromServer()
       })
-    },
-  componentWillUnmount: function () {
+    }
+
+  componentWillUnmount() {
     // Need to remember which page we're on before leaving
     sessionStorage.setItem('browse', JSON.stringify(this.state))
-  },
+  }
+
   onSearchChange(input, resolve) {
     // Hook for "suggestions"
-    },
+    }
+
   onSearch(input) {
     if (!input) return
     // console.info(`Searching "${input}"`)
@@ -174,31 +180,36 @@ const InfoTable = React.createClass({
         this.loadRecordsFromServer()
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
-    },
+    }
+
     // This is the very heavy moment we switch to a new view
     handleCustomSlideshowClick() {
       this.props.history.push('/slides/' + queryTarget)
       // this.context.router.push('/slides/' + queryTarget)
-    },
+    }
+
     clearStore() {
       // console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       queryTarget = queryBase
       this.state.fetchURL = assetBase + queryTarget
       this.loadRecordsFromServer()
-    },
+    }
+
     // Functions to remember current page across mounts
-    _onNext: function() {
+    _onNext() {
       let thisPage = this.state.currentPage + 1
       this.setState( { currentPage: thisPage} )
-      },
-    _onPrevious: function() {
+      }
+
+    _onPrevious() {
       let thisPage = this.state.currentPage
       // This protection shouldn't be necessary . . .
       thisPage = (thisPage == 1)?1:--thisPage
       this.setState( { currentPage: thisPage})
-      },
-    render: function() {
+      }
+
+    render() {
       return (
         <Section>
           <center>
@@ -243,21 +254,22 @@ const InfoTable = React.createClass({
           </Griddle>
         </Section>
       )}
-  })
+  }
 
 
 // Here is the key to allowing a click to cause a view change
 // I do not understand it well
 InfoTable.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
   }
 
 
 // Render composite component
-export default React.createClass ( {
+export default class extends React.Component {
   contextTypes: {
-   router: React.PropTypes.func.isRequired
-  },
+   router: PropTypes.func.isRequired
+  }
+  
   render() {
     // console.log('Browse props entry: ' + JSON.stringify(this.props))
     // console.log('Browse context: ' + JSON.stringify(this.context))
@@ -270,4 +282,4 @@ export default React.createClass ( {
       </div>
     )
   }
-})
+}

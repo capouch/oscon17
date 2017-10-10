@@ -3,6 +3,7 @@
 */
 
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import { Section } from 'neal-react'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'

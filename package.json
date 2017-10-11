@@ -37,6 +37,7 @@
     "react-image-gallery": "^0.7.13",
     "react-input-autosize": "1.1.0",
     "react-router-dom": "^4.2.2",
+    "react-search-bar": "^2.2.0",
     "react-select": "^1.0.0-rc.3",
     "sharp": "^0.18.4",
     "web-push": "^3.2.2"

@@ -237,9 +237,12 @@ class InfoTable extends React.Component {
           </center>
           <SearchBar
             autoFocus={false}
-            placeholder={"Search image database"}
             onChange={this.onSearchChange}
+            onClear = {this.clearStore}
+            suggestions =  {[""]}
+            renderSearchButton = {true}
             onSearch={this.onSearch} />
+
           <div>
             <Button
               label="Slideshow of this imageset"

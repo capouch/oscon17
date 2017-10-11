@@ -1,8 +1,8 @@
 {
-  "name": "oscon16-spa",
-  "version": "0.1.0",
+  "name": "oscon17-spa",
+  "version": "0.99.0",
   "description": "An example SPA",
-  "repository": "https://github.com/capouch/oscon16.git",
+  "repository": "https://github.com/capouch/oscon17.git",
   "main": "js/app.js",
   "scripts": {
     "start": "node index.js",

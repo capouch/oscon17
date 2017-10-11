@@ -5,28 +5,28 @@
 import React from 'react'
 import { Section } from 'neal-react'
 
-export default React.createClass ( {
+export default class extends React.Component {
 
-  imageClick(event) {
+  imageClick = (event) => {
     // Clicking image will take user to Zoomer view
     // See http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
     // console.log("Asset props: ", JSON.stringify(this.props))
     this.props.history.push('/zoomer/' + this.state.displayFields.filename)
     console.log('Asset eraseme!!')
-  },
-
-  getInitialState: function() {
-    let initValues = {
-      records: [],
-    }
-    // This should always return something at the level we're working at here
-    // But this is a note to ponder whether you need to cover things if not
+  }
+  
+  constructor(props) {
+    super(props);
     if (sessionStorage.getItem('browse') != null) {
-      initValues = JSON.parse(sessionStorage.getItem('browse'))
-      }
-    return initValues;
-  },
-  componentWillMount: function() {
+      this.state = JSON.parse(sessionStorage.getItem('browse'))
+      return
+    }
+    this.state = {
+      records:[],
+    }
+  }
+
+  componentWillMount() {
     // Set up various fields for display
     console.log('Asset: ', JSON.stringify(this.props))
     const record = this.props.match.params.imageId,
@@ -45,7 +45,8 @@ export default React.createClass ( {
         tags: desiredRecord["taglist"]
         }
     this.setState({ displayFields: displayRecord })
-  },
+  }
+
   render() {
     return (
       <Section>
@@ -67,4 +68,4 @@ export default React.createClass ( {
         </div>
       </Section>
   )}
-})
+}

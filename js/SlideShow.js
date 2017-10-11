@@ -35,6 +35,7 @@ export default class extends React.Component {
       images: []
     }
   }
+
   componentDidMount() {
     // console.log('loadUrl is ' + this.state.loadUrl)
 
@@ -50,6 +51,7 @@ export default class extends React.Component {
       this.loadRecordsFromServer()
     }
   }
+
   loadRecordsFromServer() {
     // console.log('Slideshow: Getting records')
     let URL = this.state.loadUrl,
@@ -88,6 +90,7 @@ export default class extends React.Component {
       this.setState( { idList: idList } )
     }.bind(this))
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.slideInterval !== prevState.slideInterval) {
       // refresh setInterval
@@ -96,18 +99,18 @@ export default class extends React.Component {
     }
   }
 
-  _pauseSlider() {
+  _pauseSlider = () => {
     this._imageGallery.pause()
     this.setState({isPlaying: false})
   }
 
-  _playSlider() {
+  _playSlider= () => {
     this._imageGallery.play()
     this.setState({isPlaying: true})
   }
 
-  _onImageClick(event) {
-    // Clicking image will take user to Zoomer view
+  _onImageClick = (event) => {
+    // Clicking image will take user to Asset view
     let URLRegex = /([^/]+$)/,
       tailRegex = /(^.*\-.*)-.*$/,
       imageName = ''
@@ -131,29 +134,29 @@ export default class extends React.Component {
     // console.log('Nothing happened!!')
   }
 
-  _onImageLoad(event) {
+  _onImageLoad = (event) => {
     console.debug('loaded image ', event.target)
   }
 
-  _onSlide(index) {
+  _onSlide = (index) => {
     console.debug('slid to ', index)
   }
 
-  _onPause(index) {
+  _onPause = (index) => {
     console.debug('paused on index ', index)
     this.setState({isPlaying: false})
   }
 
-  _onPlay(index) {
+  _onPlay = (index) => {
     console.debug('playing from index ', index)
     this.setState({isPlaying: true})
   }
 
-  _handleInputChange(state, event) {
+  _handleInputChange = (state, event) => {
     this.setState({[state]: event.target.value})
   }
 
-  _handleCheckboxChange(state, event) {
+  _handleCheckboxChange = (state, event) => {
     this.setState({[state]: event.target.checked})
   }
 

@@ -88,19 +88,21 @@ const blankFieldValues = {
 
 // Code inspired by this tutorial:
 //  https://www.viget.com/articles/building-a-multi-step-registration-form-with-react
-export default React.createClass ( {
- getInitialState: function() {
-   // Stepping stages are overkill for this project, but intrinsically interesting
-   return {
-     isLoggedIn: this.checkSignedInWithMessage(),
-     step : 1,
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: this.checkSignedInWithMessage(),
+      step: 1
+    }
   }
- },
- componentDidMount: function() {
+
+ componentDidMount() {
    // This callback seems to confuse react after the first time it's called
    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
-  },
-  onAuthStateChanged: function(user) {
+  }
+
+  onAuthStateChanged = (user) => {
     if (user) {
       this.setState( {
         isLoggedIn: true,
@@ -111,12 +113,14 @@ export default React.createClass ( {
         isLoggedIn: false,
       })
     }
-  },
- checkSignedInWithMessage: function() {
+  }
+
+ checkSignedInWithMessage() {
    // Return true if the user is signed in Firebase
    return firebase.auth().currentUser
- },
- saveValues: function(fields) {
+ }
+
+ saveValues(fields) {
     // Callback function for InfoFields sub-module
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
     fieldValues = Object.assign({}, fieldValues, fields)
@@ -133,22 +137,25 @@ export default React.createClass ( {
     fetch(req).then(function(response) {
       return response.json()
     })
-},
+}
 
-nextStep: function() {
+nextStep() {
   this.setState({
     step : this.state.step + 1
     })
- },
- previousStep: function() {
+ }
+
+ previousStep() {
   this.setState({
     step : this.state.step - 1
     })
- },
- resetStep: function() {
+ }
+
+ resetStep() {
    this.setState( {step: 1} )
- },
- render: function() {
+ }
+
+ render() {
    // console.log('Login state: ' + JSON.stringify(this.checkSignedInWithMessage()))
    switch(this.state.step) {
      case 1:
@@ -179,4 +186,4 @@ nextStep: function() {
        resetStep={this.resetStep}/>
    }
  }
-})
+}

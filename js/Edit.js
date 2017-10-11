@@ -3,6 +3,7 @@
 */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Section } from 'neal-react'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
@@ -20,14 +21,17 @@ let id = '',
   serverFilename = ''
 
 // This component is something of a love child between Browse and Upload
-const EditDeleteWidget = React.createClass({
-  getInitialState: function() {
-    return {
-      isLoggedIn: this.checkSignedInWithMessage(),
+class EditDeleteWidget extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoggedIn: this.checkSignedInWithMessage,
       step: 1
     }
-  },
-  componentDidMount: function() {
+  }
+
+  componentDidMount() {
     // console.log('Mounting event')
     // console.log(this.state.record)
 
@@ -35,8 +39,9 @@ const EditDeleteWidget = React.createClass({
     let queryTarget = "";
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
     this.loadRecordsFromServer()
-  },
-  onAuthStateChanged: function(user) {
+  }
+
+  onAuthStateChanged = (user) => {
      if (user) {
        this.setState( {
          isLoggedIn: true,
@@ -47,12 +52,14 @@ const EditDeleteWidget = React.createClass({
          isLoggedIn: false,
        })
      }
-   },
-  checkSignedInWithMessage: function() {
+   }
+
+  checkSignedInWithMessage() {
     // Return true if the user is signed in Firebase
     return firebase.auth().currentUser;
-  },
-  loadRecordsFromServer: function() {
+  }
+
+  loadRecordsFromServer() {
     let URL = '/graphql?query=query+{imageRec(id: "' + this.props.record + '"){_id, title, filename, description, source, taglist}}',
       req = new Request(URL, {method: 'POST', cache: 'reload'})
     // console.log('Fetch URL: ' + URL)
@@ -62,18 +69,21 @@ const EditDeleteWidget = React.createClass({
       // console.log('json object: ' + JSON.stringify(json))
       this.setState({record: json.data.imageRec})
     }.bind(this))
-  },
-  nextStep: function() {
+  }
+
+  nextStep() {
     this.setState({
       step : this.state.step + 1
     })
-  },
+  }
+
   // Now superfluous 3/4/17
-  resetStep: function() {
+  resetStep() {
     // See you later; when edit finishes go to Browse view
     this.context.router.push('/browse')
-  },
-  saveValues: function(fields) {
+  }
+
+  saveValues(fields) {
       // Callback function for InfoFields sub-module
       // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
       fieldValues = Object.assign({}, fieldValues, fields)
@@ -91,8 +101,9 @@ const EditDeleteWidget = React.createClass({
       fetch(req).then(function(response) {
         return response.json()
       }.bind(this))
-  },
-  deleteRecord: function() {
+  }
+
+  deleteRecord() {
       // Callback to remove an image record in the DB
 
       // Clear out cached data in local store
@@ -108,8 +119,9 @@ const EditDeleteWidget = React.createClass({
       // Mongod record is now gone; the saved original file + 2 created files
       //  still will need to be deleted on the Server
       //  How to do that??!!!???
-  },
-  render: function() {
+  }
+
+  render() {
     // console.log('rendering widget')
     switch(this.state.step) {
       case 1:
@@ -171,15 +183,15 @@ const EditDeleteWidget = React.createClass({
         )
     }
   }
-})
+}
 
 // Attach the router to the widget's context so we can jump out
 EditDeleteWidget.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
   }
 
 // Render component
-export default React.createClass ( {
+export default class extends React.Component {
   render() {
     // console.log('Edit props ' + JSON.stringify(this.props))
     // console.log('Edit context ' + JSON.stringify(this.context))
@@ -189,4 +201,4 @@ export default React.createClass ( {
       </div>
     )
   }
-})
+}

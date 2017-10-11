@@ -4,7 +4,8 @@
 */
 
 import React from "react"
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom"
+
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 
 // Controller and view modules
@@ -40,8 +41,8 @@ ReactDOM.render((
         <Route path = "/home" component = { Home } />
         <Route path = "/browse" component = { Browse } />
         <Route path = "/edit/:imageId" component = { Edit } />
-        <Route path = "/zoomer/:imageId" component = { Zoom } />
         <Route path = "/asset/:imageId" component = { Asset } />
+        <Route path = "/zoomer/:imageId" component = { Zoom } />
         <Route path = "/upload" component = { Upload } />
         <Route exact path = "/slides" component = { SlideShow } />
         <Route path = "/slides/:viewSet" component = { SlideShow } />
@@ -52,3 +53,27 @@ ReactDOM.render((
     </div>
   </Router>
 ), document.getElementById("main"))
+
+/* I forgot that the render method doesn't allow JS comments!!!!!!!11
+<Router>
+  <div>
+    <Route component = { Header } />
+    <Switch>
+      <Route exact path = '/' component = { Home } />
+      <Route exact path = '/index.html' component = { Home } />
+      <Route path = "/home" component = { Home } />
+      <Route path = "/browse" component = { Browse } />
+
+    </Switch>
+    <Route component = { Footer } />
+  </div>
+</Router>
+// <Route path = "/edit/:imageId" component = { Edit } />
+// <Route path = "/zoomer/:imageId" component = { Zoom } />
+// <Route path = "/asset/:imageId" component = { Asset } />
+// <Route path = "/upload" component = { Upload } />
+// <Route exact path = "/slides" component = { SlideShow } />
+// <Route path = "/slides/:viewSet" component = { SlideShow } />
+// <Route path = "/subscribe" component = { Subscribe } />
+// <Route path = "/announce/:topic" component = { Announce } />
+*/

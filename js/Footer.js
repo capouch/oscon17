@@ -21,7 +21,7 @@ const businessAddress = (
   </address>
 )
 
-const NavFooter = React.createClass({
+class NavFooter extends React.Component {
   render() {
     return (
       <Footer brandName={brandName}
@@ -31,7 +31,7 @@ const NavFooter = React.createClass({
       </Footer>
       )
     }
-  })
+  }
 
 // We keep default export object anonymous
 export default class extends React.Component {

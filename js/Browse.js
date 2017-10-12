@@ -14,8 +14,10 @@ import { connect } from 'react-redux'
 // CUSTOMIZATION NOTE:
 // We are using a modified version of this repo yet to be merged
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
-import SearchBar from 'react-search-bar'
+// import SearchBar from '../my_modules/react-search-bar'
 // import sbStyles from '../public/css/searchbar.css'
+
+import SearchBar from 'react-search-bar'
 
 // Hey ios/old Explorer, here's the polyfill for fetch()
 import 'whatwg-fetch'
@@ -200,8 +202,9 @@ class InfoTable extends React.Component {
     sessionStorage.setItem('browse', JSON.stringify(this.state))
   }
 
-  onSearchChange(input, resolve) {
+  onSearchChange(input) {
     // Hook for "suggestions"
+    return
     }
 
   onSearch = (input) => {
@@ -249,6 +252,14 @@ class InfoTable extends React.Component {
       thisPage = (thisPage == 1)?1:--thisPage
       this.setState( { currentPage: thisPage})
       }
+    suggestionRenderer(suggestion, searchTerm) {
+      return (
+        <span>
+          <span>{searchTerm}</span>
+          <strong>{suggestion.substr(searchTerm.length)}</strong>
+        </span>
+      );
+    }
 
     render() {
       return (
@@ -258,12 +269,17 @@ class InfoTable extends React.Component {
               Current image data
             </h2>
           </center>
-          <SearchBar
-            autoFocus={false}
-            placeholder={"Search image database"}
-            onChange={this.onSearchChange}
-            onSearch={this.onSearch} />
-          <div>
+            <SearchBar
+              renderSearchButton
+              renderClearButton
+              autoFocus={false}
+              placeholder={"Search image database"}
+              onClear = {this.clearStore}
+              onChange={this.onSearchChange}
+              suggestions={[]}
+              suggestionRenderer={this.suggestionRenderer}
+              onSearch={this.onSearch} />
+            <div>
             <Button
               label="Slideshow of this imageset"
               handleClick={this.handleCustomSlideshowClick}
@@ -306,10 +322,11 @@ InfoTable.contextTypes = {
 
 
 // Render composite component
-export default React.createClass ( {
+export default class extends React.Component {
   contextTypes: {
    router: PropTypes.func.isRequired
-  },
+  }
+
   render() {
     // console.log('Browse props entry: ' + JSON.stringify(this.props))
     // console.log('Browse context: ' + JSON.stringify(this.context))
@@ -322,4 +339,4 @@ export default React.createClass ( {
       </div>
     )
   }
-})
+}

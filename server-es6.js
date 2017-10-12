@@ -72,7 +72,7 @@ mongoose.Promise = global.Promise;
 // assert.equal(query.exec().constructor, global.Promise);
 
 // Connect to mongo database
-mongoose.connect('mongodb://localhost/' + dbName)
+ mongoose.connect('mongodb://localhost/' + dbName)
 
 // Start HTTPS server
 sserver.listen(443)

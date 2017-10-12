@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 // We are using a modified version of this repo yet to be merged
 // See https://github.com/moimael/react-search-bar.git (update-dependencies branch)
 import SearchBar from 'react-search-bar'
+// import sbStyles from '../public/css/searchbar.css'
 
 // Hey ios/old Explorer, here's the polyfill for fetch()
 import 'whatwg-fetch'
@@ -83,6 +84,28 @@ const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
   </div>
 )
 /* ** End of Griddle-related code ** */
+
+// Let's try to style the search bar button
+let sbStyles = {
+  searchBarClear: {
+    backgroundImage: 'url(../img/cancel.svg)',
+    backgroundSize: '25%',
+    right: '40px',
+    width: '40px'
+  },
+
+  searchBarSubmit: {
+    backgroundColor: '#e5e5e5',
+    backgroundImage: 'url(../img/search.svg)',
+    backgroundSize: '35%',
+    border: '1px solid #ddd',
+    borderTopRightRadius: '2px',
+    borderBottomRightRadius: '2px',
+    padding: '0 20px',
+    opacity: '.8',
+    width: '40px'
+    }
+  }
 
 // Wrap an HTML button into a component
 const buttonStyle = {
@@ -237,12 +260,9 @@ class InfoTable extends React.Component {
           </center>
           <SearchBar
             autoFocus={false}
+            placeholder={"Search image database"}
             onChange={this.onSearchChange}
-            onClear = {this.clearStore}
-            suggestions =  {[""]}
-            renderSearchButton = {true}
             onSearch={this.onSearch} />
-
           <div>
             <Button
               label="Slideshow of this imageset"

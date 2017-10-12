@@ -78,6 +78,7 @@ mongoose.Promise = global.Promise;
 // Connect to mongo database
 mongoose.connect('mongodb://localhost/' + dbName)
 
+
 // start HTTP server
 server.listen(8080)
 

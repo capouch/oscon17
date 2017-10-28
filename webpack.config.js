@@ -49,6 +49,10 @@ module.exports = {
         loader: ["style", "css", "sass"]
       },
       {
+        test: /\.svg$/,
+        loader: 'url-loader'
+      },
+      {
       test: /\.css$/,
         loaders: [
           'style-loader',

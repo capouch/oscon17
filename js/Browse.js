@@ -18,6 +18,7 @@ import { connect } from 'react-redux'
 // import sbStyles from '../public/css/searchbar.css'
 
 import SearchBar from 'react-search-bar'
+import searchStyles from '../public/css/searchbar.css'
 
 // Hey ios/old Explorer, here's the polyfill for fetch()
 import 'whatwg-fetch'
@@ -87,28 +88,6 @@ const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
 )
 /* ** End of Griddle-related code ** */
 
-// Let's try to style the search bar button
-let sbStyles = {
-  searchBarClear: {
-    backgroundImage: 'url(../img/cancel.svg)',
-    backgroundSize: '25%',
-    right: '40px',
-    width: '40px'
-  },
-
-  searchBarSubmit: {
-    backgroundColor: '#e5e5e5',
-    backgroundImage: 'url(../img/search.svg)',
-    backgroundSize: '35%',
-    border: '1px solid #ddd',
-    borderTopRightRadius: '2px',
-    borderBottomRightRadius: '2px',
-    padding: '0 20px',
-    opacity: '.8',
-    width: '40px'
-    }
-  }
-
 // Wrap an HTML button into a component
 const buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -143,7 +122,7 @@ class InfoTable extends React.Component {
   }
 
   loadRecordsFromServer() {
-    console.log('Browse: fetching ' + URL)
+    // console.log('Browse: fetching ' + this.state.fetchURL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
     // Use fetch API; -==> this needs a polyfill in iOS
@@ -165,23 +144,6 @@ class InfoTable extends React.Component {
     }.bind(this))
   }
 
-/*
-  getInitialState() {
-
-    let initValues = {
-      records: [],
-      fetchURL: "",
-      currentPage: 1,
-    }
-    // Pre-load records[] object array from sessionStorage
-    // console.log('Checking session storage in initial state')
-    if (sessionStorage.getItem('browse') != null) {
-      initValues = JSON.parse(sessionStorage.getItem('browse'))
-      }
-    return initValues;
-  }
-  */
-
   componentDidMount() {
     // console.log('Infotable history: ' + JSON.stringify(this.props.history))
     // console.log('Infotable state: ' + JSON.stringify(this.state))
@@ -192,8 +154,10 @@ class InfoTable extends React.Component {
     // Async note:
     this.setState( {fetchURL: this.props.url}, function() {
       //the conditional data fetch here is in a CALLBACK
-      if ((this.state.records == null) || this.state.records.length == 0)
+      if ((this.state.records == null) || this.state.records.length == 0) {
+      // console.log('Fetching from mount')
         this.loadRecordsFromServer()
+      }
       })
     }
 
@@ -204,7 +168,6 @@ class InfoTable extends React.Component {
 
   onSearchChange(input) {
     // Hook for "suggestions"
-    return
     }
 
   onSearch = (input) => {
@@ -221,6 +184,7 @@ class InfoTable extends React.Component {
 
     // Callback fires when this.state object has been updated
     this.setState({fetchURL: searchURL}, function(){
+      // console.log('Fetching from search')
         this.loadRecordsFromServer()
         sessionStorage.setItem('browse', JSON.stringify(this.state))
         }.bind(this))
@@ -235,8 +199,10 @@ class InfoTable extends React.Component {
     clearStore = () => {
       // console.log('Handling reset click')
       sessionStorage.removeItem('browse')
+      this.setState({placeholder: "", value: ""})
       queryTarget = queryBase
       this.state.fetchURL = assetBase + queryTarget
+      // console.log('Fetching from clear')
       this.loadRecordsFromServer()
     }
 
@@ -246,13 +212,21 @@ class InfoTable extends React.Component {
       this.setState( { currentPage: thisPage} )
     }
 
+    _onClear = () => {
+      // Long story, we don't use this Functions
+      // But it's required . . .
+      return
+    }
+
     _onPrevious = () => {
       let thisPage = this.state.currentPage
       // This protection shouldn't be necessary . . .
       thisPage = (thisPage == 1)?1:--thisPage
-      this.setState( { currentPage: thisPage})
+      this.setState( { currentPage: thisPage} )
       }
+
     suggestionRenderer(suggestion, searchTerm) {
+      // This code isn't used (yet)
       return (
         <span>
           <span>{searchTerm}</span>
@@ -271,13 +245,14 @@ class InfoTable extends React.Component {
           </center>
             <SearchBar
               renderSearchButton
-              renderClearButton
+              renderClearButton={false}
               autoFocus={false}
               placeholder={"Search image database"}
-              onClear = {this.clearStore}
+              onClear = {this._onClear}
               onChange={this.onSearchChange}
               suggestions={[]}
               suggestionRenderer={this.suggestionRenderer}
+              styles={searchStyles}
               onSearch={this.onSearch} />
             <div>
             <Button

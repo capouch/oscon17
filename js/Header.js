@@ -22,21 +22,21 @@ const nameStyle = {
   color: 'maroon',
 }
 
-let loginModal = undefined,
-authNavItem = undefined
+let loginModal = {},
+  authNavItem = undefined
 
 const buttonStyle = {
   margin: '12px 12px 12px 0'
 }
 
 class SubscribeBtn extends React.Component {
-  getInitialState() {
-    // Default to Login mode
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       label: 'Subscribe',
       subscribeDisabled: false,
       isSubscribed: false
-      }
+    }
   }
 
   updateBtn() {

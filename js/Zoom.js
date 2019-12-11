@@ -3,7 +3,7 @@
     The functionality provided by this module was the inspiration for the app
  */
 
-import OpenSeaDragon from 'openseadragon'
+import openseadragon from 'openseadragon'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Section } from 'neal-react'
@@ -22,7 +22,7 @@ const renderImage = function(selection) {
 
   const baseName = assetBase + selection + '.dzi'
   // console.log('In the renderImage method about to render ' + baseName)
-  const viewer = OpenSeadragon({
+  const viewer = openseadragon({
     id: "zoomer-view",
     prefixUrl: "/img-icons/",
     tileSources: baseName

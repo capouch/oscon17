@@ -190,14 +190,19 @@ const InfoTable = React.createClass({
     // Functions to remember current page across mounts
     _onNext: function() {
       let thisPage = this.state.currentPage + 1
-      this.setState( { currentPage: thisPage} )
+      this.setState( { currentPage: thisPage } )
       },
     _onPrevious: function() {
       let thisPage = this.state.currentPage
       // This protection shouldn't be necessary . . .
       thisPage = (thisPage == 1)?1:--thisPage
-      this.setState( { currentPage: thisPage})
+      this.setState( { currentPage: thisPage })
       },
+    // This should fix page state buglet
+    _onGetPage: function(pageNo) {
+      let thisPage = pageNo
+      this.setState( { currentPage: thisPage })
+    },
     render: function() {
       return (
         <Section>
@@ -227,6 +232,7 @@ const InfoTable = React.createClass({
             events={{
               onNext: this._onNext,
               onPrevious: this._onPrevious,
+              onGetPage: this._onGetPage,
                 }}
             components={{
               Layout: NewLayout

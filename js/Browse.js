@@ -198,9 +198,7 @@ const InfoTable = React.createClass({
       thisPage = (thisPage == 1)?1:--thisPage
       this.setState( { currentPage: thisPage })
       },
-    // This should fix page state buglet
     _onGetPage: function(pageNo) {
-      console.log("Supposed to be changing local data!!")
       let thisPage = pageNo
       this.setState( { currentPage: thisPage })
     },

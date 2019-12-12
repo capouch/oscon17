@@ -101,6 +101,29 @@ class Button extends React.Component {
 // InfoTable wraps Griddle, SearchBar, and Button components
 class InfoTable extends React.Component {
 
+  constructor(props) {
+    super(props)
+    let initValues = {
+      records: [],
+      fetchURL: "",
+      currentPage: 1,
+      }
+      // Pre-load records[] object array from sessionStorage
+      // console.log('Checking session storage in initial state')
+      if (sessionStorage.getItem('browse') != null) {
+        initValues = JSON.parse(sessionStorage.getItem('browse'))
+        }
+      this.state = initValues
+      /*
+      this.loadRecordsFromServer = this.loadRecordsFromServer.bind(this)
+      this.onSearch = this.onSearch.bind(this)
+      this._onNext = this._onNext.bind(this)
+      this._onPrevious = this._onPrevious.bind(this)
+      this._onGetPage = this._onGetPage.bind(this)
+      */
+      this.onSearch = this.onSearch.bind(this)
+    }
+
   loadRecordsFromServer = () => {
     console.log('Browse: fetching ' + URL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
@@ -122,29 +145,6 @@ class InfoTable extends React.Component {
       json.data = undefined
       sessionStorage.setItem('browse', JSON.stringify(this.state))
     }.bind(this))
-  }
-
-  constructor(props) {
-    super(props)
-    let initValues = {
-      records: [],
-      fetchURL: "",
-      currentPage: 1,
-    }
-
-    // Pre-load records[] object array from sessionStorage
-    // console.log('Checking session storage in initial state')
-    if (sessionStorage.getItem('browse') != null) {
-      initValues = JSON.parse(sessionStorage.getItem('browse'))
-      }
-    this.state = initValues
-    /*
-    this.loadRecordsFromServer = this.loadRecordsFromServer.bind(this)
-    this.onSearch = this.onSearch.bind(this)
-    this._onNext = this._onNext.bind(this)
-    this._onPrevious = this._onPrevious.bind(this)
-    this._onGetPage = this._onGetPage.bind(this)
-    */
   }
 
   componentDidMount() {
@@ -171,7 +171,8 @@ class InfoTable extends React.Component {
     // Hook for "suggestions"
     }
 
-  onSearch = (input) => {
+  onSearch(input){
+    //console.info(`Searching for "${input}"`)
     if (!input) return
     // console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){_id, title, filename, description, source, taglist}}'
@@ -197,7 +198,7 @@ class InfoTable extends React.Component {
     }
 
     clearStore = () => {
-      // console.log('Handling reset click')
+      console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       queryTarget = queryBase
       this.state.fetchURL = assetBase + queryTarget
@@ -232,7 +233,7 @@ class InfoTable extends React.Component {
           </center>
           <SearchBar
             autoFocus={false}
-            placeholder={"Search image database"}
+            placeholder={"Search images database"}
             onChange={this.onSearchChange}
             onSearch={this.onSearch} />
           <div>

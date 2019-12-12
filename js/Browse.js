@@ -87,8 +87,8 @@ const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
-const Button = React.createClass({
-  render: function () {
+class Button extends React.Component {
+  render() {
     return (
       <button
         className="btn btn-default"
@@ -96,7 +96,7 @@ const Button = React.createClass({
         onClick={this.props.handleClick}>{this.props.label}</button>
     )
   }
-})
+}
 
 // InfoTable wraps Griddle, SearchBar, and Button components
 const InfoTable = React.createClass({

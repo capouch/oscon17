@@ -121,7 +121,7 @@ class InfoTable extends React.Component {
       this._onPrevious = this._onPrevious.bind(this)
       this._onGetPage = this._onGetPage.bind(this)
       */
-      this.onSearch = this.onSearch.bind(this)
+      // this.onSearch = this.onSearch.bind(this)
     }
 
   loadRecordsFromServer = () => {
@@ -171,8 +171,9 @@ class InfoTable extends React.Component {
     // Hook for "suggestions"
     }
 
-  onSearch(input){
+  onSearch = (input) => {
     //console.info(`Searching for "${input}"`)
+    console.log("In search with state of ", this.state)
     if (!input) return
     // console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){_id, title, filename, description, source, taglist}}'
@@ -185,6 +186,7 @@ class InfoTable extends React.Component {
     // let searchURL = 'http://oscon.saintjoe-cs.org:2016/graphql?' + queryTarget
 
     // Callback fires when this.state object has been updated
+    this.setState({currentPage: 1})
     this.setState({fetchURL: searchURL}, function(){
         this.loadRecordsFromServer()
         sessionStorage.setItem('browse', JSON.stringify(this.state))
@@ -233,7 +235,7 @@ class InfoTable extends React.Component {
           </center>
           <SearchBar
             autoFocus={false}
-            placeholder={"Search images database"}
+            placeholder={"Search image database"}
             onChange={this.onSearchChange}
             onSearch={this.onSearch} />
           <div>

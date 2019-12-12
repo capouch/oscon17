@@ -101,7 +101,7 @@ class Button extends React.Component {
 // InfoTable wraps Griddle, SearchBar, and Button components
 class InfoTable extends React.Component {
 
-  loadRecordsFromServer() {
+  loadRecordsFromServer = () => {
     console.log('Browse: fetching ' + URL)
     let req = new Request(this.state.fetchURL, {method: 'POST', cache: 'reload'})
 
@@ -138,6 +138,13 @@ class InfoTable extends React.Component {
       initValues = JSON.parse(sessionStorage.getItem('browse'))
       }
     this.state = initValues
+    /*
+    this.loadRecordsFromServer = this.loadRecordsFromServer.bind(this)
+    this.onSearch = this.onSearch.bind(this)
+    this._onNext = this._onNext.bind(this)
+    this._onPrevious = this._onPrevious.bind(this)
+    this._onGetPage = this._onGetPage.bind(this)
+    */
   }
 
   componentDidMount() {
@@ -164,7 +171,7 @@ class InfoTable extends React.Component {
     // Hook for "suggestions"
     }
 
-  onSearch(input) {
+  onSearch = (input) => {
     if (!input) return
     // console.info(`Searching "${input}"`)
     queryTarget = 'query=query+{lookup(keywords: "' +  input + '" ){_id, title, filename, description, source, taglist}}'
@@ -184,12 +191,12 @@ class InfoTable extends React.Component {
     }
 
     // This is the very heavy moment we switch to a new view
-    handleCustomSlideshowClick() {
+    handleCustomSlideshowClick = () => {
       this.props.history.push('/slides/' + queryTarget)
       // this.context.router.push('/slides/' + queryTarget)
     }
 
-    clearStore() {
+    clearStore = () => {
       // console.log('Handling reset click')
       sessionStorage.removeItem('browse')
       queryTarget = queryBase
@@ -198,19 +205,19 @@ class InfoTable extends React.Component {
     }
 
     // Functions to remember current page across mounts
-    _onNext() {
+    _onNext = () => {
       let thisPage = this.state.currentPage + 1
       this.setState( { currentPage: thisPage } )
       }
 
-    _onPrevious() {
+    _onPrevious = () => {
       let thisPage = this.state.currentPage
       // This protection shouldn't be necessary . . .
       thisPage = (thisPage == 1)?1:--thisPage
       this.setState( { currentPage: thisPage })
       }
 
-    _onGetPage(pageNo) {
+    _onGetPage = (pageNo) => {
       let thisPage = pageNo
       this.setState( { currentPage: thisPage })
     }

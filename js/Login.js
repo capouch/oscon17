@@ -11,8 +11,8 @@ import { Section } from "neal-react"
 const buttonStyle = {
   margin: '10px 10px 10px 0'
 }
-const Button = React.createClass({
-  render: function () {
+class Button extends React.Component {
+  render() {
     return (
       <input
         type="image"
@@ -22,7 +22,7 @@ const Button = React.createClass({
         onClick={this.props.handleClick}></input>
     )
   }
-})
+}
 
 export default React.createClass ( {
   getInitialState: function() {

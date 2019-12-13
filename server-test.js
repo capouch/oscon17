@@ -19,18 +19,18 @@ import configRoutes from './js/server-routes'
 
 const dbName = 'oscon-test'
 
-const privateKey = fs.readFileSync('/home/brianc/CERTS/scene-history_org.key'),
-  certificate = fs.readFileSync('/home/brianc/CERTS/www_scene-history_org_combined.crt'),
+const privateKey = fs.readFileSync('/home/brianc/CERTS/shPriv.pem'),
+  certificate = fs.readFileSync('/home/brianc/CERTS/shFullChain.pem'),
   credentials = {key: privateKey, cert: certificate}
 
 const app = express(),
-  router = express.Router()
+  router = express.Router(),
 
 // Comment this out to quell logging
 // app.use(morgan('combined'))
 
 // No non-SSL service in this configuration
-// server = http.createServer( app ),
+server = http.createServer( app )
 
 // Redirect all HTTP requests to secure site version
 /*
@@ -41,7 +41,7 @@ http.createServer(function (req, res) {
   */
 
 // Allow HTTP during development so we can use 'localhost' for PWA
-const server = http.createServer(app)
+// const server = http.createServer(app)
 
 // Note that at present this only works for www.scene-history_org
 const sserver = https.createServer( credentials, app )
@@ -64,7 +64,7 @@ app.use('/graphql' ,graphqlHTTP({
 }));
 
 // Generic routers
-configRoutes(router, sserver)
+configRoutes(router, server)
 app.use('/', router)
 
 // Set up path

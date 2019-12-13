@@ -18,8 +18,8 @@ const buttonStyle = {
   marginBottom: '1',
   width: '100%'
   }
-const DeleteButton = React.createClass({
-  render: function () {
+class DeleteButton extends React.Component {
+  render() {
     return (
       <button
         className="btn btn-default"
@@ -28,14 +28,17 @@ const DeleteButton = React.createClass({
         Delete this Record!!</button>
     )
   }
-})
+}
 
-export default React.createClass({
-  componentWillMount: function() {
+export default class extends React.Component {
+
+  constructor(props) {
+    super(props)
     // Move function reference to module-scoped variable
     deleteRef = this.deleteRecord
-  },
-  render: function() {
+  }
+
+  render() {
 
     // Display delete button for edit/delete view
     if (!this.props.isCreate) {
@@ -87,8 +90,9 @@ export default React.createClass({
         </center>
       </div>
     )
-  },
-  saveAndContinue: function(e) {
+  }
+
+  saveAndContinue = (e) => {
     e.preventDefault()
 
     // Get values via this.refs
@@ -101,9 +105,9 @@ export default React.createClass({
     }
     this.props.saveValues(data)
     this.props.nextStep()
-  },
+  }
 
-  deleteRecord: function(e) {
+  deleteRecord = (e) => {
     e.preventDefault()
 
     // Get values via this.refs
@@ -118,4 +122,4 @@ export default React.createClass({
     }
   }
 
-})
+}

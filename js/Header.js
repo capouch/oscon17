@@ -29,16 +29,18 @@ const buttonStyle = {
   margin: '12px 12px 12px 0'
 }
 
-const SubscribeBtn = React.createClass({
-  getInitialState: function() {
+class SubscribeBtn extends React.Component {
+  constructor(props) {
+    super(props)
     // Default to Login mode
-    return {
+    this.state = {
       label: 'Subscribe',
       subscribeDisabled: false,
       isSubscribed: false
       }
-  },
-  updateBtn () {
+  }
+
+  updateBtn = () =>  {
     // Note this has to be done with a callback to catch initial state change
     this.setState({isSubscribed: !(this.state.isSubscribed)}, function() {
       let text = (this.state.isSubscribed ? 'Unsubscribe':'Subscribe')
@@ -46,30 +48,34 @@ const SubscribeBtn = React.createClass({
       this.setState({label: text})
       console.log('State: ' + JSON.stringify(this.state))
     })
-  },
-  render: function () {
+  }
+
+  render () {
     return (
       <button
         className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
         onClick={this.updateBtn}>{this.state.label}</button>
     )
   }
-})
+}
 
 // Puzzle: at first call, this component mounts *twice*
 //  and I can't figure out why.  Doesn't hurt anything, but yet . . . .
-const NavHeader = React.createClass({
-  getInitialState: function() {
+class NavHeader extends React.Component {
+  constructor(props) {
+    super(props)
     // Default to Login mode
-    return {
+    firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
+    this.state =  {
       authFunc: this.toggleSignIn,
       userName: '',
       authPrompt: '',
       email: '',
       password: '',
       }
-  },
-  componentWillMount: function() {
+  }
+
+  /* componentWillMount: function() {
     // This callback seems to confuse react after the first time it's called
     //   but overall it works--is called on each log in/out
     firebase.auth().onAuthStateChanged(this.onAuthStateChanged)
@@ -80,9 +86,9 @@ const NavHeader = React.createClass({
         authPrompt: ' (Logout)'
       })
     }
-    */
-  },
-  onSignIn: function({ name: name, email: email, password: password }) {
+  }
+  */
+  onSignIn =  ({ name: name, email: email, password: password }) => {
       // console.log('email/password: ' + email + " "  + password)
       // Note callback here!
       this.setState({email: email, password: password}, function(){
@@ -90,8 +96,9 @@ const NavHeader = React.createClass({
         $('#signup-modal').modal('toggle')
         this.toggleSignIn()
         }.bind(this))
-  },
-  toggleSignIn: function() {
+  }
+
+  toggleSignIn = () => {
     // Sign in Firebase using email as the identity provider
     //   Only email for now--maybe ever?
       if (firebase.auth().currentUser) {
@@ -125,8 +132,9 @@ const NavHeader = React.createClass({
         });
         // [END authwithemail]
       }
-  },
-  onAuthStateChanged: function(user) {
+  }
+
+  onAuthStateChanged = (user) => {
     // Swap menu state and re-render Header anchor
     console.log('onAuthStateChanged called')
     if (user) {
@@ -145,11 +153,13 @@ const NavHeader = React.createClass({
       })
       console.log('User is logged out')
     }
-  },
-  checkSignedInWithMessage () {
+  }
+
+  checkSignedInWithMessage =  () => {
     // Return true if the user is signed in Firebase
     return firebase.auth().currentUser
-  },
+  }
+
   render() {
     console.log('State: ' + JSON.stringify(this.state))
     // Logic to determine login/logout UI
@@ -186,7 +196,7 @@ const NavHeader = React.createClass({
           </Navbar>
         </div>
       )}
-})
+}
 
 export default class extends React.Component {
   constructor(props) {

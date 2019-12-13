@@ -282,10 +282,11 @@ InfoTable.contextTypes = {
 
 
 // Render composite component
-export default React.createClass ( {
-  contextTypes: {
+export default class extends React.Component {
+  contextTypes = {
    router: React.PropTypes.func.isRequired
-  },
+  }
+
   render() {
     // console.log('Browse props entry: ' + JSON.stringify(this.props))
     // console.log('Browse context: ' + JSON.stringify(this.context))
@@ -298,4 +299,4 @@ export default React.createClass ( {
       </div>
     )
   }
-})
+}

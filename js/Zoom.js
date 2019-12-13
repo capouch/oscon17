@@ -30,22 +30,25 @@ const renderImage = function(selection) {
 }
 
 // Create a container class for the "Zoomer" component
-const ZoomBox = React.createClass ({
-  componentDidMount: function() {
+class ZoomBox extends React.Component {
+
+  componentDidMount() {
     let zoomTarget = this.props.image
     renderImage(zoomTarget)
-  },
+    }
+
   render() {
     const style = {
       width: 800,
       height: 600
     }
+
     return (
       <div style={style} id="zoomer-view">
       </div>
     )
   }
-})
+}
 
 // Render in a component
 export default class UniqueNewYork extends React.Component {

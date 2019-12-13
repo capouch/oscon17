@@ -1,8 +1,8 @@
 {
-  "name": "oscon16-spa",
+  "name": "scene-history",
   "version": "0.1.0",
-  "description": "An example SPA",
-  "repository": "https://github.com/capouch/oscon16.git",
+  "description": "An app for manipulating historic images",
+  "repository": "https://github.com/capouch/oscon17.git",
   "main": "js/app.js",
   "scripts": {
     "start": "node index.js",

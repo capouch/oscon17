@@ -6,6 +6,7 @@ import React from 'react'
 import { Section } from 'neal-react'
 import InfoFields from './InfoFields'
 import Confirmation from './Confirmation'
+import PropTypes from 'prop-types'
 
 // fieldValues provide form input
 let fieldValues = {
@@ -209,7 +210,7 @@ class EditDeleteWidget extends React.Component {
 
 // Attach the router to the widget's context so we can jump out
 EditDeleteWidget.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
   }
 
 // Render component

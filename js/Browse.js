@@ -6,6 +6,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Section } from 'neal-react'
+import PropTypes from 'prop-types'
 
 import Griddle, {RowDefinition, ColumnDefinition, plugins} from 'griddle-react'
 import { connect } from 'react-redux'
@@ -277,14 +278,14 @@ class InfoTable extends React.Component {
 // Here is the key to allowing a click to cause a view change
 // I do not understand it well
 InfoTable.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
   }
 
 
 // Render composite component
 export default class extends React.Component {
   contextTypes = {
-   router: React.PropTypes.func.isRequired
+   router: PropTypes.func.isRequired
   }
 
   render() {

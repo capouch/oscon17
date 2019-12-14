@@ -51,30 +51,6 @@ export default class extends React.Component {
           }
     }
 
-  /*
-  componentWillMount() {
-    // Set up various fields for display
-    console.log('Asset: ', JSON.stringify(this.props))
-    const record = this.props.match.params.imageId,
-      desiredRecord = this.state.records.find(function (d){
-        return d._id == record
-      })
-
-
-      // Put together fields required for view
-      var displayRecord = {
-        filename: desiredRecord["filename"],
-        // Construct path to 1k image
-        imageURL: "/images/" + desiredRecord["filename"] + "-1k",
-        title: desiredRecord["title"],
-        description: desiredRecord["description"],
-        source: desiredRecord["source"],
-        tags: desiredRecord["taglist"]
-        }
-    this.setState({ displayFields: displayRecord })
-  }
-  */
-
   render() {
     return (
       <Section>

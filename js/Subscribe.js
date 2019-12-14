@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 const notifyGroups = ["image", "news", "publish", "program", "meeting"]
 
 // Current values of selected notify tags
-var tagValues = ""
+var listSelection = []
 
 // Config for react-select component for notify categories
 // In the world of ag, "markets, weather, sensors, legal, technical"
@@ -49,12 +49,12 @@ class SubscribeButton extends React.Component {
   // Click handler for Subscribe button
   updateBtn = () => {
     if (isSubscribed) {
-      console.log('Tag values: ' + tagValues)
+      console.log('Tag values: ' + listSelection)
         unsubscribeUser()
         this.setState({label: 'Subscribe'})
     } else {
       // Don't subscribe if no notify groups chosen
-      if (tagValues || (tagValues.length != 0)) {
+      if (listSelection || (listSelection.length != 0)) {
         subscribeUser()
         this.setState({label: 'Unsubscribe'})
         }
@@ -85,10 +85,10 @@ export default class extends React.Component  {
 	  }
 
   componentDidMount() {
-    if (tagValues.length > 0 ) {
+    if (listSelection.length > 0 ) {
       // These are the topics currently subscribed
-      console.log('We should tell the user about tags ' + tagValues)
-      tagValues = ""
+      console.log('We should tell the user about tags ' + JSON.stringify(listSelection))
+      this.setState({ value: listSelection })
       }
     }
 
@@ -101,9 +101,10 @@ export default class extends React.Component  {
 
   // Called for each select/deselect of a topic
 	handleSelectChange = (value) => {
+    console.log("In handler with value of " , value)
 		this.setState({ value },function(){
-      tagValues = this.state.value
-      console.log('Value = ' + this.state.value + ' ' + JSON.stringify(tagValues))
+      listSelection = this.state.value
+      console.log('Value = ' + this.state.value + ' ' + JSON.stringify(listSelection))
     })
 	}
 
@@ -111,11 +112,11 @@ export default class extends React.Component  {
     return (
       <div>
         <h3><center>Subscribe to event notifications</center></h3>
-        <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
         <center>
         <SubscribeButton
           />
         </center>
+        <Select isMulti isDisabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
       </div>
     )
   }
@@ -157,7 +158,7 @@ function unsubscribeUser() {
     // updateSubscriptionOnServer(null);
     console.log('User is unsubscribed.');
     isSubscribed = false;
-    // tagValues = ""
+    // listSelection = ""
 
 
     // updateBtn();
@@ -176,10 +177,17 @@ if (subscription) {
 function sendSubscriptionToBackEnd(subscription) {
   // Convert the subscription to a simple object
   let bodyObject = subscription.toJSON()
+  let tagList = []
 
   // Add selected tags to request object
-  let tagList = { tags: tagValues.split(',') }
-  bodyObject = Object.assign({}, bodyObject, tagList)
+  console.log("We have for listSelection ", listSelection)
+  // Iterate arry and extract value fields
+  listSelection.forEach(function (entry){
+    tagList.push(entry.value)
+  })
+  let tags = { tags: tagList }
+  // let tagList = { tags: listSelection.split(',') }
+  bodyObject = Object.assign({}, bodyObject, tags)
   console.log('Body object: ' + JSON.stringify(bodyObject))
 
   return fetch('/save-subscription/', {

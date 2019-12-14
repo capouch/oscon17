@@ -23,6 +23,7 @@ const businessAddress = (
 
 class NavFooter extends React.Component {
   render() {
+    console.log("<<<< 2 >>>>");
     return (
       <Footer brandName={brandName}
         facebookUrl="http://www.facebook.com/brian.capouch"
@@ -35,12 +36,13 @@ class NavFooter extends React.Component {
 
 // We keep default export object anonymous
 export default class extends React.Component {
-    constructor(props) {
-      super(props)
-    }
-    render() {
-      return (
-          <NavFooter/>
-      )
-    }
+  constructor(props) {
+    super(props)
   }
+  render() {
+    console.log("<<<< 1 >>>>");
+    return (
+        <NavFooter/>
+    )
+  }
+}

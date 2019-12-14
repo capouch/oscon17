@@ -29,35 +29,35 @@ const buttonStyle = {
   margin: '12px 12px 12px 0'
 }
 
-class SubscribeBtn extends React.Component {
-  constructor(props) {
-    super(props)
-    // Default to Login mode
-    this.state = {
-      label: 'Subscribe',
-      subscribeDisabled: false,
-      isSubscribed: false
-      }
-  }
-
-  updateBtn = () =>  {
-    // Note this has to be done with a callback to catch initial state change
-    this.setState({isSubscribed: !(this.state.isSubscribed)}, function() {
-      let text = (this.state.isSubscribed ? 'Unsubscribe':'Subscribe')
-      console.log('Set button text to: ' + text)
-      this.setState({label: text})
-      console.log('State: ' + JSON.stringify(this.state))
-    })
-  }
-
-  render () {
-    return (
-      <button
-        className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-        onClick={this.updateBtn}>{this.state.label}</button>
-    )
-  }
-}
+// class SubscribeBtn extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     // Default to Login mode
+//     this.state = {
+//       label: 'Subscribe',
+//       subscribeDisabled: false,
+//       isSubscribed: false
+//       }
+//   }
+//
+//   updateBtn = () =>  {
+//     // Note this has to be done with a callback to catch initial state change
+//     this.setState({isSubscribed: !(this.state.isSubscribed)}, function() {
+//       let text = (this.state.isSubscribed ? 'Unsubscribe':'Subscribe')
+//       console.log('Set button text to: ' + text)
+//       this.setState({label: text})
+//       console.log('State: ' + JSON.stringify(this.state))
+//     })
+//   }
+//
+//   render () {
+//     return (
+//       <button
+//         className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+//         onClick={this.updateBtn}>{this.state.label}</button>
+//     )
+//   }
+// }
 
 // Puzzle: at first call, this component mounts *twice*
 //  and I can't figure out why.  Doesn't hurt anything, but yet . . . .

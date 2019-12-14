@@ -85,7 +85,7 @@ class NavHeader extends React.Component {
     */
   }
 
-  onSignIn({ name: name, email: email, password: password }) {
+  onSignIn = ({ name: name, email: email, password: password }) => {
       // console.log('email/password: ' + email + " "  + password)
       // Note callback here!
       this.setState({email: email, password: password}, function(){
@@ -95,7 +95,7 @@ class NavHeader extends React.Component {
         }.bind(this))
   }
 
-  toggleSignIn() {
+  toggleSignIn = () => {
     // Sign in Firebase using email as the identity provider
     //   Only email for now--maybe ever?
       if (firebase.auth().currentUser) {
@@ -152,7 +152,7 @@ class NavHeader extends React.Component {
     }
   }
 
-  checkSignedInWithMessage () {
+  checkSignedInWithMessage = () => {
     // Return true if the user is signed in Firebase
     return firebase.auth().currentUser
   }
@@ -170,7 +170,7 @@ class NavHeader extends React.Component {
       console.log('About to render login view')
       // SingupModal uses now-deprecated modal dialog window; needs replaced
       loginModal =
-      <SignupModal modalId="signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
+      <SignupModal modalId="neal-signup-modal" onSubmit={this.onSignIn} title="Sign In" buttonText="Sign In">
         <div>
           <SignupModal.Input type="email" required name="email" label="Email" placeholder="Email"/>
           <SignupModal.Input type="password" required name="password" label="Password" placeholder="Password"/>

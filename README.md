@@ -13,8 +13,8 @@ Link to OSCON presentation slides: https://slides.com/capouch/spa-bootcamp/
 First:
 
 ```bash
-git clone https://github.com/capouch/oscon16.git
-cd oscon16
+git clone https://github.com/capouch/oscon17.git
+cd oscon17
 npm install
 ```
 
